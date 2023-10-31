@@ -1,0 +1,23 @@
+.corners {
+  -fx-background-color: linear-gradient(to bottom right, #0dffea, #05373c);
+    -fx-text-fill: #000;
+    -fx-border-radius: 50 50 0 0px;
+    -fx-background-radius:50 50 0 0px;
+     -fx-border-color: black;
+      -fx-border-style:solid;
+     -fx-border-width:0 0 0 0px;
+    -fx-padding: 20px;
+}
+.interPanes{
+-fx-background-color: linear-gradient(to bottom right, #0dffea, #05373c);
+ -fx-border-radius: 20 20 20 20px;
+    -fx-background-radius:20 20 20 20px;
+     -fx-border-color: black;
+      -fx-border-style:solid;
+     -fx-border-width:0 0 0 0px;
+     -fx-text-fill: black;
+
+}
+.gradiant {
+   -fx-background-color: linear-gradient(to bottom right, #0dffea, #05373c);
+}
