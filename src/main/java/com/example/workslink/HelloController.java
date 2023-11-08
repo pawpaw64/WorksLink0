@@ -3,11 +3,17 @@ package com.example.workslink;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class HelloController {
 
@@ -31,6 +37,27 @@ public class HelloController {
 
     @FXML
     private AnchorPane signUp_page;
+    @FXML
+    Button start_btn;
+    @FXML
+    Stage stage;
+    @FXML
+
+    Scene scene;
+    @FXML
+    Parent root;
+    @FXML
+    private void Start_btnAction(ActionEvent e) throws IOException {
+        //Jump in the homepage...
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/loginRegistration.fxml"));
+        root = fxmlLoader.load();
+        scene = new Scene(root);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("hi");
+    }
 
     @FXML
     private void switchPage(ActionEvent e) {

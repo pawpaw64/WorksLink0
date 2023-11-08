@@ -1,40 +1,34 @@
 package com.example.workslink;
 
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.sql.*;
 
-import java.io.IOException;
-
 public class RegistrationController extends HelloController{
     @FXML
-    TextField tf1= new TextField();
+    TextField su_email_TextField= new TextField();
     @FXML
-    TextField tf2= new TextField();
+    TextField su_username_TextFIeld= new TextField();
     @FXML
-    TextField tf3= new TextField();
+    TextField su_bdate_TextField= new TextField();
     @FXML
-    TextField tf4= new TextField();
+    TextField su_password= new TextField();
     @FXML
-    Label text = new Label();
+    Label su_valid_label = new Label();
     @FXML
-    Label text2 = new Label();
+    Label valid_label=new Label();
     @FXML
-    TextField userName = new TextField();
+    TextField login_username = new TextField();
     @FXML
-    TextField passWord = new TextField();
+    TextField login_password = new TextField();
     @FXML
     String email,user,dob,pass;
     @FXML
@@ -47,10 +41,14 @@ public class RegistrationController extends HelloController{
 
     @FXML
     public void signup(ActionEvent event){
-        email=tf1.getText();
-        user=tf2.getText();
-        dob=tf3.getText();
-        pass=tf4.getText();
+        email=su_email_TextField.getText();
+        user=su_username_TextFIeld.getText();
+        dob=su_bdate_TextField.getText();
+        pass=su_password.getText();
+        if(email.isEmpty()||user.isEmpty()||dob.isEmpty()||pass.isEmpty())
+        {
+            su_valid_label.setText("Enter All Information");
+        }
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -70,7 +68,7 @@ public class RegistrationController extends HelloController{
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
 
-                text.setText("User registration successful!");
+                su_valid_label.setText("User registration successful!");
             }
 
 
@@ -83,51 +81,54 @@ public class RegistrationController extends HelloController{
     }
     @FXML
     public void login(ActionEvent ae) throws Exception{
-        String userLogin = userName.getText();
-        String passLogin = passWord.getText();
+        String userLogin = login_username.getText();
+        String passLogin = login_password.getText();
+        if(userLogin.isEmpty()||passLogin.isEmpty())
+        {
+            valid_label.setText("Please Enter valid Info");
+        }
+        else {
+            try {
+//               Class.forName("com.mysql.cj.jdbc.Driver");
+//               String conUrl = "jdbc:mysql://localhost:3306/registration";
+//               String username = "root";
+//               String password = "";
+//
+//               Connection con = DriverManager.getConnection(conUrl, username, password);
+//               Statement stmt = con.createStatement();
+//
+//               ResultSet rs = stmt.executeQuery("SELECT * FROM `email` WHERE 1");
+//
+//               while (rs.next()) {
+//
+//                   if (userLogin.equals(rs.getString("userName")) && passLogin.equals(rs.getString("password"))) {
+//                       valid_label.setText("Successfully logged in");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String conUrl = "jdbc:mysql://localhost:3306/registration";
-            String username = "root";
-            String password = "";
+                //Jump in the homepage...
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/homePage-view.fxml"));
+                root = fxmlLoader.load();
+                scene = new Scene(root);
 
-            Connection con = DriverManager.getConnection(conUrl,username,password);
-            Statement stmt = con.createStatement();
-
-            ResultSet rs = stmt.executeQuery("SELECT * FROM `email` WHERE 1");
-
-            while(rs.next()) {
-
-                if(userLogin.equals(rs.getString("userName")) && passLogin.equals(rs.getString("password"))) {
-                    text2.setText("Successfully logged in");
-
-                    //Jump in the homepage...
-                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/homePage-view.fxml"));
-                    root = fxmlLoader.load();
-                    scene = new Scene(root);
-
-                    stage = (Stage)((Node)ae.getSource()).getScene().getWindow();
-                    stage.setScene(scene);
-                    stage.show();
-                }
-                else {
-
-                    text2.setText("Invalid Id or Password!");
-                }
-                break;
+                stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+////                   } else {
+////
+////                       valid_label.setText("Invalid Id or Password!");
+////                   }
+////                   break;
+//               }
+            }
+//           catch (SQLException e) {
+//               e.printStackTrace();
+//           }
+            catch (Exception cE) {
+                System.out.println("Class Not Found Exception: " + cE.toString());
+                cE.getMessage();
             }
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException cE) {
-            System.out.println("Class Not Found Exception: "+ cE.toString());
-            cE.getMessage();
-        }
-
     }
-    }
+}
 
 
 
