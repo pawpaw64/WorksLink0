@@ -52,7 +52,7 @@ public class HelloController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/loginRegistration.fxml"));
         root = fxmlLoader.load();
         scene = new Scene(root);
-        stage.initStyle(StageStyle.UNDECORATED);
+//        stage.initStyle(StageStyle.UNDECORATED);
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
