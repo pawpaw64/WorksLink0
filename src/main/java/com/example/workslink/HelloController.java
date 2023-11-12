@@ -56,7 +56,7 @@ public class HelloController {
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-        System.out.println("hi");
+
     }
 
     @FXML

@@ -1,5 +1,7 @@
 package com.example.workslink;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.sql.*;
 
@@ -40,13 +43,12 @@ public class RegistrationController extends HelloController{
     Parent root;
 
     @FXML
-    public void signup(ActionEvent event){
-        email=su_email_TextField.getText();
-        user=su_username_TextFIeld.getText();
-        dob=su_bdate_TextField.getText();
-        pass=su_password.getText();
-        if(email.isEmpty()||user.isEmpty()||dob.isEmpty()||pass.isEmpty())
-        {
+    public void signup(ActionEvent event) {
+        email = su_email_TextField.getText();
+        user = su_username_TextFIeld.getText();
+        dob = su_bdate_TextField.getText();
+        pass = su_password.getText();
+        if (email.isEmpty() || user.isEmpty() || dob.isEmpty() || pass.isEmpty()) {
             su_valid_label.setText("Enter All Information");
         }
 
@@ -75,10 +77,12 @@ public class RegistrationController extends HelloController{
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+//
+//        }
 
         }
-
     }
+
     @FXML
     public void login(ActionEvent ae) throws Exception{
         String userLogin = login_username.getText();
@@ -86,6 +90,9 @@ public class RegistrationController extends HelloController{
         if(userLogin.isEmpty()||passLogin.isEmpty())
         {
             valid_label.setText("Please Enter valid Info");
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> valid_label.setText("")));
+            timeline.stop();
+            timeline.play();////we need to add timer here
         }
         else {
             try {
@@ -107,15 +114,20 @@ public class RegistrationController extends HelloController{
                 //Jump in the homepage...
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/homePage-view.fxml"));
                 root = fxmlLoader.load();
+                root.setStyle("-fx-alignment: center;");
                 scene = new Scene(root);
 
                 stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
                 stage.setScene(scene);
+
                 stage.show();
 ////                   } else {
 ////
 ////                       valid_label.setText("Invalid Id or Password!");
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> valid_label.setText("")));
+                timeline.play();
 ////                   }
+
 ////                   break;
 //               }
             }
