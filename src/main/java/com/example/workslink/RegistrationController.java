@@ -1,5 +1,7 @@
 package com.example.workslink;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.sql.*;
 
@@ -40,13 +44,12 @@ public class RegistrationController extends HelloController{
     Parent root;
 
     @FXML
-    public void signup(ActionEvent event){
-        email=su_email_TextField.getText();
-        user=su_username_TextFIeld.getText();
-        dob=su_bdate_TextField.getText();
-        pass=su_password.getText();
-        if(email.isEmpty()||user.isEmpty()||dob.isEmpty()||pass.isEmpty())
-        {
+    public void signup(ActionEvent event) {
+        email = su_email_TextField.getText();
+        user = su_username_TextFIeld.getText();
+        dob = su_bdate_TextField.getText();
+        pass = su_password.getText();
+        if (email.isEmpty() || user.isEmpty() || dob.isEmpty() || pass.isEmpty()) {
             su_valid_label.setText("Enter All Information");
         }
 
@@ -75,17 +78,57 @@ public class RegistrationController extends HelloController{
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+//
+//        }
 
         }
-
     }
+
     @FXML
-    public void login(ActionEvent ae) throws Exception{
+    public void login(ActionEvent ae) throws Exception {
         String userLogin = login_username.getText();
         String passLogin = login_password.getText();
-        if(userLogin.isEmpty()||passLogin.isEmpty())
-        {
+        if (userLogin.isEmpty() || passLogin.isEmpty()) {
             valid_label.setText("Please Enter valid Info");
+ Hasib07
+        } else {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String conUrl = "jdbc:mysql://localhost:3306/registration";
+                String username = "root";
+                String password = "";
+
+                Connection con = DriverManager.getConnection(conUrl, username, password);
+                String query = "SELECT * FROM email WHERE userName = ? AND password = ?";
+
+                try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                    preparedStatement.setString(1, userLogin);
+                    preparedStatement.setString(2, passLogin);
+
+                    ResultSet rs = preparedStatement.executeQuery();
+
+                    if (rs.next()) {
+                        valid_label.setText("Successfully logged in");
+
+                        // Jump to the homepage...
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Scene scene = new Scene(root);
+
+                        Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+                    } else {
+                        valid_label.setText("Invalid Id or Password!");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception cE) {
+=======
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> valid_label.setText("")));
+            timeline.stop();
+            timeline.play();////we need to add timer here
         }
         else {
             try {
@@ -110,12 +153,19 @@ public class RegistrationController extends HelloController{
                 scene = new Scene(root);
 
                 stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+                stage.setX(100);
+                stage.setY(50);
                 stage.setScene(scene);
+
+
                 stage.show();
 ////                   } else {
 ////
 ////                       valid_label.setText("Invalid Id or Password!");
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> valid_label.setText("")));
+                timeline.play();
 ////                   }
+
 ////                   break;
 //               }
             }
@@ -123,12 +173,14 @@ public class RegistrationController extends HelloController{
 //               e.printStackTrace();
 //           }
             catch (Exception cE) {
+              Main
                 System.out.println("Class Not Found Exception: " + cE.toString());
                 cE.getMessage();
             }
         }
     }
-}
+    }
+
 
 
 
