@@ -85,12 +85,47 @@ public class RegistrationController extends HelloController{
     }
 
     @FXML
-    public void login(ActionEvent ae) throws Exception{
+    public void login(ActionEvent ae) throws Exception {
         String userLogin = login_username.getText();
         String passLogin = login_password.getText();
-        if(userLogin.isEmpty()||passLogin.isEmpty())
-        {
+        if (userLogin.isEmpty() || passLogin.isEmpty()) {
             valid_label.setText("Please Enter valid Info");
+ Hasib07
+        } else {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String conUrl = "jdbc:mysql://localhost:3306/registration";
+                String username = "root";
+                String password = "";
+
+                Connection con = DriverManager.getConnection(conUrl, username, password);
+                String query = "SELECT * FROM email WHERE userName = ? AND password = ?";
+
+                try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                    preparedStatement.setString(1, userLogin);
+                    preparedStatement.setString(2, passLogin);
+
+                    ResultSet rs = preparedStatement.executeQuery();
+
+                    if (rs.next()) {
+                        valid_label.setText("Successfully logged in");
+
+                        // Jump to the homepage...
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Scene scene = new Scene(root);
+
+                        Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+                    } else {
+                        valid_label.setText("Invalid Id or Password!");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception cE) {
+=======
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> valid_label.setText("")));
             timeline.stop();
             timeline.play();////we need to add timer here
@@ -138,12 +173,14 @@ public class RegistrationController extends HelloController{
 //               e.printStackTrace();
 //           }
             catch (Exception cE) {
+              Main
                 System.out.println("Class Not Found Exception: " + cE.toString());
                 cE.getMessage();
             }
         }
     }
-}
+    }
+
 
 
 
