@@ -37,27 +37,27 @@ public class HelloController {
 
     @FXML
     private AnchorPane signUp_page;
-    @FXML
-    Button start_btn;
-    @FXML
-    Stage stage;
-    @FXML
-
-    Scene scene;
-    @FXML
-    Parent root;
-    @FXML
-    private void Start_btnAction(ActionEvent e) throws IOException {
-        //Jump in the homepage...
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/loginRegistration.fxml"));
-        root = fxmlLoader.load();
-        scene = new Scene(root);
-//        stage.initStyle(StageStyle.UNDECORATED);
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-        System.out.println("hi");
-    }
+//    @FXML
+//    Button start_btn;
+//    @FXML
+//    Stage stage;
+//    @FXML
+//
+//    Scene scene;
+//    @FXML
+//    Parent root;
+//    @FXML
+//    private void Start_btnAction(ActionEvent e) throws IOException {
+//        //Jump in the homepage...
+//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/loginRegistration.fxml"));
+//        root = fxmlLoader.load();
+//        scene = new Scene(root);
+////        stage.initStyle(StageStyle.UNDECORATED);
+//        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+//        stage.setScene(scene);
+//        stage.show();
+//
+//    }
 
     @FXML
     private void switchPage(ActionEvent e) {

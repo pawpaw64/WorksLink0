@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane layoutX="173.0" layoutY="42.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="350.0">
+               <children>
+                  <ImageView fitHeight="117.0" fitWidth="119.0" layoutX="96.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icon/circle-user.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="88.0" layoutY="182.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Your Name" />
+                  <Label layoutX="14.0" layoutY="224.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Bio:" underline="true" />
+                  <TextArea layoutX="48.0" layoutY="224.0" prefHeight="54.0" prefWidth="254.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
+                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="250.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icon/edit%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="14.0" layoutY="280.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Add Email:" underline="true" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
