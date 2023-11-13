@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.sql.*;
@@ -114,11 +115,13 @@ public class RegistrationController extends HelloController{
                 //Jump in the homepage...
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/homePage-view.fxml"));
                 root = fxmlLoader.load();
-                root.setStyle("-fx-alignment: center;");
                 scene = new Scene(root);
 
                 stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+                stage.setX(100);
+                stage.setY(50);
                 stage.setScene(scene);
+
 
                 stage.show();
 ////                   } else {
