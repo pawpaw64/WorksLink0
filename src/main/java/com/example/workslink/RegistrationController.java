@@ -80,55 +80,52 @@ public class RegistrationController extends HelloController{
 
     }
     @FXML
-    public void login(ActionEvent ae) throws Exception{
+    public void login(ActionEvent ae) throws Exception {
         String userLogin = login_username.getText();
         String passLogin = login_password.getText();
-        if(userLogin.isEmpty()||passLogin.isEmpty())
-        {
+        if (userLogin.isEmpty() || passLogin.isEmpty()) {
             valid_label.setText("Please Enter valid Info");
-        }
-        else {
+        } else {
             try {
-//               Class.forName("com.mysql.cj.jdbc.Driver");
-//               String conUrl = "jdbc:mysql://localhost:3306/registration";
-//               String username = "root";
-//               String password = "";
-//
-//               Connection con = DriverManager.getConnection(conUrl, username, password);
-//               Statement stmt = con.createStatement();
-//
-//               ResultSet rs = stmt.executeQuery("SELECT * FROM `email` WHERE 1");
-//
-//               while (rs.next()) {
-//
-//                   if (userLogin.equals(rs.getString("userName")) && passLogin.equals(rs.getString("password"))) {
-//                       valid_label.setText("Successfully logged in");
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                String conUrl = "jdbc:mysql://localhost:3306/registration";
+                String username = "root";
+                String password = "";
 
-                //Jump in the homepage...
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/homePage-view.fxml"));
-                root = fxmlLoader.load();
-                scene = new Scene(root);
+                Connection con = DriverManager.getConnection(conUrl, username, password);
+                String query = "SELECT * FROM email WHERE userName = ? AND password = ?";
 
-                stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-////                   } else {
-////
-////                       valid_label.setText("Invalid Id or Password!");
-////                   }
-////                   break;
-//               }
-            }
-//           catch (SQLException e) {
-//               e.printStackTrace();
-//           }
-            catch (Exception cE) {
+                try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+                    preparedStatement.setString(1, userLogin);
+                    preparedStatement.setString(2, passLogin);
+
+                    ResultSet rs = preparedStatement.executeQuery();
+
+                    if (rs.next()) {
+                        valid_label.setText("Successfully logged in");
+
+                        // Jump to the homepage...
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Scene scene = new Scene(root);
+
+                        Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+                    } else {
+                        valid_label.setText("Invalid Id or Password!");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception cE) {
                 System.out.println("Class Not Found Exception: " + cE.toString());
                 cE.getMessage();
             }
         }
     }
-}
+    }
+
 
 
 
