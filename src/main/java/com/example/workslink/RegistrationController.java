@@ -111,8 +111,11 @@ public class RegistrationController extends HelloController{
 
                         Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
                         stage.setScene(scene);
+                        stage.setY(15);
+                        stage.setX(100);
                         stage.show();
-                    } else {
+                   }
+                    else {
                         valid_label.setText("Invalid Id or Password!");
                     }
                 }
