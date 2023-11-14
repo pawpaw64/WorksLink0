@@ -10,10 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <Pane prefHeight="43.0" prefWidth="1160.0" BorderPane.alignment="CENTER">
                <children>
@@ -46,7 +45,7 @@
          <left>
             <Pane prefHeight="597.0" prefWidth="75.0" styleClass="interPanes" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="48.0" fitWidth="46.0" layoutX="11.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profileImg" fitHeight="48.0" fitWidth="46.0" layoutX="11.0" layoutY="20.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icon/circle-user.png" />
                      </image>
@@ -65,7 +64,7 @@
             </Pane>
          </left>
          <right>
-            <Pane prefHeight="597.0" prefWidth="368.0" styleClass="corners" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER" />
+            <Pane fx:id="sidePane" prefHeight="597.0" prefWidth="368.0" styleClass="corners" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER" />
          </right>
          <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">

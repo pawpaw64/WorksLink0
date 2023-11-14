@@ -21,7 +21,11 @@
         -fx-font-weight: bold;
          -fx-underline: true;
     }
-
+.pane {
+  border: 2px solid #ccc; /* Set your desired border properties */
+  border-radius: 110px; /* Adjust the value to control the roundness of the corners */
+  padding: 10px; /* Optional: Add padding to the content inside the pane */
+}
 .text-field {
     -fx-border-color:  #05373c;
     -fx-border-width: 1px;
