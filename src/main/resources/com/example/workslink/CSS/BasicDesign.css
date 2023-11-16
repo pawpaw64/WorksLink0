@@ -19,7 +19,7 @@
         -fx-font-family: "Cambria";
         -fx-font-size: 18px;
         -fx-font-weight: bold;
-         -fx-underline: true;
+
     }
 .pane {
   border: 2px solid #ccc; /* Set your desired border properties */

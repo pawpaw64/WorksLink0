@@ -1,0 +1,12 @@
+/* Customize the title of the TitledPane */
+.titled-pane .title {
+    -fx-font-size: 16px; /* Set the font size */
+    -fx-font-weight: bold; /* Set the font weight */
+    -fx-text-fill: #0066cc; /* Set the text color */
+    -fx-padding: 5 10; /* Set padding as needed */
+    -fx-background-color:transparent; /* Set the background color */
+}
+
+/* Customize the arrow button (if needed) */
+
+}
