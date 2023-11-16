@@ -87,22 +87,22 @@ public class RegistrationController extends HelloController{
             valid_label.setText("Please Enter valid Info");
         } else {
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                String conUrl = "jdbc:mysql://localhost:3306/registration";
-                String username = "root";
-                String password = "";
-
-                Connection con = DriverManager.getConnection(conUrl, username, password);
-                String query = "SELECT * FROM email WHERE userName = ? AND password = ?";
-
-                try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-                    preparedStatement.setString(1, userLogin);
-                    preparedStatement.setString(2, passLogin);
-
-                    ResultSet rs = preparedStatement.executeQuery();
-
-                    if (rs.next()) {
-                        valid_label.setText("Successfully logged in");
+//                Class.forName("com.mysql.cj.jdbc.Driver");
+//                String conUrl = "jdbc:mysql://localhost:3306/registration";
+//                String username = "root";
+//                String password = "";
+//
+//                Connection con = DriverManager.getConnection(conUrl, username, password);
+//                String query = "SELECT * FROM email WHERE userName = ? AND password = ?";
+//
+//                try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+//                    preparedStatement.setString(1, userLogin);
+//                    preparedStatement.setString(2, passLogin);
+//
+//                    ResultSet rs = preparedStatement.executeQuery();
+//
+//                    if (rs.next()) {
+//                        valid_label.setText("Successfully logged in");
 
                         // Jump to the homepage...
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
@@ -115,13 +115,15 @@ public class RegistrationController extends HelloController{
                         stage.setX(100);
                         stage.show();
                    }
-                    else {
-                        valid_label.setText("Invalid Id or Password!");
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (Exception cE) {
+//                    else {
+//                        valid_label.setText("Invalid Id or Password!");
+//                    }
+//                }
+//            }
+//        catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+            catch (Exception cE) {
                 System.out.println("Class Not Found Exception: " + cE.toString());
                 cE.getMessage();
             }
