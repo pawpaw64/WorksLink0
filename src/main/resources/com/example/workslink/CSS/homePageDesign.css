@@ -18,6 +18,39 @@
      -fx-text-fill: black;
 
 }
+.icon {
+
+     -fx-background-size: 100% 100%;
+     -fx-background-repeat: no-repeat;
+     -fx-cursor: hand; /* Change cursor to hand on hover to indicate it's clickable */
+ }
+
+ .icon:hover {
+     /* Apply hover effect */
+     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+ }
+
+ .icon:pressed {
+     /* Apply click effect */
+     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+ }
+
+
+
 .gradiant {
-   -fx-background-color: linear-gradient(to bottom right, #33CCCC, #05373c);
+   -fx-background-color: linear-gradient(to bottom right, #0dffea, #05373c);
+}
+/* Apply styles to the AnchorPane */
+.anchor-pane-with-border {
+    -fx-border-color: #a0a0a0; /* Set the border color to a light grey */
+    -fx-border-width: 2; /* Set the border width as needed */
+    -fx-border-radius: 5; /* Set the border radius as needed */
+    -fx-background-color: -fx-background-color: linear-gradient(to bottom right, #0dffea, #05373c); /* Set the background color if necessary */
+    -fx-padding: 10; /* Set padding as needed */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2); /* Apply a slight shadow effect */
+}
+
+/* Apply hover effect if needed */
+.anchor-pane-with-border:hover {
+    -fx-border-color: #707070; /* Change border color on hover */
 }
