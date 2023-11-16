@@ -85,7 +85,7 @@
             </Pane>
          </left>
          <right>
-            <Pane fx:id="sidePane" prefHeight="597.0" prefWidth="368.0" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER">
+            <Pane fx:id="sidePane" prefHeight="597.0" prefWidth="368.0" stylesheets="@../CSS/homePageDesign.css" visible="false" BorderPane.alignment="CENTER">
                <styleClass>
                   <String fx:value="gradiant" />
                   <String fx:value="anchor-pane-with-border" />

@@ -51,7 +51,7 @@
                         <Image url="@../Icon/cross-circle.png" />
                      </image>
                   </ImageView>
-                  <TitledPane contentDisplay="TOP" layoutY="314.0" prefHeight="198.0" prefWidth="315.0" styleClass="title" stylesheets="@../CSS/titledpane.css" text="Change Avater" textAlignment="CENTER">
+                  <TitledPane collapsible="false" contentDisplay="TOP" layoutY="314.0" prefHeight="198.0" prefWidth="327.0" styleClass="title" stylesheets="@../CSS/titledpane.css" text="Change Avater" textAlignment="CENTER">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
