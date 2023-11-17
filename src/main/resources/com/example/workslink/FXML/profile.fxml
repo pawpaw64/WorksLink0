@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="368.0" style="-fx-background-color: white;" stylesheets="@../CSS/homePageDesign.css" type="AnchorPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.ProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="368.0" style="-fx-background-color: white;" stylesheets="@../CSS/homePageDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.ProfileController">
    <children>
       <ScrollPane cache="true" hbarPolicy="NEVER" layoutX="13.0" layoutY="13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="556.0" prefWidth="344.0" style="-fx-background-color: white;" stylesheets="@../CSS/scrollpane.css">
          <content>
@@ -101,4 +101,4 @@
          </content>
       </ScrollPane>
    </children>
-</fx:root>
+</AnchorPane>

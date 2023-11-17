@@ -19,12 +19,21 @@ public class ProfileController extends RegistrationController{
     @FXML
     public Button profile_2Set;
     @FXML
-    Label profileEmail;
+    Label profileEmail = new Label();
     @FXML
-    Label profileDOB;
+    Label profileDOB = new Label();
     @FXML
-    Label profileUserName;
+    Label profileUserName = new Label();
+    public ProfileController(){
+        //Default constructor...
+    }
 
+    public ProfileController(String name, String dob, String email){
+        this.profileDOB.setText(dob);
+        this.profileEmail.setText(email);
+        this.profileUserName.setText(name);
+        System.out.println(name+dob+email+"I am from ProfileController");
+    }
     @FXML
     private void ChangeProfile(ActionEvent e){
         if(e.getSource()==profile_1Set){
@@ -32,13 +41,6 @@ public class ProfileController extends RegistrationController{
         }
         else if(e.getSource()==profile_2Set)
             LoadProfile(profile_2);
-    }
-
-    public void profileInfo(String name, String dob, String email){
-        this.profileDOB.setText(dob);
-        this.profileEmail.setText(email);
-        this.profileUserName.setText(name);
-        System.out.println(name+dob+email);
     }
     @FXML
     private void LoadProfile(ImageView img){
