@@ -1,14 +1,8 @@
 package com.example.workslink;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
-
 import java.io.IOException;
 
 public class HomePageController extends RegistrationController {

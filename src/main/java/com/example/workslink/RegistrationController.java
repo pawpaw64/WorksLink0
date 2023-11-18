@@ -31,13 +31,7 @@ public class RegistrationController extends HelloController{
     TextField login_password = new TextField();
     @FXML
     String email,user,dob,pass;
-    @FXML
-    Stage stage;
-    @FXML
 
-    Scene scene;
-    @FXML
-    Parent root;
 
 
 //    @FXML
@@ -92,7 +86,7 @@ public class RegistrationController extends HelloController{
     }
 
     @FXML
-    public void signup(ActionEvent event) {
+    public void signup() {
         email = su_email_TextField.getText();
         user = su_username_TextFIeld.getText();
         dob = su_bdate_TextField.getText();
@@ -176,7 +170,7 @@ public class RegistrationController extends HelloController{
 //        }
 
     @FXML
-    public void login(ActionEvent ae) throws Exception {
+    public void login(ActionEvent ae) {
         String userLogin = login_username.getText();
         String passLogin = login_password.getText();
 
@@ -219,8 +213,8 @@ public class RegistrationController extends HelloController{
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception cE) {
-                System.out.println("Class Not Found Exception: " + cE.toString());
-                cE.getMessage();
+                System.out.println("Class Not Found Exception: " + cE);
+
             }
         }
     }

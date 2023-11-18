@@ -32,21 +32,17 @@ public class ProfileController implements Initializable {
     private User userProfile;
 
     public void setUserProfile(User userProfile) {
-        System.out.println("4");
         this.userProfile = userProfile;
-        System.out.println("setUserProfile called: " + userProfile.getUserName());
-        updateLabels(); // Ensure to call the method to update labels
+        updateLabels();
     }
 
     private void updateLabels() {
-        System.out.println("2");
         if (userProfile != null) {
             profileUserName.setText(userProfile.getUserName());
             profileEmail.setText(userProfile.getEmail());
             profileDOB.setText(userProfile.getDob());
             System.out.println("Labels updated!");
         }
-        System.out.println("3");
     }
 
 
@@ -69,7 +65,6 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ProfileController initialize called");
-        System.out.println("1");
         updateLabels();
     }
 }
