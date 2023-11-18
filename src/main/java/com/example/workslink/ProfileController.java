@@ -3,18 +3,18 @@ package com.example.workslink;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,7 +30,6 @@ public class ProfileController implements Initializable {
     @FXML
     public Button profile_2Set;
     @FXML
-
     public ImageView back_arrowIcon;
     @FXML
     Label profileEmail = new Label();
@@ -38,8 +37,6 @@ public class ProfileController implements Initializable {
     Label profileDOB = new Label();
     @FXML
     Label profileUserName = new Label();
-    @FXML
-    Stage stage;
     private User userProfile;
 
     public void setUserProfile(User userProfile) {
@@ -55,7 +52,26 @@ public class ProfileController implements Initializable {
             System.out.println("Labels updated!");
         }
     }
+    private Pane sidePane;  // Reference to the sidePane in HomePageController
 
+    public void setSidePane(Pane sidePane) {
+        this.sidePane = sidePane;
+    }
+    @FXML
+    private void goBack() {
+        // Pass the user information back to the HomePageController
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
+        try {
+            Pane originalHomepage = loader.load();
+            HomePageController homePageController = loader.getController();
+            homePageController.setUser(userProfile);// Pass the user information back
+            sidePane.getChildren().clear();
+            sidePane.setPrefWidth(sidePane.getMinWidth());
+            sidePane.setVisible(false);
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception as needed
+        }
+    }
 
     @FXML
     private void ChangeProfile(ActionEvent e) {
@@ -70,25 +86,18 @@ public class ProfileController implements Initializable {
         profile_default.setImage(img.getImage());
     }
 
-    public void backButton(MouseEvent e) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
-                                Parent root = fxmlLoader.load();
-                                Scene scene = new Scene(root);
 
-                                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                                stage.setScene(scene);
-                                stage.show();
-    }
-    public void logout(ActionEvent e ) throws Exception{
+    public void logout(ActionEvent e) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/loginRegistration.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
 
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.setScene(scene);
+        stage.setY(15);
+        stage.setX(100);
         stage.show();
-    }
-
+   }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
