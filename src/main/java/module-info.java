@@ -6,6 +6,7 @@ module com.example.workslink {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires mysql.connector.j;
+    requires com.jfoenix;
 
     opens com.example.workslink to javafx.fxml;
     exports com.example.workslink;

@@ -109,7 +109,7 @@ public class RegistrationController extends HelloController{
                                String DOB = rs.getString("dob");
                                String USERname = rs.getString("userName");
 
-                               ProfileController profileController = new ProfileController(USERname,Email,DOB);
+                               //ProfileController profileController = new ProfileController(USERname,Email,DOB);
                                //profileController.profileInfo(USERname,Email,DOB);
 
                                 valid_label.setText("Successfully logged in");
@@ -125,6 +125,9 @@ public class RegistrationController extends HelloController{
                                 stage.setY(15);
                                 stage.setX(100);
                                 stage.show();
+                                ProfileController profileController = new ProfileController(USERname,Email,DOB);
+                                profileController.setInfo();
+
                             } else {
                                 valid_label.setText("Invalid Id or Password!");
                             }
