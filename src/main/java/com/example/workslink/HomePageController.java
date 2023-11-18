@@ -3,31 +3,49 @@ package com.example.workslink;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
+import javafx.scene.layout.Pane;
 import java.io.IOException;
 
-public class HomePageController extends ProfileController{
+public class HomePageController extends RegistrationController {
     @FXML
     private Pane sidePane;
     @FXML
-    private void showProfile(MouseEvent e) {
-        loadView("FXML/profile.fxml");
+    public void initialize(){
+    }
+    private User currentUser;
 
-    }  //change pane after clicking mouse
+    // Method to set the user from the LoginController
+    public void setUser(User user) {
+        this.currentUser = user;
+
+        // Now you can use currentUser.getEmail(), currentUser.getUserName(), etc.
+    }
+    public HomePageController() {
+
+    }
+
     @FXML
-    private void loadView(String fxmlFileName) {
+    private void showProfile() {
+        loadNewView("FXML/profile.fxml");
+    }
+
+    private void loadNewView(String fxmlFileName) {
         try {
-            Pane newView = FXMLLoader.load(getClass().getResource(fxmlFileName));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
+            Pane newView = loader.load();
+            // Pass the user information to the ProfileController
+            ProfileController profileController = loader.getController();
+            profileController.setUserProfile(currentUser);
+
+            sidePane.setPrefWidth(newView.getPrefWidth());
+
             sidePane.getChildren().setAll(newView);
+            sidePane.setVisible(true);
 
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception as needed
         }
     }
 }
+
