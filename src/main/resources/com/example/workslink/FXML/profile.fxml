@@ -14,6 +14,8 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="368.0" style="-fx-background-color: white;" stylesheets="@../CSS/homePageDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.ProfileController">
+
+
    <children>
       <ScrollPane cache="true" hbarPolicy="NEVER" layoutX="13.0" layoutY="13.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="556.0" prefWidth="344.0" style="-fx-background-color: white;" stylesheets="@../CSS/scrollpane.css">
          <content>
@@ -26,8 +28,10 @@
                   </ImageView>
                   <Label fx:id="profileUserName" layoutX="-11.0" layoutY="195.0" prefHeight="32.0" prefWidth="344.0" style="-fx-alignment: center;" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="pawpaw" textAlignment="CENTER" />
                   <Label layoutX="11.0" layoutY="251.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Bio:" />
+
                   <Button layoutX="120.0" layoutY="623.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LOG OUT" />
                   <Label fx:id="label_bio" layoutX="50.0" layoutY="235.0" prefHeight="55.0" prefWidth="276.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="hello nihao" textAlignment="CENTER">
+
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>

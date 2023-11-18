@@ -29,6 +29,7 @@ public class RegistrationController extends HelloController{
     TextField login_username = new TextField();
     @FXML
     TextField login_password = new TextField();
+
     @FXML
     String email,user,dob,pass;
 
@@ -178,6 +179,7 @@ public class RegistrationController extends HelloController{
             valid_label.setText("Please Enter valid Info");
         } else {
             try {
+
                 String query = "SELECT * FROM email WHERE userName = ? AND password = ?";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                     preparedStatement.setString(1, userLogin);
@@ -207,6 +209,8 @@ public class RegistrationController extends HelloController{
                             valid_label.setText("Successfully logged in");
                         } else {
                             valid_label.setText("Invalid Id or Password!");
+
+
                         }
                     }
                 }
