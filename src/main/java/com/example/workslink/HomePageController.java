@@ -1,6 +1,5 @@
 package com.example.workslink;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -34,8 +33,9 @@ public class HomePageController extends RegistrationController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
             Pane newView = loader.load();
-            // Pass the user information to the ProfileController
             ProfileController profileController = loader.getController();
+            profileController.setSidePane(sidePane);
+
             profileController.setUserProfile(currentUser);
 
             sidePane.setPrefWidth(newView.getPrefWidth());
