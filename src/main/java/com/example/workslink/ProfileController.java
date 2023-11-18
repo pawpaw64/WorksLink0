@@ -4,9 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 
 import java.net.URL;
@@ -27,11 +33,13 @@ public class ProfileController implements Initializable {
 
     public ImageView back_arrowIcon;
     @FXML
-    Label profileEmail=new Label();
+    Label profileEmail = new Label();
     @FXML
-    Label profileDOB=new Label();
+    Label profileDOB = new Label();
     @FXML
-    Label profileUserName=new Label();
+    Label profileUserName = new Label();
+    @FXML
+    Stage stage;
     private User userProfile;
 
     public void setUserProfile(User userProfile) {
@@ -49,46 +57,36 @@ public class ProfileController implements Initializable {
     }
 
 
-   
-
-    Scene scene;
     @FXML
-    Parent root;
-    public ProfileController(){
-        //Default constructor...
-    }
-
-    public ProfileController(String name, String dob, String email){
-
-        this.name = name;
-        this.dob = dob;
-        this.email = email;
-        System.out.println(this.name+this.dob+this.email+"I am from ProfileController");
-        System.out.println("Label has been taken...");
-    }
-    public void setInfo(){
-        profileUserName.setText(this.name);
-        profileEmail.setText(this.email);
-        profileDOB.setText(this.dob);
-    }
-    @FXML
-    private void ChangeProfile(ActionEvent e){
-        if(e.getSource()==profile_1Set){
+    private void ChangeProfile(ActionEvent e) {
+        if (e.getSource() == profile_1Set) {
             LoadProfile(profile_1);
 
-        }
-        else if(e.getSource()==profile_2Set)
+        } else if (e.getSource() == profile_2Set)
             LoadProfile(profile_2);
     }
-    public void logout(ActionEvent e) throws Exception{
+
+    private void LoadProfile(ImageView img) {
+        profile_default.setImage(img.getImage());
+    }
+
+    public void backButton(MouseEvent e) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
+                                Parent root = fxmlLoader.load();
+                                Scene scene = new Scene(root);
+
+                                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                                stage.setScene(scene);
+                                stage.show();
+    }
+    public void logout(ActionEvent e ) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/loginRegistration.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
 
-
-    @FXML
-    private void LoadProfile(ImageView img){
-         profile_default.setImage(img.getImage());
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
 
