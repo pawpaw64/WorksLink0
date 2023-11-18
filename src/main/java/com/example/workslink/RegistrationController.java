@@ -29,6 +29,7 @@ public class RegistrationController extends HelloController{
     TextField login_username = new TextField();
     @FXML
     TextField login_password = new TextField();
+
     @FXML
     String email,user,dob,pass;
     @FXML
@@ -107,11 +108,12 @@ public class RegistrationController extends HelloController{
                                 String Email = rs.getString("email");
                                String DOB = rs.getString("dob");
                                String USERname = rs.getString("userName");
-                               ProfileController profileController = new ProfileController();
-                               profileController.profileInfo(USERname,Email,DOB);
+
+                               //ProfileController profileController = new ProfileController(USERname,Email,DOB);
+                               //profileController.profileInfo(USERname,Email,DOB);
 
                                 valid_label.setText("Successfully logged in");
-                                System.out.println(Email+DOB+USERname);
+                                System.out.println(Email+DOB+USERname+"I am from RegistrationController");
 
                                 // Jump to the homepage...
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
@@ -123,6 +125,9 @@ public class RegistrationController extends HelloController{
                                 stage.setY(15);
                                 stage.setX(100);
                                 stage.show();
+                                ProfileController profileController = new ProfileController(USERname,Email,DOB);
+                                profileController.setInfo();
+
                             } else {
                                 valid_label.setText("Invalid Id or Password!");
                             }
