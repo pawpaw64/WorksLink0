@@ -1,33 +1,37 @@
-.linear-gradiant {
-    -fx-background-color: linear-gradient(to bottom right, #05373c 10%, #33CCCC 80%,#0dffea);
-} /*gradiant for colour pane */
+.linear-gradient {
+    -fx-background-color: linear-gradient(to bottom right, #05373c 10%, #33CCCC 80%, #0dffea);
+} /* Gradient for color pane */
+
 .white {
     -fx-background-color: #fff;
-} /* gradiant for white pane*/
+} /* Gradient for white pane */
 
- .big-label {
-     -fx-font-family: "Cambria";
-     -fx-font-size: 36px;
-     -fx-font-weight: bold;
- } /* big sized label */
- .small-label {
-      -fx-font-family: "Cambria";
-      -fx-font-size: 26px;
-      -fx-font-weight: bold;
-  }
-  .normal-label {
-        -fx-font-family: "Cambria";
-        -fx-font-size: 18px;
-        -fx-font-weight: bold;
+.big-label {
+    -fx-font-family: "Cambria";
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+} /* Big-sized label */
 
-    }
-.pane {
-  border: 2px solid #ccc; /* Set your desired border properties */
-  border-radius: 110px; /* Adjust the value to control the roundness of the corners */
-  padding: 10px; /* Optional: Add padding to the content inside the pane */
+.small-label {
+    -fx-font-family: "Cambria";
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
 }
+
+.normal-label {
+    -fx-font-family: "Cambria";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/*.pane {
+    border: 2px solid #ccc; /* Set your desired border properties */
+    border-radius: 110px; /* Adjust the value to control the roundness of the corners */
+    padding: 10px; /* Optional: Add padding to the content inside the pane */
+} */
+
 .text-field {
-    -fx-border-color:  #05373c;
+    -fx-border-color: #05373c;
     -fx-border-width: 1px;
 }
 
@@ -42,12 +46,12 @@
     -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-cursor: hand;
-
-} /* #9eaeae dropshadow color*/
+} /* Colorful button */
 
 .fill-btn:hover {
-     -fx-background-color:linear-gradient(to bottom right,#fff,#0dffea ,#fff);
-} /* colourful button */
+    -fx-background-color: linear-gradient(to bottom right, #fff, #0dffea, #fff);
+} /* Hover effect for the colorful button */
+
 .color-btn {
     -fx-background-color: white;
     -fx-background-radius: 5px;
@@ -55,10 +59,8 @@
     -fx-text-fill: black;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
-
 }
+
 .color-btn:hover {
     -fx-background-color: linear-gradient(to bottom right, #05373c, #0dffea);
-} /*white button*/
-
-
+} /* Hover effect for the white button */

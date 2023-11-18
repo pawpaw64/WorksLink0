@@ -2,11 +2,9 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -42,16 +40,6 @@
                      <image>
                         <Image url="@../Icon/info.png" />
                      </image>
-                     <effect>
-                        <Lighting>
-                           <bumpInput>
-                              <Shadow />
-                           </bumpInput>
-                           <light>
-                              <Light.Distant />
-                           </light>
-                        </Lighting>
-                     </effect>
                   </ImageView>
                </children>
             </Pane>
@@ -85,7 +73,7 @@
             </Pane>
          </left>
          <right>
-            <Pane fx:id="sidePane" prefHeight="597.0" prefWidth="368.0" stylesheets="@../CSS/homePageDesign.css" visible="false" BorderPane.alignment="CENTER">
+            <Pane fx:id="sidePane" prefHeight="597.0" prefWidth="23.0" stylesheets="@../CSS/homePageDesign.css" visible="false" BorderPane.alignment="CENTER">
                <styleClass>
                   <String fx:value="gradiant" />
                   <String fx:value="anchor-pane-with-border" />
@@ -94,8 +82,23 @@
          <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="597.0" prefWidth="259.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
-                  <Pane prefHeight="597.0" prefWidth="460.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                  <AnchorPane prefHeight="597.0" prefWidth="245.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
+                     <children>
+                        <Pane layoutX="18.0" layoutY="14.0" prefHeight="57.0" prefWidth="237.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                     </children>
+                  </AnchorPane>
+                  <BorderPane prefHeight="597.0" prefWidth="824.0">
+                     <top>
+                        <Pane prefHeight="65.0" prefWidth="799.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="21.0" layoutY="11.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#Area Name" />
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                     </top>
+                  </BorderPane>
                </children>
             </HBox>
          </center>

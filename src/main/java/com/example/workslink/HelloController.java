@@ -66,7 +66,7 @@ public class HelloController {
         if (e.getSource() == create_btn) {
             slider.setNode(home_page);
             slider.setToX(389);
-            slider.setDuration(Duration.seconds(.5));
+            slider.setDuration(Duration.millis(1000));
 
             slider.setOnFinished((ActionEvent event) -> {
 
@@ -76,7 +76,7 @@ public class HelloController {
         } else if (e.getSource() == already_btn) {
             slider.setNode(home_page);
             slider.setToX(0);
-            slider.setDuration(Duration.seconds(.5));
+            slider.setDuration(Duration.millis(1000));
 
             slider.setOnFinished((ActionEvent event) -> {
 
