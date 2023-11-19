@@ -2,6 +2,7 @@ package com.example.workslink;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
@@ -149,6 +151,15 @@ public class HomePageController extends RegistrationController implements Initia
         // Show the PopOver at the adjusted position
         popOver.show(apps, adjustedX, adjustedY);
     }
+    @FXML
+    Button closeHomePage;
+    public void closeOnAction(ActionEvent e){
+        Stage stage = (Stage) closeHomePage.getScene().getWindow();
+        stage.close();
+
+    }
+
+
 }
 
 
