@@ -59,10 +59,17 @@ public class HomePageController extends RegistrationController implements Initia
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
             Pane newView = loader.load();
+            if(fxmlFileName=="FXML/profile.fxml"){
             ProfileController profileController = loader.getController();
             profileController.setSidePane(sidePane);
             profileController.setProfileImg(profileImg);
-            profileController.setUserProfile(currentUser);
+            profileController.setUserProfile(currentUser);}
+            else if(fxmlFileName=="FXML/calculator.fxml")
+            {
+                CalculatorController calculatorController=loader.getController();
+                calculatorController.setSidePane(sidePane);
+
+            }
 
             sidePane.setPrefWidth(newView.getPrefWidth());
 
@@ -87,8 +94,37 @@ public class HomePageController extends RegistrationController implements Initia
         ObservableList<String> observableItems = FXCollections.observableArrayList(items);
         listView.setItems(observableItems);
         listView.setFixedCellSize(-3);
+        // Add a listener to the selection model to handle item clicks
+        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                handleItemClick(newValue); // Call a method to handle the selected item
+            }
+        });
         vbox.getChildren().add(listView);
         return vbox;
+    }
+    // Method to handle item clicks
+    private void handleItemClick(String selectedItem) {
+        // Add logic to perform actions based on the selected item
+        switch (selectedItem) {
+            case "Calculator":
+                openCalculator();
+                break;
+            case "Notes":
+                openNotes();
+                break;
+            case "More":
+                // Handle more options
+                break;
+            // Add more cases as needed
+        }
+    }
+    private void openCalculator() {
+        loadNewView("FXML/calculator.fxml");
+    }
+
+    private void openNotes() {
+        loadNewView("FXML/notes.fxml");
     }
     public void showApps(MouseEvent event) {
         // Create a list of items
