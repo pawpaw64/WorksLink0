@@ -10,9 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.controlsfx.control.PopOver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +35,10 @@ public class ProfileController implements Initializable {
     @FXML
     public ImageView back_arrowIcon;
     @FXML
+    public ImageView bio_EditIcon;
+    @FXML
+    public Label label_bio;
+    @FXML
     Label profileEmail = new Label();
     @FXML
     Label profileDOB = new Label();
@@ -40,12 +47,12 @@ public class ProfileController implements Initializable {
     private User userProfile;
     private Pane sidePane;  // Reference to the sidePane in HomePageController
     private ImageView profileImg;
+    private TextArea textArea; // Declare as a class variable
 
     public void setUserProfile(User userProfile) {
         this.userProfile = userProfile;
         updateLabels();
     }
-
     private void updateLabels() {
         if (userProfile != null) {
             profileUserName.setText(userProfile.getUserName());
@@ -54,8 +61,6 @@ public class ProfileController implements Initializable {
             System.out.println("Labels updated!");
         }
     }
-
-
     public void setSidePane(Pane sidePane) {
         this.sidePane = sidePane;
     }
@@ -74,7 +79,6 @@ public class ProfileController implements Initializable {
             e.printStackTrace(); // Handle the exception as needed
         }
     }
-
     @FXML
     private void ChangeProfile(ActionEvent e) {
         if (e.getSource() == profile_1Set) {
@@ -112,5 +116,21 @@ public class ProfileController implements Initializable {
 
     public void setProfileImg(ImageView profileImg) {
         this.profileImg=profileImg;
+    }
+    public void bioEdit(){
+        TextArea textArea = new TextArea();
+        textArea.setPrefColumnCount(20);
+        textArea.setPrefRowCount(5);
+    }
+
+    public void edit_bio(MouseEvent mouseEvent) {
+        if(mouseEvent.getSource()==bio_EditIcon) {
+            if (textArea != null) {
+                PopOver popOver = new PopOver(textArea);
+                label_bio.setText(textArea.getText());
+                userProfile.setBio(textArea.getText());
+                popOver.show(bio_EditIcon);
+            }
+        }
     }
 }
