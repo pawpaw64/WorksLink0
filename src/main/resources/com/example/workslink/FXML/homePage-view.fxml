@@ -65,6 +65,11 @@
                         <Image url="@../Icon/home.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="45.0" layoutX="12.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icon/add.png" />
+                     </image>
+                  </ImageView>
                </children>
                <styleClass>
                   <String fx:value="gradiant" />

@@ -1,5 +1,7 @@
 package com.example.workslink;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+//import java.time.Duration;
+
 
 public class RegistrationController extends HelloController{
     @FXML
@@ -33,48 +41,6 @@ public class RegistrationController extends HelloController{
     @FXML
     String email,user,dob,pass;
 
-
-
-//    @FXML
-//    public void signup(ActionEvent event){
-//        email=su_email_TextField.getText();
-//        user=su_username_TextFIeld.getText();
-//        dob=su_bdate_TextField.getText();
-//        pass=su_password.getText();
-//        if(email.isEmpty()||user.isEmpty()||dob.isEmpty()||pass.isEmpty())
-//        {
-//            su_valid_label.setText("Enter All Information");
-//        }
-//
-//        try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            String url = "jdbc:mysql://localhost:3306/registration";
-//            String username = "root";
-//            String password = "";
-//            Connection connection = DriverManager.getConnection(url, username, password);
-//
-//            String sql = "INSERT INTO email (email, userName,dob, password) VALUES (?, ?, ?, ?)";
-//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//            preparedStatement.setString(1, email);
-//            preparedStatement.setString(2, user);
-//            preparedStatement.setString(3, dob);
-//            preparedStatement.setString(4, pass);
-//
-//
-//            int rowsInserted = preparedStatement.executeUpdate();
-//            if (rowsInserted > 0) {
-//
-//                su_valid_label.setText("User registration successful!");
-//            }
-//
-//
-//            connection.close();
-//        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-//
-//        }
-//
-//    }
 // Use the DatabaseConnection class to get a connection
     private Connection connection;
 
@@ -95,80 +61,32 @@ public class RegistrationController extends HelloController{
 
         if (email.isEmpty() || user.isEmpty() || dob.isEmpty() || pass.isEmpty()) {
             su_valid_label.setText("Enter All Information");
+            delay(su_valid_label);
         }
+        else{
+            try {
+                String sql = "INSERT INTO email (email, userName,dob, password) VALUES (?, ?, ?, ?)";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setString(1, email);
+                    preparedStatement.setString(2, user);
+                    preparedStatement.setString(3, dob);
+                    preparedStatement.setString(4, pass);
 
-        try {
-            String sql = "INSERT INTO email (email, userName,dob, password) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, email);
-                preparedStatement.setString(2, user);
-                preparedStatement.setString(3, dob);
-                preparedStatement.setString(4, pass);
+                    int rowsInserted = preparedStatement.executeUpdate();
+                    if (rowsInserted > 0) {
+                        su_valid_label.setText("User registration successful!");
 
-                int rowsInserted = preparedStatement.executeUpdate();
-                if (rowsInserted > 0) {
-                    su_valid_label.setText("User registration successful!");
+                        // Use Timeline to delay hiding the label in delay method...
+                        Duration delay = Duration.seconds(3);
+                        delay(su_valid_label);
+                    }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
-//    @FXML
-//    public void login(ActionEvent ae) throws Exception {
-//        String userLogin = login_username.getText();
-//        String passLogin = login_password.getText();
-//
-//        if (userLogin.isEmpty() || passLogin.isEmpty()) {
-//            valid_label.setText("Please Enter valid Info");
-//        } else {
-//            try {
-//                Class.forName("com.mysql.cj.jdbc.Driver");
-//                String conUrl = "jdbc:mysql://localhost:3306/registration";
-//                String username = "root";
-//                String password = "";
-//
-//                try (Connection con = DriverManager.getConnection(conUrl, username, password)) {
-//                    String query = "SELECT * FROM email WHERE userName = ? AND password = ?";
-//
-//                    try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-//                        preparedStatement.setString(1, userLogin);
-//                        preparedStatement.setString(2, passLogin);
-//
-//                        try (ResultSet rs = preparedStatement.executeQuery()) {
-//                            if (rs.next()) {
-//                                // Retrieve additional information
-//                                String Email = rs.getString("email");
-//                               String DOB = rs.getString("dob");
-//                               String USERname = rs.getString("userName");
-////                               HomePageController homePageController = new HomePageController(USERname,Email,DOB);
-//
-//                                valid_label.setText("Successfully logged in");
-//                                System.out.println(Email+DOB+USERname);
-//
-//                                // Jump to the homepage...
-//                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
-//                                Parent root = fxmlLoader.load();
-//                                Scene scene = new Scene(root);
-//
-//                                Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
-//                                stage.setScene(scene);
-//                                stage.setY(15);
-//                                stage.setX(100);
-//                                stage.show();
-//                            } else {
-//                                valid_label.setText("Invalid Id or Password!");
-//                            }
-//                        }
-//                    }
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            } catch (Exception cE) {
-//                System.out.println("Class Not Found Exception: " + cE.toString());
-//                cE.getMessage();
-//            }
-//        }
+
 
     @FXML
     public void login(ActionEvent ae) {
@@ -177,6 +95,7 @@ public class RegistrationController extends HelloController{
 
         if (userLogin.isEmpty() || passLogin.isEmpty()) {
             valid_label.setText("Please Enter valid Info");
+            delay(valid_label);
         } else {
             try {
 
@@ -209,7 +128,7 @@ public class RegistrationController extends HelloController{
                             valid_label.setText("Successfully logged in");
                         } else {
                             valid_label.setText("Invalid Id or Password!");
-
+                            delay(valid_label);
 
                         }
                     }
@@ -221,6 +140,12 @@ public class RegistrationController extends HelloController{
 
             }
         }
+    }
+    public void delay(Label label){
+        Duration delay = Duration.seconds(3);
+        KeyFrame keyFrame = new KeyFrame(delay, event -> label.setVisible(false));
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
     }
 
 }
