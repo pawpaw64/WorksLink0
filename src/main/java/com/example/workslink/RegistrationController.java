@@ -41,7 +41,6 @@ public class RegistrationController extends HelloController{
     @FXML
     String email,user,dob,pass;
 
-// Use the DatabaseConnection class to get a connection
     private Connection connection;
 
     public RegistrationController() {
@@ -86,7 +85,6 @@ public class RegistrationController extends HelloController{
             }
         }
     }
-
 
     @FXML
     public void login(ActionEvent ae) {

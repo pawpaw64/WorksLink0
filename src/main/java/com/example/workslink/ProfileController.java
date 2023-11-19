@@ -38,6 +38,8 @@ public class ProfileController implements Initializable {
     @FXML
     Label profileUserName = new Label();
     private User userProfile;
+    private Pane sidePane;  // Reference to the sidePane in HomePageController
+    private ImageView profileImg;
 
     public void setUserProfile(User userProfile) {
         this.userProfile = userProfile;
@@ -52,7 +54,7 @@ public class ProfileController implements Initializable {
             System.out.println("Labels updated!");
         }
     }
-    private Pane sidePane;  // Reference to the sidePane in HomePageController
+
 
     public void setSidePane(Pane sidePane) {
         this.sidePane = sidePane;
@@ -83,7 +85,9 @@ public class ProfileController implements Initializable {
     }
 
     private void LoadProfile(ImageView img) {
+
         profile_default.setImage(img.getImage());
+        profileImg.setImage(img.getImage());
     }
 
 
@@ -103,5 +107,10 @@ public class ProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ProfileController initialize called");
         updateLabels();
+    }
+
+
+    public void setProfileImg(ImageView profileImg) {
+        this.profileImg=profileImg;
     }
 }
