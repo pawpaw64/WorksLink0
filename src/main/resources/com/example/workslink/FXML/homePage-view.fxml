@@ -66,7 +66,6 @@
                         <Image url="@../Icon/settings.png" />
                      </image>
                   </ImageView>
-
                   <Line endX="-35.0" layoutX="110.0" layoutY="78.0" startX="-110.0" strokeWidth="1.5" />
                   <ImageView fitHeight="50.0" fitWidth="54.0" layoutX="13.0" layoutY="92.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                      <image>
@@ -76,14 +75,13 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </ImageView>
-                  <ImageView fx:id="add_workspace" fitHeight="48.0" fitWidth="46.0" layoutX="15.0" layoutY="152.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                  <ImageView fx:id="add_workspace" fitHeight="48.0" fitWidth="46.0" layoutX="15.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                      <image>
                         <Image url="@../Icon/add.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
-
                   </ImageView>
                </children>
                <styleClass>
@@ -93,7 +91,7 @@
             </Pane>
          </left>
          <right>
-            <Pane fx:id="sidePane" prefHeight="597.0" prefWidth="23.0" stylesheets="@../CSS/homePageDesign.css" visible="false" BorderPane.alignment="CENTER">
+            <Pane fx:id="sidePane" prefHeight="597.0" prefWidth="10.0" stylesheets="@../CSS/homePageDesign.css" visible="false" BorderPane.alignment="CENTER">
                <styleClass>
                   <String fx:value="gradiant" />
                   <String fx:value="anchor-pane-with-border" />

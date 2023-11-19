@@ -1,0 +1,52 @@
+
+/* Style for the PopOver background */
+.popover {
+    -fx-background-color: linear-gradient(to bottom right, #05373c 10%, #33CCCC 80%, #0dffea);
+}
+
+/* Style for the ListView items */
+.list-view .list-cell {
+    -fx-background-color: white;
+    -fx-font-family: "Cambria";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-color: black; /* Set the border color to a light grey */
+    -fx-border-width: 1.5; /* Set the border width as needed */
+    -fx-border-radius: 3; /* Set the border radius as needed */
+    -fx-padding: 10; /* Set padding as needed */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2); /* Apply a slight shadow effect */
+}
+
+/* Hover style for the ListView items */
+.list-view .list-cell:hover {
+    -fx-background-color: linear-gradient(to bottom right, #05373c 10%, #33CCCC 80%, #0dffea);
+}
+
+/* Style for the selected (clicked) ListView items */
+.list-view .list-cell:selected {
+    -fx-text-fill: black;
+}
+
+/* Add styles for the ScrollPane inside the ListView */
+.list-view .scroll-pane {
+    -fx-background-color: transparent;
+
+       -fx-padding: 0px;
+
+}
+
+/* Style for the ScrollBar */
+.list-view .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+/* Style for the Thumb (the draggable part) of the ScrollBar */
+.list-view .scroll-bar .thumb {
+    -fx-background-color: derive(black, 50%);
+}
+
+/* Style for the Track (the non-draggable part) of the ScrollBar */
+.list-view .scroll-bar .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
