@@ -3,7 +3,9 @@
 <?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,7 +13,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
    <children>
@@ -104,6 +108,69 @@
                <children>
                   <AnchorPane prefHeight="597.0" prefWidth="245.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
                      <children>
+                        <VBox layoutX="18.0" layoutY="77.0" prefHeight="474.0" prefWidth="225.0">
+                           <children>
+                              <VBox prefHeight="128.0" prefWidth="173.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <TitledPane expanded="false" prefHeight="135.0" prefWidth="202.0" text="Channels">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <VBox layoutX="22.2" layoutY="0.1999999999999993" prefHeight="0.0" prefWidth="178.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="-11.0">
+                                                         <children>
+                                                            <Label prefHeight="27.0" prefWidth="119.0" text="# general">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label prefHeight="23.0" prefWidth="108.0" text="# random">
+                                                               <font>
+                                                                  <Font size="15.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TitledPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <TitledPane expanded="false" text="Direct massages">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ScrollPane layoutX="12.0" layoutY="-10.0" prefHeight="180.0" prefWidth="223.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Icon/plus.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label layoutX="37.0" layoutY="3.0" text="Add coworkers">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </TitledPane>
+                           </children>
+                        </VBox>
                         <Pane layoutX="18.0" layoutY="14.0" prefHeight="57.0" prefWidth="237.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
                            <children>
                               <Label prefHeight="57.0" prefWidth="237.0" style="-fx-alignment: center;" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Workspace Name" />
@@ -121,6 +188,9 @@
                            </cursor>
                         </Pane>
                      </top>
+                     <left>
+                        <ImageView fitHeight="30.0" fitWidth="37.0" layoutX="-14.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </left>
                   </BorderPane>
                </children>
             </HBox>
