@@ -4,6 +4,19 @@ public class User {
     private String email;
     private String userName;
     private String dob;
+    private String bio;
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+
+
+
 
     public User(String email, String userName, String dob) {
         this.email = email;
