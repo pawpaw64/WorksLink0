@@ -39,7 +39,10 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Hyperlink>
-                  <Label fx:id="valid_label" layoutX="92.0" layoutY="407.0" prefHeight="17.0" prefWidth="184.0" />
+                  <Label fx:id="valid_label" layoutX="111.0" layoutY="408.0" prefHeight="17.0" prefWidth="184.0" textFill="#42a2a6">
+                     <font>
+                        <Font name="Cambria Bold" size="15.0" />
+                     </font></Label>
                   <ImageView fitHeight="142.0" fitWidth="172.0" layoutX="112.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icon/profile.gif" />
@@ -49,7 +52,7 @@
             </AnchorPane>
             <AnchorPane fx:id="signUp_page" prefHeight="535.0" prefWidth="389.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="signUp_btn" layoutX="107.0" layoutY="380.0" mnemonicParsing="false" onAction="#signup" prefHeight="37.0" prefWidth="172.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Sign Up" />
+                  <Button fx:id="signUp_btn" layoutX="109.0" layoutY="438.0" mnemonicParsing="false" onAction="#signup" prefHeight="37.0" prefWidth="172.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Sign Up" />
                   <TextField fx:id="su_email_TextField" layoutX="42.0" layoutY="131.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="Email" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
                   <PasswordField fx:id="su_password" layoutX="42.0" layoutY="289.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="password" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
                   <Label layoutX="42.0" layoutY="56.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Sign Up">
@@ -59,7 +62,7 @@
                   </Label>
                   <TextField fx:id="su_username_TextFIeld" layoutX="42.0" layoutY="185.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="Username" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
                   <TextField fx:id="su_bdate_TextField" layoutX="43.0" layoutY="237.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="Birthdady" />
-                  <Label fx:id="su_valid_label" layoutX="87.0" layoutY="435.0" prefHeight="20.0" prefWidth="215.0" textFill="#42a2a6">
+                  <Label fx:id="su_valid_label" layoutX="122.0" layoutY="404.0" prefHeight="20.0" prefWidth="215.0" textFill="#42a2a6">
                      <font>
                         <Font name="Cambria Bold" size="15.0" />
                      </font>

@@ -1,5 +1,7 @@
 package com.example.workslink;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+//import java.time.Duration;
+
 
 public class RegistrationController extends HelloController{
     @FXML
@@ -52,25 +60,32 @@ public class RegistrationController extends HelloController{
 
         if (email.isEmpty() || user.isEmpty() || dob.isEmpty() || pass.isEmpty()) {
             su_valid_label.setText("Enter All Information");
+            delay(su_valid_label);
         }
+        else{
+            try {
+                String sql = "INSERT INTO email (email, userName,dob, password) VALUES (?, ?, ?, ?)";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setString(1, email);
+                    preparedStatement.setString(2, user);
+                    preparedStatement.setString(3, dob);
+                    preparedStatement.setString(4, pass);
 
-        try {
-            String sql = "INSERT INTO email (email, userName,dob, password) VALUES (?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, email);
-                preparedStatement.setString(2, user);
-                preparedStatement.setString(3, dob);
-                preparedStatement.setString(4, pass);
+                    int rowsInserted = preparedStatement.executeUpdate();
+                    if (rowsInserted > 0) {
+                        su_valid_label.setText("User registration successful!");
 
-                int rowsInserted = preparedStatement.executeUpdate();
-                if (rowsInserted > 0) {
-                    su_valid_label.setText("User registration successful!");
+                        // Use Timeline to delay hiding the label in delay method...
+                        Duration delay = Duration.seconds(3);
+                        delay(su_valid_label);
+                    }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
+
     @FXML
     public void login(ActionEvent ae) {
         String userLogin = login_username.getText();
@@ -78,6 +93,7 @@ public class RegistrationController extends HelloController{
 
         if (userLogin.isEmpty() || passLogin.isEmpty()) {
             valid_label.setText("Please Enter valid Info");
+            delay(valid_label);
         } else {
             try {
 
@@ -110,7 +126,7 @@ public class RegistrationController extends HelloController{
                             valid_label.setText("Successfully logged in");
                         } else {
                             valid_label.setText("Invalid Id or Password!");
-
+                            delay(valid_label);
 
                         }
                     }
@@ -122,6 +138,12 @@ public class RegistrationController extends HelloController{
 
             }
         }
+    }
+    public void delay(Label label){
+        Duration delay = Duration.seconds(3);
+        KeyFrame keyFrame = new KeyFrame(delay, event -> label.setVisible(false));
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
     }
 
 }
