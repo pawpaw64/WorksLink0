@@ -1,0 +1,19 @@
+/* styles.css */
+
+.text-area-style {
+    -fx-background-color: linear-gradient(to bottom right, #05373c 10%, #33CCCC 80%, #0dffea);
+    -fx-font-family: "Cambria";
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}.btn {
+     -fx-background-color: linear-gradient(to bottom right, #05373c, #0dffea);
+     -fx-background-radius: 5px;
+     -fx-text-fill: black;
+     -fx-font-weight: bold;
+     -fx-font-size: 14px;
+     -fx-cursor: hand;
+ } /* Colorful button */
+
+ .btn:hover {
+     -fx-background-color: linear-gradient(to bottom right, #fff, #0dffea, #fff);
+ } /* Hover effect for the colorful button */

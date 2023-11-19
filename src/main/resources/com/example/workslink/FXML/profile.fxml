@@ -28,7 +28,7 @@
                   <Label layoutX="11.0" layoutY="251.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Bio:" />
 
                   <Button layoutX="120.0" layoutY="623.0" mnemonicParsing="false" onAction="#logout" prefHeight="36.0" prefWidth="100.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LOG OUT" />
-                  <Label fx:id="label_bio" layoutX="50.0" layoutY="234.0" prefHeight="55.0" prefWidth="276.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="hello nihao" textAlignment="CENTER">
+                  <Label fx:id="label_bio" layoutX="50.0" layoutY="234.0" prefHeight="55.0" prefWidth="276.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" textAlignment="CENTER">
 
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />

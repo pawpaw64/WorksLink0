@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
 
@@ -47,7 +48,7 @@ public class ProfileController implements Initializable {
     private User userProfile;
     private Pane sidePane;  // Reference to the sidePane in HomePageController
     private ImageView profileImg;
-    private TextArea textArea; // Declare as a class variable
+
 
     public void setUserProfile(User userProfile) {
         this.userProfile = userProfile;
@@ -117,20 +118,54 @@ public class ProfileController implements Initializable {
     public void setProfileImg(ImageView profileImg) {
         this.profileImg=profileImg;
     }
-    public void bioEdit(){
-        TextArea textArea = new TextArea();
-        textArea.setPrefColumnCount(20);
-        textArea.setPrefRowCount(5);
-    }
+    @FXML
+    private void edit_bio(MouseEvent mouseEvent) {
+        if (mouseEvent.getSource() == bio_EditIcon) {
+            System.out.println("yes");
 
-    public void edit_bio(MouseEvent mouseEvent) {
-        if(mouseEvent.getSource()==bio_EditIcon) {
-            if (textArea != null) {
-                PopOver popOver = new PopOver(textArea);
-                label_bio.setText(textArea.getText());
-                userProfile.setBio(textArea.getText());
-                popOver.show(bio_EditIcon);
-            }
+            // Create a PopOver
+            PopOver popOver = new PopOver();
+
+            // Create a TextArea
+            TextArea textArea = new TextArea();
+            textArea.setPrefColumnCount(20);
+            textArea.setPrefRowCount(5);
+
+            // Create a Button to confirm the input
+            Button confirmButton = new Button("OK");
+            confirmButton.setStyle("-fx-background-color: linear-gradient(to bottom right, #05373c, #0dffea);"+
+            "-fx-background-radius: 5px;"+
+            "-fx-text-fill: black;"+
+            "-fx-font-weight: bold;"+
+            "-fx-font-size: 14px;"+
+            "-fx-cursor: hand");
+            confirmButton.setOnAction(event -> {
+                String enteredText = textArea.getText();
+                label_bio.setText(enteredText);
+                userProfile.setBio(enteredText);
+                popOver.hide(); // Close the PopOver after confirming
+            });
+
+            // Create a VBox to hold the TextArea and Button
+            VBox content = new VBox(textArea, confirmButton);
+            textArea.setStyle("-fx-background-color: linear-gradient(to bottom right, #05373c 10%, #33CCCC 80%, #0dffea);" +
+                    "-fx-font-family: 'Cambria';" +
+                    "-fx-font-size: 14px;" +
+                    "-fx-font-weight: bold;");
+
+            // Set the content of the PopOver
+            popOver.setContentNode(content);
+
+            // Set the title of the PopOver
+            popOver.setTitle("Enter Bio");
+
+            // Show the PopOver below the bio_EditIcon
+            popOver.show(bio_EditIcon);
+
+            // Set the size of the PopOver
+            popOver.setMinWidth(300);
+            popOver.setMinHeight(200);
         }
     }
+
 }
