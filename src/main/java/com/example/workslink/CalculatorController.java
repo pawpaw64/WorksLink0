@@ -1,11 +1,19 @@
 package com.example.workslink;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-public class CalculatorController {
+
+import java.io.IOException;
+
+public class CalculatorController extends ProfileController{
     @FXML private Pane titlePane;
     @FXML private ImageView btnMinimize, btnClose;
     @FXML private Label lblResult;
@@ -63,8 +71,25 @@ public class CalculatorController {
             lblResult.setText(String.valueOf(0.0));
         }
     }
-
+    @FXML
+    private void goBack2() {
+        // Pass the user information back to the HomePageController
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
+        try {
+            Pane originalHomepage = loader.load();
+            HomePageController homePageController = loader.getController();
+            homePageController.setUser(userProfile);// Pass the user information back
+            sidePane.getChildren().clear();
+            sidePane.setPrefWidth(sidePane.getMinWidth());
+            sidePane.setVisible(false);
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception as needed
+        }
+    }
     public void setSidePane(Pane sidePane) {
         this.sidePane = sidePane;
     }
+
+
+
 }

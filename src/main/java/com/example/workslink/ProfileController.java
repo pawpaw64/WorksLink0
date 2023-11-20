@@ -45,7 +45,7 @@ public class ProfileController implements Initializable {
     Label profileDOB = new Label();
     @FXML
     Label profileUserName = new Label();
-    private User userProfile;
+    public User userProfile;
     private Pane sidePane;  // Reference to the sidePane in HomePageController
     private ImageView profileImg;
 
