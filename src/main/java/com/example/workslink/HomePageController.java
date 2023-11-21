@@ -152,8 +152,8 @@ public class HomePageController extends RegistrationController implements Initia
         popOver.show(apps, adjustedX, adjustedY);
     }
     @FXML
-    Button closeHomePage;
-    public void closeOnAction(ActionEvent e){
+    ImageView closeHomePage;
+    public void closeOnAction(MouseEvent e){
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
 
