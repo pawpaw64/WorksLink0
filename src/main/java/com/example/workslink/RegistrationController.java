@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -26,7 +27,7 @@ public class RegistrationController extends HelloController{
     @FXML
     TextField su_username_TextFIeld= new TextField();
     @FXML
-    TextField su_bdate_TextField= new TextField();
+    DatePicker su_bdate= new DatePicker();
     @FXML
     TextField su_password= new TextField();
     @FXML
@@ -55,7 +56,7 @@ public class RegistrationController extends HelloController{
     public void signup() {
         email = su_email_TextField.getText();
         user = su_username_TextFIeld.getText();
-        dob = su_bdate_TextField.getText();
+        dob = String.valueOf(su_bdate.getValue());
         pass = su_password.getText();
 
         if (email.isEmpty() || user.isEmpty() || dob.isEmpty() || pass.isEmpty()) {
