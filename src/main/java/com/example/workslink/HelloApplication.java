@@ -14,7 +14,6 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/loginRegistration.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.initStyle(StageStyle.UNDECORATED);
-        //stage.setTitle("!!!WorksLink!!!");
         stage.setScene(scene);
         stage.show();
 
