@@ -105,6 +105,58 @@
                      </effect></Button>
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="login_page1" layoutX="397.0" layoutY="10.0" onDragDetected="#login" prefHeight="535.0" prefWidth="389.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css">
+               <children>
+                  <Button fx:id="login_btn1" layoutX="110.0" layoutY="442.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="148.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="&lt;Back">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.6196078658103943" green="0.6823529601097107" blue="0.6823529601097107" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <TextField fx:id="login_username1" layoutX="37.0" layoutY="246.0" onAction="#login" prefHeight="44.0" prefWidth="321.0" promptText="Answer" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" text="Answer" />
+                  <Label layoutX="55.0" layoutY="61.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Forgot Password">
+                     <font>
+                        <Font name="Cambria Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="valid_label1" layoutX="111.0" layoutY="408.0" prefHeight="17.0" prefWidth="184.0" textFill="#42a2a6">
+                     <font>
+                        <Font name="Cambria Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <ComboBox layoutX="37.0" layoutY="178.0" prefHeight="44.0" prefWidth="322.0" promptText="Question" />
+                  <Button layoutX="36.0" layoutY="335.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="322.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Proceed" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="login_page11" layoutX="407.0" layoutY="20.0" onDragDetected="#login" prefHeight="535.0" prefWidth="389.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css">
+               <children>
+                  <Button fx:id="login_btn11" layoutX="110.0" layoutY="442.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="148.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="&lt;Back">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.6196078658103943" green="0.6823529601097107" blue="0.6823529601097107" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Label layoutX="55.0" layoutY="61.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Forgot Password">
+                     <font>
+                        <Font name="Cambria Bold" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="valid_label11" layoutX="111.0" layoutY="408.0" prefHeight="17.0" prefWidth="184.0" textFill="#42a2a6">
+                     <font>
+                        <Font name="Cambria Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="36.0" layoutY="335.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="322.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Change Password" />
+                  <PasswordField layoutX="33.0" layoutY="141.0" prefHeight="38.0" prefWidth="322.0" promptText="New password" />
+                  <PasswordField layoutX="33.0" layoutY="216.0" prefHeight="38.0" prefWidth="322.0" promptText="Change password" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
