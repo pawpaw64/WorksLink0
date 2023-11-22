@@ -30,7 +30,7 @@ import org.controlsfx.control.PopOver;
 
 
 
-public class HomePageController extends RegistrationController implements Initializable {
+public class HomePageController extends HelloController implements Initializable {
     @FXML
     public Pane rightPane;
     @FXML
@@ -41,7 +41,6 @@ public class HomePageController extends RegistrationController implements Initia
     private Pane sidePane;
     private User currentUser;
 
-    // Method to set the user from the LoginController
     public void setUser(User user) {
         this.currentUser = user;
 
