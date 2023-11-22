@@ -106,6 +106,7 @@
                      </effect></Button>
                </children>
             </AnchorPane>
+
             <AnchorPane fx:id="forget_passPane" layoutX="387.0" prefHeight="535.0" prefWidth="389.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="388.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Button layoutX="110.0" layoutY="442.0" mnemonicParsing="false" onAction="#backToLoginForm" prefHeight="37.0" prefWidth="148.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="&lt;Back">
@@ -159,6 +160,8 @@
                   <PasswordField fx:id="confirm_pass" layoutX="42.0" layoutY="252.0" prefHeight="44.0" prefWidth="321.0" promptText="Confirm password" />
                </children>
             </AnchorPane>
+
+
          </children>
       </AnchorPane>
    </children>
