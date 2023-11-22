@@ -9,29 +9,20 @@ public class User {
     public String getBio() {
         return bio;
     }
-
     public void setBio(String bio) {
         this.bio = bio;
     }
-
-
-
-
-
     public User(String email, String userName, String dob) {
         this.email = email;
         this.userName = userName;
         this.dob = dob;
     }
-
     public String getEmail() {
         return email;
     }
-
     public String getUserName() {
         return userName;
     }
-
     public String getDob() {
         return dob;
     }
