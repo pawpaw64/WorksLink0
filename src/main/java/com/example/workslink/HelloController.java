@@ -95,25 +95,35 @@ public class HelloController {
         TranslateTransition slider = new TranslateTransition();
 
         if (e.getSource() == create_btn) {
+            // Apply the "corners" style class to home_page
+            home_page.getStyleClass().add("corners");
+            // Remove the "interPanes" style class if present
+            home_page.getStyleClass().remove("interPanes");
             slider.setNode(home_page);
             slider.setToX(389);
             slider.setDuration(Duration.millis(1000));
 
+
+
             slider.setOnFinished((ActionEvent event) -> {
                 regQuestionList();
                 forgotPassQuestionList();
+
             });
 
             slider.play();
         } else if (e.getSource() == already_btn) {
+            // Apply the "interPanes" style class to home_page
+            home_page.getStyleClass().add("interPanes");
+            // Remove the "corners" style class if present
+            home_page.getStyleClass().remove("corners");
             slider.setNode(home_page);
             slider.setToX(0);
             slider.setDuration(Duration.millis(1000));
-
             slider.setOnFinished((ActionEvent event) -> {
 
-            });
 
+            });
             slider.play();
         }
     }
