@@ -70,7 +70,7 @@
                   <Separator layoutY="257.0" prefHeight="12.0" prefWidth="231.0" />
                   <Separator layoutX="227.0" layoutY="-43.0" orientation="VERTICAL" prefHeight="640.0" prefWidth="0.0" />
                   <Separator layoutX="1.0" layoutY="451.0" prefHeight="10.0" prefWidth="231.0" />
-                  <VBox layoutY="264.0" prefHeight="197.0" prefWidth="230.0" stylesheets="@../CSS/BasicDesign.css">
+                  <VBox layoutY="284.0" prefHeight="171.0" prefWidth="230.0" stylesheets="@../CSS/BasicDesign.css">
                      <children>
                         <Label prefHeight="25.0" prefWidth="232.0" text="Resources" wrapText="true">
                            <font>
@@ -112,7 +112,7 @@
                   </VBox>
                   <AnchorPane stylesheets="@../CSS/homePageDesign.css">
                      <children>
-                        <ScrollPane hbarPolicy="NEVER" layoutY="27.0" opacity="0.54" pannable="true" prefHeight="235.0" prefWidth="229.0">
+                        <ScrollPane hbarPolicy="NEVER" layoutY="27.0" opacity="0.54" pannable="true" prefHeight="231.0" prefWidth="229.0">
                            <content>
                               <AnchorPane prefHeight="235.0" prefWidth="233.0">
                                  <children>
