@@ -199,6 +199,7 @@ public class HelloController {
                     int rowsInserted = preparedStatement.executeUpdate();
                     if (rowsInserted > 0) {
                         su_valid_label.setText("User registration successful!");
+                        System.out.println("User registration successful!");
                         delay(su_valid_label);
                     }
                 }
@@ -338,58 +339,6 @@ public class HelloController {
         }
     }
 
-//@FXML
-//public void changePassBtn() {
-//
-//    if (new_pass.getText().isEmpty() || confirm_pass.getText().isEmpty()) {
-//        change_pass_valid_label.setText("Enter All Information");
-//        delay(change_pass_valid_label);
-//    } else {
-//        if (new_pass.getText().equals(confirm_pass.getText())) {
-//            try (Connection connect = DatabaseConnection.getConnection()) {
-//                String getPass = "SELECT password FROM email WHERE userName = ?";
-//                try (PreparedStatement prepare = connect.prepareStatement(getPass)) {
-//                    prepare.setString(1, fp_username.getText());
-//                    try (ResultSet result = prepare.executeQuery()) {
-//                        String date = "";
-//                        if (result.next()) {
-//                            date = result.getString("date");
-//                        }
-//
-//                        String updatePass = "UPDATE email SET password = ? WHERE userName = ?";
-//                        try (PreparedStatement updatePrepare = connect.prepareStatement(updatePass)) {
-//                            updatePrepare.setString(1, new_pass.getText());
-//                            updatePrepare.setString(2, (String) fp_questions.getSelectionModel().getSelectedItem());
-//                            updatePrepare.setString(3, fp_answers.getText());
-//                            updatePrepare.setString(4, date);
-//                            updatePrepare.setString(5, fp_username.getText());
-//
-//                            updatePrepare.executeUpdate();
-//
-//                            login_page.setVisible(true);
-//                            change_passPane.setVisible(false);
-//
-//                            // TO CLEAR FIELDS
-//                            confirm_pass.setText("");
-//                            new_pass.setText("");
-//                            fp_questions.getSelectionModel().clearSelection();
-//                            fp_answers.setText("");
-//                            fp_username.setText("");
-//
-//                            valid_label.setText("Password changed successfully!");
-//                            delay(valid_label);
-//                        }
-//                    }
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-//            change_pass_valid_label.setText("Password Doesn't match");
-//            delay(change_pass_valid_label);
-//        }
-//    }
-//}
 
 }
 

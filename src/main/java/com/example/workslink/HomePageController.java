@@ -1,5 +1,6 @@
 package com.example.workslink;
 
+import com.example.workslink.chat.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.image.ImageView;
 
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -40,6 +42,8 @@ public class HomePageController extends HelloController implements Initializable
     @FXML
     private Pane sidePane;
     private User currentUser;
+    @FXML
+    private AnchorPane chatAncPane;
 
     public void setUser(User user) {
         this.currentUser = user;
@@ -155,6 +159,12 @@ public class HomePageController extends HelloController implements Initializable
     public void closeOnAction(MouseEvent e){
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
+
+    }
+    public void chatOnAction(){
+        chatAncPane = new AnchorPane();
+        Client client = new Client();
+        client.getroot();
 
     }
 

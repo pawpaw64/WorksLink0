@@ -19,6 +19,7 @@ import java.util.Scanner;
 
 public class Client extends Application {
     private PrintWriter out;
+    BorderPane root;
 
     public static void main(String[] args) {
         launch(args);
@@ -26,18 +27,18 @@ public class Client extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
 
         TextArea chatTextArea = new TextArea();
-        chatTextArea.setPrefWidth(374);
-        chatTextArea.setPrefHeight(569);
+        chatTextArea.setPrefWidth(562);
+        chatTextArea.setPrefHeight(532);
         chatTextArea.setEditable(false);
 
         ScrollPane scrollPane = new ScrollPane(chatTextArea);
         root.setCenter(scrollPane);
 
         TextField messageInputField = new TextField();
-        messageInputField.setPrefWidth(335);
+        messageInputField.setPrefWidth(520);
         messageInputField.setPrefHeight(36);
         messageInputField.setPromptText("Type your message here...");
 
@@ -54,9 +55,9 @@ public class Client extends Application {
         bottomPane.setRight(sendButton);
         root.setBottom(bottomPane);
 
-        Scene scene = new Scene(root, 377, 597);
-        //primaryStage.setTitle("My Chat App");
+        Scene scene = new Scene(root, 562, 532);
         primaryStage.setScene(scene);
+       // primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
 
         // Connect to the server
@@ -92,5 +93,8 @@ public class Client extends Application {
             out.println(message);
             messageInputField.clear();
         }
+    }
+    public BorderPane getroot(){
+        return root;
     }
 }

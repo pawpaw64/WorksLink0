@@ -115,7 +115,7 @@
                                              <children>
                                                 <VBox layoutX="21.0" layoutY="-20.0" prefHeight="180.0" prefWidth="223.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Label text="# general">
+                                                      <Label onMouseClicked="#chatOnAction" text="# general">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -184,9 +184,9 @@
                            </cursor>
                         </Pane>
                      </top>
-                     <left>
-                        <ImageView fitHeight="30.0" fitWidth="37.0" layoutX="-14.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-                     </left>
+                     <center>
+                        <AnchorPane fx:id="chatAncPane" prefHeight="532.0" prefWidth="562.0" BorderPane.alignment="CENTER" />
+                     </center>
                   </BorderPane>
                </children>
             </HBox>

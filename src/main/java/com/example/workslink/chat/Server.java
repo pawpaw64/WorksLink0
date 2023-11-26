@@ -38,7 +38,7 @@ public class Server {
 
 
     private static void sendPreviousMessages(ClientHandler clientHandler) {
-        try (Scanner logScanner = new Scanner(new File("previousMassage.txt"))) {
+        try (Scanner logScanner = new Scanner(new File("previousMsg.txt"))) {
             while (logScanner.hasNextLine()) {
                 String message = logScanner.nextLine();
                 clientHandler.sendMessage(message);
@@ -49,7 +49,7 @@ public class Server {
     }
 
     private static void logEvent(String message) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("previousMassage.txt", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("previousMsg.txt", true))) {
             writer.println(message);
         } catch (IOException e) {
             e.printStackTrace();
