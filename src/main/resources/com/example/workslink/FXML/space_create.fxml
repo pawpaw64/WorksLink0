@@ -1,33 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="556.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.FXML.SpaceCreate">
+<AnchorPane prefHeight="556.0" prefWidth="740.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceCreate">
    <children>
-      <Label layoutX="41.0" layoutY="53.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Create New Space" />
+      <Label layoutX="238.0" layoutY="28.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Create New Space" />
       <ImageView fitHeight="31.0" fitWidth="27.0" layoutX="699.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/cross-circle.png" />
          </image>
       </ImageView>
-      <Label layoutX="47.0" layoutY="155.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="space name" />
-      <TextField layoutX="47.0" layoutY="186.0" prefHeight="25.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
-      <Label layoutX="47.0" layoutY="239.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Space's Decription" />
-      <TextArea layoutX="47.0" layoutY="261.0" prefHeight="62.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
-      <Label layoutX="47.0" layoutY="339.0" prefHeight="17.0" prefWidth="208.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Choose Colour &amp; Avater" />
-      <Button layoutX="304.0" layoutY="492.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Create Space" />
-      <ImageView fitHeight="172.0" fitWidth="200.0" layoutX="435.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="40.0" layoutY="237.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="space name" />
+      <TextField fx:id="space_name" layoutX="40.0" layoutY="266.0" prefHeight="25.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
+      <Label layoutX="40.0" layoutY="298.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Space's Decription" />
+      <TextArea layoutX="40.0" layoutY="333.0" prefHeight="62.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
+      <Label layoutX="373.0" layoutY="114.0" prefHeight="17.0" prefWidth="232.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Choose Colour &amp; Avater" />
+      <Button layoutX="261.0" layoutY="485.0" mnemonicParsing="false" onAction="#create_space" prefHeight="30.0" prefWidth="249.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Create Space" />
+      <Pane layoutX="346.0" layoutY="150.0" minHeight="-Infinity" prefHeight="256.0" prefWidth="421.0">
+         <children>
+            <Pane layoutX="20.0" layoutY="22.0" prefHeight="94.0" prefWidth="97.0" style="-fx-background-color: #778899;" styleClass="rectangle" stylesheets="@../CSS/design.css">
+               <children>
+                  <Label alignment="CENTER" layoutX="24.0" layoutY="25.0" prefHeight="50.0" prefWidth="49.0" text="F">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="199.0" layoutY="14.0" prefHeight="22.0" prefWidth="100.0" text="SPACE COLOR" textFill="DARKGRAY">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Pane layoutX="143.0" layoutY="60.0" prefHeight="1.0" prefWidth="294.0">
+               <children>
+                  <Circle fill="#76ff7a" layoutX="74.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="#bf94e4" layoutX="35.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="#0fc0fc" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="#bd33a4" layoutX="182.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="LIGHTSLATEGRAY" layoutX="149.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="#ffae42" layoutX="111.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="#ffb3de" layoutX="250.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="#0a7e8c" layoutX="217.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+               </children>
+            </Pane>
+            <Line endX="100.699951171875" layoutX="246.0" layoutY="76.0" startX="-100.0" style="-fx-fill: #a9a9a9; -fx-opacity: 0.3;" />
+            <ScrollPane layoutX="133.0" layoutY="125.0" prefHeight="118.0" prefWidth="232.0" stylesheets="@../CSS/scrollpane.css">
+               <content>
+                  <AnchorPane prefHeight="110.0" prefWidth="336.0">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/envelope.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="113.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/home.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/eye.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="208.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/img.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/globe.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="254.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/marker.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="303.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/phone-call.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/rocket-lunch.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="63.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/search.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="113.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/user%20(1).png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/world.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="208.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/building.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="254.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/bulb.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <Line endX="-51.0" endY="270.0" layoutX="57.0" layoutY="17.0" startX="-51.0" startY="-51.0" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="150.0" fitWidth="192.0" layoutX="45.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/uranus.gif" />
-         </image>
-      </ImageView>
-      <FontAwesomeIcon glyphName="SMILE" layoutX="402.0" layoutY="343.0" />
+         </image></ImageView>
    </children>
 </AnchorPane>
