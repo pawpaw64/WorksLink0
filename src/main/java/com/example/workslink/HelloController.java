@@ -46,10 +46,8 @@ public class HelloController {
     private ComboBox<?> fp_questions;
     @FXML
     public TextField su_answers;
-
     @FXML
     private Label change_pass_valid_label;
-
     @FXML
     private Label fp_valid_label;
     @FXML
@@ -61,7 +59,7 @@ public class HelloController {
     @FXML
     TextField su_password = new TextField();
     @FXML
-    Label su_valid_label = new Label();
+    Label su_valid_label ;
     @FXML
     Label valid_label = new Label();
     @FXML
@@ -70,12 +68,10 @@ public class HelloController {
     TextField login_password = new TextField();
     @FXML
     private TextField fp_answers;
-
     @FXML
     private TextField fp_username;
     @FXML
     private PasswordField confirm_pass;
-
     @FXML
     private PasswordField new_pass;
     @FXML
@@ -209,7 +205,6 @@ public class HelloController {
                     int rowsInserted = preparedStatement.executeUpdate();
                     if (rowsInserted > 0) {
                         su_valid_label.setText("User registration successful!");
-                        System.out.println("User registration successful!");
                         delay(su_valid_label);
                     }
                 }
@@ -348,7 +343,6 @@ public class HelloController {
             }
         }
     }
-
 
 }
 
