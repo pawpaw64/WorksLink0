@@ -1,15 +1,18 @@
 package com.example.workslink.chat;
 
+import com.mysql.cj.protocol.PacketSentTimeHolder;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,8 +20,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client extends Application {
+public class ChatUI extends Application {
     private PrintWriter out;
+    private VBox messageContainer; // VBox to hold the messages
 
     public static void main(String[] args) {
         launch(args);
@@ -28,12 +32,11 @@ public class Client extends Application {
     public void start(Stage primaryStage) {
         BorderPane root = new BorderPane();
 
-        TextArea chatTextArea = new TextArea();
-        chatTextArea.setPrefWidth(374);
-        chatTextArea.setPrefHeight(569);
-        chatTextArea.setEditable(false);
-
-        ScrollPane scrollPane = new ScrollPane(chatTextArea);
+        messageContainer = new VBox(); // VBox to hold the messages
+        messageContainer.setSpacing(10); // Spacing between messages
+        messageContainer.setPrefWidth(355);
+        messageContainer.setAlignment(Pos.CENTER_LEFT);
+        ScrollPane scrollPane = new ScrollPane(messageContainer);
         root.setCenter(scrollPane);
 
         TextField messageInputField = new TextField();
@@ -44,8 +47,7 @@ public class Client extends Application {
         Image image = new Image("F:\\AOOP Project\\MyChatApp\\src\\main\\resources\\com\\example\\mychatapp\\Icon\\img.png");
         ImageView sendImage = new ImageView(image);
 
-
-        Button sendButton = new Button("",sendImage);
+        Button sendButton = new Button("", sendImage);
         sendButton.setPrefHeight(35);
         sendButton.setOnAction(event -> sendMessage(messageInputField));
 
@@ -55,7 +57,6 @@ public class Client extends Application {
         root.setBottom(bottomPane);
 
         Scene scene = new Scene(root, 377, 597);
-        //primaryStage.setTitle("My Chat App");
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -69,7 +70,7 @@ public class Client extends Application {
                     Scanner in = new Scanner(socket.getInputStream());
                     while (in.hasNext()) {
                         String receivedMessage = in.nextLine();
-                        Platform.runLater(() -> chatTextArea.appendText(receivedMessage + "\n"));
+                        Platform.runLater(() -> addMessage(receivedMessage));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -79,6 +80,7 @@ public class Client extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         primaryStage.setOnCloseRequest(event -> {
             if (out != null) {
                 out.close();
@@ -92,5 +94,10 @@ public class Client extends Application {
             out.println(message);
             messageInputField.clear();
         }
+    }
+
+    private void addMessage(String message) {
+        Label label = new Label(message);
+        messageContainer.getChildren().add(label);
     }
 }

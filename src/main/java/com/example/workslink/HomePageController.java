@@ -1,17 +1,12 @@
 package com.example.workslink;
 
-import com.example.workslink.chat.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
@@ -26,7 +21,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
 
@@ -159,12 +153,6 @@ public class HomePageController extends HelloController implements Initializable
     public void closeOnAction(MouseEvent e){
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
-
-    }
-    public void chatOnAction(){
-        chatAncPane = new AnchorPane();
-        Client client = new Client();
-        client.getroot();
 
     }
 

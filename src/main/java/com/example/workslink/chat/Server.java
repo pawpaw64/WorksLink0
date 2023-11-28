@@ -17,8 +17,8 @@ public class Server {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("New client connected: " + "Client-" + clientCounter);
-                ClientHandler clientHandler = new ClientHandler(clientSocket, "Client-" + clientCounter);
+                System.out.println("New client connected: " + "ChatUI-" + clientCounter);
+                ClientHandler clientHandler = new ClientHandler(clientSocket, "ChatUI-" + clientCounter);
                 clients.put(clientHandler.getClientName(), clientHandler);
                 sendPreviousMessages(clientHandler);
                 new Thread(clientHandler).start();

@@ -26,6 +26,7 @@ public class User {
     public String getDob() {
         return dob;
     }
+
 }
 
 
