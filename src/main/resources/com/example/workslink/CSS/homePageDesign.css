@@ -11,8 +11,8 @@
 
 .interPanes {
     -fx-background-color: linear-gradient(to bottom right, #0dffea, #05373c);
-    -fx-border-radius: 0 25 25 0px;
-    -fx-background-radius: 0 25 25 0px;
+    -fx-border-radius: 0 50 50 0px;
+    -fx-background-radius: 0 50 50 0px;
     -fx-border-color: black;
     -fx-border-style: solid;
     -fx-border-width: 0 0 0 0px;

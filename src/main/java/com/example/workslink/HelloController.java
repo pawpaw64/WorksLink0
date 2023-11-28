@@ -46,10 +46,8 @@ public class HelloController {
     private ComboBox<?> fp_questions;
     @FXML
     public TextField su_answers;
-
     @FXML
     private Label change_pass_valid_label;
-
     @FXML
     private Label fp_valid_label;
     @FXML
@@ -61,7 +59,7 @@ public class HelloController {
     @FXML
     TextField su_password = new TextField();
     @FXML
-    Label su_valid_label = new Label();
+    Label su_valid_label ;
     @FXML
     Label valid_label = new Label();
     @FXML
@@ -70,12 +68,10 @@ public class HelloController {
     TextField login_password = new TextField();
     @FXML
     private TextField fp_answers;
-
     @FXML
     private TextField fp_username;
     @FXML
     private PasswordField confirm_pass;
-
     @FXML
     private PasswordField new_pass;
     @FXML
@@ -95,25 +91,35 @@ public class HelloController {
         TranslateTransition slider = new TranslateTransition();
 
         if (e.getSource() == create_btn) {
+            // Apply the "corners" style class to home_page
+            home_page.getStyleClass().add("corners");
+            // Remove the "interPanes" style class if present
+            home_page.getStyleClass().remove("interPanes");
             slider.setNode(home_page);
             slider.setToX(389);
             slider.setDuration(Duration.millis(1000));
 
+
+
             slider.setOnFinished((ActionEvent event) -> {
                 regQuestionList();
                 forgotPassQuestionList();
+
             });
 
             slider.play();
         } else if (e.getSource() == already_btn) {
+            // Apply the "interPanes" style class to home_page
+            home_page.getStyleClass().add("interPanes");
+            // Remove the "corners" style class if present
+            home_page.getStyleClass().remove("corners");
             slider.setNode(home_page);
             slider.setToX(0);
             slider.setDuration(Duration.millis(1000));
-
             slider.setOnFinished((ActionEvent event) -> {
 
-            });
 
+            });
             slider.play();
         }
     }
@@ -337,59 +343,6 @@ public class HelloController {
             }
         }
     }
-
-//@FXML
-//public void changePassBtn() {
-//
-//    if (new_pass.getText().isEmpty() || confirm_pass.getText().isEmpty()) {
-//        change_pass_valid_label.setText("Enter All Information");
-//        delay(change_pass_valid_label);
-//    } else {
-//        if (new_pass.getText().equals(confirm_pass.getText())) {
-//            try (Connection connect = DatabaseConnection.getConnection()) {
-//                String getPass = "SELECT password FROM email WHERE userName = ?";
-//                try (PreparedStatement prepare = connect.prepareStatement(getPass)) {
-//                    prepare.setString(1, fp_username.getText());
-//                    try (ResultSet result = prepare.executeQuery()) {
-//                        String date = "";
-//                        if (result.next()) {
-//                            date = result.getString("date");
-//                        }
-//
-//                        String updatePass = "UPDATE email SET password = ? WHERE userName = ?";
-//                        try (PreparedStatement updatePrepare = connect.prepareStatement(updatePass)) {
-//                            updatePrepare.setString(1, new_pass.getText());
-//                            updatePrepare.setString(2, (String) fp_questions.getSelectionModel().getSelectedItem());
-//                            updatePrepare.setString(3, fp_answers.getText());
-//                            updatePrepare.setString(4, date);
-//                            updatePrepare.setString(5, fp_username.getText());
-//
-//                            updatePrepare.executeUpdate();
-//
-//                            login_page.setVisible(true);
-//                            change_passPane.setVisible(false);
-//
-//                            // TO CLEAR FIELDS
-//                            confirm_pass.setText("");
-//                            new_pass.setText("");
-//                            fp_questions.getSelectionModel().clearSelection();
-//                            fp_answers.setText("");
-//                            fp_username.setText("");
-//
-//                            valid_label.setText("Password changed successfully!");
-//                            delay(valid_label);
-//                        }
-//                    }
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-//            change_pass_valid_label.setText("Password Doesn't match");
-//            delay(change_pass_valid_label);
-//        }
-//    }
-//}
 
 }
 
