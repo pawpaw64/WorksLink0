@@ -36,7 +36,7 @@ public class HomePageController extends HelloController implements Initializable
     @FXML
     ImageView closeHomePage;
     @FXML
-    private ListView<Label> space_list;
+    private ListView<Label> space_list=new ListView<>();
 
     public void setUser(User user) {
         this.currentUser = user;
@@ -148,7 +148,7 @@ public class HomePageController extends HelloController implements Initializable
 
     }
     @FXML
-    void create_space() {
+    void create_space() { //mouseEvent at add space
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_create.fxml"));
@@ -158,8 +158,9 @@ public class HomePageController extends HelloController implements Initializable
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
+            SpaceCreate spaceCreateController = loader.getController();
 
-            // Show the new stage
+
             newStage.showAndWait();
 
         } catch (IOException e) {
@@ -167,7 +168,9 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
     public void addItemToListView(Label newSpace) {
+        System.out.println(newSpace.getText());
         space_list.getItems().add(newSpace);
+
     }
 
 }

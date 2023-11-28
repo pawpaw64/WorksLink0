@@ -26,7 +26,7 @@
       <Label layoutX="40.0" layoutY="298.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Space's Decription" />
       <TextArea layoutX="40.0" layoutY="333.0" prefHeight="62.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
       <Label layoutX="373.0" layoutY="114.0" prefHeight="17.0" prefWidth="232.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Choose Colour &amp; Avater" />
-      <Button layoutX="261.0" layoutY="485.0" mnemonicParsing="false" onAction="#create_space" prefHeight="30.0" prefWidth="249.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Create Space" />
+      <Button fx:id="create_spaceBtn" layoutX="261.0" layoutY="485.0" mnemonicParsing="false" onAction="#create_space" prefHeight="30.0" prefWidth="249.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Create Space" />
       <Pane layoutX="346.0" layoutY="150.0" minHeight="-Infinity" prefHeight="256.0" prefWidth="421.0">
          <children>
             <Pane layoutX="20.0" layoutY="22.0" prefHeight="94.0" prefWidth="97.0" style="-fx-background-color: #778899;" styleClass="rectangle" stylesheets="@../CSS/design.css">
