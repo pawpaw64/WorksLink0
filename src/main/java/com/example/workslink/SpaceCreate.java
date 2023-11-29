@@ -19,44 +19,21 @@ public class SpaceCreate {
     private Label space_Label=new Label();
     @FXML
     Pane space_Pane1;
-    @FXML
-    Circle circle1;
-    @FXML
-    Circle circle2;
-    @FXML
-    Circle circle3;
-    @FXML
-    Circle circle4;
-    @FXML
-    Circle circle5;
-    @FXML
-    Circle circle6;
-    @FXML
-    Circle circle7;
-    @FXML
-    Circle circle8;
     String inputText;
 
-    private HomePageController homePageController;
-    public void setHomePageController(HomePageController homePageController) {
-        this.homePageController = homePageController;
-    }
     private void addNewItemToListView() {
+        HomePageController homePageController=new HomePageController();
         if (homePageController != null) {
-
             Label newSpace = new Label();
             newSpace.setText(space_name.getText());
-
-
             homePageController.addItemToListView(newSpace);
         } else {
-
             System.err.println("Error: homePageController is null");
         }
     }
     public void create_spaceBtn() {
-
-        //addNewItemToListView();
+        System.out.println("jgjh");
+        addNewItemToListView();
          inputText= space_name.getText();
          if(!inputText.isEmpty()){
              char  firstChar = inputText.charAt(0);
