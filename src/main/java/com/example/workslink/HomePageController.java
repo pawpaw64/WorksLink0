@@ -2,20 +2,19 @@ package com.example.workslink;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
 
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -29,45 +28,41 @@ import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
 
 
-
 public class HomePageController extends HelloController implements Initializable {
     @FXML
-    public Pane rightPane;
+    private AnchorPane list_anchor = new AnchorPane();
+    private ObservableList<Label> labelList = FXCollections.observableArrayList();
     @FXML
     public ImageView profileImg;
     public ImageView apps;
-    public ImageView add_workspace;
     @FXML
     private Pane sidePane;
     private User currentUser;
+    @FXML
+    ImageView closeHomePage;
 
+
+    @FXML
+    private ListView<Label> space_list = new ListView<Label>(labelList);
     public void setUser(User user) {
         this.currentUser = user;
 
     }
-
-    public HomePageController() {
-
-    }
-
-
     @FXML
     private void showProfile() {
         loadNewView("FXML/profile.fxml");
     }
-
     private void loadNewView(String fxmlFileName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
             Pane newView = loader.load();
-            if(fxmlFileName=="FXML/profile.fxml"){
-            ProfileController profileController = loader.getController();
-            profileController.setSidePane(sidePane);
-            profileController.setProfileImg(profileImg);
-            profileController.setUserProfile(currentUser);}
-            else if(fxmlFileName=="FXML/calculator.fxml")
-            {
-                CalculatorController calculatorController=loader.getController();
+            if (fxmlFileName.equals("FXML/profile.fxml")) {
+                ProfileController profileController = loader.getController();
+                profileController.setSidePane(sidePane);
+                profileController.setProfileImg(profileImg);
+                profileController.setUserProfile(currentUser);
+            } else if (fxmlFileName.equals("FXML/calculator.fxml")) {
+                CalculatorController calculatorController = loader.getController();
                 calculatorController.setSidePane(sidePane);
 
             }
@@ -81,12 +76,14 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace(); // Handle the exception as needed
         }
     }
-
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        space_list.setItems(labelList);
+
 
     }
-    private VBox createListViewVBox(List<String> items ,int height, int width) {
+    private VBox createListViewVBox(List<String> items, int height, int width) {
         VBox vbox = new VBox();
         vbox.setPrefHeight(height);
         vbox.setPrefWidth(width);
@@ -123,16 +120,15 @@ public class HomePageController extends HelloController implements Initializable
     private void openCalculator() {
         loadNewView("FXML/calculator.fxml");
     }
-
     private void openNotes() {
         loadNewView("FXML/notes.fxml");
     }
-    public void showApps(MouseEvent event) {
+    public void showApps() {
         // Create a list of items
         List<String> items = List.of("Calculator", "Notes", "More");
 
         // Create a VBox with a ListView
-        VBox vbox = createListViewVBox(items,116,210);
+        VBox vbox = createListViewVBox(items, 116, 210);
 
         // Create a PopOver with the VBox as its content
         PopOver popOver = new PopOver(vbox);
@@ -150,15 +146,31 @@ public class HomePageController extends HelloController implements Initializable
         // Show the PopOver at the adjusted position
         popOver.show(apps, adjustedX, adjustedY);
     }
-    @FXML
-    ImageView closeHomePage;
-    public void closeOnAction(MouseEvent e){
+    public void closeOnAction() {
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
+    }
+    @FXML
+    void create_space() { //mouseEvent at add space
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_create.fxml"));
+            Parent root = loader.load();
+            // Create a new stage for the new scene
+            Stage newStage = new Stage();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.setScene(new Scene(root));
+            SpaceCreate spaceCreateController = loader.getController();
+            newStage.showAndWait();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void addItemToListView(Label newSpace) {
+        labelList.add(newSpace);
 
+
+
+    }
 }
-
-
