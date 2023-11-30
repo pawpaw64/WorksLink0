@@ -64,4 +64,5 @@
 }
 .project_pane{
 	-fx-background-radius: 5em;
+	border-bottom
 }        

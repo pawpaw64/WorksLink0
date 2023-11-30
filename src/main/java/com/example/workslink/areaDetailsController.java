@@ -7,10 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,7 +19,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class TaskManagerController {
+public class areaDetailsController {
+    @FXML
+    TabPane tabPane;
+    @FXML
+    StackPane stack1 = new StackPane();
+    @FXML
+    Tab task;
 
     @FXML
     void add_task(ActionEvent event) {
@@ -50,7 +54,7 @@ public class TaskManagerController {
     Button Due_Date;
 
     public void task_operation(){
-        List<String >items = List.of("ToDo","Doing","Complete");
+        List<String > items = List.of("ToDo","Doing","Complete");
         VBox vbox = createListViewVBox(items,116,210);
         PopOver popOver = new PopOver(vbox);
         popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
@@ -100,7 +104,7 @@ public class TaskManagerController {
         });
 
     }
-       private VBox createListViewVBox(List<String> items ,int height, int width) {
+    private VBox createListViewVBox(List<String> items ,int height, int width) {
         VBox vbox = new VBox();
         vbox.setPrefHeight(height);
         vbox.setPrefWidth(width);
@@ -134,3 +138,4 @@ public class TaskManagerController {
 //        }
     }
 }
+
