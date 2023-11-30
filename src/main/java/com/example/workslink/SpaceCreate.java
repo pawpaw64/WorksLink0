@@ -32,7 +32,6 @@ public class SpaceCreate {
         }
     }
     public void create_spaceBtn() {
-        System.out.println("jgjh");
         addNewItemToListView();
          inputText= space_name.getText();
          if(!inputText.isEmpty()){
