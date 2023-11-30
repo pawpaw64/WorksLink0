@@ -26,10 +26,8 @@ public class HelloController {
 
     @FXML
     private Button already_btn;
-
     @FXML
     private Button create_btn;
-
     @FXML
     private AnchorPane home_page;
     @FXML
