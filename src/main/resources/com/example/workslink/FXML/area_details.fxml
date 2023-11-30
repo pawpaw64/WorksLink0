@@ -1,122 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="384.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-      <AnchorPane prefHeight="614.0" prefWidth="384.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css">
-         <children>
-              <TabPane layoutY="106.0" prefHeight="517.0" prefWidth="384.0" styleClass="black" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="106.0">
-                  <tabs>
-                      <Tab text="About">
-                          <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="384.0">
-                                  <children>
-                                      <VBox layoutY="14.0" prefHeight="42.0" prefWidth="250.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css">
-                                          <children>
-                                    <Label text="Topic" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                              <Button mnemonicParsing="false" stylesheets="@../CSS/BasicDesign.css" text="Edit" translateX="215.0" translateY="10.0" />
-                                          </children>
-                                      </VBox>
-                                      <VBox layoutY="79.0" prefHeight="66.0" prefWidth="250.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css">
-                                          <children>
-                                    <Button fx:id="mailName" mnemonicParsing="false" styleClass="fill-btn" text="Mail">
-                                       <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Icon/mail.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Label prefHeight="21.0" prefWidth="147.0" text="View full profile" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                          </children>
-                                      </VBox>
-                                      <VBox layoutY="182.0" prefHeight="42.0" prefWidth="250.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css">
-                                          <children>
-                                              <Button mnemonicParsing="false" stylesheets="@../CSS/BasicDesign.css" text="Edit" translateX="215.0" translateY="10.0" />
-                                          </children>
-                                      </VBox>
-                                  </children>
-                              </AnchorPane>
-                          </content>
-                      </Tab>
-                      <Tab text="Members">
-                          <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="267.0" prefWidth="194.0">
-                                  <children>
-                                      <VBox layoutX="7.0" layoutY="14.0" prefHeight="42.0" prefWidth="250.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css">
-                                          <children>
-                                              <Button mnemonicParsing="false" stylesheets="@../CSS/BasicDesign.css" text="Edit" translateX="215.0" translateY="10.0" />
-                                          </children>
-                                      </VBox>
-                                      <VBox layoutX="7.0" layoutY="69.0" prefHeight="42.0" prefWidth="250.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css">
-                                          <children>
-                                              <Button mnemonicParsing="false" text="Edit" translateX="215.0" translateY="10.0" />
-                                          </children>
-                                      </VBox>
-                                      <VBox layoutX="7.0" layoutY="125.0" prefHeight="42.0" prefWidth="250.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css">
-                                          <children>
-                                              <Button mnemonicParsing="false" text="Edit" translateX="215.0" translateY="10.0" />
-                                          </children>
-                                      </VBox>
-                                  </children>
-                              </AnchorPane>
-                          </content>
-                      </Tab>
-                      <Tab text="Integration">
-                          <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="267.0" prefWidth="194.0" styleClass="white">
-                                  <children>
-                                      <VBox layoutX="8.0" layoutY="14.0" prefHeight="42.0" prefWidth="250.0" styleClass="fill-btn">
-                                          <children>
-                                              <Button mnemonicParsing="false" text="Edit" translateX="215.0" translateY="10.0" />
-                                          </children>
-                                      </VBox>
-                                      <VBox layoutX="8.0" layoutY="69.0" prefHeight="42.0" prefWidth="250.0" styleClass="fill-btn">
-                                          <children>
-                                              <Button mnemonicParsing="false" text="Edit" translateX="215.0" translateY="10.0" />
-                                          </children>
-                                      </VBox>
-                                      <VBox layoutX="8.0" layoutY="127.0" prefHeight="42.0" prefWidth="250.0" styleClass="fill-btn">
-                                          <children>
-                                              <Button mnemonicParsing="false" text="Edit" translateX="215.0" translateY="10.0" />
-                                          </children>
-                                      </VBox>
-                                  </children>
-                              </AnchorPane>
-                          </content>
-                      </Tab>
-                  </tabs>
-              </TabPane>
-            <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Icon/user.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="92.0" layoutY="35.0" prefHeight="27.0" prefWidth="258.0" text="Name">
-               <font>
-                  <Font name="Cambria Bold" size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-    </children>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.areaDetailsController">
+   <children>
+      <TabPane fx:id="tabPane" prefHeight="441.0" prefWidth="820.0" stylesheets="@../CSS/TabPane.css" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="chat" text="   Chat      ">
+               <content>
+                  <StackPane fx:id="stack1" prefHeight="150.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="board" text="   Board     ">
+               <content>
+                  <StackPane fx:id="stack2" prefHeight="541.0" prefWidth="914.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="task" text="    Task         ">
+               <content>
+                  <StackPane fx:id="stack" prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="710.0">
+                           <children>
+                              <Label layoutX="31.0" layoutY="16.0" text="Project">
+                                 <font>
+                                    <Font name="Arial" size="29.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="addTask" layoutX="459.0" layoutY="16.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add Task" />
+                              <HBox layoutX="4.0" layoutY="110.0" prefHeight="342.0" prefWidth="698.0">
+                                 <children>
+                                    <VBox prefHeight="428.0" prefWidth="240.0" />
+                                    <VBox prefHeight="348.0" prefWidth="226.0" />
+                                    <VBox prefHeight="428.0" prefWidth="240.0" />
+                                 </children>
+                              </HBox>
+                              <Label alignment="CENTER" layoutX="86.0" layoutY="73.0" prefHeight="27.0" prefWidth="80.0" text="To Do" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="100.0" layoutX="131.0" layoutY="102.0" startX="-100.0" stroke="#90d8ff" />
+                              <Label alignment="CENTER" layoutX="322.0" layoutY="74.0" prefHeight="27.0" prefWidth="84.0" text="Doing" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="100.0" layoutX="364.0" layoutY="101.0" startX="-100.0" stroke="#90d8ff" />
+                              <Label alignment="CENTER" layoutX="550.0" layoutY="73.0" prefHeight="27.0" prefWidth="94.0" text="Complete">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="100.0" layoutX="593.0" layoutY="101.0" startX="-100.0" stroke="#90d8ff" />
+                              <Button layoutX="79.0" layoutY="467.0" mnemonicParsing="false" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Complete" />
+                              <Button layoutX="322.0" layoutY="467.0" mnemonicParsing="false" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Save Task" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </content>
+            </Tab>
+         </tabs>
+         <styleClass>
+            <String fx:value="tab" />
+            <String fx:value="tab-content-area" />
+            <String fx:value="tab-pane" />
+         </styleClass>
+      </TabPane>
+   </children>
 </StackPane>
