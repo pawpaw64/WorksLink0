@@ -151,25 +151,25 @@ public class HomePageController extends HelloController implements Initializable
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
     }
-   public Stage stage;
+   public Stage stage=new Stage();
     @FXML
     void showChat(MouseEvent event) throws IOException {
         System.out.println("gg");
-//        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load());
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/chatUICtoC.fxml.fxml"));
+//        Parent root = loader.load();
 //
-//        stage.setTitle("Hello!");
-//        stage.setScene(scene);
-//        stage.show();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/workslink/FXML/.fxml"));
-        Parent root = loader.load();
-
-        // Create a new stage for the new scene
-        Stage newStage = new Stage();
-        newStage.initModality(Modality.APPLICATION_MODAL);
-        newStage.setScene(new Scene(root));
-
-        newStage.showAndWait();
+//        // Create a new stage for the new scene
+//        Stage newStage = new Stage();
+//        newStage.initModality(Modality.APPLICATION_MODAL);
+//        newStage.setScene(new Scene(root));
+//
+//        newStage.showAndWait();
 
     }
     @FXML
