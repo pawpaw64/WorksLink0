@@ -10,6 +10,6 @@ module com.example.workslink {
 
     opens com.example.workslink to javafx.fxml;
     exports com.example.workslink;
-    exports com.example.workslink.chat;
-    opens com.example.workslink.chat to javafx.fxml;
+    exports com.example.workslink.NewChat;
+    opens com.example.workslink.NewChat to javafx.fxml;
 }
