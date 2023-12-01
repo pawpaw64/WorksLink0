@@ -1,4 +1,4 @@
-package com.example.workslink.NewChat;
+package com.example.workslink;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -68,7 +68,7 @@ public class ClientController {
                  };
                     serverListener.start();
 
-                showArea.appendText("Connection established"+"\n");
+                showArea.appendText(inputName+" is Connected.."+"\n");
                 button.setText("Send");
                 inputfield.setPromptText("Write your massage...");
                 isConnected = true;

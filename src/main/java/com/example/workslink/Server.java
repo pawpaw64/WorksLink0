@@ -1,4 +1,6 @@
-package com.example.workslink.NewChat;
+package com.example.workslink;
+
+import com.example.workslink.Client;
 
 import java.io.*;
 import java.net.ServerSocket;
