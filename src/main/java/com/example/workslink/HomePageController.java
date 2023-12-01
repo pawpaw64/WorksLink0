@@ -31,10 +31,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
 
 
-public class HomePageController extends HelloController implements Initializable {
-    @FXML
-    private AnchorPane list_anchor = new AnchorPane();
-    private ObservableList<Label> labelList = FXCollections.observableArrayList();
+public class HomePageController implements Initializable {
     @FXML
     public ImageView profileImg;
     public ImageView apps;
@@ -45,8 +42,6 @@ public class HomePageController extends HelloController implements Initializable
     ImageView closeHomePage;
 
 
-    @FXML
-    private ListView<Label> space_list = new ListView<Label>(labelList);
     public void setUser(User user) {
         this.currentUser = user;
 
@@ -79,13 +74,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace(); // Handle the exception as needed
         }
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-        space_list.setItems(labelList);
 
-
-    }
     private VBox createListViewVBox(List<String> items, int height, int width) {
         VBox vbox = new VBox();
         vbox.setPrefHeight(height);
@@ -181,12 +170,19 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
-
-    TreeView treeView=new TreeView<>();
+    @FXML
+    TreeView treeView;
+    TreeItem<String> root;
     public void newTreeRoot(String newSpace) {
+        
         TreeItem<String> root=new TreeItem<>(newSpace);
         System.out.println(newSpace);
         treeView.setRoot(root);
         treeView.setShowRoot(true);
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        System.out.println("hii");
     }
 }

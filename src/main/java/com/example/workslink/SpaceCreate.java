@@ -2,6 +2,8 @@ package com.example.workslink;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
+import java.io.IOException;
 import java.util.List;
 
 import static java.lang.Long.toHexString;
@@ -49,19 +52,20 @@ public class SpaceCreate {
     ImageView image11;
     @FXML
     ImageView image12;
-    private void addNewItemToTreeView() {
-        HomePageController homePageController=new HomePageController();
-        if (homePageController != null) {
-            Label newSpace = new Label();
-            newSpace.setText(space_name.getText());
-            homePageController.newTreeRoot(newSpace.getText());
-        } else {
-            System.err.println("Error: homePageController is null");
-        }
+
+    private void addNewItemToTreeView() throws IOException {
+
+            String newSpace =(space_name.getText());
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMl/homePage-view.fxml"));
+            Parent root = loader.load();
+            HomePageController homePageController = loader.getController();
+            //homePageController.treeView.setRoot();
+
+
     }
-    public void create_spaceBtn() {
-        System.out.println("jgjh");
-        addNewItemToTreeView();
+    public void create_spaceBtn() throws IOException {
+         addNewItemToTreeView();
          inputText= space_name.getText();
          if(!inputText.isEmpty()){
              char  firstChar = inputText.charAt(0);
@@ -98,16 +102,13 @@ public class SpaceCreate {
             double imageViewWidth = clickedImage.getFitWidth();
             double imageViewHeight = clickedImage.getFitHeight();
 
-
-            // Set the background of the Pane using CSS with the same size as the ImageView
             space_Pane1.setStyle("-fx-background-image: url('" + imageUrl + "');" +
                     "-fx-background-size: " + imageViewWidth + " " + imageViewHeight + ";" +
                     "-fx-background-repeat: no-repeat;" +
                     "-fx-background-position: center;");
 
-            // Disable the labe
-
 
         }
     }
+
 }
