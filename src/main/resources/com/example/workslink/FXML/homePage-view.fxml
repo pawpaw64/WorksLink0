@@ -152,16 +152,11 @@
                <top>
                   <Pane prefHeight="45.0" prefWidth="901.0" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER">
                      <children>
-                        <Label layoutX="4.0" layoutY="3.0" prefHeight="37.0" prefWidth="281.0" text="#Space Name">
+                        <Label layoutX="4.0" layoutY="3.0" prefHeight="42.0" prefWidth="901.0" text="#Space Name">
                            <styleClass>
                               <String fx:value="gradiant" />
                               <String fx:value="anchor-pane-with-border" />
                            </styleClass></Label>
-                        <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="96.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Icon/angle-small-down.png" />
-                           </image>
-                        </ImageView>
                      </children>
                   </Pane>
                </top>

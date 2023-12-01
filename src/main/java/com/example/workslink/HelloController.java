@@ -49,9 +49,9 @@ public class HelloController {
     @FXML
     private Label fp_valid_label;
     @FXML
-    TextField su_email_TextField = new TextField();
+    TextField su_email_TextField ;
     @FXML
-    TextField su_username_TextFIeld = new TextField();
+    TextField su_username_TextFIeld ;
     @FXML
     DatePicker su_bdate = new DatePicker();
     @FXML

@@ -13,11 +13,11 @@
             <Font size="14.0" />
          </font>
       </TextArea>
-      <TextField fx:id="inputfield" layoutX="49.0" layoutY="493.0" onMouseClicked="#buttonPrassed" prefHeight="37.0" prefWidth="386.0" promptText="Enter your name...">
+      <TextField fx:id="inputfield" layoutX="49.0" layoutY="493.0" prefHeight="37.0" prefWidth="386.0" promptText="Enter your name...">
          <font>
             <Font size="13.0" />
          </font>
       </TextField>
-      <Button fx:id="button" layoutX="458.0" layoutY="496.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" text="Connect" />
+      <Button fx:id="button" layoutX="458.0" layoutY="496.0" mnemonicParsing="false" onAction="#buttonPrassed" prefHeight="30.0" prefWidth="83.0" text="Connect" />
    </children>
 </Pane>
