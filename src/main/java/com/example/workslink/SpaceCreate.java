@@ -1,7 +1,9 @@
 package com.example.workslink;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,55 +15,25 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static java.lang.Long.toHexString;
 
-public class SpaceCreate {
+public class SpaceCreate implements Initializable {
     @FXML
     private TextField space_name;
     @FXML
-    private Label space_Label=new Label();
+    private Label space_Label;
     @FXML
     Pane space_Pane1;
     String inputText;
-    @FXML
-    ImageView image1;
-    @FXML
-    ImageView image2;
-    @FXML
-    ImageView image3;
-    @FXML
-    ImageView image4;
-    @FXML
-    ImageView image5;
-    @FXML
-    ImageView image6;
-    @FXML
-    ImageView image7;
-    @FXML
-    ImageView image8;
-    @FXML
-    ImageView image9;
-    @FXML
-    ImageView image10;
-    @FXML
-    ImageView image11;
-    @FXML
-    ImageView image12;
-    private void addNewItemToTreeView() {
-        HomePageController homePageController=new HomePageController();
-        if (homePageController != null) {
-            Label newSpace = new Label();
-            newSpace.setText(space_name.getText());
-            homePageController.newTreeRoot(newSpace.getText());
-        } else {
-            System.err.println("Error: homePageController is null");
-        }
-    }
+    public SpaceData spaceData;
+    ObservableList<String> spaceNameList;
+
     public void create_spaceBtn() {
-        System.out.println("jgjh");
-        addNewItemToTreeView();
+
          inputText= space_name.getText();
          if(!inputText.isEmpty()){
              char  firstChar = inputText.charAt(0);
@@ -70,7 +42,11 @@ public class SpaceCreate {
          else {
              return;
          }
+         spaceNameList.add(inputText);
+         spaceData.setSpaceNamesList(spaceNameList);
+
     }
+
     public void space_circle(MouseEvent event){
         if (event.getSource() instanceof Circle) {
             Circle clickedCircle = (Circle) event.getSource();
@@ -109,5 +85,10 @@ public class SpaceCreate {
 
 
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

@@ -44,9 +44,6 @@ public class HomePageController extends HelloController implements Initializable
     @FXML
     ImageView closeHomePage;
 
-
-    @FXML
-    private ListView<Label> space_list = new ListView<Label>(labelList);
     public void setUser(User user) {
         this.currentUser = user;
 
@@ -78,13 +75,6 @@ public class HomePageController extends HelloController implements Initializable
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception as needed
         }
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-        space_list.setItems(labelList);
-
-
     }
     private VBox createListViewVBox(List<String> items, int height, int width) {
         VBox vbox = new VBox();
@@ -156,9 +146,10 @@ public class HomePageController extends HelloController implements Initializable
    public Stage stage=new Stage();
     @FXML
     void showChat(MouseEvent event) throws IOException {
-        System.out.println("gg");
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        ClientController clientController=fxmlLoader.getController();
+        clientController.setUserProfile(currentUser);
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -182,11 +173,17 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
 
-    TreeView treeView=new TreeView<>();
-    public void newTreeRoot(String newSpace) {
-        TreeItem<String> root=new TreeItem<>(newSpace);
-        System.out.println(newSpace);
-        treeView.setRoot(root);
-        treeView.setShowRoot(true);
+    @FXML
+    TreeView<String> spaceTree;
+    public SpaceData spaceData;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+
+
+
+
     }
+
 }

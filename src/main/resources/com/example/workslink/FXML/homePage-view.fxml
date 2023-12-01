@@ -136,7 +136,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <TreeView fx:id="treeView" editable="true" layoutY="34.0" prefHeight="216.0" prefWidth="224.0" />
+                        <TreeView fx:id="spaceTree" editable="true" layoutY="34.0" prefHeight="216.0" prefWidth="224.0" />
                      </children>
                   </AnchorPane>
                   <Label layoutX="1.0" layoutY="461.0" prefHeight="25.0" prefWidth="232.0" text="General" wrapText="true">

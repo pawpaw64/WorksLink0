@@ -1,6 +1,7 @@
 package com.example.workslink;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -9,7 +10,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 
-public class ClientController {
+public class ClientController  {
 
     @FXML
     Button button;
@@ -21,14 +22,26 @@ public class ClientController {
     TextArea showArea;
     boolean isConnected = false;
 
-    public ClientController() {
+    public User userProfile;
+    String name;
 
+    public void setUserProfile(User userProfile) {
+        this.userProfile = userProfile;
+        check();
     }
-   User user=new User();
+    public void check() {
+        if (userProfile.getUserName() != null) {
+            name = userProfile.getUserName();
+            System.out.println(name);
+        } else
+            System.out.println("null");
+    }
+
+
     @FXML
     void buttonPrassed() {
         if (!isConnected) {
-            String clientName =user.getUserName();
+            String clientName =userProfile.getUserName();
             showArea.setText(clientName);
             System.out.println(clientName);//User name in setText method..
             //Client is not connected with server, let's connect with server...
