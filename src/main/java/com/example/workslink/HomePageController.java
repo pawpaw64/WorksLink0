@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -173,16 +174,68 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
 
-    @FXML
-    TreeView<String> spaceTree;
+
+   @FXML TreeView<String> spaceTree=new TreeView<>();
     public SpaceData spaceData;
+
+    public void setSpaceData(SpaceData spaceData) {
+        this.spaceData = spaceData;
+
+        // Call initialize after setting spaceData to ensure it's not null
+        initializeTreeView();
+        newTree();
+    }
+    void newTree(){
+
+
+    }
+
+    private void initializeTreeView() {
+        if (spaceData != null && spaceData.getSpaceNamesList() != null) {
+            String spaceNameList = spaceData.getSpaceNamesList();
+            System.out.println(spaceNameList);
+            TreeItem<String> root = new TreeItem<>(spaceNameList);
+            List<String> spaces = Arrays.asList("Space1", "Space2", "Space3");
+            for (String space : spaces) {
+                TreeItem<String> spaceItem = new TreeItem<>(space);
+                root.getChildren().add(spaceItem);
+            }
+            spaceTree.setRoot(root);
+            spaceTree.setShowRoot(true);
+
+            spaceTree.setRoot(root);
+            spaceTree.setShowRoot(true);
+            space_Vbox.getChildren().add(spaceTree);
+        }
+        else {
+            System.out.println("null");
+        }
+    }
+    @FXML
+    private VBox space_Vbox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
-
-
+//        TreeItem<String>rootItem = new TreeItem("Tutorials");
+//
+//        TreeItem<String> webItem = new TreeItem<>("Web Tutorials");
+//        webItem.getChildren().add(new TreeItem<>("HTML  Tutorial"));
+//        webItem.getChildren().add(new TreeItem<>("HTML5 Tutorial"));
+//        webItem.getChildren().add(new TreeItem<>("CSS Tutorial"));
+//        webItem.getChildren().add(new TreeItem<>("SVG Tutorial"));
+//        rootItem.getChildren().add(webItem);
+//
+//        TreeItem<String>javaItem = new TreeItem<>("Java Tutorials");
+//        javaItem.getChildren().add(new TreeItem<>("Java Language"));
+//        javaItem.getChildren().add(new TreeItem<>("Java Collections"));
+//        javaItem.getChildren().add(new TreeItem<>("Java Concurrency"));
+//        rootItem.getChildren().add(javaItem);
+//
+//        TreeView<String>treeView = new TreeView<>();
+//        treeView.setRoot(rootItem);
+//
+//        treeView.setShowRoot(false);
 
     }
 

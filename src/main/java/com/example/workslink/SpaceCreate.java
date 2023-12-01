@@ -1,25 +1,22 @@
 package com.example.workslink;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import static java.lang.Long.toHexString;
 
 public class SpaceCreate implements Initializable {
     @FXML
@@ -30,21 +27,32 @@ public class SpaceCreate implements Initializable {
     Pane space_Pane1;
     String inputText;
     public SpaceData spaceData;
-    ObservableList<String> spaceNameList;
+   public String spaceNameList;
+
 
     public void create_spaceBtn() {
+        try {
+            inputText = space_name.getText();
+            if (!inputText.isEmpty()) {
+                char firstChar = inputText.charAt(0);
+                space_Label.setText(String.valueOf(firstChar));
+                spaceNameList = inputText;
 
-         inputText= space_name.getText();
-         if(!inputText.isEmpty()){
-             char  firstChar = inputText.charAt(0);
-             space_Label.setText(String.valueOf(firstChar));
-         }
-         else {
-             return;
-         }
-         spaceNameList.add(inputText);
-         spaceData.setSpaceNamesList(spaceNameList);
+                // Initialize spaceData if it's null
+                if (spaceData == null) {
+                    spaceData = new SpaceData();
+                }
 
+                spaceData.setSpaceNamesList(spaceNameList);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
+                Parent root = loader.load();
+                HomePageController homePageController = loader.getController();
+                homePageController. setSpaceData(spaceData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void space_circle(MouseEvent event){
