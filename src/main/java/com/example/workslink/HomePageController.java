@@ -160,6 +160,7 @@ public class HomePageController extends HelloController implements Initializable
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
             SpaceCreate spaceCreateController = loader.getController();
+            spaceCreateController.setHomePageController(this);
             newStage.showAndWait();
 
         } catch (IOException e) {
@@ -168,7 +169,9 @@ public class HomePageController extends HelloController implements Initializable
     }
 
     public void addItemToListView(Label newSpace) {
-        labelList.add(newSpace);
+        System.out.println(newSpace.getText());
+        labelList.add(newSpace);  // Add the newSpace Label to the labelList
+        space_list.setItems(labelList);
 
 
 

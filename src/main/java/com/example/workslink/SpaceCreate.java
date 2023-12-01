@@ -49,6 +49,8 @@ public class SpaceCreate {
     ImageView image11;
     @FXML
     ImageView image12;
+    private HomePageController homePageController;
+
     private void addNewItemToListView() {
         HomePageController homePageController=new HomePageController();
         if (homePageController != null) {
@@ -109,5 +111,9 @@ public class SpaceCreate {
 
 
         }
+    }
+
+    public void setHomePageController(HomePageController homePageController) {
+        this.homePageController=new HomePageController();
     }
 }

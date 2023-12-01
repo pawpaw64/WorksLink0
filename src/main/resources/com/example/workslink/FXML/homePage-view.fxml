@@ -126,7 +126,8 @@
                         </ImageView>
                         <AnchorPane fx:id="list_anchor" layoutY="33.0" prefHeight="228.0" prefWidth="228.0">
                            <children>
-                              <ListView editable="true" prefHeight="215.0" prefWidth="227.0" />
+                              
+                              <ListView fx:id="space_list" layoutX="6.0" layoutY="7.0" prefHeight="217.0" prefWidth="222.0" />
                            </children>
                         </AnchorPane>
                      </children>
