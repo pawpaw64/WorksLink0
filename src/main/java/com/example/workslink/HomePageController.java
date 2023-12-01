@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 
 
@@ -161,16 +163,7 @@ public class HomePageController extends HelloController implements Initializable
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/chatUICtoC.fxml.fxml"));
-//        Parent root = loader.load();
 //
-//        // Create a new stage for the new scene
-//        Stage newStage = new Stage();
-//        newStage.initModality(Modality.APPLICATION_MODAL);
-//        newStage.setScene(new Scene(root));
-//
-//        newStage.showAndWait();
-
     }
     @FXML
     void create_space() { //mouseEvent at add space
@@ -189,10 +182,11 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
 
-    public void addItemToListView(Label newSpace) {
-        labelList.add(newSpace);
-
-
-
+    TreeView treeView=new TreeView<>();
+    public void newTreeRoot(String newSpace) {
+        TreeItem<String> root=new TreeItem<>(newSpace);
+        System.out.println(newSpace);
+        treeView.setRoot(root);
+        treeView.setShowRoot(true);
     }
 }

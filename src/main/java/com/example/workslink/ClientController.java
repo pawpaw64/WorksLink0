@@ -24,11 +24,13 @@ public class ClientController {
     public ClientController() {
 
     }
-
+   User user=new User();
     @FXML
     void buttonPrassed() {
         if (!isConnected) {
-            //showArea.setText(); //User name in setText method..
+            String clientName =user.getUserName();
+            showArea.setText(clientName);
+            System.out.println(clientName);//User name in setText method..
             //Client is not connected with server, let's connect with server...
             String inputName = inputfield.getText();
             inputfield.clear();
@@ -83,7 +85,7 @@ public class ClientController {
 
                 System.out.println(msg);
                 if(msg==null || msg.length() == 0){
-                    showArea.appendText("Enter your name..."+"\n");
+                    showArea.appendText("");
                     return;
                 }
                 writer.write(msg+"\n");
