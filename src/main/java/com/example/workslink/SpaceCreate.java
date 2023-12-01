@@ -49,21 +49,19 @@ public class SpaceCreate {
     ImageView image11;
     @FXML
     ImageView image12;
-    private HomePageController homePageController;
-
-    private void addNewItemToListView() {
+    private void addNewItemToTreeView() {
         HomePageController homePageController=new HomePageController();
         if (homePageController != null) {
             Label newSpace = new Label();
             newSpace.setText(space_name.getText());
-            homePageController.addItemToListView(newSpace);
+            homePageController.newTreeRoot(newSpace.getText());
         } else {
             System.err.println("Error: homePageController is null");
         }
     }
     public void create_spaceBtn() {
         System.out.println("jgjh");
-        addNewItemToListView();
+        addNewItemToTreeView();
          inputText= space_name.getText();
          if(!inputText.isEmpty()){
              char  firstChar = inputText.charAt(0);
@@ -111,9 +109,5 @@ public class SpaceCreate {
 
 
         }
-    }
-
-    public void setHomePageController(HomePageController homePageController) {
-        this.homePageController=new HomePageController();
     }
 }

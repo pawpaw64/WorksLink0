@@ -1,3 +1,4 @@
+//add_task.fxml controller
 package com.example.workslink;
 
 import javafx.collections.FXCollections;
@@ -5,51 +6,46 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.controlsfx.control.PopOver;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class TaskManagerController {
+public class AddTaskController implements Initializable {
+    @FXML
+    private Button AssigneMember;
 
     @FXML
-    void add_task(ActionEvent event) {
-        try {
+    private Button CreateTask;
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/workslink/FXML/add-task.fxml"));
-            Parent root = loader.load();
+    @FXML
+    private Button Due_Date;
 
-            // Create a new stage for the new scene
-            Stage newStage = new Stage();
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            newStage.setScene(new Scene(root));
-
-            newStage.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    private Button TaskButton;
+    String selectedTask;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-    @FXML
-    Button TaskButton;
-    @FXML
-    Button AssigneMember;
-    @FXML
-    Button Due_Date;
+    public void task_operation(){ //todo button work
 
-    public void task_operation(){
         List<String >items = List.of("ToDo","Doing","Complete");
         VBox vbox = createListViewVBox(items,116,210);
         PopOver popOver = new PopOver(vbox);
@@ -63,6 +59,15 @@ public class TaskManagerController {
         double adjustedY = screenY;
 
         popOver.show(TaskButton, adjustedX, adjustedY);
+
+        ListView<String> listView = (ListView<String>) vbox.getChildren().get(0);
+        listView.setOnMouseClicked(event -> {
+            String selectedItem = listView.getSelectionModel().getSelectedItem();
+            // Update the label of the button based on the selected item
+            TaskButton.setText(selectedItem);
+            popOver.hide();
+        });
+
     }
     public void assign_Member(){
         VBox vbox1 = new VBox();
@@ -100,7 +105,66 @@ public class TaskManagerController {
         });
 
     }
-       private VBox createListViewVBox(List<String> items ,int height, int width) {
+    @FXML
+    public void createTask(){
+        System.out.println("H");
+        selectedTask = TaskButton.getText();
+
+
+        // Depending on the selected task, create a corresponding pane or perform other actions
+        switch (selectedTask) {
+            case "ToDo":
+                createToDoPane();
+                break;
+            case "Doing":
+                createDoingPane();
+                break;
+            case "Complete":
+                createCompletePane();
+                break;
+            default:
+                // Handle other cases or provide a default behavior
+                break;
+        }
+    }
+
+    private void createCompletePane() {
+
+    }
+
+    private void createDoingPane() {
+
+    }
+
+    private void createToDoPane() {
+        System.out.println("H4");
+        Pane toDoPane = new Pane();
+        Label label = new Label("ToDo Task");
+        toDoPane.getChildren().add(label);
+
+        // Assuming vbox is the appropriate VBox you want to add the pane to
+        areaDetailsController controller = getAreaDetailsController();
+        if (controller != null) {
+            controller.addPaneToVBox(toDoPane, controller.getTodoVbox());
+        }
+
+    }
+    private areaDetailsController getAreaDetailsController() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/workslink/FXML/area_details.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return loader.getController();
+    }
+
+
+
+
+
+    private VBox createListViewVBox(List<String> items ,int height, int width) {
         VBox vbox = new VBox();
         vbox.setPrefHeight(height);
         vbox.setPrefWidth(width);
@@ -133,4 +197,6 @@ public class TaskManagerController {
 //            // Add more cases as needed
 //        }
     }
+
+
 }
