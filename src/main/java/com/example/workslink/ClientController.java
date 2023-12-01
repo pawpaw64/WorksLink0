@@ -19,18 +19,22 @@ public class ClientController {
     BufferedWriter writer;
     @FXML
     TextArea showArea;
+    public User userProfile;
     boolean isConnected = false;
 
     public ClientController() {
 
     }
+    public void setUserProfile(User userProfile) {
+        this.userProfile = userProfile;
+    }
 
     @FXML
     void buttonPrassed() {
         if (!isConnected) {
-            //showArea.setText(); //User name in setText method..
             //Client is not connected with server, let's connect with server...
-            String inputName = inputfield.getText();
+              String inputName = inputfield.getText();
+
             inputfield.clear();
             if(inputName==null || inputName.length() == 0){
                 showArea.appendText("Enter your name..."+"\n");
@@ -93,4 +97,5 @@ public class ClientController {
             }
         }
     }
+
 }

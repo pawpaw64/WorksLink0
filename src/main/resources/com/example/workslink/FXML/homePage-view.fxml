@@ -88,14 +88,17 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="52.0" prefWidth="132.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Chat" textAlignment="CENTER">
+                        <Label alignment="CENTER" onMouseClicked="#showChat" prefHeight="52.0" prefWidth="132.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Chat" textAlignment="CENTER">
                            <graphic>
-                              <ImageView fx:id="apps1" fitHeight="32.0" fitWidth="129.0" onMouseClicked="#showApps" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                              <ImageView fitHeight="32.0" fitWidth="129.0" onMouseClicked="#showChat" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
                                     <Image url="@../Icon/meeting.png" />
                                  </image>
                               </ImageView>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Label>
                      </children>
                   </VBox>
