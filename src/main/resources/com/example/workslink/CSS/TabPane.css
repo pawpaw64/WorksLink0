@@ -1,0 +1,32 @@
+/* styles.css */
+
+/* Customize the overall appearance of the TabPane */
+.tab-pane {
+    -fx-background-color: #f0f0f0; /* Set background color */
+}
+
+/* Customize the appearance of individual tabs */
+.tab {
+    -fx-background-color: #ffffff; /* Set default tab color */
+    -fx-text-fill: black; /* Set text color */
+    -fx-font-size: 14px; /* Set font size */
+    -fx-font-weight: bold; /* Set font weight */
+
+}
+
+/* Change the color of the selected tab */
+.tab:selected {
+    -fx-background-color: linear-gradient(to bottom right, #0dffea, #0dffea); 
+   /* -fx-underline: true;
+    -fx-underline-color: #7df9ff;*/
+}
+
+/* Add a hover effect for tabs */
+.tab:hover {
+    /*-fx-background-color: #45a049; /* Set hover effect color */
+}*/
+
+/* Customize the content area of the TabPane */
+.tab-content-area {
+    -fx-background-color: #ffffff; /* Set content area background color */
+}

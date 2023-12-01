@@ -22,16 +22,16 @@
          </image>
       </ImageView>
       <Label layoutX="40.0" layoutY="237.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="space name" />
-      <TextField fx:id="space_name" layoutX="40.0" layoutY="266.0" prefHeight="25.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
+      <TextField fx:id="space_name" layoutX="40.0" layoutY="266.0" onAction="#create_spaceBtn" prefHeight="25.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
       <Label layoutX="40.0" layoutY="298.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Space's Decription" />
       <TextArea layoutX="40.0" layoutY="333.0" prefHeight="62.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
       <Label layoutX="373.0" layoutY="114.0" prefHeight="17.0" prefWidth="232.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Choose Colour &amp; Avater" />
-      <Button layoutX="261.0" layoutY="485.0" mnemonicParsing="false" onAction="#create_space" prefHeight="30.0" prefWidth="249.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Create Space" />
+      <Button layoutX="261.0" layoutY="485.0" mnemonicParsing="false" onAction="#create_spaceBtn" prefHeight="30.0" prefWidth="249.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Create Space" />
       <Pane layoutX="346.0" layoutY="150.0" minHeight="-Infinity" prefHeight="256.0" prefWidth="421.0">
          <children>
-            <Pane layoutX="20.0" layoutY="22.0" prefHeight="94.0" prefWidth="97.0" style="-fx-background-color: #778899;" styleClass="rectangle" stylesheets="@../CSS/design.css">
+            <Pane fx:id="space_Pane1" layoutX="20.0" layoutY="22.0" prefHeight="94.0" prefWidth="97.0" style="-fx-background-color: #778899;" styleClass="space_Pane1" stylesheets="@../CSS/design.css">
                <children>
-                  <Label alignment="CENTER" layoutX="24.0" layoutY="25.0" prefHeight="50.0" prefWidth="49.0" text="F">
+                  <Label fx:id="space_Label" alignment="CENTER" layoutX="24.0" layoutY="25.0" prefHeight="50.0" prefWidth="49.0" text="F">
                      <font>
                         <Font size="32.0" />
                      </font>
@@ -45,82 +45,77 @@
             </Label>
             <Pane layoutX="143.0" layoutY="60.0" prefHeight="1.0" prefWidth="294.0">
                <children>
-                  <Circle fill="#76ff7a" layoutX="74.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fill="#bf94e4" layoutX="35.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fill="#0fc0fc" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fill="#bd33a4" layoutX="182.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fill="LIGHTSLATEGRAY" layoutX="149.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fill="#ffae42" layoutX="111.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fill="#ffb3de" layoutX="250.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
-                  <Circle fill="#0a7e8c" layoutX="217.0" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circle3" fill="#76ff7a" layoutX="74.0" onMouseClicked="#space_circle" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circle2" fill="#bf94e4" layoutX="35.0" onMouseClicked="#space_circle" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circle1" fill="#0fc0fc" onMouseClicked="#space_circle" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circle6" fill="#bd33a4" layoutX="182.0" onMouseClicked="#space_circle" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circle5" fill="LIGHTSLATEGRAY" layoutX="149.0" onMouseClicked="#space_circle" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circle4" fill="#ffae42" layoutX="111.0" onMouseClicked="#space_circle" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circle8" fill="#ffb3de" layoutX="250.0" onMouseClicked="#space_circle" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fx:id="circle7" fill="#0a7e8c" layoutX="217.0" onMouseClicked="#space_circle" radius="11.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" />
                </children>
             </Pane>
             <Line endX="100.699951171875" layoutX="246.0" layoutY="76.0" startX="-100.0" style="-fx-fill: #a9a9a9; -fx-opacity: 0.3;" />
-            <ScrollPane layoutX="133.0" layoutY="125.0" prefHeight="118.0" prefWidth="232.0" stylesheets="@../CSS/scrollpane.css">
+            <ScrollPane layoutX="117.0" layoutY="127.0" prefHeight="118.0" prefWidth="232.0" stylesheets="@../CSS/scrollpane.css">
                <content>
-                  <AnchorPane prefHeight="110.0" prefWidth="336.0">
+                  <AnchorPane prefHeight="118.0" prefWidth="292.0">
                      <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Icon/envelope.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="113.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image2" fitHeight="25.0" fitWidth="25.0" layoutX="113.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/home.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image3" fitHeight="25.0" fitWidth="25.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/eye.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="208.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image4" fitHeight="25.0" fitWidth="25.0" layoutX="208.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/img.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image5" fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/globe.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="254.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image6" fitHeight="25.0" fitWidth="25.0" layoutX="254.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/marker.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="303.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image7" fitHeight="25.0" fitWidth="25.0" layoutX="303.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/phone-call.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image8" fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/rocket-lunch.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="63.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image9" fitHeight="25.0" fitWidth="25.0" layoutX="63.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/search.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="113.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image10" fitHeight="25.0" fitWidth="25.0" layoutX="113.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/user%20(1).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image11" fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/world.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="208.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image12" fitHeight="25.0" fitWidth="25.0" layoutX="208.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/building.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="254.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="image13" fitHeight="25.0" fitWidth="25.0" layoutX="254.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/bulb.png" />
                            </image>
@@ -136,5 +131,10 @@
          <image>
             <Image url="@../Icon/uranus.gif" />
          </image></ImageView>
+      <ImageView fx:id="image1" fitHeight="25.0" fitWidth="25.0" layoutX="565.0" layoutY="448.0" onMouseClicked="#setIcon" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icon/calculator.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
