@@ -1,3 +1,4 @@
+//area_details.fxml controller
 package com.example.workslink;
 
 import javafx.collections.FXCollections;
@@ -8,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -26,6 +28,19 @@ public class areaDetailsController {
     StackPane stack1 = new StackPane();
     @FXML
     Tab task;
+    @FXML
+    private VBox todoVbox;
+    @FXML
+    private VBox completeVbox;
+    @FXML
+    private VBox doingVbox;
+
+
+
+    public VBox getTodoVbox() {
+        return todoVbox;
+    }
+
 
     @FXML
     void add_task(ActionEvent event) {
@@ -46,96 +61,11 @@ public class areaDetailsController {
         }
 
     }
-    @FXML
-    Button TaskButton;
-    @FXML
-    Button AssigneMember;
-    @FXML
-    Button Due_Date;
-
-    public void task_operation(){
-        List<String > items = List.of("ToDo","Doing","Complete");
-        VBox vbox = createListViewVBox(items,116,210);
-        PopOver popOver = new PopOver(vbox);
-        popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
-        vbox.getStylesheets().add(getClass().getResource("CSS/popOver.css").toExternalForm());
-
-        double screenX = TaskButton.localToScreen(TaskButton.getBoundsInLocal()).getMinX();
-        double screenY = TaskButton.localToScreen(TaskButton.getBoundsInLocal()).getMaxY();
-
-        double adjustedX = screenX - (vbox.getWidth() - TaskButton.getBoundsInParent().getWidth()) / 2;
-        double adjustedY = screenY;
-
-        popOver.show(TaskButton, adjustedX, adjustedY);
-    }
-    public void assign_Member(){
-        VBox vbox1 = new VBox();
-        PopOver popOver = new PopOver(vbox1);
-        popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
-
-        double screenX = AssigneMember.localToScreen(AssigneMember.getBoundsInLocal()).getMinX();
-        double screenY = AssigneMember.localToScreen(AssigneMember.getBoundsInLocal()).getMaxY();
-
-        double adjustedX = screenX - (vbox1.getWidth() - AssigneMember.getBoundsInParent().getWidth()) / 2;
-        double adjustedY = screenY;
 
 
-        popOver.show(AssigneMember);
-
-    }
-    public void pickDate(){
-        DatePicker datePicker = new DatePicker();
-
-        PopOver popOver = new PopOver(datePicker);
-        popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
-//        double screenX = Due_Date.localToScreen(Due_Date.getBoundsInLocal()).getMinX();
-//        double screenY = Due_Date.localToScreen(Due_Date.getBoundsInLocal()).getMaxY();
-//
-//        double adjustedX = screenX - (vbox2.getWidth() - Due_Date.getBoundsInParent().getWidth()) / 2;
-//        double adjustedY = screenY;
-
-
-        popOver.show(Due_Date);
-        datePicker.setOnAction(actionEvent -> {
-//            Due_Date.setText(datePicker.getValue().toString());
-            LocalDate myDate = datePicker.getValue();
-            String myFormattedDate = myDate.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
-            Due_Date.setText(myFormattedDate);
-        });
-
-    }
-    private VBox createListViewVBox(List<String> items ,int height, int width) {
-        VBox vbox = new VBox();
-        vbox.setPrefHeight(height);
-        vbox.setPrefWidth(width);
-        vbox.getStylesheets().add(getClass().getResource("CSS/popOver.css").toExternalForm());
-        ListView<String> listView = new ListView<>();
-        ObservableList<String> observableItems = FXCollections.observableArrayList(items);
-        listView.setItems(observableItems);
-        listView.setFixedCellSize(-3);
-        // Add a listener to the selection model to handle item clicks
-        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                handleItemClick(newValue); // Call a method to handle the selected item
-            }
-        });
-        vbox.getChildren().add(listView);
-        return vbox;
-    }
-    private void handleItemClick(String selectedItem) {
-        // Add logic to perform actions based on the selected item
-//        switch (selectedItem) {
-//            case "Calculator":
-//                openCalculator();
-//                break;
-//            case "Notes":
-//                openNotes();
-//                break;
-//            case "More":
-//                // Handle more options
-//                break;
-//            // Add more cases as needed
-//        }
+    void addPaneToVBox(Pane pane, VBox targetVBox) {
+        System.out.println("hhg");
+        targetVBox.getChildren().add(pane);
     }
 }
 

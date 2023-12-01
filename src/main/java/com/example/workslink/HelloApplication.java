@@ -9,11 +9,15 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+//    area_details.fxml
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/area_details.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/area_details.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/homePage-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/homePage-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-       // stage.initStyle(StageStyle.UNDECORATED);
+         // stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
 

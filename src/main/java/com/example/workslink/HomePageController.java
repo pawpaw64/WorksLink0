@@ -11,9 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -150,6 +153,18 @@ public class HomePageController extends HelloController implements Initializable
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
     }
+   public Stage stage=new Stage();
+    @FXML
+    void showChat(MouseEvent event) throws IOException {
+        System.out.println("gg");
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+//
+    }
     @FXML
     void create_space() { //mouseEvent at add space
         try {
@@ -167,10 +182,11 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
 
-    public void addItemToListView(Label newSpace) {
-        labelList.add(newSpace);
-
-
-
+    TreeView treeView=new TreeView<>();
+    public void newTreeRoot(String newSpace) {
+        TreeItem<String> root=new TreeItem<>(newSpace);
+        System.out.println(newSpace);
+        treeView.setRoot(root);
+        treeView.setShowRoot(true);
     }
 }

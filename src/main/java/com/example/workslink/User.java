@@ -17,6 +17,12 @@ public class User {
         this.userName = userName;
         this.dob = dob;
     }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public  User(){
+
+    }
     public String getEmail() {
         return email;
     }
@@ -26,6 +32,7 @@ public class User {
     public String getDob() {
         return dob;
     }
+
 }
 
 

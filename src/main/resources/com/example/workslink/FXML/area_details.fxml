@@ -12,7 +12,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.areaDetailsController">
    <children>
       <TabPane fx:id="tabPane" prefHeight="441.0" prefWidth="820.0" stylesheets="@../CSS/TabPane.css" tabClosingPolicy="UNAVAILABLE">
@@ -41,9 +40,9 @@
                               <Button fx:id="addTask" layoutX="459.0" layoutY="16.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add Task" />
                               <HBox layoutX="4.0" layoutY="110.0" prefHeight="342.0" prefWidth="698.0">
                                  <children>
-                                    <VBox prefHeight="428.0" prefWidth="240.0" />
-                                    <VBox prefHeight="348.0" prefWidth="226.0" />
-                                    <VBox prefHeight="428.0" prefWidth="240.0" />
+                                    <VBox fx:id="todoVbox" prefHeight="428.0" prefWidth="240.0" />
+                                    <VBox fx:id="doingVbox" prefHeight="348.0" prefWidth="226.0" />
+                                    <VBox fx:id="CompleteVbox" prefHeight="428.0" prefWidth="240.0" />
                                  </children>
                               </HBox>
                               <Label alignment="CENTER" layoutX="86.0" layoutY="73.0" prefHeight="27.0" prefWidth="80.0" text="To Do" textAlignment="CENTER">
