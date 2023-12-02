@@ -85,7 +85,7 @@
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="129.0" onMouseClicked="#showChat" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
-                                    <Image url="@../Icon/meeting.png" />
+                                    <Image url="@../Icon/chatIcon.jpg" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -147,7 +147,7 @@
          <center>
             <BorderPane prefHeight="597.0" prefWidth="913.0" BorderPane.alignment="CENTER">
                <top>
-                  <Pane prefHeight="45.0" prefWidth="901.0" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER">
+                  <Pane onMouseClicked="#showChat" prefHeight="45.0" prefWidth="901.0" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER">
                      <children>
                         <Label layoutX="4.0" layoutY="3.0" prefHeight="37.0" prefWidth="281.0" text="#Space Name">
                            <styleClass>
@@ -163,7 +163,7 @@
                   </Pane>
                </top>
                <center>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                  <Pane fx:id="chatPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
          </center>
