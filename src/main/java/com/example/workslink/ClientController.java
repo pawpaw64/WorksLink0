@@ -40,7 +40,7 @@ public class ClientController implements Initializable {
             String inputName = userProfile.getUserName();
             inputfield.clear();
             if(inputName==null || inputName.length() == 0){
-                showArea.appendText("Enter your name..."+"\n");
+                showArea.appendText("\n");
                 return;
             }
             try {
