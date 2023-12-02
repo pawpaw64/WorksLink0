@@ -8,6 +8,7 @@ import java.net.Socket;
 
 public class Server {
     public static void main(String[] args) {
+
         try {
             System.out.println("Server is waiting for client...");
             ServerSocket serverSocket = new ServerSocket(6600);

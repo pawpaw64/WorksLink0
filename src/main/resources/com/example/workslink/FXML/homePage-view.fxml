@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -59,7 +65,7 @@
             <AnchorPane prefHeight="597.0" prefWidth="230.0" BorderPane.alignment="TOP_LEFT">
                <children>
                   <Separator layoutY="-4.0" prefHeight="9.0" prefWidth="231.0" />
-                  <Separator layoutY="257.0" prefHeight="12.0" prefWidth="231.0" />
+                  <Separator layoutX="1.0" layoutY="256.0" prefHeight="12.0" prefWidth="231.0" />
                   <Separator layoutX="227.0" layoutY="-43.0" orientation="VERTICAL" prefHeight="640.0" prefWidth="0.0" />
                   <Separator layoutX="1.0" layoutY="451.0" prefHeight="10.0" prefWidth="231.0" />
                   <VBox layoutY="284.0" prefHeight="171.0" prefWidth="230.0" stylesheets="@../CSS/BasicDesign.css">
@@ -85,7 +91,7 @@
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="129.0" onMouseClicked="#showChat" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
-                                    <Image url="@../Icon/chatIcon.jpg" />
+                                    <Image url="@../Icon/meeting.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -129,11 +135,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <AnchorPane fx:id="list_anchor" layoutY="33.0" prefHeight="228.0" prefWidth="228.0">
-                           <children>
-                              <ListView editable="true" prefHeight="215.0" prefWidth="227.0" />
-                           </children>
-                        </AnchorPane>
+                        <VBox fx:id="space_Vbox" layoutY="34.0" prefHeight="223.0" prefWidth="228.0" />
                      </children>
                   </AnchorPane>
                   <Label layoutX="1.0" layoutY="461.0" prefHeight="25.0" prefWidth="232.0" text="General" wrapText="true">
@@ -147,7 +149,7 @@
          <center>
             <BorderPane prefHeight="597.0" prefWidth="913.0" BorderPane.alignment="CENTER">
                <top>
-                  <Pane onMouseClicked="#showChat" prefHeight="45.0" prefWidth="901.0" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER">
+                  <Pane prefHeight="45.0" prefWidth="901.0" stylesheets="@../CSS/homePageDesign.css" BorderPane.alignment="CENTER">
                      <children>
                         <Label layoutX="4.0" layoutY="3.0" prefHeight="37.0" prefWidth="281.0" text="#Space Name">
                            <styleClass>
@@ -162,9 +164,6 @@
                      </children>
                   </Pane>
                </top>
-               <center>
-                  <Pane fx:id="chatPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </center>
             </BorderPane>
          </center>
       </BorderPane>

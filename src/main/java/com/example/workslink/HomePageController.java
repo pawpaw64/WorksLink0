@@ -11,17 +11,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -39,16 +41,10 @@ public class HomePageController extends HelloController implements Initializable
     public ImageView apps;
     @FXML
     private Pane sidePane;
-    @FXML
-    private Pane chatPane;
     private User currentUser;
     @FXML
     ImageView closeHomePage;
-    BorderPane borderPane;
 
-
-    @FXML
-    private ListView<Label> space_list = new ListView<Label>(labelList);
     public void setUser(User user) {
         this.currentUser = user;
 
@@ -80,13 +76,6 @@ public class HomePageController extends HelloController implements Initializable
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception as needed
         }
-    }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-        space_list.setItems(labelList);
-
-
     }
     private VBox createListViewVBox(List<String> items, int height, int width) {
         VBox vbox = new VBox();
@@ -159,18 +148,14 @@ public class HomePageController extends HelloController implements Initializable
     @FXML
     void showChat(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load());
-        chatPane  = fxmlLoader.load();
-        chatPane.setVisible(true);
-
+        Scene scene = new Scene(fxmlLoader.load());
         ClientController clientController=fxmlLoader.getController();
         clientController.setUserProfile(currentUser);
 
-//        stage.setTitle("Hello!");
-//        stage.setScene(scene);
-//        stage.show();
-        stage.setScene(new Scene(chatPane));
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
         stage.show();
+//
     }
     @FXML
     void create_space() { //mouseEvent at add space
@@ -189,10 +174,69 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
 
-    public void addItemToListView(Label newSpace) {
-        labelList.add(newSpace);
 
+   @FXML TreeView<String> spaceTree=new TreeView<>();
+    public SpaceData spaceData;
+
+    public void setSpaceData(SpaceData spaceData) {
+        this.spaceData = spaceData;
+
+        // Call initialize after setting spaceData to ensure it's not null
+        initializeTreeView();
+        newTree();
+    }
+    void newTree(){
 
 
     }
+
+    private void initializeTreeView() {
+        if (spaceData != null && spaceData.getSpaceNamesList() != null) {
+            String spaceNameList = spaceData.getSpaceNamesList();
+            System.out.println(spaceNameList);
+            TreeItem<String> root = new TreeItem<>(spaceNameList);
+            List<String> spaces = Arrays.asList("Space1", "Space2", "Space3");
+            for (String space : spaces) {
+                TreeItem<String> spaceItem = new TreeItem<>(space);
+                root.getChildren().add(spaceItem);
+            }
+            spaceTree.setRoot(root);
+            spaceTree.setShowRoot(true);
+
+            spaceTree.setRoot(root);
+            spaceTree.setShowRoot(true);
+            space_Vbox.getChildren().add(spaceTree);
+        }
+        else {
+            System.out.println("null");
+        }
+    }
+    @FXML
+    private VBox space_Vbox;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+//        TreeItem<String>rootItem = new TreeItem("Tutorials");
+//
+//        TreeItem<String> webItem = new TreeItem<>("Web Tutorials");
+//        webItem.getChildren().add(new TreeItem<>("HTML  Tutorial"));
+//        webItem.getChildren().add(new TreeItem<>("HTML5 Tutorial"));
+//        webItem.getChildren().add(new TreeItem<>("CSS Tutorial"));
+//        webItem.getChildren().add(new TreeItem<>("SVG Tutorial"));
+//        rootItem.getChildren().add(webItem);
+//
+//        TreeItem<String>javaItem = new TreeItem<>("Java Tutorials");
+//        javaItem.getChildren().add(new TreeItem<>("Java Language"));
+//        javaItem.getChildren().add(new TreeItem<>("Java Collections"));
+//        javaItem.getChildren().add(new TreeItem<>("Java Concurrency"));
+//        rootItem.getChildren().add(javaItem);
+//
+//        TreeView<String>treeView = new TreeView<>();
+//        treeView.setRoot(rootItem);
+//
+//        treeView.setShowRoot(false);
+
+    }
+
 }

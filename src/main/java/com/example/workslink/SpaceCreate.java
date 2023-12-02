@@ -1,76 +1,60 @@
 package com.example.workslink;
 
-import javafx.event.ActionEvent;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 
-import java.util.List;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import static java.lang.Long.toHexString;
-
-public class SpaceCreate {
+public class SpaceCreate implements Initializable {
     @FXML
     private TextField space_name;
     @FXML
-    private Label space_Label=new Label();
+    private Label space_Label;
     @FXML
     Pane space_Pane1;
     String inputText;
-    @FXML
-    ImageView image1;
-    @FXML
-    ImageView image2;
-    @FXML
-    ImageView image3;
-    @FXML
-    ImageView image4;
-    @FXML
-    ImageView image5;
-    @FXML
-    ImageView image6;
-    @FXML
-    ImageView image7;
-    @FXML
-    ImageView image8;
-    @FXML
-    ImageView image9;
-    @FXML
-    ImageView image10;
-    @FXML
-    ImageView image11;
-    @FXML
-    ImageView image12;
-    private void addNewItemToListView() {
-        HomePageController homePageController=new HomePageController();
-        if (homePageController != null) {
-            Label newSpace = new Label();
-            newSpace.setText(space_name.getText());
-            homePageController.addItemToListView(newSpace);
-        } else {
-            System.err.println("Error: homePageController is null");
+    public SpaceData spaceData;
+   public String spaceNameList;
+
+
+    public void create_spaceBtn() {
+        try {
+            inputText = space_name.getText();
+            if (!inputText.isEmpty()) {
+                char firstChar = inputText.charAt(0);
+                space_Label.setText(String.valueOf(firstChar));
+                spaceNameList = inputText;
+
+                // Initialize spaceData if it's null
+                if (spaceData == null) {
+                    spaceData = new SpaceData();
+                }
+
+                spaceData.setSpaceNamesList(spaceNameList);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
+                Parent root = loader.load();
+                HomePageController homePageController = loader.getController();
+                homePageController. setSpaceData(spaceData);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-    public void create_spaceBtn() {
-        System.out.println("jgjh");
-        addNewItemToListView();
-         inputText= space_name.getText();
-         if(!inputText.isEmpty()){
-             char  firstChar = inputText.charAt(0);
-             space_Label.setText(String.valueOf(firstChar));
-         }
-         else {
-             return;
-         }
-    }
+
     public void space_circle(MouseEvent event){
         if (event.getSource() instanceof Circle) {
             Circle clickedCircle = (Circle) event.getSource();
@@ -109,5 +93,10 @@ public class SpaceCreate {
 
 
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
