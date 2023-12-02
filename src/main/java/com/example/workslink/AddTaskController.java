@@ -70,7 +70,8 @@ public class AddTaskController implements Initializable {
 
     }
     public void assign_Member(){
-        VBox vbox1 = new VBox();
+        List<String >items = List.of("Hasib","Rana","Sumaiya","Prince");
+        VBox vbox1 = createListViewVBox(items,116,210);
         PopOver popOver = new PopOver(vbox1);
         popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
 
