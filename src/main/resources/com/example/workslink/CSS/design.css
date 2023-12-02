@@ -65,4 +65,21 @@
 .project_pane{
 	-fx-background-radius: 5em;
 	border-bottom
-}        
+}
+
+.pi_pane{
+  
+    -fx-background-radius: 50%;
+}
+.check-box {
+    -fx-padding: 5;
+}
+
+/* Change the color of the check mark when selected */
+.checkbox:selected {
+    -fx-background-color: #b9f2ff; /* Green color, change as needed */
+    -fx-border-color: #b9f2ff; /* Border color same as background color */
+    -fx-text-fill: black; /* Text color */
+}
+
+/* Style the text label of the CheckBox */       
