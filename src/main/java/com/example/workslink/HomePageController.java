@@ -44,6 +44,8 @@ public class HomePageController extends HelloController implements Initializable
     private User currentUser;
     @FXML
     ImageView closeHomePage;
+    public VBox space_Vbox;
+    String spaceName;
 
     public void setUser(User user) {
         this.currentUser = user;
@@ -169,10 +171,13 @@ public class HomePageController extends HelloController implements Initializable
             SpaceCreate spaceCreateController = loader.getController();
             newStage.showAndWait();
 
+            addNewLabel();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 
    @FXML TreeView<String> spaceTree=new TreeView<>();
@@ -180,6 +185,11 @@ public class HomePageController extends HelloController implements Initializable
 
     public void setSpaceData(SpaceData spaceData) {
         this.spaceData = spaceData;
+
+        System.out.printf(this.spaceData.getSpaceNamesList()+"testing...\n");
+        spaceName = this.spaceData.getSpaceNamesList();
+        System.out.printf(spaceName+"testing...space name\n");
+
 
         // Call initialize after setting spaceData to ensure it's not null
         initializeTreeView();
@@ -211,8 +221,6 @@ public class HomePageController extends HelloController implements Initializable
             System.out.println("null");
         }
     }
-    @FXML
-    private VBox space_Vbox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -237,6 +245,18 @@ public class HomePageController extends HelloController implements Initializable
 //
 //        treeView.setShowRoot(false);
 
+    }
+    public void callLaabel(){
+        Label newLabel = new Label("Project: "+spaceName);
+        //System.out.printf(spaceName);
+        space_Vbox.getChildren().add(newLabel);
+    }
+
+
+    private void addNewLabel() {
+        Label newLabel = new Label("Project: "+spaceName);
+        //System.out.printf(spaceName);
+        space_Vbox.getChildren().add(newLabel);
     }
 
 }

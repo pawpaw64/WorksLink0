@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -28,10 +29,13 @@ public class SpaceCreate implements Initializable {
     String inputText;
     public SpaceData spaceData;
    public String spaceNameList;
+   public VBox space_Vbox;
 
 
     public void create_spaceBtn() {
         try {
+//            String sp_name = space_name.getText();
+//            System.out.printf(sp_name+" in string");
             inputText = space_name.getText();
             if (!inputText.isEmpty()) {
                 char firstChar = inputText.charAt(0);
@@ -49,10 +53,16 @@ public class SpaceCreate implements Initializable {
                 Parent root = loader.load();
                 HomePageController homePageController = loader.getController();
                 homePageController. setSpaceData(spaceData);
+
+
+                homePageController.callLaabel();
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
     public void space_circle(MouseEvent event){
