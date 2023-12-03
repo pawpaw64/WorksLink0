@@ -11,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 
@@ -41,9 +38,6 @@ public class HomePageController extends HelloController implements Initializable
     @FXML
     private Pane sidePane;
     private User currentUser;
-    @FXML
-    ImageView closeHomePage;
-
     public void setUser(User user) {
         this.currentUser = user;
 
@@ -157,9 +151,11 @@ public class HomePageController extends HelloController implements Initializable
         // Show the PopOver at the adjusted position
         popOver.show(apps, adjustedX, adjustedY);
     }
+    @FXML
+    Button closeButton;
 
-    public void closeOnAction() {
-        Stage stage = (Stage) closeHomePage.getScene().getWindow();
+    public void closeOnAction(ActionEvent e) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
 
@@ -224,7 +220,13 @@ public class HomePageController extends HelloController implements Initializable
         }
 
 
+    public void addMembers(MouseEvent e) throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/AddUser.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
 
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
