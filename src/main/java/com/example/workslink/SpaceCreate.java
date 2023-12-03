@@ -49,6 +49,7 @@ public class SpaceCreate implements Initializable {
                 Parent root = loader.load();
                 HomePageController homePageController = loader.getController();
                 homePageController. setSpaceData(spaceData);
+
             }
         } catch (Exception e) {
             e.printStackTrace();

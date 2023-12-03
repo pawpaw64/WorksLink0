@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.sql.Connection;
@@ -193,7 +194,7 @@ public class HelloController {
             delay(su_valid_label);
         } else {
             try {
-                String sql = "INSERT INTO email (email, userName,dob, password,questions,answer) VALUES (?, ?, ?, ?,?,?)";
+                String sql = "INSERT INTO user (email, userName,dob, password,questions,answer) VALUES (?, ?, ?, ?,?,?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, email);
                     preparedStatement.setString(2, user);
@@ -225,7 +226,7 @@ public class HelloController {
         } else {
             try {
 
-                String query = "SELECT * FROM email WHERE userName = ? AND password = ?";
+                String query = "SELECT * FROM user WHERE userName = ? AND password = ?";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                     preparedStatement.setString(1, userLogin);
                     preparedStatement.setString(2, passLogin);
@@ -236,8 +237,11 @@ public class HelloController {
                             String email = rs.getString("email");
                             String dob = rs.getString("dob");
                             String userName = rs.getString("userName");
+                            int user_id=rs.getInt("id");
+                            String bio=rs.getString("user_bio");
+                            byte[] user_img=rs.getBytes("user_img");
                             // Create a User instance
-                            User loggedInUser = new User(email, userName, dob);
+                            User loggedInUser = new User(email, userName, dob,user_id,bio,user_img);
 
                             // Jump to the homepage...
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
@@ -281,7 +285,7 @@ public class HelloController {
         delay(fp_valid_label);
     } else {
         try (Connection connect = DatabaseConnection.getConnection()) {
-            String selectData = "SELECT userName, questions, answer FROM email WHERE userName = ? AND questions = ? AND answer = ?";
+            String selectData = "SELECT userName, questions, answer FROM user WHERE userName = ? AND questions = ? AND answer = ?";
             try (PreparedStatement prepare = connect.prepareStatement(selectData)) {
                 prepare.setString(1, fp_username.getText());
                 prepare.setString(2, (String) fp_questions.getSelectionModel().getSelectedItem());
@@ -311,7 +315,7 @@ public class HelloController {
         } else {
             if (new_pass.getText().equals(confirm_pass.getText())) {
                 try (Connection connect = DatabaseConnection.getConnection()) {
-                    String updatePass = "UPDATE email SET password = ? WHERE userName = ?";
+                    String updatePass = "UPDATE user SET password = ? WHERE userName = ?";
                     try (PreparedStatement updatePrepare = connect.prepareStatement(updatePass)) {
                         updatePrepare.setString(1, new_pass.getText());
                         updatePrepare.setString(2, fp_username.getText());
