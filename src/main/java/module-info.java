@@ -7,6 +7,7 @@ module com.example.workslink {
     requires org.kordamp.bootstrapfx.core;
     requires mysql.connector.j;
     requires com.jfoenix;
+    requires java.desktop;
 
     opens com.example.workslink to javafx.fxml;
     exports com.example.workslink;

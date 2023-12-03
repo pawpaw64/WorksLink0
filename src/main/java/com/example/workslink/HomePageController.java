@@ -2,6 +2,8 @@ package com.example.workslink;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,17 +13,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,31 +36,36 @@ import org.controlsfx.control.PopOver;
 
 public class HomePageController extends HelloController implements Initializable {
     @FXML
-    private AnchorPane list_anchor = new AnchorPane();
-    private ObservableList<Label> labelList = FXCollections.observableArrayList();
-    @FXML
     public ImageView profileImg;
     public ImageView apps;
     @FXML
     private Pane sidePane;
-    @FXML
-    private Pane chatPane;
     private User currentUser;
     @FXML
     ImageView closeHomePage;
-    BorderPane borderPane;
 
-
-    @FXML
-    private ListView<Label> space_list = new ListView<Label>(labelList);
     public void setUser(User user) {
         this.currentUser = user;
 
     }
     @FXML
+    public void logout(ActionEvent e) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/loginRegistration.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setY(15);
+        stage.setX(100);
+        stage.show();
+    }
+
+    @FXML
     private void showProfile() {
         loadNewView("FXML/profile.fxml");
     }
+
     private void loadNewView(String fxmlFileName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
@@ -81,13 +90,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace(); // Handle the exception as needed
         }
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-        space_list.setItems(labelList);
 
-
-    }
     private VBox createListViewVBox(List<String> items, int height, int width) {
         VBox vbox = new VBox();
         vbox.setPrefHeight(height);
@@ -106,6 +109,7 @@ public class HomePageController extends HelloController implements Initializable
         vbox.getChildren().add(listView);
         return vbox;
     }
+
     // Method to handle item clicks
     private void handleItemClick(String selectedItem) {
         // Add logic to perform actions based on the selected item
@@ -122,12 +126,15 @@ public class HomePageController extends HelloController implements Initializable
             // Add more cases as needed
         }
     }
+
     private void openCalculator() {
         loadNewView("FXML/calculator.fxml");
     }
+
     private void openNotes() {
         loadNewView("FXML/notes.fxml");
     }
+
     public void showApps() {
         // Create a list of items
         List<String> items = List.of("Calculator", "Notes", "More");
@@ -151,27 +158,27 @@ public class HomePageController extends HelloController implements Initializable
         // Show the PopOver at the adjusted position
         popOver.show(apps, adjustedX, adjustedY);
     }
+
     public void closeOnAction() {
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
     }
-   public Stage stage=new Stage();
+
+    public Stage stage = new Stage();
+
     @FXML
     void showChat(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load());
-        chatPane  = fxmlLoader.load();
-        chatPane.setVisible(true);
-
-        ClientController clientController=fxmlLoader.getController();
+        Scene scene = new Scene(fxmlLoader.load());
+        ClientController clientController = fxmlLoader.getController();
         clientController.setUserProfile(currentUser);
 
-//        stage.setTitle("Hello!");
-//        stage.setScene(scene);
-//        stage.show();
-        stage.setScene(new Scene(chatPane));
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
         stage.show();
+//
     }
+
     @FXML
     void create_space() { //mouseEvent at add space
         try {
@@ -182,17 +189,46 @@ public class HomePageController extends HelloController implements Initializable
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
             SpaceCreate spaceCreateController = loader.getController();
-            newStage.showAndWait();
+            newStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void addItemToListView(Label newSpace) {
-        labelList.add(newSpace);
+
+    @FXML
+    TreeView<String> spaceTree = new TreeView<>();
+    public SpaceData spaceData;
+
+    public void setSpaceData(SpaceData spaceData) {
+        this.spaceData = spaceData;
+
+        // Call initialize after setting spaceData to ensure it's not null
+        initializeTreeView();
+    }
+
+    @FXML
+    VBox space_Vbox;
+    private void initializeTreeView() {
+        if (spaceData != null && spaceData.getSpaceNamesList() != null) {
+            String spaceNameList = spaceData.getSpaceNamesList();
+            System.out.println(spaceNameList);
+            Label label = new Label();
+            label.setText(spaceNameList);
+            space_Vbox.getChildren().add(label);
+        }
+
+        else{
+                System.out.println("null");
+            }
+        }
 
 
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 }
