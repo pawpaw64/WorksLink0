@@ -6,22 +6,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.TaskManagerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AddTaskController">
    <children>
-      <Label layoutX="14.0" layoutY="31.0" prefHeight="24.0" prefWidth="77.0" text="Task Name:">
+      <Label layoutX="29.0" layoutY="32.0" prefHeight="24.0" prefWidth="77.0" text="Task Name:">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="80.0" prefHeight="34.0" prefWidth="395.0" promptText="Task name" />
-      <Label layoutX="14.0" layoutY="145.0" prefHeight="24.0" prefWidth="77.0" text="Discription:">
+      <TextField layoutX="14.0" layoutY="80.0" prefHeight="34.0" prefWidth="395.0" promptText="Task name" styleClass="tx" stylesheets="@../CSS/design.css" />
+      <Label layoutX="29.0" layoutY="145.0" prefHeight="24.0" prefWidth="77.0" text="Discription:">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="192.0" prefHeight="84.0" prefWidth="395.0" promptText="Discription" />
-      <Button fx:id="TaskButton" layoutX="14.0" layoutY="326.0" mnemonicParsing="false" onAction="#task_operation" text="Todo" />
-      <Button layoutX="212.0" layoutY="326.0" mnemonicParsing="false" text="Due Date" />
-      <Button fx:id="AssigneMember" layoutX="106.0" layoutY="326.0" mnemonicParsing="false" onAction="#assign_Member" text="Assignee" />
+      <TextField layoutX="14.0" layoutY="192.0" prefHeight="84.0" prefWidth="395.0" promptText="Discription" styleClass="tx" stylesheets="@../CSS/design.css" />
+      <Button fx:id="TaskButton" layoutX="14.0" layoutY="326.0" mnemonicParsing="false" onAction="#task_operation" prefHeight="30.0" prefWidth="102.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Todo" />
+      <Button fx:id="Due_Date" layoutX="275.0" layoutY="326.0" mnemonicParsing="false" onAction="#pickDate" prefHeight="30.0" prefWidth="102.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Due Date" />
+      <Button fx:id="AssigneMember" layoutX="144.0" layoutY="326.0" mnemonicParsing="false" onAction="#assign_Member" prefHeight="30.0" prefWidth="102.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Assignee" />
+      <Button layoutX="483.0" layoutY="326.0" mnemonicParsing="false" onAction="#createTask" prefHeight="30.0" prefWidth="102.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Create Task" />
    </children>
 </AnchorPane>

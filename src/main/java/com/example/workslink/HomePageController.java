@@ -14,7 +14,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -37,9 +39,12 @@ public class HomePageController extends HelloController implements Initializable
     public ImageView apps;
     @FXML
     private Pane sidePane;
+    @FXML
+    private Pane chatPane;
     private User currentUser;
     @FXML
     ImageView closeHomePage;
+    BorderPane borderPane;
 
 
     @FXML
@@ -149,6 +154,23 @@ public class HomePageController extends HelloController implements Initializable
     public void closeOnAction() {
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
+    }
+   public Stage stage=new Stage();
+    @FXML
+    void showChat(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
+        //Scene scene = new Scene(fxmlLoader.load());
+        chatPane  = fxmlLoader.load();
+        chatPane.setVisible(true);
+
+        ClientController clientController=fxmlLoader.getController();
+        clientController.setUserProfile(currentUser);
+
+//        stage.setTitle("Hello!");
+//        stage.setScene(scene);
+//        stage.show();
+        stage.setScene(new Scene(chatPane));
+        stage.show();
     }
     @FXML
     void create_space() { //mouseEvent at add space

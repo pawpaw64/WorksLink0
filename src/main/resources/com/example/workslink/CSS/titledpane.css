@@ -10,3 +10,12 @@
 /* Customize the arrow button (if needed) */
 
 }
+/* styles.css */
+
+.left-message {
+    -fx-text-fill: blue;
+}
+
+.right-message {
+    -fx-text-fill: green;
+}

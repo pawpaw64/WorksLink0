@@ -17,6 +17,7 @@ public class User {
         this.userName = userName;
         this.dob = dob;
     }
+
     public String getEmail() {
         return email;
     }
@@ -26,6 +27,7 @@ public class User {
     public String getDob() {
         return dob;
     }
+
 }
 
 
