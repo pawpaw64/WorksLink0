@@ -2,6 +2,8 @@ package com.example.workslink;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +47,18 @@ public class HomePageController extends HelloController implements Initializable
     public void setUser(User user) {
         this.currentUser = user;
 
+    }
+    @FXML
+    public void logout(ActionEvent e) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/loginRegistration.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setY(15);
+        stage.setX(100);
+        stage.show();
     }
 
     @FXML
