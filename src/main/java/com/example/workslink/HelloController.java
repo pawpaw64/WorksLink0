@@ -73,6 +73,10 @@ public class HelloController {
     private PasswordField confirm_pass;
     @FXML
     private PasswordField new_pass;
+    private String[] questionList = {
+            "What is your favorite Color?",
+            "What is your favorite food?",
+            "what is your birth date?"};
     @FXML
     String email, user, dob, pass,question, answer;
     private Connection connection;
@@ -122,9 +126,6 @@ public class HelloController {
             slider.play();
         }
     }
-
-    private String[] questionList = {"What is your favorite Color?", "What is your favorite food?", "what is your birth date?"};
-
     @FXML
     public void regQuestionList() {
         List<String> listQ = new ArrayList<>();
@@ -136,13 +137,11 @@ public class HelloController {
         ObservableList listData = FXCollections.observableArrayList(listQ);
         su_questions.setItems(listData);
     }
-
     @FXML
     public void backToLoginForm() {
         login_page.setVisible(true);
         forget_passPane.setVisible(false);
     }
-
     @FXML
     public void backToQuestionForm() {
         forget_passPane.setVisible(true);
@@ -161,7 +160,6 @@ public class HelloController {
         fp_questions.setItems(listData);
 
     }
-
     @FXML
     public void switchForgotPass() {
         forget_passPane.setVisible(true);
@@ -169,14 +167,13 @@ public class HelloController {
 
         forgotPassQuestionList();
     }
-
     @FXML
     Button closeButton;
 
     public void closeOnAction(ActionEvent e) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
-    }
+    }  //NEED TO FIX
     @FXML
     public void signup() {
         email = su_email_TextField.getText();
@@ -304,7 +301,7 @@ public class HelloController {
             e.printStackTrace();
         }
     }
-}
+} //NEED TO CHECK
     @FXML
     public void changePassBtn() {
         if (new_pass.getText().isEmpty() || confirm_pass.getText().isEmpty()) {
@@ -344,7 +341,7 @@ public class HelloController {
                 delay(change_pass_valid_label);
             }
         }
-    }
+    } //NEED TO CHECK
 
 }
 

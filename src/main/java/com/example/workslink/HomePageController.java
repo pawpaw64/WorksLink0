@@ -60,7 +60,6 @@ public class HomePageController extends HelloController implements Initializable
         stage.setX(100);
         stage.show();
     }
-
     @FXML
     private void showProfile() {
         loadNewView("FXML/profile.fxml");
