@@ -1,7 +1,7 @@
 
 /* Style for the PopOver background */
 .popover {
-    -fx-background-color: linear-gradient(to bottom right, #05373c 10%, #33CCCC 80%, #0dffea);
+    -fx-background-color:  #f0f0f0;;
 }
 
 /* Style for the ListView items */
