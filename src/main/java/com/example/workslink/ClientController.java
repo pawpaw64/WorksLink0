@@ -9,8 +9,10 @@ import javafx.scene.control.TextField;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ClientController  {
+public class ClientController implements Initializable {
 
     @FXML
     Button button;
@@ -20,32 +22,22 @@ public class ClientController  {
     BufferedWriter writer;
     @FXML
     TextArea showArea;
-    boolean isConnected = false;
-
     public User userProfile;
+    boolean isConnected = false;
     String name;
 
     public void setUserProfile(User userProfile) {
         this.userProfile = userProfile;
-        check();
-    }
-    public void check() {
-        if (userProfile.getUserName() != null) {
-            name = userProfile.getUserName();
-            System.out.println(name);
-        } else
-            System.out.println("null");
+
     }
 
 
     @FXML
     void buttonPrassed() {
         if (!isConnected) {
-            String clientName =userProfile.getUserName();
-            showArea.setText(clientName);
-            System.out.println(clientName);//User name in setText method..
-            //Client is not connected with server, let's connect with server...
-            String inputName = inputfield.getText();
+            System.out.printf(userProfile.getUserName());
+
+            String inputName = userProfile.getUserName();
             inputfield.clear();
             if(inputName==null || inputName.length() == 0){
                 showArea.appendText("Enter your name..."+"\n");
@@ -98,7 +90,7 @@ public class ClientController  {
 
                 System.out.println(msg);
                 if(msg==null || msg.length() == 0){
-                    showArea.appendText("");
+                    showArea.appendText("Enter your name..."+"\n");
                     return;
                 }
                 writer.write(msg+"\n");
@@ -106,6 +98,17 @@ public class ClientController  {
             } catch (IOException e){
                 e.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(userProfile!=null){
+            name = userProfile.getUserName();
+            System.out.printf(name);
+        }
+        else {
+            //System.out.printf("Null name");
         }
     }
 }

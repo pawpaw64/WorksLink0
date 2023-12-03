@@ -62,6 +62,7 @@ public class ProfileController implements Initializable {
             profileDOB.setText(userProfile.getDob());
 
             System.out.println("Labels updated!");
+
         }
     }
     public void setSidePane(Pane sidePane) {
