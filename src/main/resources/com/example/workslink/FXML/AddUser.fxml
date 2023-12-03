@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="493.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
+<AnchorPane prefHeight="493.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AddMembers">
    <children>
       <Label layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="186.0" text="Add Members" textFill="#6a6569">
          <font>
@@ -48,8 +48,8 @@
          </font>
       </Label>
       <TextField layoutX="130.0" layoutY="121.0" prefHeight="25.0" prefWidth="238.0" />
-      <ChoiceBox layoutX="129.0" layoutY="163.0" prefHeight="25.0" prefWidth="238.0" />
-      <ChoiceBox layoutX="129.0" layoutY="254.0" prefHeight="25.0" prefWidth="238.0" />
+      <ChoiceBox fx:id="choices" layoutX="129.0" layoutY="163.0" prefHeight="25.0" prefWidth="238.0" />
+      <ChoiceBox fx:id="role" layoutX="129.0" layoutY="254.0" prefHeight="25.0" prefWidth="238.0" />
       <ChoiceBox layoutX="129.0" layoutY="305.0" prefHeight="25.0" prefWidth="238.0" />
       <DatePicker layoutX="129.0" layoutY="208.0" prefHeight="26.0" prefWidth="238.0" />
       <Button layoutX="125.0" layoutY="418.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Save Members" textFill="#f5f0f4">
