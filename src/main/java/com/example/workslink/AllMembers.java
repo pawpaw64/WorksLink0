@@ -1,17 +1,12 @@
 package com.example.workslink;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -43,42 +38,42 @@ public class AllMembers implements Initializable {
     public Button homeBackBtn;
     public Button AddEmployeeBtn;
     public Button viewAllEmployee;
-    public TableView<Members> membersTableView;
+    public TableView<MembersData> membersTableView;
     public Label membersCountLabel;
-    public TableColumn<Members, String> memberID;
-    public TableColumn<Members, String> memberEmail;
-    public TableColumn<Members, String> memberUserName;
-    public TableColumn<Members, String> memberDOB;
+    public TableColumn<MembersData, String> memberID;
+    public TableColumn<MembersData, String> memberEmail;
+    public TableColumn<MembersData, String> memberUserName;
+    public TableColumn<MembersData, String> memberDOB;
 
-    public TableColumn<Members, String> getMemberID() {
+    public TableColumn<MembersData, String> getMemberID() {
         return memberID;
     }
 
-    public void setMemberID(TableColumn<Members, String> memberID) {
+    public void setMemberID(TableColumn<MembersData, String> memberID) {
         this.memberID = memberID;
     }
 
-    public TableColumn<Members, String> getMemberEmail() {
+    public TableColumn<MembersData, String> getMemberEmail() {
         return memberEmail;
     }
 
-    public void setMemberEmail(TableColumn<Members, String> memberEmail) {
+    public void setMemberEmail(TableColumn<MembersData, String> memberEmail) {
         this.memberEmail = memberEmail;
     }
 
-    public TableColumn<Members, String> getMemberUserName() {
+    public TableColumn<MembersData, String> getMemberUserName() {
         return memberUserName;
     }
 
-    public void setMemberUserName(TableColumn<Members, String> memberUserName) {
+    public void setMemberUserName(TableColumn<MembersData, String> memberUserName) {
         this.memberUserName = memberUserName;
     }
 
-    public TableColumn<Members, String> getMemberDOB() {
+    public TableColumn<MembersData, String> getMemberDOB() {
         return memberDOB;
     }
 
-    public void setMemberDOB(TableColumn<Members, String> memberDOB) {
+    public void setMemberDOB(TableColumn<MembersData, String> memberDOB) {
         this.memberDOB = memberDOB;
     }
 
@@ -115,7 +110,7 @@ public class AllMembers implements Initializable {
                 String dob = rs.getString("dob");
                 System.out.println(userName+" "+email+"" +dob);
 
-                Members members = new Members(userName,email,dob);
+                MembersData members = new MembersData(userName,email,dob);
                 membersTableView.getItems().add(members);
             }
 

@@ -1,4 +1,4 @@
-//area_details.fxml controller
+//space_details.fxml controller
 package com.example.workslink;
 
 import javafx.beans.binding.Bindings;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class areaDetailsController implements Initializable {
+public class SpaceDetailsController implements Initializable {
     @FXML
     TabPane tabPane;
     @FXML

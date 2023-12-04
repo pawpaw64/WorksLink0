@@ -9,11 +9,11 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-//    area_details.fxml
+//    space_details.fxml
 
     @Override
     public void start(Stage stage) throws IOException {
-       //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/area_details.fxml"));
+       //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/space_details.fxml"));
        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/homePage-view.fxml"));
       // FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FXML/loginRegistration.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

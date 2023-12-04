@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -205,7 +204,7 @@ public class HomePageController extends HelloController implements Initializable
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
-            SpaceCreate spaceCreateController = loader.getController();
+            SpaceCreateController spaceCreateController = loader.getController();
             newStage.show();
 
         } catch (IOException e) {
@@ -287,12 +286,12 @@ public class HomePageController extends HelloController implements Initializable
     private void handleSpaceItemClick(String newValue) {
         System.out.println(newValue);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/area_details.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
             Parent root = loader.load();
 
             // Pass the selected space name to the controller if needed
-            areaDetailsController areaDetailsController = loader.getController();
-            areaDetailsController.setAreaSpaceName(newValue);
+            SpaceDetailsController SpaceDetailsController = loader.getController();
+            SpaceDetailsController.setAreaSpaceName(newValue);
 
             // Create a new stage for the new scene
             Stage newStage = new Stage();
