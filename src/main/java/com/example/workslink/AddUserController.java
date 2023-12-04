@@ -7,7 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddMembers implements Initializable {
+public class AddUserController implements Initializable {
     @FXML
     private ChoiceBox<String> choices;
     @FXML

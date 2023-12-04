@@ -104,8 +104,6 @@ public class SpaceCreate implements Initializable {
                     preparedStatement.setString(2, getSpaceDescription().getText());
                     preparedStatement.setString(3, String.valueOf(Date.valueOf(spaceStartDate.getValue())));
                     preparedStatement.setString(4, String.valueOf(Date.valueOf(spaceEndDate.getValue())));
-                    //preparedStatement.setString(5,question);
-                    //preparedStatement.setString(6,answer);
 
                     int rowsInserted = preparedStatement.executeUpdate();
 

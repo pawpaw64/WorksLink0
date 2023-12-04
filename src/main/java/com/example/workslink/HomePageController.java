@@ -211,6 +211,21 @@ public class HomePageController extends HelloController implements Initializable
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }@FXML
+    void membersOnAction() { //mouseEvent at add space
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/allMembers.fxml"));
+            Parent root = loader.load();
+            // Create a new stage for the new scene
+            Stage newStage = new Stage();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.setScene(new Scene(root));
+            AllMembers allMembers = loader.getController();
+            newStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -324,15 +339,6 @@ public class HomePageController extends HelloController implements Initializable
         }
 
 
-    }
-
-    public void addMembers(MouseEvent mouseEvent) throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/AddUser.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-
-        stage.setScene(scene);
-        stage.show();
     }
 }
 
