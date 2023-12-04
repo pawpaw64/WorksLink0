@@ -10,14 +10,12 @@
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AllMembers">
    <children>
       <Button layoutX="79.0" layoutY="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="84.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Home" />
-      <Button layoutX="249.0" layoutY="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="123.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add Members" />
-      <Button layoutX="427.0" layoutY="58.0" mnemonicParsing="false" onAction="#ViewAllMembers" prefHeight="31.0" prefWidth="145.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="View All Members" />
-      <TableView fx:id="membersTableView" layoutX="62.0" layoutY="178.0" prefHeight="410.0" prefWidth="498.0">
+      <Button layoutX="418.0" layoutY="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="123.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add Members" />
+      <TableView fx:id="membersTableView" layoutX="62.0" layoutY="178.0" prefHeight="410.0" prefWidth="483.0">
         <columns>
-          <TableColumn fx:id="memberID" prefWidth="119.0" text="Id" />
-          <TableColumn fx:id="memberEmail" prefWidth="123.0" text="Email" />
-            <TableColumn fx:id="memberDOB" prefWidth="125.0" text="User Name" />
-            <TableColumn fx:id="members_DOB" prefWidth="128.0" text="Date of Birth" />
+            <TableColumn fx:id="memberUserName" prefWidth="147.20001220703125" text="User Name" />
+          <TableColumn fx:id="memberEmail" prefWidth="171.20001220703125" text="Email" />
+            <TableColumn fx:id="memberDOB" prefWidth="161.60003662109375" text="Date of Birth" />
         </columns>
       </TableView>
       <Label layoutX="255.0" layoutY="107.0" text="All Members">
@@ -25,6 +23,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="membersCountLabel" layoutX="257.0" layoutY="143.0" text="Number Of member" />
+      <Label fx:id="membersCountLabel" layoutX="239.0" layoutY="143.0" prefHeight="20.0" prefWidth="170.0" text="Number Of members ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>

@@ -3,64 +3,49 @@ package com.example.workslink;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Members {
-    private SimpleStringProperty memberId;
-    private SimpleStringProperty memberUserName;
-    private SimpleStringProperty memberEmail;
-    private SimpleStringProperty memberDOB;
+    private String memberId;
+    private String memberUserName;
+    private String memberEmail;
+    private String memberDOB;
 
 
-    public Members(SimpleStringProperty memberId, SimpleStringProperty memberUserName, SimpleStringProperty memberEmail, SimpleStringProperty memberDOB) {
-        this.memberId = memberId;
+    public Members(String memberUserName, String memberEmail, String memberDOB) {
         this.memberUserName = memberUserName;
         this.memberEmail = memberEmail;
         this.memberDOB = memberDOB;
+        System.out.printf("Got from AllMembers: "+ memberUserName+memberEmail+memberDOB);
     }
+
 
     public String getMemberId() {
-        return memberId.get();
-    }
-
-    public SimpleStringProperty memberIdProperty() {
         return memberId;
     }
 
     public void setMemberId(String memberId) {
-        this.memberId.set(memberId);
+        this.memberId = memberId;
     }
 
     public String getMemberUserName() {
-        return memberUserName.get();
-    }
-
-    public SimpleStringProperty memberUserNameProperty() {
         return memberUserName;
     }
 
     public void setMemberUserName(String memberUserName) {
-        this.memberUserName.set(memberUserName);
+        this.memberUserName = memberUserName;
     }
 
     public String getMemberEmail() {
-        return memberEmail.get();
-    }
-
-    public SimpleStringProperty memberEmailProperty() {
         return memberEmail;
     }
 
     public void setMemberEmail(String memberEmail) {
-        this.memberEmail.set(memberEmail);
+        this.memberEmail = memberEmail;
     }
 
     public String getMemberDOB() {
-        return memberDOB.get();
-    }
-
-    public SimpleStringProperty memberDOBProperty() {
         return memberDOB;
     }
 
     public void setMemberDOB(String memberDOB) {
-        this.memberDOB.set(memberDOB);
+        this.memberDOB = memberDOB;
     }
 }
