@@ -44,7 +44,7 @@ public class AllMembers implements Initializable {
     public Button AddEmployeeBtn;
     public Button viewAllEmployee;
     public TableView<Members> membersTableView;
-    public Label employeeCountLabel;
+    public Label membersCountLabel;
     public TableColumn<Members, String> memberID;
     public TableColumn<Members, String> memberEmail;
     public TableColumn<Members, String> memberUserName;
@@ -87,9 +87,8 @@ public class AllMembers implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        memberID.setCellValueFactory(new PropertyValueFactory<>("memberID"));
-        memberEmail.setCellValueFactory(new PropertyValueFactory<>("memberEmail"));
         memberUserName.setCellValueFactory(new PropertyValueFactory<>("memberUserName"));
+        memberEmail.setCellValueFactory(new PropertyValueFactory<>("memberEmail"));
         memberDOB.setCellValueFactory(new PropertyValueFactory<>("memberDOB"));
 
         membersTableView.setEditable(false);
@@ -107,17 +106,17 @@ public class AllMembers implements Initializable {
             DatabaseConnection databaseConnection=new DatabaseConnection();
             Connection connection=databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name, start_date, end_date FROM space_info";
+            String sql = "SELECT userName, email, dob FROM user";
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 membersCount++;
-                String spaceName = rs.getString("Space_name");
-                String startDate = rs.getString("start_date");
-                String endDate = rs.getString("end_date");
-                System.out.println("w"+" "+spaceName+" "+startDate+"" +endDate);
+                String userName = rs.getString("userName");
+                String email = rs.getString("email");
+                String dob = rs.getString("dob");
+                System.out.println(userName+" "+email+"" +dob);
 
-//                Members members = new Members();
-//                membersTableView.getItems().add();
+                Members members = new Members(userName,email,dob);
+                membersTableView.getItems().add(members);
             }
 
             statement.close();
@@ -127,7 +126,7 @@ public class AllMembers implements Initializable {
             e.printStackTrace();
         }
 
-
+        membersCountLabel.setText("Currently you have " + String.valueOf(membersCount) + " employees.");
     }
 
     public void ViewAllMembers(ActionEvent e) {
