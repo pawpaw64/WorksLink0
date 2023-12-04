@@ -196,7 +196,7 @@ public class HomePageController extends HelloController implements Initializable
     }
 
     @FXML
-    void create_space() { //mouseEvent at add space
+    void createNewSpace() { //mouseEvent at add space
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_create.fxml"));
             Parent root = loader.load();
