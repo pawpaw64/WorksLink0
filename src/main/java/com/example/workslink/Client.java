@@ -23,7 +23,7 @@ public class Client implements Runnable {
             clientName = reader.readLine();
             clients.add(this);
 
-            System.out.println("Client "+clientName+" connected...");
+            //System.out.println("Client "+clientName+" connected...");
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -35,6 +35,7 @@ public class Client implements Runnable {
         while (true){
             try {
                 String data = reader.readLine()+"\n";
+                System.out.printf(data);
                 data = clientName + ":"+data;
 
                 synchronized (clients){

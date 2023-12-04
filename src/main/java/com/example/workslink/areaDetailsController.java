@@ -1,27 +1,28 @@
 //area_details.fxml controller
 package com.example.workslink;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.controlsfx.control.PopOver;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class areaDetailsController {
+public class areaDetailsController implements Initializable {
     @FXML
     TabPane tabPane;
     @FXML
@@ -61,11 +62,41 @@ public class areaDetailsController {
         }
 
     }
+    @FXML
+    private Label areaSpaceName;
 
+    public Label getAreaSpaceName() {
+        return areaSpaceName;
+    }
+
+    public void setAreaSpaceName(String areaSpaceName) {
+        this.areaSpaceName.setText(areaSpaceName);
+    }
 
     void addPaneToVBox(Pane pane, VBox targetVBox) {
         System.out.println("hhg");
         targetVBox.getChildren().add(pane);
     }
+    @FXML
+    private PieChart pieChart;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                    new PieChart.Data("Todo",100),
+                    new PieChart.Data("Doing",30),
+                    new PieChart.Data("Done",20));
+
+
+        pieChartData.forEach(data ->
+                data.nameProperty().bind(
+                        Bindings.concat(
+                                data.getName(),"amount",data.pieValueProperty()
+                        )
+                )
+                );
+        pieChart.getData().addAll(pieChartData);
+    }
+
 }
 

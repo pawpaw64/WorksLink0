@@ -27,10 +27,8 @@ public class HelloController {
 
     @FXML
     private Button already_btn;
-
     @FXML
     private Button create_btn;
-
     @FXML
     private AnchorPane home_page;
     @FXML
@@ -52,9 +50,9 @@ public class HelloController {
     @FXML
     private Label fp_valid_label;
     @FXML
-    TextField su_email_TextField = new TextField();
+    TextField su_email_TextField ;
     @FXML
-    TextField su_username_TextFIeld = new TextField();
+    TextField su_username_TextFIeld ;
     @FXML
     DatePicker su_bdate = new DatePicker();
     @FXML
@@ -75,6 +73,10 @@ public class HelloController {
     private PasswordField confirm_pass;
     @FXML
     private PasswordField new_pass;
+    private String[] questionList = {
+            "What is your favorite Color?",
+            "What is your favorite food?",
+            "what is your birth date?"};
     @FXML
     String email, user, dob, pass,question, answer;
     private Connection connection;
@@ -124,9 +126,6 @@ public class HelloController {
             slider.play();
         }
     }
-
-    private String[] questionList = {"What is your favorite Color?", "What is your favorite food?", "what is your birth date?"};
-
     @FXML
     public void regQuestionList() {
         List<String> listQ = new ArrayList<>();
@@ -138,13 +137,11 @@ public class HelloController {
         ObservableList listData = FXCollections.observableArrayList(listQ);
         su_questions.setItems(listData);
     }
-
     @FXML
     public void backToLoginForm() {
         login_page.setVisible(true);
         forget_passPane.setVisible(false);
     }
-
     @FXML
     public void backToQuestionForm() {
         forget_passPane.setVisible(true);
@@ -163,7 +160,6 @@ public class HelloController {
         fp_questions.setItems(listData);
 
     }
-
     @FXML
     public void switchForgotPass() {
         forget_passPane.setVisible(true);
@@ -171,7 +167,6 @@ public class HelloController {
 
         forgotPassQuestionList();
     }
-
     @FXML
     Button closeButton;
 
@@ -306,7 +301,7 @@ public class HelloController {
             e.printStackTrace();
         }
     }
-}
+} //NEED TO CHECK
     @FXML
     public void changePassBtn() {
         if (new_pass.getText().isEmpty() || confirm_pass.getText().isEmpty()) {
@@ -346,7 +341,7 @@ public class HelloController {
                 delay(change_pass_valid_label);
             }
         }
-    }
+    } //NEED TO CHECK
 
 }
 
