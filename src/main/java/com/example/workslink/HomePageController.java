@@ -73,9 +73,11 @@ public class HomePageController extends HelloController implements Initializable
     }
     @FXML
     private void showProfile() throws Exception {
-//        loadNewView("FXML/profile.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        ProfileController profileController = fxmlLoader.getController();
+        profileController.setProfileImg(profileImg);
+        profileController.setUserProfile(currentUser);
 
 
         stage.setScene(scene);
