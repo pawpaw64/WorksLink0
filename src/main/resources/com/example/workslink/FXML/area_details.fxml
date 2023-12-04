@@ -30,7 +30,7 @@
                            <content>
                               <AnchorPane prefHeight="576.0" prefWidth="920.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css">
                                  <children>
-                                    <Label layoutX="53.0" layoutY="14.0" prefHeight="21.0" prefWidth="338.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#Space" wrapText="true" />
+                                    <Label fx:id="areaSpaceName" layoutX="53.0" layoutY="14.0" prefHeight="32.0" prefWidth="380.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#Space" wrapText="true" />
                                     <Label layoutX="53.0" layoutY="69.0" text="Space description" />
                                     <Pane layoutX="56.0" layoutY="96.0" prefHeight="106.0" prefWidth="690.0" style="-fx-background-color: #b9f2ff;" styleClass="space_Pane1" stylesheets="@../CSS/design.css" />
                                     <Label layoutX="56.0" layoutY="323.0" text="Task history " />

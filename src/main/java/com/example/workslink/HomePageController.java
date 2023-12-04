@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -217,10 +218,80 @@ public class HomePageController extends HelloController implements Initializable
         SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         spaceTableView.setEditable(false);
+
           
         getSpaceTableData();
+        getSpaceVbox();
 
     }
+    @FXML
+    private ListView<String> spaceListView;
+
+    private void getSpaceVbox() {
+        try {
+            System.out.println("Getting Data into Vbox");
+            DatabaseConnection databaseConnection=new DatabaseConnection();
+            Connection connection=databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT space_name FROM space_info";
+            ResultSet rs = statement.executeQuery(sql);
+            ObservableList<String> spaceNames = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                spaceCount++;
+                String spaceName = rs.getString("Space_name");
+                spaceNames.add(spaceName);
+            }
+
+            statement.close();
+            connection.close();
+
+            // Set the items in the ListView
+            spaceListView.setItems(spaceNames);
+
+            // Add a listener to handle item clicks
+            spaceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    System.out.println("Getting into list");
+                    handleSpaceItemClick(newValue); // Call a method to handle the selected item
+                }
+            });
+
+
+
+
+        statement.close();
+            connection.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void handleSpaceItemClick(String newValue) {
+        System.out.println(newValue);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/area_details.fxml"));
+            Parent root = loader.load();
+
+            // Pass the selected space name to the controller if needed
+            areaDetailsController areaDetailsController = loader.getController();
+            areaDetailsController.setAreaSpaceName(newValue);
+
+            // Create a new stage for the new scene
+            Stage newStage = new Stage();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.setScene(new Scene(root));
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private VBox spaceBox;
+
     private Connection connection;
 
     int spaceCount;
@@ -228,7 +299,7 @@ public class HomePageController extends HelloController implements Initializable
         spaceTableView.getItems().clear();
          spaceCount = 0;
         try {
-            System.out.println("w");
+            System.out.println("Getting Data From SpaceInfo");
             DatabaseConnection databaseConnection=new DatabaseConnection();
             Connection connection=databaseConnection.getConnection();
             Statement statement = connection.createStatement();
