@@ -75,10 +75,8 @@ public class ProfileController implements Initializable {
         try {
             Pane originalHomepage = loader.load();
             HomePageController homePageController = loader.getController();
-            homePageController.setUser(userProfile);// Pass the user information back
-            sidePane.getChildren().clear();
-            sidePane.setPrefWidth(sidePane.getMinWidth());
-            sidePane.setVisible(false);
+            homePageController.setUser(userProfile);// Pass the user information back;
+
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception as needed
         }

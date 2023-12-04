@@ -21,6 +21,8 @@ public class SpaceCreate implements Initializable {
     private Label space_Label;
     @FXML
     Pane space_Pane1;
+    @FXML
+    private Label spaceValidLabel;
     String inputText;
     public SpaceInfo spaceData;
    public String spaceNameList;

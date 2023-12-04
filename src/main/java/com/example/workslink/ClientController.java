@@ -1,10 +1,12 @@
 package com.example.workslink;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.Socket;
@@ -22,6 +24,8 @@ public class ClientController implements Initializable {
     BufferedWriter writer;
     @FXML
     TextArea showArea;
+    @FXML
+    Button minimize;
     public User userProfile;
     boolean isConnected = false;
     String name;
@@ -110,5 +114,13 @@ public class ClientController implements Initializable {
         else {
             //System.out.printf("Null name");
         }
+    }
+    @FXML
+    void minimizeButtonPressed(ActionEvent event) {
+        // Get the stage from the minimize button
+        Stage stage = (Stage) minimize.getScene().getWindow();
+
+        // Minimize the stage
+        stage.setIconified(true);
     }
 }

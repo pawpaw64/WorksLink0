@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controlsfx.control.PopOver;
 public class HomePageController extends HelloController implements Initializable {
     @FXML
@@ -78,8 +79,6 @@ public class HomePageController extends HelloController implements Initializable
         ProfileController profileController = fxmlLoader.getController();
         profileController.setProfileImg(profileImg);
         profileController.setUserProfile(currentUser);
-
-
         stage.setScene(scene);
         stage.show();
     }
@@ -121,7 +120,11 @@ public class HomePageController extends HelloController implements Initializable
         // Add a listener to the selection model to handle item clicks
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                handleItemClick(newValue); // Call a method to handle the selected item
+                try {
+                    handleItemClick(newValue); // Call a method to handle the selected item
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         vbox.getChildren().add(listView);
@@ -129,7 +132,7 @@ public class HomePageController extends HelloController implements Initializable
     }
 
     // Method to handle item clicks
-    private void handleItemClick(String selectedItem) {
+    private void handleItemClick(String selectedItem) throws IOException {
         // Add logic to perform actions based on the selected item
         switch (selectedItem) {
             case "Calculator":
@@ -145,8 +148,21 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
 
-    private void openCalculator() {
-        loadNewView("FXML/calculator.fxml");
+    private void openCalculator() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/calculator.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        CalculatorController calculatorController = fxmlLoader.getController();
+        stage.setScene(scene);
+
+       // stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+//        ProfileController profileController = fxmlLoader.getController();
+//        profileController.setProfileImg(profileImg);
+//        profileController.setUserProfile(currentUser);
+
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void openNotes() {
@@ -164,6 +180,19 @@ public class HomePageController extends HelloController implements Initializable
         PopOver popOver = new PopOver(vbox);
         popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
         vbox.getStylesheets().add(getClass().getResource("CSS/popOver.css").toExternalForm());
+        ListView<String> listView = (ListView<String>) vbox.getChildren().get(0);
+        listView.setOnMouseClicked(event -> {
+            String selectedItem = listView.getSelectionModel().getSelectedItem();
+            if ("Calculator".equals(selectedItem)) {
+                // Open calculator.fxml or perform any other actions you need
+                try {
+                    openCalculator();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            // Add similar blocks for other items if needed
+        });
         // Convert local coordinates to screen coordinates
         // Calculate the screen coordinates for the apps ImageView
         double screenX = apps.localToScreen(apps.getBoundsInLocal()).getMinX();
@@ -177,6 +206,7 @@ public class HomePageController extends HelloController implements Initializable
         popOver.show(apps, adjustedX, adjustedY);
     }
 
+
     public void closeOnAction() {
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
@@ -186,6 +216,7 @@ public class HomePageController extends HelloController implements Initializable
     void showChat(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        stage.initStyle(StageStyle.UNDECORATED);
         ClientController clientController = fxmlLoader.getController();
         clientController.setUserProfile(currentUser);
 

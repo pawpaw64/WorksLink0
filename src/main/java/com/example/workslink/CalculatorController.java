@@ -1,4 +1,5 @@
 package com.example.workslink;
+import com.jfoenix.controls.JFXDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ public class CalculatorController extends ProfileController{
     @FXML private Pane titlePane;
     @FXML private ImageView btnMinimize, btnClose;
     @FXML private Label lblResult;
+    @FXML private Button exitButton;
 
     private double x, y;
     private double num1 = 0;
@@ -89,7 +91,16 @@ public class CalculatorController extends ProfileController{
     public void setSidePane(Pane sidePane) {
         this.sidePane = sidePane;
     }
+//    @FXML
+//    private void handleCloseButton(ActionEvent event) {
+//        // Get the stage from the exitButton
+//        Stage stage = (Stage) exitButton.getScene().getWindow();
+//
+//        // Close the stage
+//        stage.close();
+//    }
+    public void calcCancel(){
 
-
+    }
 
 }
