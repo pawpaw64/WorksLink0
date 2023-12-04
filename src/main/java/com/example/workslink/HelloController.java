@@ -173,7 +173,7 @@ public class HelloController {
     public void closeOnAction(ActionEvent e) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
-    }  //NEED TO FIX
+    }
     @FXML
     public void signup() {
         email = su_email_TextField.getText();
