@@ -17,7 +17,6 @@ import javafx.scene.image.ImageView;
 
 
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -25,9 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -75,8 +72,16 @@ public class HomePageController extends HelloController implements Initializable
         stage.show();
     }
     @FXML
-    private void showProfile() {
-        loadNewView("FXML/profile.fxml");
+    private void showProfile() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        ProfileController profileController = fxmlLoader.getController();
+        profileController.setProfileImg(profileImg);
+        profileController.setUserProfile(currentUser);
+
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void loadNewView(String fxmlFileName) {
@@ -85,19 +90,19 @@ public class HomePageController extends HelloController implements Initializable
             Pane newView = loader.load();
             if (fxmlFileName.equals("FXML/profile.fxml")) {
                 ProfileController profileController = loader.getController();
-                profileController.setSidePane(sidePane);
-                profileController.setProfileImg(profileImg);
-                profileController.setUserProfile(currentUser);
+//                profileController.setSidePane(sidePane);
+//                profileController.setProfileImg(profileImg);
+//                profileController.setUserProfile(currentUser);
             } else if (fxmlFileName.equals("FXML/calculator.fxml")) {
                 CalculatorController calculatorController = loader.getController();
                 calculatorController.setSidePane(sidePane);
 
             }
 
-            sidePane.setPrefWidth(newView.getPrefWidth());
-
-            sidePane.getChildren().setAll(newView);
-            sidePane.setVisible(true);
+//            sidePane.setPrefWidth(newView.getPrefWidth());
+//
+//            sidePane.getChildren().setAll(newView);
+//            sidePane.setVisible(true);
 
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception as needed
@@ -249,5 +254,14 @@ public class HomePageController extends HelloController implements Initializable
 
 
     }
+
+    public void addMembers(MouseEvent mouseEvent) throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/AddUser.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+
+        stage.setScene(scene);
+        stage.show();
     }
+}
 

@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="556.0" prefWidth="740.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceCreate">
+<AnchorPane prefHeight="556.0" prefWidth="740.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceCreate">
    <children>
       <Label layoutX="238.0" layoutY="28.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Create New Space" />
       <ImageView fitHeight="31.0" fitWidth="27.0" layoutX="699.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -22,9 +22,9 @@
          </image>
       </ImageView>
       <Label layoutX="40.0" layoutY="237.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Space Name" />
-      <TextField fx:id="space_name" layoutX="40.0" layoutY="266.0" onAction="#create_spaceBtn" prefHeight="25.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
+      <TextField fx:id="spaceName" layoutX="40.0" layoutY="266.0" prefHeight="25.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
       <Label layoutX="40.0" layoutY="298.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Space's Decription" />
-      <TextArea layoutX="40.0" layoutY="333.0" prefHeight="62.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
+      <TextArea fx:id="spaceDescription" layoutX="40.0" layoutY="333.0" prefHeight="62.0" prefWidth="294.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
       <Label layoutX="373.0" layoutY="114.0" prefHeight="17.0" prefWidth="232.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Choose Colour &amp; Avater" />
       <Button layoutX="261.0" layoutY="485.0" mnemonicParsing="false" onAction="#create_spaceBtn" prefHeight="30.0" prefWidth="249.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Create Space" />
       <Pane layoutX="346.0" layoutY="154.0" minHeight="-Infinity" prefHeight="119.0" prefWidth="422.0">
@@ -65,7 +65,7 @@
          </image></ImageView>
       <Label layoutX="364.0" layoutY="273.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Start Date" />
       <Label layoutX="364.0" layoutY="353.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="End Date" />
-      <DatePicker layoutX="364.0" layoutY="307.0" prefHeight="26.0" prefWidth="240.0" />
-      <DatePicker layoutX="364.0" layoutY="395.0" prefHeight="26.0" prefWidth="240.0" />
+      <DatePicker fx:id="spaceStartDate" layoutX="364.0" layoutY="307.0" prefHeight="26.0" prefWidth="240.0" />
+      <DatePicker fx:id="spaceEndDate" layoutX="364.0" layoutY="395.0" prefHeight="26.0" prefWidth="240.0" />
    </children>
 </AnchorPane>
