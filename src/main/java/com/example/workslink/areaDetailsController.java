@@ -17,14 +17,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.controlsfx.control.PopOver;
-import org.controlsfx.control.ToggleSwitch;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class areaDetailsController implements Initializable {
@@ -67,7 +62,16 @@ public class areaDetailsController implements Initializable {
         }
 
     }
+    @FXML
+    private Label areaSpaceName;
 
+    public Label getAreaSpaceName() {
+        return areaSpaceName;
+    }
+
+    public void setAreaSpaceName(String areaSpaceName) {
+        this.areaSpaceName.setText(areaSpaceName);
+    }
 
     void addPaneToVBox(Pane pane, VBox targetVBox) {
         System.out.println("hhg");
