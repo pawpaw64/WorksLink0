@@ -42,7 +42,11 @@ public class AddTaskController implements Initializable {
     private ChoiceBox<String> taskStatus;
     private int taskID;
     @FXML
-    private Label su_valid_label;
+    private Label valid_label;
+
+
+    String[] priority={"Urgent","Averge","Minor"};
+    String [] status={"ToDo","Ongoing","Complete"};
 
     public ChoiceBox<String> getTaskAssigned() {
         return (ChoiceBox<String>) taskAssigned;
@@ -103,7 +107,7 @@ public class AddTaskController implements Initializable {
         statuss = (String) getTaskStatus().getValue();
 
         if(name.isEmpty() || description.isEmpty() || date.isEmpty()){
-            su_valid_label.setText("Enter All Information");
+            valid_label.setText("Enter All Information");
         }
         else {
 
@@ -131,9 +135,6 @@ public class AddTaskController implements Initializable {
         }
     }
 
-
-    String[] priority={"Urgent","Averge","Minor"};
-    String [] status={"ToDo","Ongoing","Complete"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -28,7 +28,7 @@
                      </image>
                   </ImageView>
                   <Button layoutX="1004.0" layoutY="11.0" mnemonicParsing="false" onAction="#logout" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LogOut" />
-                  <Button layoutX="1083.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Close" />
+                  <Button fx:id="closeButton" layoutX="1083.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Close" />
                </children>
             </Pane>
          </top>
