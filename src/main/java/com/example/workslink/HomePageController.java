@@ -13,10 +13,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.ImageView;
 
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -24,13 +26,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controlsfx.control.PopOver;
 public class HomePageController extends HelloController implements Initializable {
     @FXML
@@ -42,6 +44,8 @@ public class HomePageController extends HelloController implements Initializable
     public Stage stage = new Stage();
     @FXML
     ImageView closeHomePage;
+    @FXML
+    AnchorPane homePane;
     @FXML
     private TableColumn<SpaceInfo,String> SpaceEndDate;
 
@@ -72,17 +76,39 @@ public class HomePageController extends HelloController implements Initializable
         stage.setX(100);
         stage.show();
     }
-    @FXML
-    private void showProfile() throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        ProfileController profileController = fxmlLoader.getController();
+@FXML
+private void showProfile() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
+    Parent root = fxmlLoader.load();
+    Scene scene = new Scene(root);
+
+    // If the profile controller and stage are not initialized, create new ones
+    if (profileController == null) {
+        profileController = fxmlLoader.getController();
         profileController.setProfileImg(profileImg);
         profileController.setUserProfile(currentUser);
 
+        profileStage = new Stage();
+        profileStage.setScene(scene);
+//        profileStage.initStyle(StageStyle.UNDECORATED);
+    }
 
-        stage.setScene(scene);
-        stage.show();
+    // Apply blur effect to the homepage
+    applyBlurEffect();
+
+    // Show the profile window
+    profileStage.showAndWait(); // Use showAndWait to wait for the profile window to close
+
+    // Remove blur effect when the profile window is closed
+    removeBlurEffect();
+}
+
+    // Add these fields to your HomePageController
+    private ProfileController profileController;
+    private Stage profileStage;
+
+    private void removeBlurEffect() {
+        homePane.setEffect(null); // Remove the blur effect
     }
 
     private void loadNewView(String fxmlFileName) {
@@ -205,13 +231,19 @@ public class HomePageController extends HelloController implements Initializable
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
-            SpaceCreate spaceCreateController = loader.getController();
+            SpaceCreateController spaceCreateController = loader.getController();
             newStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }@FXML
+    }
+    private void applyBlurEffect() {
+        BoxBlur blur = new BoxBlur(5, 5, 3); // You can adjust the blur parameters
+        homePane.setEffect(blur);
+    }
+
+    @FXML
     void membersOnAction() { //mouseEvent at add space
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/allMembers.fxml"));
@@ -287,12 +319,12 @@ public class HomePageController extends HelloController implements Initializable
     private void handleSpaceItemClick(String newValue) {
         System.out.println(newValue);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/area_details.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
             Parent root = loader.load();
 
             // Pass the selected space name to the controller if needed
-            areaDetailsController areaDetailsController = loader.getController();
-            areaDetailsController.setAreaSpaceName(newValue);
+            SpaceDetailsController SpaceDetailsController = loader.getController();
+            SpaceDetailsController.setAreaSpaceName(newValue);
 
             // Create a new stage for the new scene
             Stage newStage = new Stage();

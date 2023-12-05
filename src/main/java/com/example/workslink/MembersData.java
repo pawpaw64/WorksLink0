@@ -1,15 +1,13 @@
 package com.example.workslink;
 
-import javafx.beans.property.SimpleStringProperty;
-
-public class Members {
+public class MembersData {
     private String memberId;
     private String memberUserName;
     private String memberEmail;
     private String memberDOB;
 
 
-    public Members(String memberUserName, String memberEmail, String memberDOB) {
+    public MembersData(String memberUserName, String memberEmail, String memberDOB) {
         this.memberUserName = memberUserName;
         this.memberEmail = memberEmail;
         this.memberDOB = memberDOB;
