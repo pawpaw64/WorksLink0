@@ -3,6 +3,7 @@ package com.example.workslink;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -10,7 +11,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -115,5 +118,11 @@ public class SpaceCreateController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+    }
+    @FXML
+    private void goBack(MouseEvent event) throws IOException {
+        // Pass the user information back to the HomePageController
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

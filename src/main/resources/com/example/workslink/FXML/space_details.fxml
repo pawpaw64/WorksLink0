@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceDetailsController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceDetailsController">
    <children>
       <TabPane fx:id="tabPane" prefHeight="441.0" prefWidth="820.0" stylesheets="@../CSS/TabPane.css" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -35,7 +36,7 @@
                                     <Pane layoutX="56.0" layoutY="96.0" prefHeight="106.0" prefWidth="690.0" style="-fx-background-color: #b9f2ff;" styleClass="space_Pane1" stylesheets="@../CSS/design.css" />
                                     <Label layoutX="56.0" layoutY="233.0" text="Task history " />
                                     <ImageView fitHeight="51.0" fitWidth="54.0" layoutX="330.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                                    <TableView layoutX="39.0" layoutY="266.0" prefHeight="200.0" prefWidth="698.0">
+                                    <TableView layoutX="39.0" layoutY="266.0" prefHeight="200.0" prefWidth="698.0" stylesheets="@../CSS/table-view.css">
                                       <columns>
                                         <TableColumn prefWidth="96.00000381469727" text="ID" />
                                         <TableColumn prefWidth="124.00001525878906" text="Task name" />
@@ -43,8 +44,39 @@
                                           <TableColumn minWidth="0.0" prefWidth="168.79998779296875" text="Progress" />
                                           <TableColumn prefWidth="154.39999389648438" text="Assigned To" />
                                       </columns>
+                                       <styleClass>
+                                          <String fx:value="color-btn" />
+                                          <String fx:value="column-header" />
+                                          <String fx:value="column-header-background" />
+                                          <String fx:value="corner" />
+                                          <String fx:value="decrement-button" />
+                                          <String fx:value="fill-btn" />
+                                          <String fx:value="filler" />
+                                          <String fx:value="increment-button" />
+                                          <String fx:value="linear-gradient" />
+                                          <String fx:value="normal-label" />
+                                          <String fx:value="scroll-bar" />
+                                          <String fx:value="small-label" />
+                                          <String fx:value="tab" />
+                                          <String fx:value="tab-pane" />
+                                          <String fx:value="table-cell" />
+                                          <String fx:value="table-row-cell" />
+                                          <String fx:value="table-view" />
+                                          <String fx:value="text-field" />
+                                          <String fx:value="thumb" />
+                                          <String fx:value="track" />
+                                          <String fx:value="track-background" />
+                                          <String fx:value="virtual-flow" />
+                                          <String fx:value="white" />
+                                          <String fx:value="white" />
+                                       </styleClass>
                                     </TableView>
                                     <Button fx:id="addTask" layoutX="501.0" layoutY="225.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
+                                    <ImageView fx:id="backButton" fitHeight="31.0" fitWidth="53.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                                       <image>
+                                          <Image url="@../Icon/angle-small-left.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </AnchorPane>
                            </content>
@@ -90,6 +122,11 @@
                               <Line endX="100.0" layoutX="637.0" layoutY="100.0" startX="-115.99996948242188" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
                               <Button layoutX="79.0" layoutY="467.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Complete" />
                               <Button layoutX="605.0" layoutY="467.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Save Task" />
+                              <ImageView fx:id="backButton1" fitHeight="31.0" fitWidth="53.0" layoutX="-5.0" layoutY="18.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                                 <image>
+                                    <Image url="@../Icon/angle-small-left.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                      </children>
@@ -100,7 +137,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <PieChart fx:id="pieChart" layoutX="44.0" layoutY="50.0" prefHeight="246.0" prefWidth="254.0" stylesheets="@../CSS/design.css" />
+                        <PieChart fx:id="pieChart" layoutX="275.0" layoutY="83.0" prefHeight="246.0" prefWidth="254.0" stylesheets="@../CSS/design.css" />
+                        <ImageView fx:id="backButton2" fitHeight="31.0" fitWidth="53.0" layoutX="29.0" layoutY="14.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                           <image>
+                              <Image url="@../Icon/angle-small-left.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
               </content>

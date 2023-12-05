@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AllMembers">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AllMembers">
    <children>
-      <Button layoutX="79.0" layoutY="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="84.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Home" />
+      <Button layoutX="79.0" layoutY="58.0" mnemonicParsing="false" onAction="#goBack" onMouseClicked="#goBack" prefHeight="31.0" prefWidth="84.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Home" />
       <Button layoutX="418.0" layoutY="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="123.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add Members" />
-      <TableView fx:id="membersTableView" layoutX="62.0" layoutY="178.0" prefHeight="410.0" prefWidth="483.0">
+      <TableView fx:id="membersTableView" layoutX="62.0" layoutY="178.0" prefHeight="410.0" prefWidth="483.0" stylesheets="@../CSS/table-view.css">
         <columns>
             <TableColumn fx:id="memberUserName" prefWidth="147.20001220703125" text="User Name" />
           <TableColumn fx:id="memberEmail" prefWidth="171.20001220703125" text="Email" />
             <TableColumn fx:id="memberDOB" prefWidth="161.60003662109375" text="Date of Birth" />
         </columns>
+         <styleClass>
+            <String fx:value="column-header" />
+            <String fx:value="column-header-background" />
+            <String fx:value="corner" />
+            <String fx:value="decrement-button" />
+            <String fx:value="filler" />
+            <String fx:value="increment-button" />
+            <String fx:value="scroll-bar" />
+            <String fx:value="table-cell" />
+            <String fx:value="table-row-cell" />
+            <String fx:value="table-view" />
+            <String fx:value="thumb" />
+            <String fx:value="track" />
+            <String fx:value="track-background" />
+            <String fx:value="virtual-flow" />
+         </styleClass>
       </TableView>
       <Label layoutX="255.0" layoutY="107.0" text="All Members">
          <font>

@@ -3,6 +3,7 @@ import com.jfoenix.controls.JFXDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -87,6 +88,12 @@ public class CalculatorController extends ProfileController{
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception as needed
         }
+    }
+    @FXML
+    private void goBack(MouseEvent event) throws IOException {
+        // Pass the user information back to the HomePageController
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
     public void setSidePane(Pane sidePane) {
         this.sidePane = sidePane;

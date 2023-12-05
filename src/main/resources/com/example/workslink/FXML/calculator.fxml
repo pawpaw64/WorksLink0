@@ -172,7 +172,7 @@
               </image>
           </ImageView>
           <Label layoutX="85.0" layoutY="50.0" prefHeight="50.0" prefWidth="115.0" style="-fx-alignment: center; -fx-text-fill: black;" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Calculator" textAlignment="CENTER" />
-      <ImageView fx:id="backButton" fitHeight="27.0" fitWidth="26.0" layoutX="23.0" layoutY="59.0" onMouseClicked="#goBack2" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+      <ImageView fx:id="backButton" fitHeight="27.0" fitWidth="26.0" layoutX="23.0" layoutY="59.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" styleClass="icon">
          <image>
             <Image url="@../Icon/angle-small-left.png" />
          </image>
