@@ -3,6 +3,7 @@ package com.example.workslink;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -10,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.*;
@@ -18,6 +20,7 @@ import java.util.ResourceBundle;
 public class SpaceCreateController implements Initializable {
 
 
+    public Button createSpaceBtn;
     @FXML
     private TextArea spaceDescription;
 
@@ -81,11 +84,12 @@ public class SpaceCreateController implements Initializable {
 
         return String.format("%02X%02X%02X", r, g, b);
     }
-
+    int userId;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        System.out.println("1");
     }
+
 
     public void create_spaceBtn(ActionEvent actionEvent) {
         if(getSpaceName().getText()!=null||getSpaceDescription().getText()!=null||spaceStartDate.getValue()!=null||
@@ -93,14 +97,15 @@ public class SpaceCreateController implements Initializable {
             try {
                 DatabaseConnection databaseConnection = new DatabaseConnection();
                 Connection connection = databaseConnection.getConnection();
-
+                System.out.println(userId);
                 //String sql = "INSERT INTO user (email, userName,dob, password,questions,answer) VALUES (?, ?, ?, ?,?,?)";
-                String sql = "INSERT INTO space_info( space_name, Space_description, start_date, end_date) VALUES(?,?,?,?)";
+                String sql = "INSERT INTO space_info(user_id,space_name, Space_description, start_date, end_date) VALUES(?,?,?,?,?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                    preparedStatement.setString(1, getSpaceName().getText());
-                    preparedStatement.setString(2, getSpaceDescription().getText());
-                    preparedStatement.setString(3, String.valueOf(Date.valueOf(spaceStartDate.getValue())));
-                    preparedStatement.setString(4, String.valueOf(Date.valueOf(spaceEndDate.getValue())));
+                    preparedStatement.setString(1, String.valueOf(userId));
+                    preparedStatement.setString(2, getSpaceName().getText());
+                    preparedStatement.setString(3, getSpaceDescription().getText());
+                    preparedStatement.setString(4, String.valueOf(Date.valueOf(spaceStartDate.getValue())));
+                    preparedStatement.setString(5, String.valueOf(Date.valueOf(spaceEndDate.getValue())));
 
                     int rowsInserted = preparedStatement.executeUpdate();
 
@@ -114,6 +119,13 @@ public class SpaceCreateController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            Stage stage=(Stage)createSpaceBtn.getScene().getWindow();
+            stage.close();
         }
+    }
+
+    public void setUserID(int id) {
+        this.userId=id;
+        System.out.println("2");
     }
 }

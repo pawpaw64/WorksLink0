@@ -238,11 +238,15 @@ public class HelloController {
                             // Create a User instance
                             User loggedInUser = new User(email, userName, dob,user_id,bio,user_img);
 
-                            // Jump to the homepage...
+                            System.out.println("home1");
+                            // Jump to the homepage...v
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
                             Parent root = fxmlLoader.load();
                             HomePageController homePageController = fxmlLoader.getController();
+
                             homePageController.setUser(loggedInUser);
+                           // homePageController.settingUserID(user_id);
+
                             Scene scene = new Scene(root);
                             Stage stage = (Stage) ((Node) ae.getSource()).getScene().getWindow();
                             stage.setScene(scene);
@@ -261,7 +265,7 @@ public class HelloController {
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception cE) {
-                System.out.println("Class Not Found Exception: " + cE);
+                System.out.println("Class Not bbbbbFound Exception: " + cE);
 
             }
         }
