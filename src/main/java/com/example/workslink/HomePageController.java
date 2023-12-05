@@ -90,10 +90,9 @@ private void showProfile() throws Exception {
 
         profileStage = new Stage();
         profileStage.setScene(scene);
-//        profileStage.initStyle(StageStyle.UNDECORATED);
+    profileStage.initStyle(StageStyle.UNDECORATED);
     }
 
-    // Apply blur effect to the homepage
     applyBlurEffect();
 
     // Show the profile window
@@ -117,9 +116,7 @@ private void showProfile() throws Exception {
             Pane newView = loader.load();
             if (fxmlFileName.equals("FXML/profile.fxml")) {
                 ProfileController profileController = loader.getController();
-//                profileController.setSidePane(sidePane);
-//                profileController.setProfileImg(profileImg);
-//                profileController.setUserProfile(currentUser);
+//
             } else if (fxmlFileName.equals("FXML/calculator.fxml")) {
                 CalculatorController calculatorController = loader.getController();
                 calculatorController.setSidePane(sidePane);
@@ -203,9 +200,10 @@ private void showProfile() throws Exception {
         // Show the PopOver at the adjusted position
         popOver.show(apps, adjustedX, adjustedY);
     }
-
+    @FXML
+    Button closeButton;
     public void closeOnAction() {
-        Stage stage = (Stage) closeHomePage.getScene().getWindow();
+        Stage stage = (Stage)closeButton.getScene().getWindow();
         stage.close();
     }
 
