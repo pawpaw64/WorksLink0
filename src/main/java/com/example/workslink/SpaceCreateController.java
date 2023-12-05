@@ -2,11 +2,8 @@ package com.example.workslink;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -18,7 +15,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class SpaceCreate implements Initializable {
+public class SpaceCreateController implements Initializable {
 
 
     @FXML
@@ -104,8 +101,6 @@ public class SpaceCreate implements Initializable {
                     preparedStatement.setString(2, getSpaceDescription().getText());
                     preparedStatement.setString(3, String.valueOf(Date.valueOf(spaceStartDate.getValue())));
                     preparedStatement.setString(4, String.valueOf(Date.valueOf(spaceEndDate.getValue())));
-                    //preparedStatement.setString(5,question);
-                    //preparedStatement.setString(6,answer);
 
                     int rowsInserted = preparedStatement.executeUpdate();
 

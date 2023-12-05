@@ -65,21 +65,11 @@ public class ProfileController implements Initializable {
 
         }
     }
-    public void setSidePane(Pane sidePane) {
-        this.sidePane = sidePane;
-    }
     @FXML
-    private void goBack() {
+    private void goBack(MouseEvent event) throws IOException {
         // Pass the user information back to the HomePageController
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
-        try {
-            Pane originalHomepage = loader.load();
-            HomePageController homePageController = loader.getController();
-            homePageController.setUser(userProfile);// Pass the user information back;
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle the exception as needed
-        }
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
     @FXML
     private void ChangeProfile(ActionEvent e) {

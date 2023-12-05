@@ -13,10 +13,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.ImageView;
 
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -24,7 +26,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -43,6 +44,8 @@ public class HomePageController extends HelloController implements Initializable
     public Stage stage = new Stage();
     @FXML
     ImageView closeHomePage;
+    @FXML
+    AnchorPane homePane;
     @FXML
     private TableColumn<SpaceInfo,String> SpaceEndDate;
 
@@ -73,15 +76,39 @@ public class HomePageController extends HelloController implements Initializable
         stage.setX(100);
         stage.show();
     }
-    @FXML
-    private void showProfile() throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        ProfileController profileController = fxmlLoader.getController();
+@FXML
+private void showProfile() throws Exception {
+    FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
+    Parent root = fxmlLoader.load();
+    Scene scene = new Scene(root);
+
+    // If the profile controller and stage are not initialized, create new ones
+    if (profileController == null) {
+        profileController = fxmlLoader.getController();
         profileController.setProfileImg(profileImg);
         profileController.setUserProfile(currentUser);
-        stage.setScene(scene);
-        stage.show();
+
+        profileStage = new Stage();
+        profileStage.setScene(scene);
+//        profileStage.initStyle(StageStyle.UNDECORATED);
+    }
+
+    // Apply blur effect to the homepage
+    applyBlurEffect();
+
+    // Show the profile window
+    profileStage.showAndWait(); // Use showAndWait to wait for the profile window to close
+
+    // Remove blur effect when the profile window is closed
+    removeBlurEffect();
+}
+
+    // Add these fields to your HomePageController
+    private ProfileController profileController;
+    private Stage profileStage;
+
+    private void removeBlurEffect() {
+        homePane.setEffect(null); // Remove the blur effect
     }
 
     private void loadNewView(String fxmlFileName) {
@@ -121,11 +148,7 @@ public class HomePageController extends HelloController implements Initializable
         // Add a listener to the selection model to handle item clicks
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                try {
-                    handleItemClick(newValue); // Call a method to handle the selected item
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                handleItemClick(newValue); // Call a method to handle the selected item
             }
         });
         vbox.getChildren().add(listView);
@@ -133,7 +156,7 @@ public class HomePageController extends HelloController implements Initializable
     }
 
     // Method to handle item clicks
-    private void handleItemClick(String selectedItem) throws IOException {
+    private void handleItemClick(String selectedItem) {
         // Add logic to perform actions based on the selected item
         switch (selectedItem) {
             case "Calculator":
@@ -149,21 +172,8 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
 
-    private void openCalculator() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/calculator.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        CalculatorController calculatorController = fxmlLoader.getController();
-        stage.setScene(scene);
-
-       // stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
-//        ProfileController profileController = fxmlLoader.getController();
-//        profileController.setProfileImg(profileImg);
-//        profileController.setUserProfile(currentUser);
-
-
-        stage.setScene(scene);
-        stage.show();
+    private void openCalculator() {
+        loadNewView("FXML/calculator.fxml");
     }
 
     private void openNotes() {
@@ -181,19 +191,6 @@ public class HomePageController extends HelloController implements Initializable
         PopOver popOver = new PopOver(vbox);
         popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
         vbox.getStylesheets().add(getClass().getResource("CSS/popOver.css").toExternalForm());
-        ListView<String> listView = (ListView<String>) vbox.getChildren().get(0);
-        listView.setOnMouseClicked(event -> {
-            String selectedItem = listView.getSelectionModel().getSelectedItem();
-            if ("Calculator".equals(selectedItem)) {
-                // Open calculator.fxml or perform any other actions you need
-                try {
-                    openCalculator();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            // Add similar blocks for other items if needed
-        });
         // Convert local coordinates to screen coordinates
         // Calculate the screen coordinates for the apps ImageView
         double screenX = apps.localToScreen(apps.getBoundsInLocal()).getMinX();
@@ -207,7 +204,6 @@ public class HomePageController extends HelloController implements Initializable
         popOver.show(apps, adjustedX, adjustedY);
     }
 
-
     public void closeOnAction() {
         Stage stage = (Stage) closeHomePage.getScene().getWindow();
         stage.close();
@@ -217,7 +213,6 @@ public class HomePageController extends HelloController implements Initializable
     void showChat(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.initStyle(StageStyle.UNDECORATED);
         ClientController clientController = fxmlLoader.getController();
         clientController.setUserProfile(currentUser);
 
@@ -236,7 +231,28 @@ public class HomePageController extends HelloController implements Initializable
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
-            SpaceCreate spaceCreateController = loader.getController();
+            SpaceCreateController spaceCreateController = loader.getController();
+            newStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void applyBlurEffect() {
+        BoxBlur blur = new BoxBlur(5, 5, 3); // You can adjust the blur parameters
+        homePane.setEffect(blur);
+    }
+
+    @FXML
+    void membersOnAction() { //mouseEvent at add space
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/allMembers.fxml"));
+            Parent root = loader.load();
+            // Create a new stage for the new scene
+            Stage newStage = new Stage();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.setScene(new Scene(root));
+            AllMembers allMembers = loader.getController();
             newStage.show();
 
         } catch (IOException e) {
@@ -303,12 +319,12 @@ public class HomePageController extends HelloController implements Initializable
     private void handleSpaceItemClick(String newValue) {
         System.out.println(newValue);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/area_details.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
             Parent root = loader.load();
 
             // Pass the selected space name to the controller if needed
-            areaDetailsController areaDetailsController = loader.getController();
-            areaDetailsController.setAreaSpaceName(newValue);
+            SpaceDetailsController SpaceDetailsController = loader.getController();
+            SpaceDetailsController.setAreaSpaceName(newValue);
 
             // Create a new stage for the new scene
             Stage newStage = new Stage();
@@ -355,15 +371,6 @@ public class HomePageController extends HelloController implements Initializable
         }
 
 
-    }
-
-    public void addMembers(MouseEvent mouseEvent) throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/AddUser.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-
-        stage.setScene(scene);
-        stage.show();
     }
 }
 
