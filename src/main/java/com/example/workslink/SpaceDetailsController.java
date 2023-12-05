@@ -38,13 +38,16 @@ public class SpaceDetailsController implements Initializable {
     @FXML
     private TableView<TaskHistoryData> spaceTableView;
     @FXML
-    private TableColumn<TaskHistoryData,String> spaceId;
-    @FXML
     private TableColumn<TaskHistoryData,String> name;
     @FXML
     private TableColumn<TaskHistoryData,String> spaceStatus;
     @FXML
     private TableColumn<TaskHistoryData,String> spaceProgress;
+    @FXML
+    private TableColumn<TaskHistoryData,String> spaceID;
+    private TextArea textArea;
+    @FXML
+    private Pane spaceDettails;
     @FXML
     private VBox completeVbox;
     @FXML
@@ -94,6 +97,7 @@ public class SpaceDetailsController implements Initializable {
     private PieChart pieChart;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                     new PieChart.Data("Todo",100),
@@ -110,33 +114,35 @@ public class SpaceDetailsController implements Initializable {
                 );
         pieChart.getData().addAll(pieChartData);
 
-        //spaceId.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
+
+        spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
+        name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
         spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
         spaceProgress.setCellValueFactory(new PropertyValueFactory<>("spaceProgress"));
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         spaceTableView.setEditable(false);
-        getSoaceTableData();
+        getSpaceTableData();
 
     }
-    private void getSoaceTableData() {
+    private void getSpaceTableData() {
         spaceTableView.getItems().clear();
         try {
             System.out.println("Getting Data From Database");
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT task_name, status, priority FROM task_info";
+            String sql = "SELECT task_projectID, task_name, task_description, status, priority FROM task_info";
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                //String task_projectID = rs.getString("task_projectID");
+                String task_projectID = rs.getString("task_projectID");
                 String task_name = rs.getString("task_name");
-                System.out.println("Task name: "+task_name);
+                String task_details = rs.getString("task_description");
                 String status = rs.getString("status");
                 String priority = rs.getString("priority");
 
-                TaskHistoryData t = new TaskHistoryData(task_name, status, priority);
+                TaskHistoryData t = new TaskHistoryData(task_projectID, task_name, status, priority, task_details);
                 spaceTableView.getItems().add(t);
+                System.out.println(t);
             }
 
             statement.close();

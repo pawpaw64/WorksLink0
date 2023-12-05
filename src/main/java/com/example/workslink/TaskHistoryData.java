@@ -1,48 +1,50 @@
 package com.example.workslink;
 
-public class TaskHistoryData {
-    private String spaceId;
-    private String spaceTask;
-    private String spaceStatus;
-    private String spaceProgress;
+import javafx.beans.property.SimpleStringProperty;
 
-    public TaskHistoryData( String spaceTaskname, String spaceStatus, String spaceProgress) {
-       // this.spaceId = spaceId;
-        this.spaceTask = spaceTaskname;
-        this.spaceStatus = spaceStatus;
-        this.spaceProgress = spaceProgress;
-        System.out.println(spaceTaskname);
+public class TaskHistoryData {
+    private final SimpleStringProperty spaceId;
+    private final SimpleStringProperty spaceTaskName;
+    private final SimpleStringProperty spaceStatus;
+    private final SimpleStringProperty spaceProgress;
+    private final SimpleStringProperty spaceDetails;
+
+    public TaskHistoryData(String spaceId, String spaceTaskName, String spaceStatus, String spaceProgress, String spaceDetails) {
+        this.spaceId = new SimpleStringProperty(spaceId);
+        this.spaceTaskName = new SimpleStringProperty(spaceTaskName);
+        this.spaceStatus = new SimpleStringProperty(spaceStatus);
+        this.spaceProgress = new SimpleStringProperty(spaceProgress);
+        this.spaceDetails = new SimpleStringProperty(spaceDetails);
     }
 
     public String getSpaceId() {
-        return spaceId;
+        return spaceId.get();
     }
 
-    public void setSpaceId(String spaceId) {
-        this.spaceId = spaceId;
-    }
-
-    public String getSpaceTask() {
-        return spaceTask;
-    }
-
-    public void setSpaceTask(String spaceTask) {
-        this.spaceTask = spaceTask;
+    public String getSpaceTaskName() {
+        return spaceTaskName.get();
     }
 
     public String getSpaceStatus() {
-        return spaceStatus;
-    }
-
-    public void setSpaceStatus(String spaceStatus) {
-        this.spaceStatus = spaceStatus;
+        return spaceStatus.get();
     }
 
     public String getSpaceProgress() {
-        return spaceProgress;
+        return spaceProgress.get();
     }
 
-    public void setSpaceProgress(String spaceProgress) {
-        this.spaceProgress = spaceProgress;
+    @Override
+    public String toString() {
+        return "TaskHistoryData{" +
+                "spaceId=" + spaceId +
+                ", spaceTaskName=" + spaceTaskName +
+                ", spaceStatus=" + spaceStatus +
+                ", spaceProgress=" + spaceProgress +
+                ", spaceDetails=" + spaceDetails +
+                '}';
+    }
+
+    public String getSpaceDetails() {
+        return spaceDetails.get();
     }
 }
