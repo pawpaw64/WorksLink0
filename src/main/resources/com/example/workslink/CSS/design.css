@@ -57,8 +57,8 @@
 }
 .upload{
 	-fx-background-color: #3498db;
-	-fx-border-color: #e0b0ff;
-	-fx-border-radius: 3em;
+/*	-fx-border-color: #e0b0ff;*/
+/*	-fx-border-radius: 3em;*/
 	-fx-background-radius: 3em;
     -fx-padding: 10px 20px;
 }
@@ -80,6 +80,13 @@
     -fx-background-color: #b9f2ff; /* Green color, change as needed */
     -fx-border-color: #b9f2ff; /* Border color same as background color */
     -fx-text-fill: black; /* Text color */
+}
+.minimize{
+	-fx-background-color: #3498db;
+    -fx-border-color: #e0b0ff;
+    -fx-border-radius: 3em;
+	-fx-background-radius: 3em;
+    -fx-padding: 10px 20px;
 }
 
 /* Style the text label of the CheckBox */       
