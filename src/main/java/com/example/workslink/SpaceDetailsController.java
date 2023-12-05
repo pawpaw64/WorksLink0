@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -20,6 +21,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class SpaceDetailsController implements Initializable {
@@ -31,6 +35,16 @@ public class SpaceDetailsController implements Initializable {
     Tab task;
     @FXML
     private VBox todoVbox;
+    @FXML
+    private TableView<TaskHistoryData> spaceTableView;
+    @FXML
+    private TableColumn<TaskHistoryData,String> spaceId;
+    @FXML
+    private TableColumn<TaskHistoryData,String> name;
+    @FXML
+    private TableColumn<TaskHistoryData,String> spaceStatus;
+    @FXML
+    private TableColumn<TaskHistoryData,String> spaceProgress;
     @FXML
     private VBox completeVbox;
     @FXML
@@ -74,7 +88,6 @@ public class SpaceDetailsController implements Initializable {
     }
 
     void addPaneToVBox(Pane pane, VBox targetVBox) {
-        System.out.println("hhg");
         targetVBox.getChildren().add(pane);
     }
     @FXML
@@ -96,6 +109,41 @@ public class SpaceDetailsController implements Initializable {
                 )
                 );
         pieChart.getData().addAll(pieChartData);
+
+        //spaceId.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
+        spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
+        spaceProgress.setCellValueFactory(new PropertyValueFactory<>("spaceProgress"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        spaceTableView.setEditable(false);
+        getSoaceTableData();
+
+    }
+    private void getSoaceTableData() {
+        spaceTableView.getItems().clear();
+        try {
+            System.out.println("Getting Data From Database");
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT task_name, status, priority FROM task_info";
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                //String task_projectID = rs.getString("task_projectID");
+                String task_name = rs.getString("task_name");
+                System.out.println("Task name: "+task_name);
+                String status = rs.getString("status");
+                String priority = rs.getString("priority");
+
+                TaskHistoryData t = new TaskHistoryData(task_name, status, priority);
+                spaceTableView.getItems().add(t);
+            }
+
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
