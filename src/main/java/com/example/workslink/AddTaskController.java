@@ -1,6 +1,7 @@
 //add_task.fxml controller
 package com.example.workslink;
 
+import com.jfoenix.controls.JFXBadge;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
+import org.controlsfx.control.TaskProgressView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,15 +36,16 @@ public class AddTaskController implements Initializable {
     private TextField taskName;
 
     @FXML
-    private ChoiceBox<?> taskPriority;
+    private ChoiceBox<String> taskPriority;
 
     @FXML
-    private ChoiceBox<?> taskStatus;
+    private ChoiceBox<String> taskStatus;
     private int taskID;
+    @FXML
+    private Label su_valid_label;
 
-
-    public ChoiceBox<?> getTaskAssigned() {
-        return taskAssigned;
+    public ChoiceBox<String> getTaskAssigned() {
+        return (ChoiceBox<String>) taskAssigned;
     }
 
     public void setTaskAssigned(ChoiceBox<?> taskAssigned) {
@@ -78,7 +81,7 @@ public class AddTaskController implements Initializable {
     }
 
     public void setTaskPriority(ChoiceBox<?> taskPriority) {
-        this.taskPriority = taskPriority;
+        this.taskPriority = (ChoiceBox<String>) taskPriority;
     }
 
     public ChoiceBox<?> getTaskStatus() {
@@ -86,48 +89,56 @@ public class AddTaskController implements Initializable {
     }
 
     public void setTaskStatus(ChoiceBox<?> taskStatus) {
-        this.taskStatus = taskStatus;
+        this.taskStatus = (ChoiceBox<String>) taskStatus;
     }
+    String name,description,statuss,priorityy,date;
+
 
     @FXML
-    void createTask(ActionEvent event) throws SQLException {
-        try {
-            System.out.println("Getting Data From task");
-            DatabaseConnection databaseConnection = new DatabaseConnection();
-            Connection connection = databaseConnection.getConnection();
-            Statement statement = connection.createStatement();
-            String sql = "INSERT INTO `task_info`" +
-                    "( `task_name`, `task_description`, " +
-                    "`task_start_date`, `priority`, `status`, `assigned`) " +
-                    "VALUES ('?','?','?','?','?','?')";
-            ResultSet rs = statement.executeQuery(sql);
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, getTaskName().getText());
-                preparedStatement.setString(2, getTaskDescription().getText());
-                preparedStatement.setString(3, String.valueOf(Date.valueOf(taskDate.getValue())));
-                preparedStatement.setString(4, "0%");
-                // preparedStatement.setString(5,question);
-                // preparedStatement.setString(6,answer);
+    private void saveTaskOnAction(ActionEvent e){
+        name = taskName.getText();
+        description = taskDescription.getText();
+        date = String.valueOf(getTaskDate().getValue());
+        priorityy = (String) getTaskPriority().getValue();
+        statuss = (String) getTaskStatus().getValue();
 
-
-                preparedStatement.close();
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(name.isEmpty() || description.isEmpty() || date.isEmpty()){
+            su_valid_label.setText("Enter All Information");
         }
+        else {
+
+            try{
+                DatabaseConnection databaseConnection = new DatabaseConnection();
+                Connection connection = databaseConnection.getConnection();
+               // String sql = "INSERT INTO task(name,description,startDate)VALUES (?, ?, ?)";
+                String sql = "INSERT INTO task_info(task_name,task_description,task_start_date,priority,status)VALUES (?, ?, ?, ?, ?)";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setString(1,name);
+                    preparedStatement.setString(2,description);
+                    preparedStatement.setString(3,date);
+                    preparedStatement.setString(4,priorityy);
+                    preparedStatement.setString(5,statuss);
+                    System.out.println(name+description+date);
+
+                    preparedStatement.executeUpdate();
 
 
-
+                }
+            }catch (SQLException eee){
+                eee.printStackTrace();
+            }
+        }
     }
 
 
-
+    String[] priority={"Urgent","Averge","Minor"};
+    String [] status={"ToDo","Ongoing","Complete"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        taskName.getText();
+        taskPriority.getItems().addAll(priority);
+        taskStatus.getItems().addAll(status);
     }
 }
