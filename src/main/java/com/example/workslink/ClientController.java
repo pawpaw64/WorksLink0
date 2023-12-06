@@ -5,7 +5,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
@@ -110,5 +112,12 @@ public class ClientController implements Initializable {
         else {
             //System.out.printf("Null name");
         }
+    }
+    @FXML
+    private Button homeButton;
+
+    public void homeButtonOnAction(javafx.event.ActionEvent actionEvent) {
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+        stage.close();
     }
 }

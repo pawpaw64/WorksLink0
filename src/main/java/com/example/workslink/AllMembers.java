@@ -1,7 +1,12 @@
 package com.example.workslink;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -35,15 +40,14 @@ public class AllMembers implements Initializable {
         this.adminId = adminId;
     }
 
-    public Button homeBackBtn;
-    public Button AddEmployeeBtn;
-    public Button viewAllEmployee;
     public TableView<MembersData> membersTableView;
     public Label membersCountLabel;
     public TableColumn<MembersData, String> memberID;
     public TableColumn<MembersData, String> memberEmail;
     public TableColumn<MembersData, String> memberUserName;
     public TableColumn<MembersData, String> memberDOB;
+    @FXML
+    private Button homeButton;
 
     public TableColumn<MembersData, String> getMemberID() {
         return memberID;
@@ -108,7 +112,6 @@ public class AllMembers implements Initializable {
                 String userName = rs.getString("userName");
                 String email = rs.getString("email");
                 String dob = rs.getString("dob");
-                System.out.println(userName+" "+email+"" +dob);
 
                 MembersData members = new MembersData(userName,email,dob);
                 membersTableView.getItems().add(members);
@@ -124,7 +127,9 @@ public class AllMembers implements Initializable {
         membersCountLabel.setText("Currently you have " + String.valueOf(membersCount) + " employees.");
     }
 
-    public void ViewAllMembers(ActionEvent e) {
-
+    public void homeButtonOnAction(ActionEvent e) throws Exception{
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+        stage.close();
     }
+
 }
