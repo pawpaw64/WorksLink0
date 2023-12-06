@@ -60,9 +60,6 @@ public class ProfileController implements Initializable {
             profileUserName.setText(userProfile.getUserName());
             profileEmail.setText(userProfile.getEmail());
             profileDOB.setText(userProfile.getDob());
-
-            System.out.println("Labels updated!");
-
         }
     }
     @FXML

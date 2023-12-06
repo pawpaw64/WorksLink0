@@ -96,51 +96,6 @@ public class SpaceDetailsController implements Initializable {
                 )
                 );
         pieChart.getData().addAll(pieChartData);
-
-
-
-
-        spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
-        name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
-        spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
-        spaceProgress.setCellValueFactory(new PropertyValueFactory<>("spaceProgress"));
-
-        spaceTableView.setEditable(false);
-        getSpaceTableData();
-
-    }
-    private void getSpaceTableData() {
-        spaceTableView.getItems().clear();
-        try {
-            System.out.println("Getting Data From Database");
-            DatabaseConnection databaseConnection = new DatabaseConnection();
-            Connection connection = databaseConnection.getConnection();
-            Statement statement = connection.createStatement();
-            String sql = "SELECT task_projectID, task_name, task_description, status, priority FROM task_info";
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                String task_projectID = rs.getString("task_projectID");
-                String task_name = rs.getString("task_name");
-                String task_details = rs.getString("task_description");
-                String status = rs.getString("status");
-                String priority = rs.getString("priority");
-
-                TaskHistoryData t = new TaskHistoryData(task_projectID, task_name, status, priority, task_details);
-                spaceTableView.getItems().add(t);
-            }
-
-            statement.close();
-            connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-    @FXML
-    private Button homeButton;
-    public void homeButtonOnAction(ActionEvent e) throws Exception{
-        Stage stage = (Stage) homeButton.getScene().getWindow();
-        stage.close();
     }
 
 }

@@ -45,15 +45,6 @@
                                       </columns>
                                     </TableView>
                                     <Button fx:id="addTask" layoutX="501.0" layoutY="225.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
-
-
-                                    <TextArea fx:id="texxtArea" layoutX="55.0" layoutY="92.0" prefHeight="102.0" prefWidth="728.0" />
-                                    <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="18.0" prefWidth="34.0" text="&lt;">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Button>
-
                                  </children>
                               </AnchorPane>
                            </content>
