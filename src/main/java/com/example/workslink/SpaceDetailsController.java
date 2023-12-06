@@ -142,7 +142,6 @@ public class SpaceDetailsController implements Initializable {
 
                 TaskHistoryData t = new TaskHistoryData(task_projectID, task_name, status, priority, task_details);
                 spaceTableView.getItems().add(t);
-                System.out.println(t);
             }
 
             statement.close();
@@ -150,6 +149,12 @@ public class SpaceDetailsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    private Button homeButton;
+    public void homeButtonOnAction(ActionEvent e) throws Exception{
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+        stage.close();
     }
 
 }

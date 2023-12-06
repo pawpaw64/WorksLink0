@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AllMembers">
    <children>
-      <Button layoutX="79.0" layoutY="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="84.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Home" />
+      <Button fx:id="homeButton" layoutX="79.0" layoutY="58.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="31.0" prefWidth="84.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Home" />
       <Button layoutX="418.0" layoutY="58.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="123.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add Members" />
       <TableView fx:id="membersTableView" layoutX="62.0" layoutY="178.0" prefHeight="410.0" prefWidth="483.0">
         <columns>

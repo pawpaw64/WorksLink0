@@ -241,6 +241,7 @@ private void showProfile() throws Exception {
         homePane.setEffect(blur);
     }
 
+
     @FXML
     void membersOnAction() { //mouseEvent at add space
         try {
@@ -252,6 +253,7 @@ private void showProfile() throws Exception {
             newStage.setScene(new Scene(root));
             AllMembers allMembers = loader.getController();
             newStage.show();
+
 
         } catch (IOException e) {
             e.printStackTrace();
