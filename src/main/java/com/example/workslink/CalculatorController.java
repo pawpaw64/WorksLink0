@@ -1,7 +1,9 @@
 package com.example.workslink;
+import com.jfoenix.controls.JFXDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +19,7 @@ public class CalculatorController extends ProfileController{
     @FXML private Pane titlePane;
     @FXML private ImageView btnMinimize, btnClose;
     @FXML private Label lblResult;
+    @FXML private Button exitButton;
 
     private double x, y;
     private double num1 = 0;
@@ -86,10 +89,25 @@ public class CalculatorController extends ProfileController{
             e.printStackTrace(); // Handle the exception as needed
         }
     }
+    @FXML
+    private void goBack(MouseEvent event) throws IOException {
+        // Pass the user information back to the HomePageController
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
     public void setSidePane(Pane sidePane) {
         this.sidePane = sidePane;
     }
+//    @FXML
+//    private void handleCloseButton(ActionEvent event) {
+//        // Get the stage from the exitButton
+//        Stage stage = (Stage) exitButton.getScene().getWindow();
+//
+//        // Close the stage
+//        stage.close();
+//    }
+    public void calcCancel(){
 
-
+    }
 
 }

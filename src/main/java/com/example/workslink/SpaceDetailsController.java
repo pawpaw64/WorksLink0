@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -21,9 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class SpaceDetailsController implements Initializable {
@@ -35,19 +31,6 @@ public class SpaceDetailsController implements Initializable {
     Tab task;
     @FXML
     private VBox todoVbox;
-    @FXML
-    private TableView<TaskHistoryData> spaceTableView;
-    @FXML
-    private TableColumn<TaskHistoryData,String> name;
-    @FXML
-    private TableColumn<TaskHistoryData,String> spaceStatus;
-    @FXML
-    private TableColumn<TaskHistoryData,String> spaceProgress;
-    @FXML
-    private TableColumn<TaskHistoryData,String> spaceID;
-    private TextArea textArea;
-    @FXML
-    private Pane spaceDettails;
     @FXML
     private VBox completeVbox;
     @FXML
@@ -91,13 +74,13 @@ public class SpaceDetailsController implements Initializable {
     }
 
     void addPaneToVBox(Pane pane, VBox targetVBox) {
+        System.out.println("hhg");
         targetVBox.getChildren().add(pane);
     }
     @FXML
     private PieChart pieChart;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                     new PieChart.Data("Todo",100),
@@ -113,6 +96,8 @@ public class SpaceDetailsController implements Initializable {
                 )
                 );
         pieChart.getData().addAll(pieChartData);
+
+
 
 
         spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
@@ -149,6 +134,7 @@ public class SpaceDetailsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
     @FXML
     private Button homeButton;
