@@ -73,6 +73,6 @@
             <Image url="@../Icon/angle-small-left.png" />
          </image>
       </ImageView>
-      <TextField layoutX="40.0" layoutY="355.0" prefHeight="70.0" prefWidth="294.0" styleClass="tx" stylesheets="@../CSS/design.css" />
+      <TextField fx:id="spaceDescription" layoutX="40.0" layoutY="355.0" prefHeight="70.0" prefWidth="294.0" styleClass="tx" stylesheets="@../CSS/design.css" />
    </children>
 </AnchorPane>

@@ -1,76 +1,90 @@
-.space_Pane1{
-	-fx-background-color: #0fc0fc;
-	-fx-background-radius: 3em;
+.space_Pane1 {
+    -fx-background-color: #0fc0fc;
+    -fx-background-radius: 3em;
 }
-.login{
-	 -fx-background-color: #3498db; /* Button background color */
+
+.login {
+    -fx-background-color: #3498db; /* Button background color */
     -fx-background-radius: 5em;
     -fx-padding: 10px 20px; /* Padding */
     -fx-cursor: hand; /* Hand cursor on hover */
 }
-.login:hover{
-	-fx-background-color: #8A9A5B; /* New background color for the hover state */
+
+.login:hover {
+    -fx-background-color: #8A9A5B; /* New background color for the hover state */
     -fx-text-fill: #FF5733;
 }
-.signup{
-	 -fx-background-color: #3498db; /* Button background color */
+
+.signup {
+    -fx-background-color: #3498db; /* Button background color */
     -fx-background-radius: 5em;
 }
-.signup:hover{
-	-fx-background-color: #8A9A5B; /* New background color for the hover state */
-    -fx-text-fill: #FF5733; 
+
+.signup:hover {
+    -fx-background-color: #8A9A5B; /* New background color for the hover state */
+    -fx-text-fill: #FF5733;
 }
-.animated_button{
+
+.animated_button {
 }
-.animated_button:hover{
-/*	-fx-transform: scale(1.1);*/
--fx-transition: all 1s;
+
+.animated_button:hover {
+    /* -fx-transform: scale(1.1); */
+    -fx-transition: all 1s;
 }
-.label{
-	
+
+.label {
 }
-.label:hover{
-	-fx-background-color: #8A9A5B; /* New background color for the hover state */
-    -fx-text-fill: #FF5733; 
+
+.label:hover {
+    -fx-background-color: #8A9A5B; /* New background color for the hover state */
+    -fx-text-fill: #FF5733;
 }
-.rectangle{
-	-fx-background-radius: 3em;
+
+.rectangle {
+    -fx-background-radius: 3em;
     -fx-padding: 10px 20px;
 }
-.rectangle:hover{
-	-fx-background-color: #8A9A5B; /* New background color for the hover state */
+
+.rectangle:hover {
+    -fx-background-color: #8A9A5B; /* New background color for the hover state */
     -fx-text-fill: #FF5733;
-    -fx-background-color: #3fff00; 
+    -fx-background-color: #3fff00;
 }
-.next{
-	-fx-background-color: #76ff7a;
-	-fx-background-radius: 5em;
+
+.next {
+    -fx-background-color: #76ff7a;
+    -fx-background-radius: 5em;
     -fx-padding: 10px 20px; /* Padding */
     -fx-cursor: hand;
 }
-.next:hover{
-	-fx-background-color: #76ff7a; /* New background color for the hover state */
-}
-.tx{
-		-fx-background-radius: 3em;
-        -fx-padding: 10px 20px;
-}
-.upload{
-	-fx-background-color: #3498db;
-/*	-fx-border-color: #e0b0ff;*/
-/*	-fx-border-radius: 3em;*/
-	-fx-background-radius: 3em;
-    -fx-padding: 10px 20px;
-}
-.project_pane{
-	-fx-background-radius: 5em;
-	border-bottom
+
+.next:hover {
+    -fx-background-color: #76ff7a; /* New background color for the hover state */
 }
 
-.pi_pane{
-  
+.tx {
+    -fx-background-radius: 3em;
+    -fx-padding: 10px 20px;
+}
+
+.upload {
+    -fx-background-color: #3498db;
+    /* -fx-border-color: #e0b0ff; */
+    /* -fx-border-radius: 3em; */
+    -fx-background-radius: 3em;
+    -fx-padding: 10px 20px;
+}
+
+.project_pane {
+    -fx-background-radius: 5em;
+    border-bottom;
+}
+
+.pi_pane {
     -fx-background-radius: 50%;
 }
+
 .check-box {
     -fx-padding: 5;
 }
@@ -81,12 +95,11 @@
     -fx-border-color: #b9f2ff; /* Border color same as background color */
     -fx-text-fill: black; /* Text color */
 }
-.minimize{
-	-fx-background-color: #3498db;
+
+.minimize {
+    -fx-background-color: #3498db;
     -fx-border-color: #e0b0ff;
     -fx-border-radius: 3em;
-	-fx-background-radius: 3em;
+    -fx-background-radius: 3em;
     -fx-padding: 10px 20px;
 }
-
-/* Style the text label of the CheckBox */       
