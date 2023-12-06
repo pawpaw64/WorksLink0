@@ -40,29 +40,38 @@ public class HomePageController extends HelloController implements Initializable
     public ImageView apps;
     @FXML
     private Pane sidePane;
-    private User currentUser;
-    public Stage stage = new Stage();
     @FXML
-    ImageView closeHomePage;
+    Button closeButton;
+    private User currentUser;
+    public Stage stage ;
     @FXML
     AnchorPane homePane;
+    private ProfileController profileController;
+    private Stage profileStage;
     @FXML
-    private TableColumn<SpaceInfo,String> SpaceEndDate;
+    private ListView<String> spaceListView;
 
     @FXML
-    private TableColumn<SpaceInfo,String> SpaceName;
+    private TableColumn<SpaceInfo, String> SpaceEndDate;
 
     @FXML
-    private TableColumn<SpaceInfo,String> SpaceStartDate;
+    private TableColumn<SpaceInfo, String> SpaceName;
 
     @FXML
-    private TableColumn<SpaceInfo,String> SpaceTaskOngoing;
+    private TableColumn<SpaceInfo, String> SpaceStartDate;
+
+    @FXML
+    private TableColumn<SpaceInfo, String> SpaceTaskOngoing;
     @FXML
     private TableView<SpaceInfo> spaceTableView;
-
-    public void setUser(User user) {
-        this.currentUser = user;
-
+    @FXML
+    private VBox spaceBox;
+   int id;
+    private Connection connection;
+    public void setUser(User loggedInUser) {
+        this.currentUser=loggedInUser;
+        id=currentUser.getUser_id();
+        getSpaceData();
     }
     @FXML
     public void logout(ActionEvent e) throws Exception {
@@ -76,35 +85,26 @@ public class HomePageController extends HelloController implements Initializable
         stage.setX(100);
         stage.show();
     }
-@FXML
-private void showProfile() throws Exception {
-    FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
-    Parent root = fxmlLoader.load();
-    Scene scene = new Scene(root);
 
-    // If the profile controller and stage are not initialized, create new ones
-    if (profileController == null) {
-        profileController = fxmlLoader.getController();
-        profileController.setProfileImg(profileImg);
-        profileController.setUserProfile(currentUser);
 
-        profileStage = new Stage();
-        profileStage.setScene(scene);
-    profileStage.initStyle(StageStyle.UNDECORATED);
+    @FXML
+    private void showProfile() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        if (profileController == null) {
+            profileController = fxmlLoader.getController();
+            profileController.setProfileImg(profileImg);
+            profileController.setUserProfile(currentUser);
+
+            profileStage = new Stage();
+            profileStage.setScene(scene);
+            profileStage.initStyle(StageStyle.UNDECORATED);
+        }
+        applyBlurEffect();
+        profileStage.showAndWait();
+        removeBlurEffect();
     }
-
-    applyBlurEffect();
-
-    // Show the profile window
-    profileStage.showAndWait(); // Use showAndWait to wait for the profile window to close
-
-    // Remove blur effect when the profile window is closed
-    removeBlurEffect();
-}
-
-    // Add these fields to your HomePageController
-    private ProfileController profileController;
-    private Stage profileStage;
 
     private void removeBlurEffect() {
         homePane.setEffect(null); // Remove the blur effect
@@ -116,18 +116,12 @@ private void showProfile() throws Exception {
             Pane newView = loader.load();
             if (fxmlFileName.equals("FXML/profile.fxml")) {
                 ProfileController profileController = loader.getController();
-//
+
             } else if (fxmlFileName.equals("FXML/calculator.fxml")) {
                 CalculatorController calculatorController = loader.getController();
                 calculatorController.setSidePane(sidePane);
 
             }
-
-//            sidePane.setPrefWidth(newView.getPrefWidth());
-//
-//            sidePane.getChildren().setAll(newView);
-//            sidePane.setVisible(true);
-
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception as needed
         }
@@ -200,10 +194,8 @@ private void showProfile() throws Exception {
         // Show the PopOver at the adjusted position
         popOver.show(apps, adjustedX, adjustedY);
     }
-    @FXML
-    Button closeButton;
     public void closeOnAction() {
-        Stage stage = (Stage)closeButton.getScene().getWindow();
+        Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
 
@@ -225,17 +217,20 @@ private void showProfile() throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_create.fxml"));
             Parent root = loader.load();
+
             // Create a new stage for the new scene
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
             SpaceCreateController spaceCreateController = loader.getController();
+            spaceCreateController.setUserID(id);
             newStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private void applyBlurEffect() {
         BoxBlur blur = new BoxBlur(5, 5, 3); // You can adjust the blur parameters
         homePane.setEffect(blur);
@@ -259,6 +254,7 @@ private void showProfile() throws Exception {
             e.printStackTrace();
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
@@ -266,21 +262,19 @@ private void showProfile() throws Exception {
         SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         spaceTableView.setEditable(false);
 
-          
-        getSpaceTableData();
-        getSpaceVbox();
 
     }
-    @FXML
-    private ListView<String> spaceListView;
+
 
     private void getSpaceVbox() {
         try {
             System.out.println("Getting Data into Vbox");
-            DatabaseConnection databaseConnection=new DatabaseConnection();
-            Connection connection=databaseConnection.getConnection();
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name FROM space_info";
+            //String sql = "SELECT space_name FROM space_info";
+            String sql = "SELECT space_name FROM space_info WHERE user_id = " + id;
+
             ResultSet rs = statement.executeQuery(sql);
             ObservableList<String> spaceNames = FXCollections.observableArrayList();
 
@@ -300,23 +294,20 @@ private void showProfile() throws Exception {
             spaceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     System.out.println("Getting into list");
-                    handleSpaceItemClick(newValue); // Call a method to handle the selected item
+                    handleSpaceItemClick(newValue, currentUser.getUser_id()); // Call a method to handle the selected item
                 }
             });
 
 
-
-
-        statement.close();
+            statement.close();
             connection.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    private void handleSpaceItemClick(String newValue) {
+    private void handleSpaceItemClick(String newValue, int userId) {
         System.out.println(newValue);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
@@ -336,41 +327,40 @@ private void showProfile() throws Exception {
         }
     }
 
-    @FXML
-    private VBox spaceBox;
-
-    private Connection connection;
-
     int spaceCount;
+    private void getSpaceData() {
+        getSpaceTableData();
+        getSpaceVbox();
+    }
+
     private void getSpaceTableData() {
         spaceTableView.getItems().clear();
-         spaceCount = 0;
+
         try {
-            System.out.println("Getting Data From SpaceInfo");
-            DatabaseConnection databaseConnection=new DatabaseConnection();
-            Connection connection=databaseConnection.getConnection();
+            System.out.println("userid " + id);
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name, start_date, end_date FROM space_info";
+            String sql = "SELECT space_name,start_date,end_date FROM space_info WHERE user_id = " + id;
+
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                spaceCount++;
-                String spaceName = rs.getString("Space_name");
+                String spaceName = rs.getString("space_name");
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
-                System.out.println("w"+" "+spaceName+" "+startDate+"" +endDate);
-
-                SpaceInfo singleSpace = new SpaceInfo(spaceName,startDate,endDate);
+                System.out.println(startDate + "\n" + spaceName + endDate);
+                SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate);
                 spaceTableView.getItems().add(singleSpace);
             }
 
             statement.close();
             connection.close();
-        }
-        catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
+
 }
+
 

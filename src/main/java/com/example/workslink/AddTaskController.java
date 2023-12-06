@@ -47,8 +47,10 @@ public class AddTaskController implements Initializable {
 
     String[] priority={"Urgent","Averge","Minor"};
     String [] status={"ToDo","Ongoing","Complete"};
+
     @FXML
     private Button closeButton;
+
 
     public ChoiceBox<String> getTaskAssigned() {
         return (ChoiceBox<String>) taskAssigned;
