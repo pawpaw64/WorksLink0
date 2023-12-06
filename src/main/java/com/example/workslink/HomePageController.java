@@ -86,6 +86,7 @@ public class HomePageController extends HelloController implements Initializable
         stage.show();
     }
 
+
     @FXML
     private void showProfile() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
@@ -115,6 +116,7 @@ public class HomePageController extends HelloController implements Initializable
             Pane newView = loader.load();
             if (fxmlFileName.equals("FXML/profile.fxml")) {
                 ProfileController profileController = loader.getController();
+
             } else if (fxmlFileName.equals("FXML/calculator.fxml")) {
                 CalculatorController calculatorController = loader.getController();
                 calculatorController.setSidePane(sidePane);
@@ -192,7 +194,6 @@ public class HomePageController extends HelloController implements Initializable
         // Show the PopOver at the adjusted position
         popOver.show(apps, adjustedX, adjustedY);
     }
-
     public void closeOnAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
@@ -235,6 +236,7 @@ public class HomePageController extends HelloController implements Initializable
         homePane.setEffect(blur);
     }
 
+
     @FXML
     void membersOnAction() { //mouseEvent at add space
         try {
@@ -246,6 +248,7 @@ public class HomePageController extends HelloController implements Initializable
             newStage.setScene(new Scene(root));
             AllMembers allMembers = loader.getController();
             newStage.show();
+
 
         } catch (IOException e) {
             e.printStackTrace();
