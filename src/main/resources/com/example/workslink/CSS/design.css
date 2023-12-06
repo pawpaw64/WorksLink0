@@ -103,3 +103,7 @@
     -fx-background-radius: 3em;
     -fx-padding: 10px 20px;
 }
+.choice-box {
+  
+  -fx-mark-color: rgb(33, 235, 114); // arrow color
+}
