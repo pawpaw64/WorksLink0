@@ -121,12 +121,7 @@ private void showProfile() throws Exception {
                 CalculatorController calculatorController = loader.getController();
                 calculatorController.setSidePane(sidePane);
 
-            }
-
-//            sidePane.setPrefWidth(newView.getPrefWidth());
-//
-//            sidePane.getChildren().setAll(newView);
-//            sidePane.setVisible(true);
+            };
 
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception as needed
@@ -276,7 +271,6 @@ private void showProfile() throws Exception {
 
     private void getSpaceVbox() {
         try {
-            System.out.println("Getting Data into Vbox");
             DatabaseConnection databaseConnection=new DatabaseConnection();
             Connection connection=databaseConnection.getConnection();
             Statement statement = connection.createStatement();
@@ -346,7 +340,6 @@ private void showProfile() throws Exception {
         spaceTableView.getItems().clear();
          spaceCount = 0;
         try {
-            System.out.println("Getting Data From SpaceInfo");
             DatabaseConnection databaseConnection=new DatabaseConnection();
             Connection connection=databaseConnection.getConnection();
             Statement statement = connection.createStatement();
@@ -357,7 +350,6 @@ private void showProfile() throws Exception {
                 String spaceName = rs.getString("Space_name");
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
-                System.out.println("w"+" "+spaceName+" "+startDate+"" +endDate);
 
                 SpaceInfo singleSpace = new SpaceInfo(spaceName,startDate,endDate);
                 spaceTableView.getItems().add(singleSpace);

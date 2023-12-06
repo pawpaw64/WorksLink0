@@ -101,7 +101,6 @@ public class AllMembers implements Initializable {
         membersTableView.getItems().clear();
         membersCount = 0;
         try {
-            System.out.println("Getting Data From SpaceInfo");
             DatabaseConnection databaseConnection=new DatabaseConnection();
             Connection connection=databaseConnection.getConnection();
             Statement statement = connection.createStatement();

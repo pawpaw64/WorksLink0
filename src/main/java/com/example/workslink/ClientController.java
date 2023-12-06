@@ -65,6 +65,7 @@ public class ClientController implements Initializable {
                              try {
                                  String data = reader.readLine()+"\n";
                                  showArea.appendText(data);
+                                 storeMessegeInFile(data);
                              }catch (SocketException ee){
                                  showArea.appendText("Connection lost"+"\n");
                                  break;
@@ -77,7 +78,7 @@ public class ClientController implements Initializable {
                  };
                     serverListener.start();
 
-                showArea.appendText(inputName+" is Connected.."+"\n");
+                showArea.appendText("");
                 button.setText("Send");
                 inputfield.setPromptText("Write your massage...");
                 isConnected = true;
@@ -92,7 +93,7 @@ public class ClientController implements Initializable {
 
                 System.out.println(msg);
                 if(msg==null || msg.length() == 0){
-                    showArea.appendText("Enter your name..."+"\n");
+                    showArea.appendText("");
                     return;
                 }
                 writer.write(msg+"\n");
@@ -120,4 +121,13 @@ public class ClientController implements Initializable {
         Stage stage = (Stage) homeButton.getScene().getWindow();
         stage.close();
     }
+
+    private static void storeMessegeInFile(String message) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
+            writer.println(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

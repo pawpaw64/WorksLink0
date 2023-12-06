@@ -11,7 +11,6 @@ public class MembersData {
         this.memberUserName = memberUserName;
         this.memberEmail = memberEmail;
         this.memberDOB = memberDOB;
-        System.out.printf("Got from AllMembers: "+ memberUserName+memberEmail+memberDOB);
     }
 
 
