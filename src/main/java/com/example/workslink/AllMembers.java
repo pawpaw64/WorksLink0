@@ -12,11 +12,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class AllMembers implements Initializable {
     Stage stage;
@@ -127,9 +132,12 @@ public class AllMembers implements Initializable {
         membersCountLabel.setText("Currently you have " + String.valueOf(membersCount) + " employees.");
     }
 
+
+
     public void homeButtonOnAction(ActionEvent e) throws Exception{
         Stage stage = (Stage) homeButton.getScene().getWindow();
         stage.close();
+
     }
 
 }

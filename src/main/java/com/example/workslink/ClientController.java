@@ -1,10 +1,15 @@
 package com.example.workslink;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import javafx.scene.input.MouseEvent;
+
 import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
@@ -24,6 +29,8 @@ public class ClientController implements Initializable {
     BufferedWriter writer;
     @FXML
     TextArea showArea;
+    @FXML
+    Button minimize;
     public User userProfile;
     boolean isConnected = false;
     String name;
@@ -113,11 +120,12 @@ public class ClientController implements Initializable {
             //System.out.printf("Null name");
         }
     }
-    @FXML
+
     private Button homeButton;
 
     public void homeButtonOnAction(javafx.event.ActionEvent actionEvent) {
         Stage stage = (Stage) homeButton.getScene().getWindow();
+
         stage.close();
     }
 }
