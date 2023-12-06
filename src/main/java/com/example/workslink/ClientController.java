@@ -7,9 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import javafx.scene.input.MouseEvent;
+
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
@@ -117,18 +120,12 @@ public class ClientController implements Initializable {
             //System.out.printf("Null name");
         }
     }
-    @FXML
-    void minimizeButtonPressed(ActionEvent event) {
-        // Get the stage from the minimize button
-        Stage stage = (Stage) minimize.getScene().getWindow();
 
-        // Minimize the stage
-        stage.setIconified(true);
-    }
-    @FXML
-    private void goBack(MouseEvent event) throws IOException {
-        // Pass the user information back to the HomePageController
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    private Button homeButton;
+
+    public void homeButtonOnAction(javafx.event.ActionEvent actionEvent) {
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+
         stage.close();
     }
 }

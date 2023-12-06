@@ -8,7 +8,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goBack" prefHeight="571.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.ClientController">
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.ClientController">
+
    <children>
       <TextArea fx:id="showArea" editable="false" layoutX="1.0" layoutY="49.0" prefHeight="423.0" prefWidth="600.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
          <font>
@@ -28,15 +31,9 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="minimize" layoutX="476.0" layoutY="4.0" mnemonicParsing="false" onAction="#minimizeButtonPressed" prefHeight="39.0" prefWidth="103.0" style="-fx-background-color: #ffff;" styleClass="minimize" stylesheets="@../CSS/design.css" text="Minimize">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <ImageView fx:id="backButton" fitHeight="27.0" fitWidth="26.0" layoutX="23.0" layoutY="11.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" styleClass="icon">
-         <image>
-            <Image url="@../Icon/angle-small-left.png" />
-         </image>
-      </ImageView>
+
+
+      <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#homeButtonOnAction" text="Home" />
+
    </children>
 </Pane>

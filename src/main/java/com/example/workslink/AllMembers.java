@@ -45,15 +45,14 @@ public class AllMembers implements Initializable {
         this.adminId = adminId;
     }
 
-    public Button homeBackBtn;
-    public Button AddEmployeeBtn;
-    public Button viewAllEmployee;
     public TableView<MembersData> membersTableView;
     public Label membersCountLabel;
     public TableColumn<MembersData, String> memberID;
     public TableColumn<MembersData, String> memberEmail;
     public TableColumn<MembersData, String> memberUserName;
     public TableColumn<MembersData, String> memberDOB;
+    @FXML
+    private Button homeButton;
 
     public TableColumn<MembersData, String> getMemberID() {
         return memberID;
@@ -118,7 +117,6 @@ public class AllMembers implements Initializable {
                 String userName = rs.getString("userName");
                 String email = rs.getString("email");
                 String dob = rs.getString("dob");
-                System.out.println(userName+" "+email+"" +dob);
 
                 MembersData members = new MembersData(userName,email,dob);
                 membersTableView.getItems().add(members);
@@ -136,37 +134,10 @@ public class AllMembers implements Initializable {
 
 
 
-    @FXML
-    private void goBack(MouseEvent event) throws IOException {
-        try {
-            // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("homePage-viev.fxml"));
-            Parent root = loader.load();
-
-            // Get the controller of the home page
-            HomePageController homePageController = loader.getController();
-
-            // Set any necessary data in the home page controller
-            // For example: homePageController.setUserRole(userRole);
-
-            // Create a new scene with the home page and set it on the stage
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-
-            // Close the current stage (current page)
-            ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
-
-            // Show the home page stage
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception appropriately (e.g., show an error message)
-        }
-    }
-
-
-    public void ViewAllMembers(ActionEvent e) {
+    public void homeButtonOnAction(ActionEvent e) throws Exception{
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+        stage.close();
 
     }
+
 }
