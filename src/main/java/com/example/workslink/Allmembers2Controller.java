@@ -1,11 +1,12 @@
 package com.example.workslink;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -27,7 +28,9 @@ public class Allmembers2Controller implements Initializable {
     public TableColumn<MembersData, String> memberEmail;
     public TableColumn<MembersData, String> memberUserName;
     public TableColumn<MembersData, String> memberDOB;
-    public  TableColumn<CheckBox, Boolean> membersSelected;
+    public  TableColumn<MembersData,String> membersSelected;
+    @FXML
+    private CheckBox selectALl;
     @FXML
     public TableColumn<MembersData, String> getMemberID() {
         return memberID;
@@ -53,29 +56,34 @@ public class Allmembers2Controller implements Initializable {
     public void setMemberDOB(TableColumn<MembersData, String> memberDOB) {
         this.memberDOB = memberDOB;
     }
+    private CheckBox checkBox;
+
+    @FXML
+    private TableColumn<MembersData,String> sendRqst;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("1");
         memberUserName.setCellValueFactory(new PropertyValueFactory<>("memberUserName"));
         memberEmail.setCellValueFactory(new PropertyValueFactory<>("memberEmail"));
         memberDOB.setCellValueFactory(new PropertyValueFactory<>("memberDOB"));
-       // membersSelected.setCellValueFactory(new PropertyValueFactory<>("membersSelected"));
+        membersSelected.setCellValueFactory(new PropertyValueFactory<>("select"));
+        //sendRqst.setCellValueFactory(new PropertyValueFactory<>("sendRqst"));
 
         membersTableView.setEditable(false);
 
 
-
-        getMembersTableData();
         getSelectedData();
     }
 
     private void getSelectedData() {
 
+
     }
 
     int membersCount;
     private void getMembersTableData() {
+
         membersTableView.getItems().clear();
         membersCount = 0;
         try {
@@ -90,9 +98,11 @@ public class Allmembers2Controller implements Initializable {
                 String userName = rs.getString("userName");
                 String email = rs.getString("email");
                 String dob = rs.getString("dob");
+                String selectValue = null;
 
-                MembersData members = new MembersData(userName, email, dob);
+                MembersData members = new MembersData(userName, email, dob, selectValue);
                 membersTableView.getItems().add(members);
+
             }
 
             preparedStatement.close();
@@ -103,6 +113,7 @@ public class Allmembers2Controller implements Initializable {
 
         membersCountLabel.setText("Total numbers of User: " + String.valueOf(membersCount));
     }
+    String excludname;
 
     @FXML
     public void saveMembers(ActionEvent event) {
@@ -129,11 +140,17 @@ public class Allmembers2Controller implements Initializable {
             connection.close();
 
             // Refresh the table data after insertion
-            getMembersTableData();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/allMembers.fxml"));
+            Parent root = loader.load();
+            AllMembers allMembersController = loader.getController();
+            allMembersController.refreshData();
+            allMembersController.setUser(userId,excludname);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+
+   }
     @FXML
     void goBack(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -141,7 +158,9 @@ public class Allmembers2Controller implements Initializable {
 
     }
      int userId;
-    public void userId(int userId) {
+    public void userId(int userId, String excludename) {
         this.userId=userId;
+        this.excludname=excludename;
+        getMembersTableData();
     }
 }
