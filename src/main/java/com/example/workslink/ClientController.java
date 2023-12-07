@@ -17,6 +17,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class ClientController implements Initializable {
@@ -65,28 +66,31 @@ public class ClientController implements Initializable {
                 InputStreamReader isr = new InputStreamReader(socket.getInputStream());
                 reader = new BufferedReader(isr);
 
-                 Thread serverListener = new Thread(){
-                     @Override
-                     public void run(){
-                         while (true){
-                             try {
-                                 String data = reader.readLine()+"\n";
-                                 showArea.appendText(data);
-                                 storeMessegeInFile(data);
-                             }catch (SocketException ee){
-                                 showArea.appendText("Connection lost"+"\n");
-                                 break;
-                             }
-                             catch (IOException e) {
-                                 e.printStackTrace();
-                             }
-                         }
-                     }
-                 };
-                    serverListener.start();
+                Thread serverListener = new Thread() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            try {
+                                String data = reader.readLine();
+                                if (data != null) {
+                                    data = data.trim(); // Trim to remove leading/trailing whitespaces
+                                    showArea.appendText(data + "\n");
+                                    storeMessegeInFile(data);
+                                }
+                            } catch (SocketException ee) {
+                                showArea.appendText("Connection lost" + "\n");
+                                break;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                };
+
+                serverListener.start();
 
                 showArea.appendText("");
-                button.setText("Send");
+                button.setText("");
                 inputfield.setPromptText("Write your massage...");
                 isConnected = true;
             } catch (IOException e) {
@@ -112,13 +116,13 @@ public class ClientController implements Initializable {
     }
 
     private static void storeMessegeInFile(String message) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
-            System.out.println("ihhsuikdfuerg");
-            writer.println(message);
+        try (PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
+            writer.write(message + "\n"); // Use write with "\n" to add a newline character
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -131,6 +135,7 @@ public class ClientController implements Initializable {
         }
     }
 
+    @FXML
     private Button homeButton;
 
     public void homeButtonOnAction(javafx.event.ActionEvent actionEvent) {
@@ -138,4 +143,5 @@ public class ClientController implements Initializable {
 
         stage.close();
     }
+
 }
