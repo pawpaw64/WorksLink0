@@ -43,7 +43,7 @@ public class HomePageController extends HelloController implements Initializable
     @FXML
     Button closeButton;
     private User currentUser;
-    public Stage stage ;
+    public Stage stage = new Stage() ;
     @FXML
     AnchorPane homePane;
     private ProfileController profileController;

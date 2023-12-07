@@ -23,7 +23,8 @@ public class Client implements Runnable {
             clientName = reader.readLine();
             clients.add(this);
 
-            //System.out.println("Client "+clientName+" connected...");
+            sendPreviousMessages();
+            System.out.println("Client "+clientName+" connected...");
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -48,6 +49,18 @@ public class Client implements Runnable {
             catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void sendPreviousMessages() {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt"))) {
+            String line;
+            while ((line = fileReader.readLine()) != null) {
+                writer.write(line + "\n");
+                writer.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

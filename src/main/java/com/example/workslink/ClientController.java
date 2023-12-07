@@ -71,7 +71,9 @@ public class ClientController implements Initializable {
                              try {
                                  String data = reader.readLine()+"\n";
                                  showArea.appendText(data);
-                                 storeMessegeInFile(data);
+
+                                 storeMessageInFile(userProfile.getUserName(), data);
+
                              }catch (SocketException ee){
                                  showArea.appendText("Connection lost"+"\n");
                                  break;
@@ -121,6 +123,7 @@ public class ClientController implements Initializable {
         }
     }
 
+    @FXML
     private Button homeButton;
 
     public void homeButtonOnAction(javafx.event.ActionEvent actionEvent) {
@@ -129,12 +132,13 @@ public class ClientController implements Initializable {
         stage.close();
     }
 
-    private static void storeMessegeInFile(String message) {
+    private static void storeMessageInFile(String senderName, String message) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
-            writer.println(message);
+            writer.println(senderName + ": " + message);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
 }
