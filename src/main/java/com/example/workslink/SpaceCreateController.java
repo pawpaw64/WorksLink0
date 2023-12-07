@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -136,7 +137,14 @@ public class SpaceCreateController implements Initializable {
     public void setUserID(int id) {
         this.userId=id;
     }
+    @FXML
+    private ImageView homeButton;
 
     public void goBack(MouseEvent mouseEvent) {
+
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+
+            stage.close();
+
     }
 }
