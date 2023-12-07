@@ -43,7 +43,7 @@ public class HomePageController extends HelloController implements Initializable
     @FXML
     Button closeButton;
     private User currentUser;
-    public Stage stage ;
+    public Stage stage=new Stage();
     @FXML
     AnchorPane homePane;
     private ProfileController profileController;
@@ -190,6 +190,7 @@ public class HomePageController extends HelloController implements Initializable
         Scene scene = new Scene(fxmlLoader.load());
         ClientController clientController = fxmlLoader.getController();
         clientController.setUserProfile(currentUser);
+        System.out.println("hhhh");
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -224,7 +225,8 @@ public class HomePageController extends HelloController implements Initializable
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
             AllMembers allMembers = loader.getController();
-            allMembers.userID(id);
+            allMembers.setUser(id,currentUser.getUserName());
+
             applyBlurEffect();
             newStage.showAndWait();
             removeBlurEffect();

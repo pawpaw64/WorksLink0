@@ -4,27 +4,26 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
+
+import javax.swing.*;
 
 public class AllMembers implements Initializable {
     public TableView<MembersData> membersTableView;
@@ -36,44 +35,121 @@ public class AllMembers implements Initializable {
 
     @FXML
     private Button homeButton;
+    private String excludename;
+
+    @FXML
+    private TableColumn<MembersData, String> memeberEdit;
+
     @FXML
     void addNewMembers(ActionEvent event) throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/allMembers2.fxml"));
         Parent root = fxmlLoader.load();
-        Allmembers2Controller allmembers2Controller=fxmlLoader.getController();
-        allmembers2Controller.userId(userId);
+        Allmembers2Controller allmembers2Controller = fxmlLoader.getController();
+        allmembers2Controller.userId(userId, excludename);
         Scene scene = new Scene(root);
 
-          Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
 
         stage.show();
 
 
     }
+
+    int userId;
+    Image image ;
+    MembersData membersData;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         memberUserName.setCellValueFactory(new PropertyValueFactory<>("memberUserName"));
         memberEmail.setCellValueFactory(new PropertyValueFactory<>("memberEmail"));
         memberDOB.setCellValueFactory(new PropertyValueFactory<>("memberDOB"));
-        membersTableView.setEditable(false);
+        Callback<TableColumn<MembersData, String>, TableCell<MembersData, String>> cellFoctory =
+                (TableColumn<MembersData, String> param) -> {
+                    // make cell containing buttons
+                    final TableCell<MembersData, String> cell = new TableCell<>() {
+                        final Button delete = new Button("Delete");
+                        @Override
+                        public void updateItem(String item, boolean empty) {
+                            super.updateItem(item, empty);
+                            //that cell created only on non-empty rows
+                            if (empty) {
+                                setGraphic(null);
+                                setText(null);
 
-
-        getMembersTableData();
+                            } else {
+                               
+                                delete.setOnAction((ActionEvent event) -> {
+                                    try {
+                                        membersData = membersTableView.getSelectionModel().getSelectedItem();
+                                        DatabaseConnection databaseConnection = new DatabaseConnection();
+                                        Connection connection = databaseConnection.getConnection();
+                                        String sql = "DELETE FROM `members` WHERE id  = " + membersData.getMemberId();
+                                        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                                        preparedStatement = connection.prepareStatement(sql);
+                                        preparedStatement.execute();
+                                        reloadData();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                });
+                            }
+                            membersTableView.setEditable(false);
+                        }
+                    };
+                    return cell;
+                };
+        memeberEdit.setCellFactory(cellFoctory);
 
     }
 
-    private void getMembersTableData() {
+        @FXML
+        public void reloadData() {
+            membersTableView.getItems().clear();
+            int membersCount = 0;
+            try {
+                DatabaseConnection databaseConnection = new DatabaseConnection();
+                Connection connection = databaseConnection.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName, email, dob FROM members WHERE userID = ? AND userName != ?");
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setString(2, excludename);
+                ResultSet rs = preparedStatement.executeQuery();
+
+                while (rs.next()) {
+                    membersCount++;
+                    String userName = rs.getString("userName");
+                    String email = rs.getString("email");
+                    String dob = rs.getString("dob");
+
+                    MembersData members = new MembersData(userName, email, dob);
+                    membersTableView.getItems().add(members);
+                }
+
+                preparedStatement.close();
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            membersCountLabel.setText("Total numbers of User: " + String.valueOf(membersCount));
+        }
+
+
+
+    private void getMembersTableData(int id, String excludedUsername)
+    {
         membersTableView.getItems().clear();
         int membersCount = 0;
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName, email, dob FROM members WHERE userID != ?");
-            preparedStatement.setInt(1, userId);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName, email, dob FROM members WHERE userID = ? AND userName != ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, excludedUsername);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -94,16 +170,25 @@ public class AllMembers implements Initializable {
 
         membersCountLabel.setText("Total numbers of User: " + String.valueOf(membersCount));
     }
-
-    public void homeButtonOnAction(ActionEvent e) throws Exception{
+    @FXML
+    public void homeButtonOnAction(ActionEvent e) throws Exception {
         Stage stage = (Stage) homeButton.getScene().getWindow();
         stage.close();
 
     }
-    int userId;
 
-    public void userID(int id) {
-        this.userId=id;
-        System.out.println(userId);
+
+    public void setUser(int id, String excludename) {
+        this.userId = id;
+        this.excludename = excludename;
+        getMembersTableData(userId, excludename);
+    }
+
+    public void refreshData() {
+        getMembersTableData(userId, excludename);
+    }
+
+    public void reload(MouseEvent event) {
+        reloadData();
     }
 }
