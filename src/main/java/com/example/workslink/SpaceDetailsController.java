@@ -1,6 +1,8 @@
 //space_details.fxml controller
 package com.example.workslink;
 
+import com.example.workslink.DatabaseConnection;
+import com.example.workslink.TaskHistoryData;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -158,4 +160,3 @@ public class SpaceDetailsController implements Initializable {
     }
 
 }
-

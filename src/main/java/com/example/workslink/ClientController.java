@@ -1,5 +1,6 @@
 package com.example.workslink;
 
+import com.example.workslink.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,7 +49,7 @@ public class ClientController implements Initializable {
             String inputName = userProfile.getUserName();
             inputfield.clear();
             if(inputName==null || inputName.length() == 0){
-                showArea.appendText("\n");
+                showArea.appendText("\n");//show
                 return;
             }
             try {
@@ -57,7 +58,7 @@ public class ClientController implements Initializable {
                 OutputStreamWriter o = new OutputStreamWriter(socket.getOutputStream());
                 writer = new BufferedWriter(o);
 
-                writer.write(inputName+"\n");
+                writer.write(inputName+"\n");//show msg
                 writer.flush();
 
 
@@ -71,9 +72,7 @@ public class ClientController implements Initializable {
                              try {
                                  String data = reader.readLine()+"\n";
                                  showArea.appendText(data);
-
-                                 storeMessageInFile(userProfile.getUserName(), data);
-
+                                 storeMessegeInFile(data);
                              }catch (SocketException ee){
                                  showArea.appendText("Connection lost"+"\n");
                                  break;
@@ -112,6 +111,15 @@ public class ClientController implements Initializable {
         }
     }
 
+    private static void storeMessegeInFile(String message) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
+            System.out.println("ihhsuikdfuerg");
+            writer.println(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(userProfile!=null){
@@ -123,7 +131,6 @@ public class ClientController implements Initializable {
         }
     }
 
-    @FXML
     private Button homeButton;
 
     public void homeButtonOnAction(javafx.event.ActionEvent actionEvent) {
@@ -131,14 +138,4 @@ public class ClientController implements Initializable {
 
         stage.close();
     }
-
-    private static void storeMessageInFile(String senderName, String message) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
-            writer.println(senderName + ": " + message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }
