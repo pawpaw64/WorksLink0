@@ -1,5 +1,6 @@
 package com.example.workslink;
 
+import com.example.workslink.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

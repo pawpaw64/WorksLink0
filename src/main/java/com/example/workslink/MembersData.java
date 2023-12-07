@@ -63,7 +63,11 @@
 //}
 package com.example.workslink;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
 
 public class MembersData {
     private String memberId;
@@ -71,22 +75,23 @@ public class MembersData {
     private String memberEmail;
     private String memberDOB;
     private CheckBox select;
+    private Button sendRqst;
 
-    public CheckBox getSelect() {
-        System.out.println(select);
-        return select;
-    }
 
-    public void setSelect(CheckBox select) {
-        this.select = select;
-    }
-
-    public MembersData(String memberUserName, String memberEmail, String memberDOB) {
+    public MembersData(String memberUserName, String memberEmail, String memberDOB, String value) {
         this.memberUserName = memberUserName;
         this.memberEmail = memberEmail;
         this.memberDOB = memberDOB;
-        this.select = new CheckBox();
+       this.select=new CheckBox();
+        this.sendRqst=new Button();
 
+
+
+    }
+    public MembersData(String memberUserName,String memberEmail,String memberDOB){
+        this.memberDOB=memberDOB;
+        this.memberEmail=memberEmail;
+        this.memberUserName=memberUserName;
     }
 
     public String getMemberId() {
@@ -119,5 +124,13 @@ public class MembersData {
 
     public void setMemberDOB(String memberDOB) {
         this.memberDOB = memberDOB;
+    }
+
+    public CheckBox getSelect() {
+        return select;
+    }
+
+    public void setSelect(CheckBox select) {
+        this.select = select;
     }
 }

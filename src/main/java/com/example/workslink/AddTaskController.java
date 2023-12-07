@@ -1,28 +1,19 @@
 //add_task.fxml controller
 package com.example.workslink;
 
-import com.jfoenix.controls.JFXBadge;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.controlsfx.control.PopOver;
-import org.controlsfx.control.TaskProgressView;
 
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddTaskController implements Initializable {
@@ -154,5 +145,27 @@ public class AddTaskController implements Initializable {
         // Pass the user information back to the HomePageController
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    public static class Server {
+        public static void main(String[] args) {
+
+            try {
+                System.out.println("Server is waiting for client...");
+                ServerSocket serverSocket = new ServerSocket(6600);
+
+                while (true){
+                    Socket socket = serverSocket.accept();
+                   Client client = new Client(socket);
+                    Thread t = new Thread(client);
+                    t.start();
+                }
+
+
+
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 }
