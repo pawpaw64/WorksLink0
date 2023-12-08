@@ -36,6 +36,8 @@ public class AddTaskController implements Initializable {
     private int taskID;
     @FXML
     private Label valid_label;
+    @FXML
+    private Label invalid_date_label;
 
 
     String[] priority={"Urgent","Averge","Minor"};
@@ -93,6 +95,7 @@ public class AddTaskController implements Initializable {
         this.taskStatus = (ChoiceBox<String>) taskStatus;
     }
     String name,description,statuss,priorityy,date;
+
 
 
     @FXML

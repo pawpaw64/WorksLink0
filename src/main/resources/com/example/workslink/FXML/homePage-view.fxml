@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
 <AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -146,11 +147,19 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="904.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
                <children>
+                  <Label layoutX="80.0" layoutY="14.0" prefHeight="38.0" prefWidth="231.0" stylesheets="@../CSS/homePageDesign.css" text="#Workspace">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="spaceTableView" layoutX="22.0" layoutY="128.0" prefHeight="200.0" prefWidth="769.0" stylesheets="@../CSS/table-view.css">
                   <TableView fx:id="spaceTableView" layoutX="22.0" layoutY="100.0" prefHeight="200.0" prefWidth="750.0" stylesheets="@../CSS/table-view.css">
                     <columns>
                       <TableColumn fx:id="SpaceName" prefWidth="179.0" text="Space Name" />
                       <TableColumn fx:id="SpaceStartDate" prefWidth="187.0" text="Start date" />
                         <TableColumn fx:id="SpaceEndDate" prefWidth="201.0" text="End date" />
+                        <TableColumn fx:id="SpaceTaskOngoing" prefWidth="171.0" text="Task ongoing" />
+                        <TableColumn fx:id="time" prefWidth="75.0" text="TIme" />
                         <TableColumn fx:id="TaskOngoing" prefWidth="171.0" text="Total Task" />
                     </columns>
                      <columnResizePolicy>

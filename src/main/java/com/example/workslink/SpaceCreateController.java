@@ -1,12 +1,14 @@
 package com.example.workslink;
 
 import com.example.workslink.DatabaseConnection;
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -15,9 +17,11 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import java.util.List;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 public class SpaceCreateController implements Initializable {
@@ -36,6 +40,8 @@ public class SpaceCreateController implements Initializable {
 
     @FXML
     private DatePicker spaceStartDate;
+    @FXML
+    private Label invalid_date_label;
 
     public TextField getSpaceDescription() {
         return spaceDescription;
@@ -71,6 +77,8 @@ public class SpaceCreateController implements Initializable {
 
     @FXML
     private Pane space_Pane1;
+
+
 
 
     public void space_circle(MouseEvent event) {
@@ -116,6 +124,45 @@ public class SpaceCreateController implements Initializable {
         }
     }
 
+    private boolean hasValidDateRange() {
+        if (spaceStartDate.getValue() == null || spaceEndDate.getValue() == null) {
+            return false;
+        }
+        final Date startDate = Date.valueOf(spaceStartDate.getValue());
+        final Date endDate = Date.valueOf(spaceEndDate.getValue());
+
+        //If endDate is greater than startDate return true (is valid) else return false (is invalid)
+        return endDate.compareTo(startDate) >= 0;
+    }
+
+    @FXML
+    private void onDateChange(javafx.event.ActionEvent event) {
+        if (hasValidDateRange()) {
+            invalid_date_label.setText(null);
+        }
+        else if (spaceStartDate.getValue() == null) {
+            invalid_date_label.setText("NO_START_DATE_ERROR");
+        }
+        else if (spaceEndDate.getValue() != null){
+            invalid_date_label.setText("INVALID_END_DATE");
+        }
+        else if (event == null) {
+            //This means the AddTaskButton button called this method and if so we must tell the user to specify the end_date
+            invalid_date_label.setText("NO_END_DATE_ERROR");
+
+        }
+
+        if (invalid_date_label.getText() != null) {
+            invalid_date_label.setVisible(true);
+        } else {
+            invalid_date_label.setVisible(false);
+        }
+    }
+    private String calcDays(DatePicker start_date, DatePicker end_date) throws IOException {
+        long intervalDays = (ChronoUnit.DAYS.between(start_date.getValue(), end_date.getValue()) + 1);
+        return String.valueOf(intervalDays);
+    }
+
     public void create_spaceBtn(ActionEvent actionEvent) {
 
         String sd = spaceDescription.getText();
@@ -129,6 +176,7 @@ public class SpaceCreateController implements Initializable {
                 Connection connection = databaseConnection.getConnection();
 
                 //String sql = "INSERT INTO user (email, userName,dob, password,questions,answer) VALUES (?, ?, ?, ?,?,?)";
+                String sql = "INSERT INTO space_info(user_id, space_name, Space_description, start_date, end_date,calcDays) VALUES(?,?,?,?,?,?)";
                 String sql = "INSERT INTO space_info(user_id, space_name, Space_description, start_date, end_date,assignee_id) VALUES(?,?,?,?,?,?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, String.valueOf(userId));
@@ -137,6 +185,8 @@ public class SpaceCreateController implements Initializable {
                     preparedStatement.setString(4, String.valueOf(Date.valueOf(spaceStartDate.getValue())));
                     preparedStatement.setString(5, String.valueOf(Date.valueOf(spaceEndDate.getValue())));
                     preparedStatement.setString(6, assignee);
+                    preparedStatement.setString(6, calcDays(spaceStartDate,spaceEndDate)+"Days");
+
 
                     int rowsInserted = preparedStatement.executeUpdate();
 
@@ -152,6 +202,8 @@ public class SpaceCreateController implements Initializable {
             }
         } else {
             System.out.println("hhh");
+        }
+        else {
         }
         Stage stage = (Stage) createSpaceBtn.getScene().getWindow();
         stage.close();
