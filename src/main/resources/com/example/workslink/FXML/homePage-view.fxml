@@ -121,7 +121,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox fx:id="spaceBox" layoutY="9.0" prefHeight="253.0" prefWidth="231.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
+                  <VBox fx:id="spaceBox" layoutY="9.0" prefHeight="253.0" prefWidth="231.0" styleClass="anchor-pane-with-border">
                      <children>
                         <Label onMouseClicked="#createNewSpace" prefHeight="25.0" prefWidth="229.0" text="Add Spaces" textAlignment="RIGHT" wrapText="true">
                            <font>
@@ -138,8 +138,12 @@
                               </ImageView>
                            </graphic>
                         </Label>
-                        <ListView fx:id="spaceListView" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="spaceListView" prefHeight="200.0" prefWidth="200.0" styleClass="anchor-pane-with-border" />
                      </children>
+                     <stylesheets>
+                        <URL value="@../CSS/homePageDesign.css" />
+                        <URL value="@../CSS/listView.css" />
+                     </stylesheets>
                   </VBox>
                </children>
             </AnchorPane>
@@ -152,8 +156,7 @@
                       <TableColumn fx:id="SpaceName" prefWidth="179.0" text="Space Name" />
                       <TableColumn fx:id="SpaceStartDate" prefWidth="187.0" text="Start date" />
                         <TableColumn fx:id="SpaceEndDate" prefWidth="201.0" text="End date" />
-                        <TableColumn fx:id="SpaceTaskOngoing" prefWidth="171.0" text="Task ongoing" />
-                        <TableColumn fx:id="time" prefWidth="75.0" text="TIme" />
+                        <TableColumn fx:id="time" prefWidth="75.0" text="Time" />
                         <TableColumn fx:id="TaskOngoing" prefWidth="171.0" text="Total Task" />
                     </columns>
                      <columnResizePolicy>
@@ -195,12 +198,25 @@
                   </ImageView>
                   <TableView layoutX="22.0" layoutY="345.0" prefHeight="200.0" prefWidth="769.0" stylesheets="@../CSS/table-view.css">
                     <columns>
-                      <TableColumn fx:id="AssignedSpaceName" prefWidth="116.0" text="Space Name" />
-                      <TableColumn fx:id="g" prefWidth="102.0" text="Task Ongoing" />
-                        <TableColumn prefWidth="108.0" text="Owner" />
+                      <TableColumn fx:id="AssignedSpaceName" prefWidth="232.0" text="Space Name" />
+                      <TableColumn fx:id="g" prefWidth="282.0" text="Task Ongoing" />
+                        <TableColumn prefWidth="247.0" text="Owner" />
                     </columns>
                   </TableView>
                   <Label layoutX="22.0" layoutY="314.0" prefHeight="22.0" prefWidth="163.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="ASSIGNED SPACES" />
+                  <Label layoutX="697.0" layoutY="46.0" onMouseClicked="#refresh" prefHeight="29.0" prefWidth="98.0" stylesheets="@../CSS/BasicDesign.css" text="Refresh">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Icon/reload.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="normal-label" />
+                        <String fx:value="fill-btn" />
+                     </styleClass>
+                  </Label>
                </children>
             </AnchorPane>
          </center>

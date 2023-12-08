@@ -35,7 +35,7 @@
                                     <Label layoutX="53.0" layoutY="69.0" text="Space description" />
                                     <Label layoutX="56.0" layoutY="233.0" text="Task history " />
                                     <ImageView fitHeight="51.0" fitWidth="54.0" layoutX="330.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                                    <TableView fx:id="spaceTableView" layoutX="65.0" layoutY="281.0" prefHeight="266.0" prefWidth="746.0">
+                                    <TableView fx:id="spaceTableView" layoutX="65.0" layoutY="281.0" prefHeight="266.0" prefWidth="746.0" stylesheets="@../CSS/table-view.css">
                                       <columns>
                                           <TableColumn fx:id="spaceID" prefWidth="75.0" text="ID" />
                                         <TableColumn fx:id="name" prefWidth="159.0" text="Task name" />
@@ -49,7 +49,7 @@
                                           <Image url="@../Icon/angle-small-left.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="65.0" layoutY="101.0" prefHeight="98.0" prefWidth="746.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <Label fx:id="space_description" layoutX="65.0" layoutY="101.0" prefHeight="98.0" prefWidth="746.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
                                  </children>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -76,9 +76,9 @@
                               <TableColumn prefWidth="203.0" text="Action" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addTask" layoutX="553.0" layoutY="24.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
+                        <Button fx:id="addTask" layoutX="641.0" layoutY="29.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
                         <Label layoutX="34.0" layoutY="19.0" prefHeight="44.0" prefWidth="120.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#TASK" />
-                        <Label layoutX="402.0" layoutY="24.0" prefHeight="34.0" prefWidth="146.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Refresh Task">
+                        <Label layoutX="465.0" layoutY="29.0" prefHeight="34.0" prefWidth="160.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Refresh Task" textFill="#fff8f8">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -114,7 +114,7 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="176.0" layoutY="102.0" startX="-121.9999771118164" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
+                              <Line endX="100.0" layoutX="176.0" layoutY="102.0" startX="-129.0" stroke="#90d8ff" strokeWidth="1.5" />
                               <Label alignment="CENTER" layoutX="332.0" layoutY="71.0" prefHeight="30.0" prefWidth="116.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Doing" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
