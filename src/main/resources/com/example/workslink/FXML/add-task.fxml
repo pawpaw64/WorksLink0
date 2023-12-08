@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="434.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AddTaskController">
+<AnchorPane prefHeight="434.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AddTaskController">
 
 
    <children>
@@ -44,7 +44,7 @@
       </Label>
       <ChoiceBox fx:id="taskPriority" layoutX="130.0" layoutY="178.0" prefHeight="26.0" prefWidth="395.0" stylesheets="@../CSS/design.css" />
       <ChoiceBox fx:id="taskStatus" layoutX="130.0" layoutY="229.0" prefHeight="26.0" prefWidth="395.0" stylesheets="@../CSS/design.css" />
-      <ChoiceBox fx:id="taskAssigned" layoutX="130.0" layoutY="280.0" prefHeight="26.0" prefWidth="395.0" stylesheets="@../CSS/design.css" />
+      <ChoiceBox fx:id="assignMember" layoutX="130.0" layoutY="280.0" prefHeight="26.0" prefWidth="395.0" stylesheets="@../CSS/design.css" />
       <Label layoutX="29.0" layoutY="328.0" text="Date:">
          <font>
             <Font name="System Bold" size="15.0" />

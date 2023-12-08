@@ -116,7 +116,7 @@ public class SpaceDetailsController implements Initializable {
                         )
                 )
         );
-        pieChart.getData().addAll(pieChartData);
+        //pieChart.getData().addAll(pieChartData);
 
         spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
         name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
