@@ -124,14 +124,14 @@ public class SpaceDetailsController implements Initializable {
 
 
 
-        pieChartData.forEach(data ->
-                data.nameProperty().bind(
-                        Bindings.concat(
-                                data.getName(),"amount",data.pieValueProperty()
-                        )
-                )
-        );
-        pieChart.getData().addAll(pieChartData);
+//        pieChartData.forEach(data ->
+//                data.nameProperty().bind(
+//                        Bindings.concat(
+//                                data.getName(),"amount",data.pieValueProperty()
+//                        )
+//                )
+//        );
+//        pieChart.getData().addAll(pieChartData);
 
     }
 

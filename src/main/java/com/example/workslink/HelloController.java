@@ -201,6 +201,13 @@ public class HelloController {
                     int rowsInserted = preparedStatement.executeUpdate();
                     if (rowsInserted > 0) {
                         su_valid_label.setText("User registration successful!");
+                        su_valid_label.setVisible(true);
+                        su_email_TextField.clear();
+                        su_username_TextFIeld.clear();
+                        su_bdate.getEditor().clear(); // Clear the DatePicker
+                        su_password.clear();
+                        su_questions.getSelectionModel().clearSelection();
+                        su_answers.clear();
                         delay(su_valid_label);
                     }
                 }
@@ -208,6 +215,7 @@ public class HelloController {
                 e.printStackTrace();
             }
         }
+
     }
 
     @FXML
@@ -235,6 +243,8 @@ public class HelloController {
                             int user_id=rs.getInt("id");
                             String bio=rs.getString("user_bio");
                             byte[] user_img=rs.getBytes("user_img");
+                            login_username.clear();
+                            login_password.clear();
                             // Create a User instance
                             User loggedInUser = new User(email, userName, dob,user_id,bio,user_img);
 

@@ -210,12 +210,14 @@ public class HomePageController extends HelloController implements Initializable
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
-//            SpaceCreateController spaceCreateController = loader.getController();
-//            spaceCreateController.setUserID(id);
+           SpaceCreateController spaceCreateController = loader.getController();
+           spaceCreateController.setUserID(id);
             newStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     @FXML
@@ -238,6 +240,36 @@ public class HomePageController extends HelloController implements Initializable
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private void getVbox() {
+        try {
+
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            //String sql = "SELECT space_name FROM space_info";
+            String sql = "SELECT space_name FROM space_info WHERE user_id = " + id;
+
+            ResultSet rs = statement.executeQuery(sql);
+            ObservableList<String> spaceNames = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                spaceCount++;
+                String spaceName = rs.getString("Space_name");
+                spaceNames.add(spaceName);
+            }
+
+            statement.close();
+            connection.close();
+
+            // Set the items in the ListView
+            spaceListView.setItems(spaceNames);
+
+        statement.close();
+        connection.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
     private void getSpaceVbox() {
         try {
@@ -307,7 +339,9 @@ public class HomePageController extends HelloController implements Initializable
         TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
-        getSpaceData();
+        getSpaceTableData();
+        getVbox();
+
 
 
     }

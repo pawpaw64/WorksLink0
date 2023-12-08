@@ -68,12 +68,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="34.0" layoutY="71.0" prefHeight="200.0" prefWidth="823.0" stylesheets="@../CSS/table-view.css">
+                        <TableView layoutX="34.0" layoutY="67.0" prefHeight="204.0" prefWidth="843.0" stylesheets="@../CSS/table-view.css">
                           <columns>
                             <TableColumn prefWidth="160.0" text="Task Name" />
                             <TableColumn prefWidth="186.0" text="Status" />
-                              <TableColumn prefWidth="184.0" text="Priority" />
-                              <TableColumn prefWidth="203.0" text="Action" />
+                              <TableColumn prefWidth="247.0" text="Priority" />
+                              <TableColumn prefWidth="248.0" text="Action" />
                           </columns>
                         </TableView>
                         <Button fx:id="addTask" layoutX="641.0" layoutY="29.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
