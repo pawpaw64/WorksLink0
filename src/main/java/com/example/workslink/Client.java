@@ -1,12 +1,8 @@
-
 package com.example.workslink;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Client implements Runnable {
@@ -64,25 +60,6 @@ public class Client implements Runnable {
                 writer.flush();
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void getChatDatabase() {
-        try {
-            System.out.println("Getting Data From Database");
-            DatabaseConnection databaseConnection = new DatabaseConnection();
-            Connection connection = databaseConnection.getConnection();
-            Statement statement = connection.createStatement();
-            String sql = "SELECT previousChat FROM chat";
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                String previousChat = rs.getString("previousChat"+"\n");
-            }
-
-            statement.close();
-            connection.close();
-        } catch (Exception e) {
             e.printStackTrace();
         }
     }

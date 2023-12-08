@@ -36,8 +36,6 @@ public class AddTaskController implements Initializable {
     private int taskID;
     @FXML
     private Label valid_label;
-    @FXML
-    private Label invalid_date_label;
 
 
     String[] priority={"Urgent","Averge","Minor"};
@@ -45,7 +43,6 @@ public class AddTaskController implements Initializable {
 
     @FXML
     private Button closeButton;
-    private int spaceId;
 
 
     public ChoiceBox<String> getTaskAssigned() {
@@ -98,7 +95,6 @@ public class AddTaskController implements Initializable {
     String name,description,statuss,priorityy,date;
 
 
-
     @FXML
     private void saveTaskOnAction(ActionEvent e){
         name = taskName.getText();
@@ -115,15 +111,15 @@ public class AddTaskController implements Initializable {
             try{
                 DatabaseConnection databaseConnection = new DatabaseConnection();
                 Connection connection = databaseConnection.getConnection();
-                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status)VALUES (?,?, ?, ?, ?, ?)";
+               // String sql = "INSERT INTO task(name,description,startDate)VALUES (?, ?, ?)";
+                String sql = "INSERT INTO task_info(task_name,task_description,task_start_date,priority,status)VALUES (?, ?, ?, ?, ?)";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                    preparedStatement.setString(1, String.valueOf(spaceId));
-                    preparedStatement.setString(2,name);
-                    preparedStatement.setString(3,description);
-                    preparedStatement.setString(4,date);
-                    preparedStatement.setString(5,priorityy);
-                    preparedStatement.setString(6,statuss);
+                    preparedStatement.setString(1,name);
+                    preparedStatement.setString(2,description);
+                    preparedStatement.setString(3,date);
+                    preparedStatement.setString(4,priorityy);
+                    preparedStatement.setString(5,statuss);
                     System.out.println(name+description+date);
 
                     preparedStatement.executeUpdate();
@@ -151,7 +147,25 @@ public class AddTaskController implements Initializable {
         stage.close();
     }
 
-    public void setSpaceID(int spaceId) {
-        this.spaceId=spaceId;
+    public static class Server {
+        public static void main(String[] args) {
+
+            try {
+                System.out.println("Server is waiting for client...");
+                ServerSocket serverSocket = new ServerSocket(6600);
+
+                while (true){
+                    Socket socket = serverSocket.accept();
+                   Client client = new Client(socket);
+                    Thread t = new Thread(client);
+                    t.start();
+                }
+
+
+
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 }
