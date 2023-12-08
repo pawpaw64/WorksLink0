@@ -294,10 +294,23 @@ public class HomePageController extends HelloController implements Initializable
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
-            newStage.show();
+            applyBlurEffect();
+            newStage.showAndWait();
+            removeBlurEffect();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void refresh(){
+        SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
+        SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
+        time.setCellValueFactory(new PropertyValueFactory<>("time"));
+        spaceTableView.setEditable(false);
+        getSpaceTableData();
+        getSpaceVbox();
+
     }
     int spaceCount;
     private void getSpaceData() {

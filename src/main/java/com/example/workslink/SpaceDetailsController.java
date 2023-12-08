@@ -102,26 +102,26 @@ public class SpaceDetailsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Todo",100),
-                        new PieChart.Data("Doing",30),
-                        new PieChart.Data("Done",20));
-
-
-        pieChartData.forEach(data ->
-                data.nameProperty().bind(
-                        Bindings.concat(
-                                data.getName(),"amount",data.pieValueProperty()
-                        )
-                )
-        );
-        pieChart.getData().addAll(pieChartData);
+//        ObservableList<PieChart.Data> pieChartData =
+//                FXCollections.observableArrayList(
+//                        new PieChart.Data("Todo",100),
+//                        new PieChart.Data("Doing",30),
+//                        new PieChart.Data("Done",20));
+//
+//
+//        pieChartData.forEach(data ->
+//                data.nameProperty().bind(
+//                        Bindings.concat(
+//                                data.getName(),"amount",data.pieValueProperty()
+//                        )
+//                )
+//        );
+//        pieChart.getData().addAll(pieChartData);
 
         spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
         name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
         spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
-        spaceProgress.setCellValueFactory(new PropertyValueFactory<>("spaceProgress"));
+       // spaceProgress.setCellValueFactory(new PropertyValueFactory<>("spaceProgress"));
 
         spaceTableView.setEditable(false);
         getSpaceTableData();

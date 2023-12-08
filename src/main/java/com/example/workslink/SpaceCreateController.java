@@ -167,7 +167,7 @@ public class SpaceCreateController implements Initializable {
 
         String sd = spaceDescription.getText();
         System.out.println(sd);
-        String assignee=(String) assignedTo.getValue();
+        //String assignee=(String) assignedTo.getValue();
 
         if (getSpaceName().getText() != null || getSpaceDescription().getText().isEmpty() || spaceStartDate.getValue() != null ||
                 spaceEndDate.getValue() != null) {
@@ -183,7 +183,7 @@ public class SpaceCreateController implements Initializable {
                     preparedStatement.setString(3, spaceDescription.getText());
                     preparedStatement.setString(4, String.valueOf(Date.valueOf(spaceStartDate.getValue())));
                     preparedStatement.setString(5, String.valueOf(Date.valueOf(spaceEndDate.getValue())));
-                    preparedStatement.setString(6, assignee);
+                   // preparedStatement.setString(6, assignee);
                     preparedStatement.setString(6, calcDays(spaceStartDate,spaceEndDate)+"Days");
 
 
@@ -210,8 +210,8 @@ public class SpaceCreateController implements Initializable {
     public void setUserID(int id) throws SQLException {
         this.userId = id;
         getAssigneeList();
-        assignedTo.getItems().addAll(assigneName);
-        System.out.println(assignedTo.getItems());
+        //assignedTo.getItems().addAll(assigneName);
+      //  System.out.println(assignedTo.getItems());
     }
 
     @FXML
