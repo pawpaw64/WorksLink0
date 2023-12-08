@@ -177,7 +177,6 @@ public class SpaceCreateController implements Initializable {
 
                 //String sql = "INSERT INTO user (email, userName,dob, password,questions,answer) VALUES (?, ?, ?, ?,?,?)";
                 String sql = "INSERT INTO space_info(user_id, space_name, Space_description, start_date, end_date,calcDays) VALUES(?,?,?,?,?,?)";
-                String sql = "INSERT INTO space_info(user_id, space_name, Space_description, start_date, end_date,assignee_id) VALUES(?,?,?,?,?,?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, String.valueOf(userId));
                     preparedStatement.setString(2, getSpaceName().getText());
@@ -202,8 +201,6 @@ public class SpaceCreateController implements Initializable {
             }
         } else {
             System.out.println("hhh");
-        }
-        else {
         }
         Stage stage = (Stage) createSpaceBtn.getScene().getWindow();
         stage.close();
