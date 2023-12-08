@@ -31,7 +31,12 @@
          </graphic></Button>
 
 
-      <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#homeButtonOnAction" text="Home" />
+      <Button fx:id="homeButton" layoutX="529.0" layoutY="14.0" mnemonicParsing="false" onAction="#homeButtonOnAction" text="Home" />
+      <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icon/angle-small-left.png" />
+         </image>
+      </ImageView>
 
    </children>
 </Pane>

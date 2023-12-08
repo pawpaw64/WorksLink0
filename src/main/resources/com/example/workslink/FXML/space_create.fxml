@@ -65,7 +65,7 @@
          </image></ImageView>
       <Label layoutX="364.0" layoutY="273.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Start Date" />
       <Label layoutX="364.0" layoutY="341.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="End Date" />
-      <DatePicker fx:id="spaceStartDate" layoutX="364.0" layoutY="307.0" prefHeight="26.0" prefWidth="240.0" stylesheets="@../CSS/datepicker.css">
+      <DatePicker fx:id="spaceStartDate" layoutX="364.0" layoutY="307.0" onAction="#onDateChange" prefHeight="26.0" prefWidth="240.0" stylesheets="@../CSS/datepicker.css">
          <styleClass>
             <String fx:value="color-btn" />
             <String fx:value="data-picker-list-cell" />
@@ -81,7 +81,7 @@
             <String fx:value="spinner-label" />
             <String fx:value="week-number-cell" />
          </styleClass></DatePicker>
-      <DatePicker fx:id="spaceEndDate" layoutX="364.0" layoutY="364.0" prefHeight="26.0" prefWidth="240.0" stylesheets="@../CSS/datepicker.css">
+      <DatePicker fx:id="spaceEndDate" layoutX="364.0" layoutY="364.0" onAction="#onDateChange" prefHeight="26.0" prefWidth="240.0" stylesheets="@../CSS/datepicker.css">
          <styleClass>
             <String fx:value="color-btn" />
             <String fx:value="data-picker-list-cell" />
@@ -104,5 +104,10 @@
          </image>
       </ImageView>
       <TextField fx:id="spaceDescription" layoutX="40.0" layoutY="355.0" prefHeight="70.0" prefWidth="294.0" styleClass="tx" stylesheets="@../CSS/design.css" />
+      <Label fx:id="invalid_date_label" layoutX="301.0" layoutY="458.0" prefHeight="18.0" prefWidth="303.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
