@@ -45,8 +45,6 @@ public class SpaceDetailsController implements Initializable {
     private TableColumn<TaskHistoryData,String> name;
     @FXML
     private TableColumn<TaskHistoryData,String> spaceStatus;
-//    @FXML
-//    private TableColumn<TaskHistoryData,String> spaceProgress;
     @FXML
     private TableColumn<TaskHistoryData,String> spaceID;
     private TextArea textArea;
@@ -59,7 +57,7 @@ public class SpaceDetailsController implements Initializable {
     private int userId;
     String spaceName;
     String  spaceDes;
-    int spaceId;
+    String spaceId;
     @FXML
     private Label space_description;
     @FXML
@@ -74,7 +72,7 @@ public class SpaceDetailsController implements Initializable {
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
             AddTaskController addTaskController=loader.getController();
-            addTaskController.setSpaceID(spaceId);
+            addTaskController.setSpaceID(Integer.parseInt(spaceId));
 
             newStage.showAndWait();
 
@@ -141,17 +139,14 @@ public class SpaceDetailsController implements Initializable {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_Id, space_name, space_description FROM space_info WHERE user_id= "+userId;
+            String sql = "SELECT space_name, space_description FROM space_info WHERE space_Id = "+spaceId;
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 spaceName = rs.getString("space_name");
                 spaceDes  = rs.getString("space_description");
-                spaceId=rs.getInt("space_Id");
                 space_description.setText(spaceDes);
+                System.out.println(spaceName);
                 System.out.println(spaceDes);
-//                String task_details = rs.getString("task_description");
-//                String status = rs.getString("status");
-//                String priority = rs.getString("priority");
 
             }
 
@@ -199,6 +194,13 @@ public class SpaceDetailsController implements Initializable {
 
     public void setUserId(int userId) {
         this.userId=userId;
+
+
+
+    }
+
+    public void setSpaceID(String spaceid) {
+        this.spaceId= spaceid;
         spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
         name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
         spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
@@ -208,5 +210,6 @@ public class SpaceDetailsController implements Initializable {
         getSpaces();
         getSpaceTableData();
 
+        System.out.println(spaceId);
     }
 }

@@ -271,47 +271,122 @@ public class HomePageController extends HelloController implements Initializable
         e.printStackTrace();
     }
     }
-    private void getSpaceVbox() {
-        try {
+    String spaceid;
+//    private void getSpaceVbox() {
+//        try {
+//
+//            DatabaseConnection databaseConnection = new DatabaseConnection();
+//            Connection connection = databaseConnection.getConnection();
+//            Statement statement = connection.createStatement();
+//            //String sql = "SELECT space_name FROM space_info";
+//            String sql = "SELECT space_name FROM space_info WHERE user_id = " + id;
+//
+//            ResultSet rs = statement.executeQuery(sql);
+//            ObservableList<String> spaceNames = FXCollections.observableArrayList();
+//
+//            while (rs.next()) {
+//                spaceCount++;
+//                String spaceName = rs.getString("Space_name");
+//                spaceNames.add(spaceName);
+//            }
+//
+//            statement.close();
+//            connection.close();
+//
+//            // Set the items in the ListView
+//            spaceListView.setItems(spaceNames);
+//
+//            // Add a listener to handle item clicks
+//            spaceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//                try {
+//                    if (newValue != null) {
+//                        //String sql = "SELECT space_name FROM space_info";
+//                        String sql2 = "SELECT space_Id FROM space_info WHERE user_id = " + id + " AND space_name = '" + newValue + "'";
+//
+//                        ResultSet rs2 = statement.executeQuery(sql2);
+//                        while (rs2.next()) {
+//
+//                             spaceid = rs2.getString("space_Id");
+//
+//                        }
+//                        handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid); // Call a method to handle the selected item
+//                    }
+//                }catch (Exception e) {
+//                    System.out.println("nkjui");
+//                }
+//            });
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+private void getSpaceVbox() {
+    try {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        Connection connection = databaseConnection.getConnection();
+        Statement statement = connection.createStatement();
 
-            DatabaseConnection databaseConnection = new DatabaseConnection();
-            Connection connection = databaseConnection.getConnection();
-            Statement statement = connection.createStatement();
-            //String sql = "SELECT space_name FROM space_info";
-            String sql = "SELECT space_name FROM space_info WHERE user_id = " + id;
+        String sql = "SELECT space_name FROM space_info WHERE user_id = " + id;
+        ResultSet rs = statement.executeQuery(sql);
+        ObservableList<String> spaceNames = FXCollections.observableArrayList();
 
-            ResultSet rs = statement.executeQuery(sql);
-            ObservableList<String> spaceNames = FXCollections.observableArrayList();
-
-            while (rs.next()) {
-                spaceCount++;
-                String spaceName = rs.getString("Space_name");
-                spaceNames.add(spaceName);
-            }
-
-            statement.close();
-            connection.close();
-
-            // Set the items in the ListView
-            spaceListView.setItems(spaceNames);
-
-            // Add a listener to handle item clicks
-            spaceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue != null) {
-                    handleSpaceItemClick(newValue, currentUser.getUser_id()); // Call a method to handle the selected item
-                }
-            });
-
-
-            statement.close();
-            connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (rs.next()) {
+            spaceCount++;
+            String spaceName = rs.getString("Space_name");
+            spaceNames.add(spaceName);
         }
 
+        // Close the ResultSet, but keep the statement and connection open for the next query
+         rs.close();
+        statement.close();
+        connection.close();
+
+
+        // Set the items in the ListView
+        spaceListView.setItems(spaceNames);
+
+        // Add a listener to handle item clicks
+        spaceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                if (newValue != null) {
+                    getSpaceInfo(newValue);
+                    handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Close the statement and connection after using them
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-    private void handleSpaceItemClick(String newValue, int userId) {
-        System.out.println(newValue);
+}
+
+    public void getSpaceInfo(String value) throws SQLException {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        Connection connection = databaseConnection.getConnection();
+        Statement statement = connection.createStatement();
+
+        String sql = "SELECT space_Id FROM space_info WHERE user_id = " + id + " AND space_name = '" + value + "'";
+        ResultSet rs = statement.executeQuery(sql);
+        ObservableList<String> spaceNames = FXCollections.observableArrayList();
+
+        while (rs.next()) {
+            spaceid = rs.getString("Space_Id");
+
+        }
+
+        // Close the ResultSet, but keep the statement and connection open for the next query
+        rs.close();
+        statement.close();
+        connection.close();
+
+
+    }
+    private void handleSpaceItemClick(String newValue, int userId, String spaceid) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
             Parent root = loader.load();
@@ -320,6 +395,7 @@ public class HomePageController extends HelloController implements Initializable
             SpaceDetailsController SpaceDetailsController = loader.getController();
             SpaceDetailsController.setAreaSpaceName(newValue);
             SpaceDetailsController.setUserId(userId);
+            SpaceDetailsController.setSpaceID(spaceid);
 
             // Create a new stage for the new scene
             Stage newStage = new Stage();
