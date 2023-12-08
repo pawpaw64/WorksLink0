@@ -59,6 +59,8 @@ public class HomePageController extends HelloController implements Initializable
 
     @FXML
     private TableColumn<SpaceInfo, String> SpaceStartDate;
+    @FXML
+    private TableColumn<SpaceInfo, String> time;
 
     @FXML
     private TableColumn<SpaceInfo, String> SpaceTaskOngoing;
@@ -306,15 +308,16 @@ public class HomePageController extends HelloController implements Initializable
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name,start_date,end_date FROM space_info WHERE user_id = " + id;
+            String sql = "SELECT space_name,start_date,end_date,calcDays FROM space_info WHERE user_id = " + id;
 
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 String spaceName = rs.getString("space_name");
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
-                System.out.println(startDate + "\n" + spaceName + endDate);
-                SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate);
+                String calcDays = rs.getString("calcDays");
+                System.out.println(startDate + "  " + spaceName+ "  "  + endDate+ "  " +calcDays);
+                SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate,calcDays);
                 spaceTableView.getItems().add(singleSpace);
             }
 
@@ -338,6 +341,7 @@ public class HomePageController extends HelloController implements Initializable
         SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
         SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
 
 
