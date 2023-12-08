@@ -1,6 +1,8 @@
 //add_task.fxml controller
 package com.example.workslink;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +16,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddTaskController implements Initializable {
@@ -33,6 +37,13 @@ public class AddTaskController implements Initializable {
 
     @FXML
     private ChoiceBox<String> taskStatus;
+
+
+
+    @FXML
+    private ChoiceBox<String> assignMember;
+
+
     private int taskID;
     @FXML
     private Label valid_label;
@@ -95,7 +106,7 @@ public class AddTaskController implements Initializable {
     public void setTaskStatus(ChoiceBox<?> taskStatus) {
         this.taskStatus = (ChoiceBox<String>) taskStatus;
     }
-    String name,description,statuss,priorityy,date;
+    String name,description,statuss,priorityy,date,assigned;
 
 
 
@@ -143,12 +154,38 @@ public class AddTaskController implements Initializable {
         taskName.getText();
         taskPriority.getItems().addAll(priority);
         taskStatus.getItems().addAll(status);
+
+
+        // Initialize the assignMember ChoiceBox with userNames
+        List<String> userNames = getUserNamesFromDatabase();
+        assignMember.setItems(FXCollections.observableArrayList(userNames));
+
     }
     @FXML
     private void goBack(MouseEvent event) throws IOException {
         // Pass the user information back to the HomePageController
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+
+    private List<String> getUserNamesFromDatabase() {
+        List<String> userNames = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String sql = "SELECT userName FROM members";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    String userName = resultSet.getString("userName");
+                    userNames.add(userName);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userNames;
     }
 
     public void setSpaceID(int spaceId) {

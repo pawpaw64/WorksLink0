@@ -41,7 +41,7 @@
                                         <TableColumn fx:id="name" prefWidth="159.0" text="Task name" />
                                           <TableColumn fx:id="spaceStatus" minWidth="5.60003662109375" prefWidth="165.0" text="Priority" />
                                           <TableColumn prefWidth="178.0" text="Assigned To" />
-                                          <TableColumn prefWidth="157.0" text="Status" />
+                                          <TableColumn fx:id="spaceProgress" prefWidth="157.0" text="Status" />
                                       </columns>
                                     </TableView>
                                     <ImageView fx:id="homeButton" fitHeight="29.0" fitWidth="27.0" layoutX="26.0" layoutY="18.0" onMouseClicked="#homeButtonOnAction" pickOnBounds="true" preserveRatio="true" styleClass="icon">

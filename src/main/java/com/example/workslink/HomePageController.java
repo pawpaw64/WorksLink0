@@ -210,14 +210,12 @@ public class HomePageController extends HelloController implements Initializable
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
-            SpaceCreateController spaceCreateController = loader.getController();
-            spaceCreateController.setUserID(id);
+//            SpaceCreateController spaceCreateController = loader.getController();
+//            spaceCreateController.setUserID(id);
             newStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
     @FXML
