@@ -49,7 +49,7 @@
                                           <Image url="@../Icon/angle-small-left.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="65.0" layoutY="101.0" prefHeight="98.0" prefWidth="746.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <Label fx:id="space_description" layoutX="65.0" layoutY="101.0" prefHeight="98.0" prefWidth="746.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
                                  </children>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />

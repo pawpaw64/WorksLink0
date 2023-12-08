@@ -289,6 +289,7 @@ public class HomePageController extends HelloController implements Initializable
             // Pass the selected space name to the controller if needed
             SpaceDetailsController SpaceDetailsController = loader.getController();
             SpaceDetailsController.setAreaSpaceName(newValue);
+            SpaceDetailsController.setUserId(userId);
 
             // Create a new stage for the new scene
             Stage newStage = new Stage();
@@ -308,12 +309,13 @@ public class HomePageController extends HelloController implements Initializable
         TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
-        getSpaceTableData();
-        getSpaceVbox();
+        getSpaceData();
+
 
     }
     int spaceCount;
     private void getSpaceData() {
+
         getSpaceTableData();
         getSpaceVbox();
     }
