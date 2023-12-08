@@ -1,0 +1,49 @@
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 5px 10px;
+    -fx-border-color: transparent;
+}
+
+.list-view .list-cell:odd {
+    -fx-background-color: #93f9b911;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #1dbbdd11;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #93f9b911;
+}
+
+.list-view .list-cell:selected {
+    -fx-text-fill: black; /* Set the desired text color */
+}
+
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:vertical .track,
+.list-view .scroll-bar:vertical .track-background,
+.list-view .scroll-bar:horizontal,
+.list-view .scroll-bar:horizontal .track,
+.list-view .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.list-view .scroll-bar .increment-button,
+.list-view .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: linear-gradient(to bottom right, #0dffea, #0dffea);
+}
+
+.list-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: linear-gradient(to bottom right, #0dffea, #0dffea);
+}
+
+.list-view .list-cell:filled:selected {
+    -fx-background-color:#0dffea ;
+    -fx-background-radius: 15px;
+}

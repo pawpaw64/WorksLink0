@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -59,9 +60,11 @@ public class HomePageController extends HelloController implements Initializable
 
     @FXML
     private TableColumn<SpaceInfo, String> SpaceStartDate;
+    @FXML
+    private TableColumn<SpaceInfo, String> time;
 
     @FXML
-    private TableColumn<SpaceInfo, String> SpaceTaskOngoing;
+    private TableColumn<SpaceInfo, String> TaskOngoing;
     @FXML
     private TableView<SpaceInfo> spaceTableView;
     @FXML
@@ -213,6 +216,8 @@ public class HomePageController extends HelloController implements Initializable
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     @FXML
@@ -284,18 +289,33 @@ public class HomePageController extends HelloController implements Initializable
             // Pass the selected space name to the controller if needed
             SpaceDetailsController SpaceDetailsController = loader.getController();
             SpaceDetailsController.setAreaSpaceName(newValue);
+            SpaceDetailsController.setUserId(userId);
 
             // Create a new stage for the new scene
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
-            newStage.show();
+            applyBlurEffect();
+            newStage.showAndWait();
+            removeBlurEffect();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void refresh(){
+        SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
+        SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
+        time.setCellValueFactory(new PropertyValueFactory<>("time"));
+        spaceTableView.setEditable(false);
+        getSpaceData();
+
+
+    }
     int spaceCount;
     private void getSpaceData() {
+
         getSpaceTableData();
         getSpaceVbox();
     }
@@ -306,15 +326,16 @@ public class HomePageController extends HelloController implements Initializable
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name,start_date,end_date FROM space_info WHERE user_id = " + id;
+            String sql = "SELECT space_name,start_date,end_date,calcDays FROM space_info WHERE user_id = " + id;
 
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 String spaceName = rs.getString("space_name");
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
-                System.out.println(startDate + "\n" + spaceName + endDate);
-                SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate);
+                String calcDays = rs.getString("calcDays");
+                System.out.println(startDate + "  " + spaceName+ "  "  + endDate+ "  " +calcDays);
+                SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate,calcDays);
                 spaceTableView.getItems().add(singleSpace);
             }
 
@@ -338,6 +359,8 @@ public class HomePageController extends HelloController implements Initializable
         SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
         SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
+        time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
 
 
