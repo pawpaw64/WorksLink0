@@ -3,13 +3,17 @@ package com.example.workslink;
 
 import com.example.workslink.DatabaseConnection;
 import com.example.workslink.TaskHistoryData;
+import javafx.animation.TranslateTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -20,8 +24,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -101,35 +107,55 @@ public class SpaceDetailsController implements Initializable {
     }
     @FXML
     private PieChart pieChart;
+    @FXML
+    private Label percentlebel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//        ObservableList<PieChart.Data> pieChartData =
-//                FXCollections.observableArrayList(
-//                        new PieChart.Data("Todo",100),
-//                        new PieChart.Data("Doing",30),
-//                        new PieChart.Data("Done",20));
-//
-//
-//        pieChartData.forEach(data ->
-//                data.nameProperty().bind(
-//                        Bindings.concat(
-//                                data.getName(),"amount",data.pieValueProperty()
-//                        )
-//                )
-//        );
-//        pieChart.getData().addAll(pieChartData);
+        ObservableList<PieChart.Data>pieChartData =
+                FXCollections.observableArrayList(
+                  new PieChart.Data("Todo",50),
+                  new PieChart.Data("Doing",30),
+                  new PieChart.Data("Done",25)
+                );
+        pieChart.setData(pieChartData);
+        pieChart.setTitle("Stats");
 
+        pieChart.setLegendSide(Side.RIGHT);
+        pieChart.setClockwise(false);
 
+        percentlebel.setTextFill(Color.BLACK);
+        percentlebel.setStyle("-fx-font: 15 arial");
 
-//        pieChartData.forEach(data ->
-//                data.nameProperty().bind(
-//                        Bindings.concat(
-//                                data.getName(),"amount",data.pieValueProperty()
-//                        )
-//                )
-//        );
-//        pieChart.getData().addAll(pieChartData);
+        for(final PieChart.Data data : pieChart.getData()){
+            data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+//                            percentlebel.setTranslateX(event.getSceneX()- percentlebel.getLayoutX());
+//                            percentlebel.setTranslateY(event.getSceneY()- percentlebel.getLayoutY());
+//                            percentlebel.setText(String.valueOf(data.getPieValue())+ "%");
+
+                            Bounds b1 = data.getNode().getBoundsInLocal();
+                            double newX = (b1.getHeight()) / 2.0 + b1.getMinX();
+                            System.out.println(b1.getMinX());
+                            double newY = (b1.getHeight())/ 2.0 + b1.getMinY();
+
+                            data.getNode().setTranslateX(0);
+                            data.getNode().setTranslateY(0);
+                            TranslateTransition tt = new TranslateTransition(
+                                    Duration.millis(1500), data.getNode()
+                            );
+                            tt.setByX(newX);
+                            tt.setByY(newY);
+                            tt.setAutoReverse(true);
+                            tt.setCycleCount(2);
+                            tt.play();
+
+                        }
+                    });
+        }
+
 
     }
 
@@ -204,7 +230,6 @@ public class SpaceDetailsController implements Initializable {
         spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
         name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
         spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
-        // spaceProgress.setCellValueFactory(new PropertyValueFactory<>("spaceProgress"));
 
         spaceTableView.setEditable(false);
         getSpaces();
