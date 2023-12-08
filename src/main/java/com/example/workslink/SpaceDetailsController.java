@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -151,9 +153,10 @@ public class SpaceDetailsController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
-    private Button homeButton;
-    public void homeButtonOnAction(ActionEvent e) throws Exception{
+    private ImageView homeButton;
+    public void homeButtonOnAction(MouseEvent event) throws Exception{
         Stage stage = (Stage) homeButton.getScene().getWindow();
         stage.close();
     }

@@ -7,8 +7,16 @@ public class SpaceInfo {
     private String spaceDescription;
     private SimpleStringProperty startDate;
     private SimpleStringProperty endDate;
-    private int assigneeId;
     private String spaceColor;
+    private  int TaskOngoing;
+
+    public int getTaskOngoing() {
+        return TaskOngoing;
+    }
+
+    public void setTaskOngoing(int taskOngoing) {
+        TaskOngoing = taskOngoing;
+    }
 
     public SpaceInfo(String spaceName, String startDate, String endDate) {
         this.spaceName = new SimpleStringProperty(spaceName);
@@ -59,15 +67,6 @@ public class SpaceInfo {
     public void setEndDate(String endDate) {
         this.endDate.set(endDate);
     }
-
-    public int getAssigneeId() {
-        return assigneeId;
-    }
-
-    public void setAssigneeId(int assigneeId) {
-        this.assigneeId = assigneeId;
-    }
-
     public String getSpaceColor() {
         return spaceColor;
     }

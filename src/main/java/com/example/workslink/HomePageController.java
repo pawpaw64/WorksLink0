@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -61,7 +62,7 @@ public class HomePageController extends HelloController implements Initializable
     private TableColumn<SpaceInfo, String> SpaceStartDate;
 
     @FXML
-    private TableColumn<SpaceInfo, String> SpaceTaskOngoing;
+    private TableColumn<SpaceInfo, String> TaskOngoing;
     @FXML
     private TableView<SpaceInfo> spaceTableView;
     @FXML
@@ -213,6 +214,8 @@ public class HomePageController extends HelloController implements Initializable
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     @FXML
@@ -338,6 +341,7 @@ public class HomePageController extends HelloController implements Initializable
         SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
         SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
         spaceTableView.setEditable(false);
 
 

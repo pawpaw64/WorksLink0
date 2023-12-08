@@ -4,9 +4,8 @@ import com.example.workslink.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -14,13 +13,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import java.util.List;
 
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SpaceCreateController implements Initializable {
-
+    @FXML
+    private ChoiceBox<String> assignedTo;
 
     public Button createSpaceBtn;
     @FXML
@@ -90,28 +92,51 @@ public class SpaceCreateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
     }
+    List<String>assigneName=new ArrayList<>();
+
     int userId;
+
+    private void getAssigneeList() throws SQLException {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName FROM members WHERE userID = ?");
+            preparedStatement.setInt(1, userId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                assigneName.add(rs.getString("userName"));
+                System.out.println(assigneName);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void create_spaceBtn(ActionEvent actionEvent) {
 
-        String sd=spaceDescription.getText();
+        String sd = spaceDescription.getText();
         System.out.println(sd);
+        String assignee=(String) assignedTo.getValue();
 
-        if(getSpaceName().getText()!=null||getSpaceDescription().getText().isEmpty()||spaceStartDate.getValue()!=null||
-            spaceEndDate.getValue()!=null) {
+        if (getSpaceName().getText() != null || getSpaceDescription().getText().isEmpty() || spaceStartDate.getValue() != null ||
+                spaceEndDate.getValue() != null) {
             try {
                 DatabaseConnection databaseConnection = new DatabaseConnection();
                 Connection connection = databaseConnection.getConnection();
 
                 //String sql = "INSERT INTO user (email, userName,dob, password,questions,answer) VALUES (?, ?, ?, ?,?,?)";
-                String sql = "INSERT INTO space_info(user_id, space_name, Space_description, start_date, end_date) VALUES(?,?,?,?,?)";
+                String sql = "INSERT INTO space_info(user_id, space_name, Space_description, start_date, end_date,assignee_id) VALUES(?,?,?,?,?,?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, String.valueOf(userId));
                     preparedStatement.setString(2, getSpaceName().getText());
                     preparedStatement.setString(3, spaceDescription.getText());
                     preparedStatement.setString(4, String.valueOf(Date.valueOf(spaceStartDate.getValue())));
                     preparedStatement.setString(5, String.valueOf(Date.valueOf(spaceEndDate.getValue())));
+                    preparedStatement.setString(6, assignee);
 
                     int rowsInserted = preparedStatement.executeUpdate();
 
@@ -125,18 +150,21 @@ public class SpaceCreateController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else {
+        } else {
             System.out.println("hhh");
         }
-        Stage stage=(Stage) createSpaceBtn.getScene().getWindow();
+        Stage stage = (Stage) createSpaceBtn.getScene().getWindow();
         stage.close();
     }
 
 
-    public void setUserID(int id) {
-        this.userId=id;
+    public void setUserID(int id) throws SQLException {
+        this.userId = id;
+        getAssigneeList();
+        assignedTo.getItems().addAll(assigneName);
+        System.out.println(assignedTo.getItems());
     }
+
     @FXML
     private ImageView homeButton;
 
@@ -144,7 +172,8 @@ public class SpaceCreateController implements Initializable {
 
         Stage stage = (Stage) homeButton.getScene().getWindow();
 
-            stage.close();
+        stage.close();
 
     }
+
 }
