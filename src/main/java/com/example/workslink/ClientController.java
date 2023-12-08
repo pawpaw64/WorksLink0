@@ -116,7 +116,7 @@ public class ClientController implements Initializable {
     }
 
     private static void storeMessegeInFile(String message) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
             writer.write(message + "\n"); // Use write with "\n" to add a newline character
         } catch (IOException e) {
             e.printStackTrace();

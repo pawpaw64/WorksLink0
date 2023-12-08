@@ -15,6 +15,7 @@ public class TaskHistoryData {
         this.spaceStatus = new SimpleStringProperty(spaceStatus);
         this.spaceProgress = new SimpleStringProperty(spaceProgress);
         this.spaceDetails = new SimpleStringProperty(spaceDetails);
+
     }
 
     public String getSpaceId() {

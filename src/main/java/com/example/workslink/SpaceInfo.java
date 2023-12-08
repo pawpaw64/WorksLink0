@@ -7,13 +7,37 @@ public class SpaceInfo {
     private String spaceDescription;
     private SimpleStringProperty startDate;
     private SimpleStringProperty endDate;
+    private SimpleStringProperty time;
+
+    public String getTime() {
+        return time.get();
+    }
+
+    public SimpleStringProperty timeProperty() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time.set(time);
+    }
+
     private int assigneeId;
     private String spaceColor;
+    private  int TaskOngoing;
 
-    public SpaceInfo(String spaceName, String startDate, String endDate) {
+    public int getTaskOngoing() {
+        return TaskOngoing;
+    }
+
+    public void setTaskOngoing(int taskOngoing) {
+        TaskOngoing = taskOngoing;
+    }
+
+    public SpaceInfo(String spaceName, String startDate, String endDate,String time) {
         this.spaceName = new SimpleStringProperty(spaceName);
         this.endDate = new SimpleStringProperty(endDate);
         this.startDate = new SimpleStringProperty(startDate);
+        this.time = new SimpleStringProperty(time);
     }
 
     public String getSpaceName() {

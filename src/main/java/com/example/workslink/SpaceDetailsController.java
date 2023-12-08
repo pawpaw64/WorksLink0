@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -116,7 +118,6 @@ public class SpaceDetailsController implements Initializable {
         );
         pieChart.getData().addAll(pieChartData);
 
-
         spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
         name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
         spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
@@ -142,6 +143,7 @@ public class SpaceDetailsController implements Initializable {
                 String status = rs.getString("status");
                 String priority = rs.getString("priority");
 
+
                 TaskHistoryData t = new TaskHistoryData(task_projectID, task_name, status, priority, task_details);
                 spaceTableView.getItems().add(t);
             }
@@ -152,9 +154,10 @@ public class SpaceDetailsController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
-    private Button homeButton;
-    public void homeButtonOnAction(ActionEvent e) throws Exception{
+    private ImageView homeButton;
+    public void homeButtonOnAction(MouseEvent event) throws Exception{
         Stage stage = (Stage) homeButton.getScene().getWindow();
         stage.close();
     }
