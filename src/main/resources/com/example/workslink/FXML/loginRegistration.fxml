@@ -23,16 +23,24 @@
          <children>
             <AnchorPane fx:id="login_page" layoutX="387.0" onDragDetected="#login" prefHeight="535.0" prefWidth="389.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="387.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="login_btn" layoutX="110.0" layoutY="442.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="148.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Login">
+                  <Button fx:id="login_btn" layoutX="110.0" layoutY="442.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="148.0" text="Login">
                      <effect>
                         <DropShadow>
                            <color>
                               <Color red="0.6196078658103943" green="0.6823529601097107" blue="0.6823529601097107" />
                            </color>
                         </DropShadow>
-                     </effect></Button>
-                  <TextField fx:id="login_username" layoutX="42.0" layoutY="213.0" onAction="#login" prefHeight="44.0" prefWidth="321.0" promptText="username" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
-                  <PasswordField fx:id="login_password" layoutX="42.0" layoutY="279.0" onAction="#login" prefHeight="44.0" prefWidth="321.0" promptText="password" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
+                     </effect>
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="fill-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
+                  <TextField fx:id="login_username" layoutX="42.0" layoutY="213.0" onAction="#login" prefHeight="44.0" prefWidth="321.0" promptText="username" styleClass="tx" stylesheets="@../CSS/design.css" />
+                  <PasswordField fx:id="login_password" layoutX="42.0" layoutY="279.0" onAction="#login" prefHeight="44.0" prefWidth="321.0" promptText="password" styleClass="tx" stylesheets="@../CSS/design.css" />
                   <Label layoutX="131.0" layoutY="156.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="LOGIN">
                      <font>
                         <Font name="Cambria Bold" size="31.0" />
@@ -56,56 +64,100 @@
             </AnchorPane>
             <AnchorPane fx:id="signUp_page" prefHeight="535.0" prefWidth="389.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="signUp_btn" layoutX="109.0" layoutY="445.0" mnemonicParsing="false" onAction="#signup" prefHeight="37.0" prefWidth="172.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Sign Up" />
-                  <TextField fx:id="su_email_TextField" layoutX="42.0" layoutY="88.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="Email" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
-                  <PasswordField fx:id="su_password" layoutX="43.0" layoutY="352.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="password" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
+                  <Button fx:id="signUp_btn" layoutX="109.0" layoutY="445.0" mnemonicParsing="false" onAction="#signup" prefHeight="37.0" prefWidth="172.0" stylesheets="@../CSS/design.css" text="Sign Up">
+                     <styleClass>
+                        <String fx:value="fill-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
+                  <TextField fx:id="su_email_TextField" layoutX="42.0" layoutY="88.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="Email" styleClass="tx" stylesheets="@../CSS/design.css" />
+                  <PasswordField fx:id="su_password" layoutX="43.0" layoutY="352.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="password" styleClass="tx" stylesheets="@../CSS/design.css" />
                   <Label layoutX="41.0" layoutY="30.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Sign Up">
                      <font>
                         <Font name="Cambria Bold" size="31.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="su_username_TextFIeld" layoutX="42.0" layoutY="142.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="Username" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
+                  <TextField fx:id="su_username_TextFIeld" layoutX="42.0" layoutY="142.0" onAction="#signup" prefHeight="44.0" prefWidth="321.0" promptText="Username" styleClass="tx" stylesheets="@../CSS/design.css" />
                   <Label fx:id="su_valid_label" layoutX="40.0" layoutY="409.0" prefHeight="20.0" prefWidth="322.0" textAlignment="CENTER" textFill="#42a2a6" wrapText="true">
                      <font>
                         <Font name="Cambria Bold" size="15.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="su_bdate" layoutX="42.0" layoutY="194.0" onAction="#signup" prefHeight="44.0" prefWidth="322.0" promptText="Date of Birth" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" />
-                  <ComboBox fx:id="su_questions" layoutX="42.0" layoutY="245.0" prefHeight="44.0" prefWidth="322.0" promptText="Questions" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" visibleRowCount="4" />
-                  <TextField fx:id="su_answers" layoutX="43.0" layoutY="298.0" prefHeight="44.0" prefWidth="321.0" promptText="Answer" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
+                  <DatePicker fx:id="su_bdate" layoutX="42.0" layoutY="194.0" onAction="#signup" prefHeight="44.0" prefWidth="322.0" promptText="Date of Birth" stylesheets="@../CSS/design.css">
+                     <styleClass>
+                        <String fx:value="color-btn" />
+                        <String fx:value="data-picker-list-cell" />
+                        <String fx:value="date-cell" />
+                        <String fx:value="day-name-cell" />
+                        <String fx:value="fill-btn" />
+                        <String fx:value="jfx-svg-glyph" />
+                        <String fx:value="jfx-svg-glyph" />
+                        <String fx:value="left-button" />
+                        <String fx:value="linear-gradient" />
+                        <String fx:value="right-button" />
+                        <String fx:value="root" />
+                        <String fx:value="spinner-label" />
+                        <String fx:value="week-number-cell" />
+                     </styleClass></DatePicker>
+                  <ComboBox fx:id="su_questions" layoutX="42.0" layoutY="245.0" prefHeight="44.0" prefWidth="322.0" promptText="Questions" styleClass="choice-box" stylesheets="@../CSS/design.css" visibleRowCount="4" />
+                  <TextField fx:id="su_answers" layoutX="43.0" layoutY="298.0" prefHeight="44.0" prefWidth="321.0" promptText="Answer" styleClass="tx" stylesheets="@../CSS/design.css" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="home_page" prefHeight="535.0" prefWidth="389.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="create_btn" layoutX="80.0" layoutY="305.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="37.0" prefWidth="231.0" styleClass="color-btn" stylesheets="@../CSS/BasicDesign.css" text="Create New Account" textFill="WHITE">
+                  <Button fx:id="create_btn" layoutX="80.0" layoutY="305.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="37.0" prefWidth="231.0" text="Create New Account" textFill="WHITE">
                      <effect>
                         <DropShadow blurType="GAUSSIAN">
                            <color>
                               <Color red="0.6196078658103943" green="0.6823529601097107" blue="0.6823529601097107" />
                            </color>
                         </DropShadow>
-                     </effect></Button>
+                     </effect>
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="animated_button" />
+                        <String fx:value="color-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
                   <Label layoutX="99.0" layoutY="67.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="WorksLink" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Cambria Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Button fx:id="already_btn" layoutX="79.0" layoutY="386.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="37.0" prefWidth="231.0" styleClass="color-btn" stylesheets="@../CSS/BasicDesign.css" text="Already Have an Account?">
+                  <Button fx:id="already_btn" layoutX="79.0" layoutY="386.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="37.0" prefWidth="231.0" text="Already Have an Account?">
                      <effect>
                         <DropShadow blurType="GAUSSIAN">
                            <color>
                               <Color red="0.6196078658103943" green="0.6823529601097107" blue="0.6823529601097107" />
                            </color>
                         </DropShadow>
-                     </effect></Button>
-                  <Button fx:id="closeButton" layoutX="160.0" layoutY="455.0" mnemonicParsing="false" onAction="#closeOnAction" styleClass="color-btn" stylesheets="@../CSS/BasicDesign.css" text="Cancel">
+                     </effect>
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="color-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
+                  <Button fx:id="closeButton" layoutX="160.0" layoutY="455.0" mnemonicParsing="false" onAction="#closeOnAction" text="Cancel">
                      <effect>
                         <DropShadow blurType="GAUSSIAN">
                            <color>
                               <Color red="0.6196078658103943" green="0.6823529601097107" blue="0.6823529601097107" />
                            </color>
                         </DropShadow>
-                     </effect></Button>
+                     </effect>
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="color-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
                </children>
                <stylesheets>
                   <URL value="@../CSS/BasicDesign.css" />
@@ -120,7 +172,7 @@
 
             <AnchorPane fx:id="forget_passPane" layoutX="387.0" prefHeight="535.0" prefWidth="389.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="388.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button layoutX="110.0" layoutY="442.0" mnemonicParsing="false" onAction="#backToLoginForm" prefHeight="37.0" prefWidth="148.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="&lt;Back">
+                  <Button layoutX="110.0" layoutY="442.0" mnemonicParsing="false" onAction="#backToLoginForm" prefHeight="37.0" prefWidth="148.0" text="&lt;Back">
                      <effect>
                         <DropShadow>
                            <color>
@@ -128,6 +180,14 @@
                            </color>
                         </DropShadow>
                      </effect>
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="fill-btn" />
+                        <String fx:value="tx" />
+                     </styleClass>
                   </Button>
                   <TextField fx:id="fp_answers" layoutX="38.0" layoutY="268.0" prefHeight="44.0" prefWidth="321.0" promptText="Answer" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
                   <Label layoutX="55.0" layoutY="61.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Forgot Password">
@@ -141,13 +201,21 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="fp_questions" layoutX="38.0" layoutY="211.0" prefHeight="44.0" prefWidth="322.0" promptText="Question" styleClass="text-field" />
-                  <Button fx:id="proceed_btn" layoutX="36.0" layoutY="335.0" mnemonicParsing="false" onAction="#proceedBtn" prefHeight="44.0" prefWidth="322.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Proceed" />
+                  <Button fx:id="proceed_btn" layoutX="36.0" layoutY="335.0" mnemonicParsing="false" onAction="#proceedBtn" prefHeight="44.0" prefWidth="322.0" text="Proceed">
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="fill-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
                   <TextField fx:id="fp_username" layoutX="38.0" layoutY="150.0" prefHeight="44.0" prefWidth="321.0" promptText="username" styleClass="textfield" stylesheets="@../CSS/BasicDesign.css" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="change_passPane" layoutX="388.0" prefHeight="535.0" prefWidth="389.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="388.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button layoutX="127.0" layoutY="438.0" mnemonicParsing="false" onAction="#backToQuestionForm" prefHeight="37.0" prefWidth="148.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="&lt;Back">
+                  <Button layoutX="127.0" layoutY="438.0" mnemonicParsing="false" onAction="#backToQuestionForm" prefHeight="37.0" prefWidth="148.0" text="&lt;Back">
                      <effect>
                         <DropShadow>
                            <color>
@@ -155,6 +223,14 @@
                            </color>
                         </DropShadow>
                      </effect>
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="fill-btn" />
+                        <String fx:value="tx" />
+                     </styleClass>
                   </Button>
                   <Label layoutX="55.0" layoutY="61.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Change Password" textAlignment="CENTER">
                      <font>
