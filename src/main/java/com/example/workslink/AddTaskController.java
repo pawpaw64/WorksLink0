@@ -56,6 +56,7 @@ public class AddTaskController implements Initializable {
 
     @FXML
     private Button closeButton;
+    private int spaceId;
 
 
     public ChoiceBox<String> getTaskAssigned() {

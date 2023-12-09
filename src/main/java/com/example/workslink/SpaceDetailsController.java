@@ -76,7 +76,7 @@ public class SpaceDetailsController implements Initializable {
             AddTaskController addTaskController=loader.getController();
             addTaskController.setSpaceID(spaceId);
 
-            newStage.showAndWait();
+            newStage. showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,14 +124,14 @@ public class SpaceDetailsController implements Initializable {
 
 
 
-        pieChartData.forEach(data ->
-                data.nameProperty().bind(
-                        Bindings.concat(
-                                data.getName(),"amount",data.pieValueProperty()
-                        )
-                )
-        );
-        pieChart.getData().addAll(pieChartData);
+//        pieChartData.forEach(data ->
+//                data.nameProperty().bind(
+//                        Bindings.concat(
+//                                data.getName(),"amount",data.pieValueProperty()
+//                        )
+//                )
+//        );
+//        pieChart.getData().addAll(pieChartData);
 
     }
 
@@ -171,17 +171,17 @@ public class SpaceDetailsController implements Initializable {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT task_name, task_description, status, priority FROM task_info WHERE space_Id= "+spaceId;
+            String sql = "SELECT space_id,task_name, task_description, status, priority FROM task_info WHERE space_Id= "+spaceId;
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                String task_projectID = rs.getString("task_projectID");
+                String space_id = rs.getString("space_id");
                 String task_name = rs.getString("task_name");
                 String task_details = rs.getString("task_description");
                 String status = rs.getString("status");
                 String priority = rs.getString("priority");
 
 
-                TaskHistoryData taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details);
+                TaskHistoryData taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details,space_id);
                 spaceTableView.getItems().add(taskHistoryData);
             }
 
@@ -201,10 +201,11 @@ public class SpaceDetailsController implements Initializable {
 
     public void setUserId(int userId) {
         this.userId=userId;
-        spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
+        spaceID.setCellValueFactory(new PropertyValueFactory<>("space_id"));
         name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
         spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
-        // spaceProgress.setCellValueFactory(new PropertyValueFactory<>("spaceProgress"));
+        //spaceProgress.setCellValueFactory(new PropertyValueFactory<>("spaceProgress"));
+        System.out.println();
 
         spaceTableView.setEditable(false);
         getSpaces();
