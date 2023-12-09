@@ -59,11 +59,11 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" graphicTextGap="5.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#showApps" prefHeight="34.0" prefWidth="131.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="App" textAlignment="JUSTIFY" wrapText="true">
+                        <Label alignment="CENTER" graphicTextGap="5.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#calculator" prefHeight="34.0" prefWidth="188.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Calculator" textAlignment="JUSTIFY" wrapText="true">
                            <graphic>
-                              <ImageView fx:id="apps" fitHeight="32.0" fitWidth="82.0" onMouseClicked="#showApps" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                              <ImageView fx:id="apps" fitHeight="32.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                  <image>
-                                    <Image url="@../Icon/apps.png" />
+                                    <Image url="@../Icon/calculator.png" />
                                  </image>
                               </ImageView>
                            </graphic>
