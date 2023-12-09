@@ -200,7 +200,7 @@ public class SpaceCreateController implements Initializable {
                 throw new RuntimeException(e);
             }
         } else {
-            System.out.println("hhh");
+            System.out.println("");
         }
         Stage stage = (Stage) createSpaceBtn.getScene().getWindow();
         stage.close();

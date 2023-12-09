@@ -210,8 +210,8 @@ public class HomePageController extends HelloController implements Initializable
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.setScene(new Scene(root));
-            SpaceCreateController spaceCreateController = loader.getController();
-            spaceCreateController.setUserID(id);
+           SpaceCreateController spaceCreateController = loader.getController();
+           spaceCreateController.setUserID(id);
             newStage.show();
 
         } catch (IOException e) {
@@ -241,7 +241,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
-    private void getSpaceVbox() {
+    private void getVbox() {
         try {
 
             DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -265,23 +265,79 @@ public class HomePageController extends HelloController implements Initializable
             // Set the items in the ListView
             spaceListView.setItems(spaceNames);
 
-            // Add a listener to handle item clicks
-            spaceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue != null) {
-                    handleSpaceItemClick(newValue, currentUser.getUser_id()); // Call a method to handle the selected item
-                }
-            });
+        statement.close();
+        connection.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+    String spaceid;
+private void getSpaceVbox() {
+    try {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        Connection connection = databaseConnection.getConnection();
+        Statement statement = connection.createStatement();
 
+        String sql = "SELECT space_name FROM space_info WHERE user_id = " + id;
+        ResultSet rs = statement.executeQuery(sql);
+        ObservableList<String> spaceNames = FXCollections.observableArrayList();
 
-            statement.close();
-            connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        while (rs.next()) {
+            spaceCount++;
+            String spaceName = rs.getString("Space_name");
+            spaceNames.add(spaceName);
         }
 
+        // Close the ResultSet, but keep the statement and connection open for the next query
+         rs.close();
+        statement.close();
+        connection.close();
+
+
+        // Set the items in the ListView
+        spaceListView.setItems(spaceNames);
+
+        // Add a listener to handle item clicks
+        spaceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                if (newValue != null) {
+                    getSpaceInfo(newValue);
+                    handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Close the statement and connection after using them
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-    private void handleSpaceItemClick(String newValue, int userId) {
-        System.out.println(newValue);
+}
+
+    public void getSpaceInfo(String value) throws SQLException {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        Connection connection = databaseConnection.getConnection();
+        Statement statement = connection.createStatement();
+
+        String sql = "SELECT space_Id FROM space_info WHERE user_id = " + id + " AND space_name = '" + value + "'";
+        ResultSet rs = statement.executeQuery(sql);
+        ObservableList<String> spaceNames = FXCollections.observableArrayList();
+
+        while (rs.next()) {
+            spaceid = rs.getString("Space_Id");
+
+        }
+
+        // Close the ResultSet, but keep the statement and connection open for the next query
+        rs.close();
+        statement.close();
+        connection.close();
+
+
+    }
+    private void handleSpaceItemClick(String newValue, int userId, String spaceid) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
             Parent root = loader.load();
@@ -290,6 +346,7 @@ public class HomePageController extends HelloController implements Initializable
             SpaceDetailsController SpaceDetailsController = loader.getController();
             SpaceDetailsController.setAreaSpaceName(newValue);
             SpaceDetailsController.setUserId(userId);
+            SpaceDetailsController.setSpaceID(spaceid);
 
             // Create a new stage for the new scene
             Stage newStage = new Stage();
@@ -302,14 +359,19 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+    void getTable(){
+
+    }
     public void refresh(){
-        SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
-        SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
-        time.setCellValueFactory(new PropertyValueFactory<>("time"));
-        spaceTableView.setEditable(false);
-        getSpaceData();
+//        SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
+//        SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+//        SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+//        TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
+//        time.setCellValueFactory(new PropertyValueFactory<>("time"));
+       // spaceTableView.setEditable(false);
+        getSpaceTableData();
+        getVbox();
+
 
 
     }

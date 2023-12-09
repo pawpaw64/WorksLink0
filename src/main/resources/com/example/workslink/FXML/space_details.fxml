@@ -35,14 +35,12 @@
                                     <Label fx:id="areaSpaceName" layoutX="53.0" layoutY="14.0" prefHeight="32.0" prefWidth="380.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#Space" wrapText="true" />
                                     <Label layoutX="53.0" layoutY="69.0" text="Space description" />
                                     <Label layoutX="56.0" layoutY="233.0" text="Task history " />
-                                    <ImageView fitHeight="51.0" fitWidth="54.0" layoutX="330.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                                    <TableView fx:id="spaceTableView" layoutX="65.0" layoutY="281.0" prefHeight="266.0" prefWidth="746.0" stylesheets="@../CSS/table-view.css">
+                                    <TableView fx:id="spaceTableView" layoutX="65.0" layoutY="281.0" prefHeight="266.0" prefWidth="773.0" stylesheets="@../CSS/table-view.css">
                                       <columns>
-                                          <TableColumn fx:id="spaceID" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="name" prefWidth="159.0" text="Task name" />
-                                          <TableColumn fx:id="spaceStatus" minWidth="5.60003662109375" prefWidth="165.0" text="Priority" />
-                                          <TableColumn prefWidth="178.0" text="Assigned To" />
-                                          <TableColumn prefWidth="157.0" text="Status" />
+                                        <TableColumn fx:id="taskName" prefWidth="159.0" text="Task name" />
+                                          <TableColumn fx:id="taskPriority" minWidth="5.60003662109375" prefWidth="165.0" text="Priority" />
+                                          <TableColumn fx:id="taskAssigned" prefWidth="244.0" text="Assigned To" />
+                                          <TableColumn fx:id="taskStatus" prefWidth="204.0" text="Status" />
                                       </columns>
                                     </TableView>
                                     <ImageView fx:id="homeButton" fitHeight="29.0" fitWidth="27.0" layoutX="26.0" layoutY="18.0" onMouseClicked="#homeButtonOnAction" pickOnBounds="true" preserveRatio="true" styleClass="icon">
@@ -69,12 +67,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="34.0" layoutY="71.0" prefHeight="200.0" prefWidth="823.0" stylesheets="@../CSS/table-view.css">
+                        <TableView layoutX="34.0" layoutY="67.0" prefHeight="204.0" prefWidth="843.0" stylesheets="@../CSS/table-view.css">
                           <columns>
                             <TableColumn prefWidth="160.0" text="Task Name" />
                             <TableColumn prefWidth="186.0" text="Status" />
-                              <TableColumn prefWidth="184.0" text="Priority" />
-                              <TableColumn prefWidth="203.0" text="Action" />
+                              <TableColumn prefWidth="247.0" text="Priority" />
+                              <TableColumn prefWidth="248.0" text="Action" />
                           </columns>
                         </TableView>
                         <Button fx:id="addTask" layoutX="641.0" layoutY="29.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
@@ -134,7 +132,7 @@
                   </StackPane>
                </content>
             </Tab>
-            <Tab text="Untitled Tab">
+            <Tab text="Chart">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
