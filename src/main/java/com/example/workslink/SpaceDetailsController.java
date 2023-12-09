@@ -172,9 +172,10 @@ public class SpaceDetailsController implements Initializable {
                 String task_details = rs.getString("task_description");
                 String status = rs.getString("status");
                 String priority = rs.getString("priority");
+                String assigned = rs.getString("assigend");
 
 
-                TaskHistoryData taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details);
+                TaskHistoryData taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details, assigned);
                 spaceTableView.getItems().add(taskHistoryData);
             }
 
