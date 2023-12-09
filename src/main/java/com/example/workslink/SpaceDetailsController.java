@@ -128,21 +128,6 @@ public class SpaceDetailsController implements Initializable {
         percentlebel.setTextFill(Color.BLACK);
         percentlebel.setStyle("-fx-font: 15 arial");
 
-//        ObservableList<PieChart.Data> pieChartData =
-//                FXCollections.observableArrayList(
-//                        new PieChart.Data("Todo",100),
-//                        new PieChart.Data("Doing",30),
-//                        new PieChart.Data("Done",20));
-//
-//
-//        pieChartData.forEach(data ->
-//                data.nameProperty().bind(
-//                        Bindings.concat(
-//                                data.getName(),"amount",data.pieValueProperty()
-//                        )
-//                )
-//        );
-//        pieChart.getData().addAll(pieChartData);
 
 
         for(final PieChart.Data data : pieChart.getData()){
