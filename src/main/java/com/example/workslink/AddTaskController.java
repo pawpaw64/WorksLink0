@@ -39,6 +39,13 @@ public class AddTaskController implements Initializable {
     private ChoiceBox<String> taskStatus;
 
 
+    public ChoiceBox<String> getAssignMember() {
+        return assignMember;
+    }
+
+    public void setAssignMember(ChoiceBox<String> assignMember) {
+        this.assignMember = assignMember;
+    }
 
     @FXML
     private ChoiceBox<String> assignMember;
@@ -83,7 +90,7 @@ public class AddTaskController implements Initializable {
         date = String.valueOf(getTaskDate().getValue());
         priorityy = (String) getTaskPriority().getValue();
         statuss = (String) getTaskStatus().getValue();
-        assigned=getTaskAssigned().getValue();
+        assigned=getAssignMember().getValue();
 
         if(name.isEmpty() || description.isEmpty() || date.isEmpty()){
             valid_label.setText("Enter All Information");
