@@ -62,49 +62,15 @@ public class AddTaskController implements Initializable {
     public ChoiceBox<String> getTaskAssigned() {
         return (ChoiceBox<String>) taskAssigned;
     }
-
-    public void setTaskAssigned(ChoiceBox<?> taskAssigned) {
-        this.taskAssigned = taskAssigned;
-    }
-
     public DatePicker getTaskDate() {
         return taskDate;
-    }
-
-    public void setTaskDate(DatePicker taskDate) {
-        this.taskDate = taskDate;
-    }
-
-    public TextField getTaskDescription() {
-        return taskDescription;
-    }
-
-    public void setTaskDescription(TextField taskDescription) {
-        this.taskDescription = taskDescription;
-    }
-
-    public TextField getTaskName() {
-        return taskName;
-    }
-
-    public void setTaskName(TextField taskName) {
-        this.taskName = taskName;
     }
 
     public ChoiceBox<?> getTaskPriority() {
         return taskPriority;
     }
-
-    public void setTaskPriority(ChoiceBox<?> taskPriority) {
-        this.taskPriority = (ChoiceBox<String>) taskPriority;
-    }
-
     public ChoiceBox<?> getTaskStatus() {
         return taskStatus;
-    }
-
-    public void setTaskStatus(ChoiceBox<?> taskStatus) {
-        this.taskStatus = (ChoiceBox<String>) taskStatus;
     }
     String name,description,statuss,priorityy,date,assigned;
 
@@ -117,6 +83,7 @@ public class AddTaskController implements Initializable {
         date = String.valueOf(getTaskDate().getValue());
         priorityy = (String) getTaskPriority().getValue();
         statuss = (String) getTaskStatus().getValue();
+        assigned=getTaskAssigned().getValue();
 
         if(name.isEmpty() || description.isEmpty() || date.isEmpty()){
             valid_label.setText("Enter All Information");
@@ -126,7 +93,7 @@ public class AddTaskController implements Initializable {
             try{
                 DatabaseConnection databaseConnection = new DatabaseConnection();
                 Connection connection = databaseConnection.getConnection();
-                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status)VALUES (?,?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status,assigned)VALUES (?,?, ?,?, ?, ?, ?,)";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, String.valueOf(spaceId));
@@ -135,6 +102,7 @@ public class AddTaskController implements Initializable {
                     preparedStatement.setString(4,date);
                     preparedStatement.setString(5,priorityy);
                     preparedStatement.setString(6,statuss);
+                    preparedStatement.setString(7,assigned);
                     System.out.println(name+description+date);
 
                     preparedStatement.executeUpdate();
@@ -151,14 +119,7 @@ public class AddTaskController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        taskName.getText();
-        taskPriority.getItems().addAll(priority);
-        taskStatus.getItems().addAll(status);
 
-
-        // Initialize the assignMember ChoiceBox with userNames
-        List<String> userNames = getUserNamesFromDatabase();
-        assignMember.setItems(FXCollections.observableArrayList(userNames));
 
     }
     @FXML
@@ -167,13 +128,14 @@ public class AddTaskController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
-
+    String userID;
 
     private List<String> getUserNamesFromDatabase() {
         List<String> userNames = new ArrayList<>();
 
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String sql = "SELECT userName FROM members";
+
+            String sql = "SELECT userName FROM members WHERE userID="+userID;
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
@@ -190,5 +152,17 @@ public class AddTaskController implements Initializable {
 
     public void setSpaceID(int spaceId) {
         this.spaceId=spaceId;
+    }
+
+    public void setUserId(int userId) {
+        this.userID= String.valueOf(userId);
+        taskName.getText();
+        taskPriority.getItems().addAll(priority);
+        taskStatus.getItems().addAll(status);
+
+
+        // Initialize the assignMember ChoiceBox with userNames
+        List<String> userNames = getUserNamesFromDatabase();
+        assignMember.setItems(FXCollections.observableArrayList(userNames));
     }
 }

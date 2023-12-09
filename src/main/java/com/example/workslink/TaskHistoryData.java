@@ -3,34 +3,19 @@ package com.example.workslink;
 import javafx.beans.property.SimpleStringProperty;
 
 public class TaskHistoryData {
+        private String spaceTaskName;
+        private String taskSatus;
+        private String taskAssigned;
+        private String taskPriority;
 
-    private final SimpleStringProperty spaceTaskName;
-    private final SimpleStringProperty spaceStatus;
-    private final SimpleStringProperty spaceProgress;
-    private final SimpleStringProperty spaceDetails;
-
-    public TaskHistoryData(String spaceTaskName, String spaceStatus, String spaceProgress, String spaceDetails) {
-        this.spaceTaskName = new SimpleStringProperty(spaceTaskName);
-        this.spaceStatus = new SimpleStringProperty(spaceStatus);
-        this.spaceProgress = new SimpleStringProperty(spaceProgress);
-        this.spaceDetails = new SimpleStringProperty(spaceDetails);
-
+    public TaskHistoryData(String taskName, String status, String priority, String taskDetails, String assignedto) {
+        this.taskAssigned=assignedto;
+        this.taskPriority=priority;
+        this.taskSatus=status;
+        this.spaceTaskName=taskName;
     }
 
 
-    public String getSpaceTaskName() {
-        return spaceTaskName.get();
-    }
 
-    public String getSpaceStatus() {
-        return spaceStatus.get();
-    }
 
-    public String getSpaceProgress() {
-        return spaceProgress.get();
-    }
-
-    public String getSpaceDetails() {
-        return spaceDetails.get();
-    }
 }

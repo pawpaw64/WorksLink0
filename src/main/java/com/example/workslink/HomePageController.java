@@ -272,55 +272,6 @@ public class HomePageController extends HelloController implements Initializable
     }
     }
     String spaceid;
-//    private void getSpaceVbox() {
-//        try {
-//
-//            DatabaseConnection databaseConnection = new DatabaseConnection();
-//            Connection connection = databaseConnection.getConnection();
-//            Statement statement = connection.createStatement();
-//            //String sql = "SELECT space_name FROM space_info";
-//            String sql = "SELECT space_name FROM space_info WHERE user_id = " + id;
-//
-//            ResultSet rs = statement.executeQuery(sql);
-//            ObservableList<String> spaceNames = FXCollections.observableArrayList();
-//
-//            while (rs.next()) {
-//                spaceCount++;
-//                String spaceName = rs.getString("Space_name");
-//                spaceNames.add(spaceName);
-//            }
-//
-//            statement.close();
-//            connection.close();
-//
-//            // Set the items in the ListView
-//            spaceListView.setItems(spaceNames);
-//
-//            // Add a listener to handle item clicks
-//            spaceListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//                try {
-//                    if (newValue != null) {
-//                        //String sql = "SELECT space_name FROM space_info";
-//                        String sql2 = "SELECT space_Id FROM space_info WHERE user_id = " + id + " AND space_name = '" + newValue + "'";
-//
-//                        ResultSet rs2 = statement.executeQuery(sql2);
-//                        while (rs2.next()) {
-//
-//                             spaceid = rs2.getString("space_Id");
-//
-//                        }
-//                        handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid); // Call a method to handle the selected item
-//                    }
-//                }catch (Exception e) {
-//                    System.out.println("nkjui");
-//                }
-//            });
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 private void getSpaceVbox() {
     try {
         DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -408,13 +359,16 @@ private void getSpaceVbox() {
             e.printStackTrace();
         }
     }
+    void getTable(){
+
+    }
     public void refresh(){
-        SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
-        SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
-        time.setCellValueFactory(new PropertyValueFactory<>("time"));
-        spaceTableView.setEditable(false);
+//        SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
+//        SpaceStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+//        SpaceEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+//        TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
+//        time.setCellValueFactory(new PropertyValueFactory<>("time"));
+       // spaceTableView.setEditable(false);
         getSpaceTableData();
         getVbox();
 

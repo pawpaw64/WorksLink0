@@ -48,11 +48,16 @@ public class SpaceDetailsController implements Initializable {
     @FXML
     private TableView<TaskHistoryData> spaceTableView;
     @FXML
-    private TableColumn<TaskHistoryData,String> name;
+    private TableColumn<TaskHistoryData,String> taskAssigned;
+
     @FXML
-    private TableColumn<TaskHistoryData,String> spaceStatus;
+    private TableColumn<TaskHistoryData,String> taskName;
+
     @FXML
-    private TableColumn<TaskHistoryData,String> spaceID;
+    private TableColumn<TaskHistoryData,String> taskPriority;
+
+    @FXML
+    private TableColumn<TaskHistoryData,String> taskStatus;
     private TextArea textArea;
     @FXML
     private Pane spaceDettails;
@@ -79,6 +84,7 @@ public class SpaceDetailsController implements Initializable {
             newStage.setScene(new Scene(root));
             AddTaskController addTaskController=loader.getController();
             addTaskController.setSpaceID(Integer.parseInt(spaceId));
+            addTaskController.setUserId(userId);
 
             newStage.showAndWait();
 
@@ -93,7 +99,6 @@ public class SpaceDetailsController implements Initializable {
     public Label getSpace_description() {
         return space_description;
     }
-
     public void setSpace_description(Label space_description) {
         this.space_description.setText(spaceDes);
     }
@@ -111,6 +116,7 @@ public class SpaceDetailsController implements Initializable {
     private Label percentlebel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
         ObservableList<PieChart.Data>pieChartData =
                 FXCollections.observableArrayList(
@@ -191,16 +197,19 @@ public class SpaceDetailsController implements Initializable {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT task_name, task_description, status, priority FROM task_info WHERE space_Id= "+spaceId;
+            String sql = "SELECT task_name, task_description, status, priority,assigned FROM task_info WHERE space_Id= "+spaceId;
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 String task_name = rs.getString("task_name");
                 String task_details = rs.getString("task_description");
                 String status = rs.getString("status");
                 String priority = rs.getString("priority");
+                String assignedto=rs.getString("assigned");
+                System.out.println(task_details+task_name+status+priority+assignedto);
 
 
-                TaskHistoryData taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details);
+
+                TaskHistoryData taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details,assignedto);
                 spaceTableView.getItems().add(taskHistoryData);
             }
 
@@ -210,6 +219,7 @@ public class SpaceDetailsController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private ImageView homeButton;
@@ -227,11 +237,12 @@ public class SpaceDetailsController implements Initializable {
 
     public void setSpaceID(String spaceid) {
         this.spaceId= spaceid;
-        spaceID.setCellValueFactory(new PropertyValueFactory<>("spaceId"));
-        name.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
-        spaceStatus.setCellValueFactory(new PropertyValueFactory<>("spaceStatus"));
-
+        taskName.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
+        taskPriority.setCellValueFactory(new PropertyValueFactory<>("taskPriority"));
+        taskStatus.setCellValueFactory(new PropertyValueFactory<>("taskSatus"));
+        taskAssigned.setCellValueFactory(new PropertyValueFactory<>("taskAssigned"));
         spaceTableView.setEditable(false);
+
         getSpaces();
         getSpaceTableData();
 
