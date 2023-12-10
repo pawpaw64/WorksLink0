@@ -125,49 +125,6 @@ public class HomePageController extends HelloController implements Initializable
         removeBlurEffect();
 
     }
-//    private VBox createListViewVBox(List<String> items, int height, int width) {
-//        VBox vbox = new VBox();
-//        vbox.setPrefHeight(height);
-//        vbox.setPrefWidth(width);
-//        vbox.getStylesheets().add(getClass().getResource("CSS/popOver.css").toExternalForm());
-//        ListView<String> listView = new ListView<>();
-//        ObservableList<String> observableItems = FXCollections.observableArrayList(items);
-//        listView.setItems(observableItems);
-//        listView.setFixedCellSize(-3);
-//        // Add a listener to the selection model to handle item clicks
-//        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//            if (newValue != null) {
-//                handleItemClick(newValue); // Call a method to handle the selected item
-//            }
-//        });
-//        vbox.getChildren().add(listView);
-//        return vbox;
-//    }
-//
-
-//    public void showApps() {
-//        // Create a list of items
-//        List<String> items = List.of("Calculator", "Notes", "More");
-//
-//        // Create a VBox with a ListView
-//        VBox vbox = createListViewVBox(items, 116, 210);
-//
-//        // Create a PopOver with the VBox as its content
-//        PopOver popOver = new PopOver(vbox);
-//        popOver.setArrowLocation(PopOver.ArrowLocation.BOTTOM_CENTER);
-//        vbox.getStylesheets().add(getClass().getResource("CSS/popOver.css").toExternalForm());
-//        // Convert local coordinates to screen coordinates
-//        // Calculate the screen coordinates for the apps ImageView
-//        double screenX = apps.localToScreen(apps.getBoundsInLocal()).getMinX();
-//        double screenY = apps.localToScreen(apps.getBoundsInLocal()).getMaxY();
-//
-//        // Adjust the position to place the PopOver alongside the icon
-//        double adjustedX = screenX - (vbox.getWidth() - apps.getBoundsInParent().getWidth()) / 2;
-//        double adjustedY = screenY;
-//
-//        // Show the PopOver at the adjusted position
-//        popOver.show(apps, adjustedX, adjustedY);
-//    }
     @FXML
     void showChat(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
@@ -179,7 +136,7 @@ public class HomePageController extends HelloController implements Initializable
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-//
+
     }
     @FXML
     void createNewSpace() { //mouseEvent at add space
@@ -353,8 +310,6 @@ private void getSpaceVbox() {
        // spaceTableView.setEditable(false);
         getSpaceTableData();
         getVbox();
-
-
 
     }
     int spaceCount;
