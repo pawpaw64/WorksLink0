@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 
 import javafx.scene.input.MouseEvent;
 
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -51,8 +52,6 @@ public class ClientController implements Initializable {
     @FXML
     void buttonPrassed() {
         if (!isConnected) {
-            System.out.printf(userProfile.getUserName());
-
             String inputName = userProfile.getUserName();
             inputfield.clear();
             if(inputName==null || inputName.length() == 0){
@@ -86,6 +85,7 @@ public class ClientController implements Initializable {
                                     });
                                     storeMessegeInFile(data);
                                 }
+
                             } catch (SocketException ee) {
                                 showArea.appendText("Connection lost" + "\n");
                                 break;

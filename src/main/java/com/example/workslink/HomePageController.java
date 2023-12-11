@@ -189,22 +189,14 @@ public class HomePageController extends HelloController implements Initializable
     }
     @FXML
     void showChat(MouseEvent event) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load());
-//        ClientController clientController = fxmlLoader.getController();
-//        clientController.setUserProfile(currentUser);
-//
-//        stage.setTitle("Hello!");
-//        stage.setScene(scene);
-//        stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        ClientController clientController = fxmlLoader.getController();
+        clientController.setUserProfile(currentUser);
 
-
-        Xserver xserver = new Xserver();
-        xserver.setUserProfile(currentUser);
-        Xclient xclient = new Xclient();
-        Stage chatStage = new Stage();
-        xclient.start(chatStage);
-        System.out.println(xclient);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
 
 
     }
@@ -436,6 +428,8 @@ private void getSpaceVbox() {
 
     }
 
+    public void calculator(MouseEvent event) {
+    }
 }
 
 
