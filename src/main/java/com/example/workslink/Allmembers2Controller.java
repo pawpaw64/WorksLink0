@@ -7,13 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -24,20 +22,13 @@ import java.util.ResourceBundle;
 public class Allmembers2Controller implements Initializable {
     public TableView<MembersData> membersTableView;
     public Label membersCountLabel;
-    public TableColumn<MembersData, String> memberID;
+    public TableColumn<MembersData, Integer> membersID;
     public TableColumn<MembersData, String> memberEmail;
     public TableColumn<MembersData, String> memberUserName;
     public TableColumn<MembersData, String> memberDOB;
-    public  TableColumn<MembersData,String> membersSelected;
+   public  TableColumn<MembersData,String> membersSelected;
     @FXML
     private CheckBox selectALl;
-    @FXML
-    public TableColumn<MembersData, String> getMemberID() {
-        return memberID;
-    }
-    public void setMemberID(TableColumn<MembersData, String> memberID) {
-        this.memberID = memberID;
-    }
     public TableColumn<MembersData, String> getMemberEmail() {
         return memberEmail;
     }
@@ -67,19 +58,42 @@ public class Allmembers2Controller implements Initializable {
         memberUserName.setCellValueFactory(new PropertyValueFactory<>("memberUserName"));
         memberEmail.setCellValueFactory(new PropertyValueFactory<>("memberEmail"));
         memberDOB.setCellValueFactory(new PropertyValueFactory<>("memberDOB"));
-        membersSelected.setCellValueFactory(new PropertyValueFactory<>("select"));
-        //sendRqst.setCellValueFactory(new PropertyValueFactory<>("sendRqst"));
+        membersID.setCellValueFactory(new PropertyValueFactory<>("memberId"));
+        Callback<TableColumn<MembersData, String>, TableCell<MembersData, String>> cellFoctory =
+                (TableColumn<MembersData, String> param) -> {
+                    // make cell containing buttons
 
+                    final TableCell<MembersData, String> cell = new TableCell<>() {
+
+                        final Button sendRequest = new Button("Send Request");
+                        @Override
+                        public void updateItem(String item, boolean empty) {
+                            super.updateItem(item, empty);
+                            //that cell created only on non-empty rows
+                            if (empty) {
+                                setGraphic(null);
+                                setText(null);
+
+
+                            } else {
+
+
+
+                                setGraphic(sendRequest);
+                            }
+                            membersTableView.setEditable(false);
+                        }
+                    };
+                    return cell;
+                };
+        sendRqst.setCellFactory(cellFoctory);
+        membersSelected.setCellValueFactory(new PropertyValueFactory<>("select"));
+        //getMembersTableData();
         membersTableView.setEditable(false);
 
 
-        getSelectedData();
     }
 
-    private void getSelectedData() {
-
-
-    }
 
     int membersCount;
     private void getMembersTableData() {
@@ -89,18 +103,19 @@ public class Allmembers2Controller implements Initializable {
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName, email, dob FROM user WHERE id != ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id,userName, email, dob FROM user WHERE id != ?");
             preparedStatement.setInt(1, userId);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 membersCount++;
+                String id= rs.getString("id");
                 String userName = rs.getString("userName");
                 String email = rs.getString("email");
                 String dob = rs.getString("dob");
-                String selectValue = null;
+                System.out.println("ID"+id);
 
-                MembersData members = new MembersData(userName, email, dob, selectValue);
+                MembersData members = new MembersData(userName, email, dob, id);
                 membersTableView.getItems().add(members);
 
             }
