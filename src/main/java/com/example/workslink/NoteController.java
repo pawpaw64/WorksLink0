@@ -51,28 +51,7 @@ public class NoteController {
 
     @FXML
     private void saveNote() throws IOException {
-        String noteName = noteNameTextField.getText();
-        String noteText = yourNoteTextField.getText();
 
-        // Load the new note pane FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/note.fxml"));
-        Parent newNotePaneRoot = loader.load();
-
-        // Access the controller of the new note pane
-        addPaneController addPaneController = loader.getController();
-
-        // Set the note information in the new note pane
-        addPaneController.setNoteInfo(noteName, noteText);
-
-        // Access the controller of the main FXML
-        NoteController noteController = new NoteController();
-
-        // Call the method in the main FXML to add the new note pane to the VBox
-        noteController.addNoteToVBox(newNotePaneRoot);
-
-        // Close the current stage (assuming FXML 2 is opened in a separate stage)
-        Stage stage = (Stage) noteNameTextField.getScene().getWindow();
-        stage.close();
     }
 
     private void addNoteToVBox(Parent newNotePaneRoot) {
