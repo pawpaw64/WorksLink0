@@ -61,13 +61,19 @@
 *//* Apply styles to the table */
   .table-view {
       -fx-background-color: transparent;
+       -fx-alignment: CENTER;
   }
+/* if the table-view property doesn't work , then create:
+ .table-cell {
+    -fx-alignment: CENTER; 
+} also don't forget to add the property to scenebuilder  */
 
   /* Apply styles to table cells */
   .table-row-cell {
       -fx-background-color: transparent;
       -fx-padding: 5px 10px;
       -fx-border-color: transparent;
+       -fx-alignment: CENTER;
   }
 
 .table-view .column-header-background{
