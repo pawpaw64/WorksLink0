@@ -100,7 +100,7 @@ public class AddTaskController implements Initializable {
             try{
                 DatabaseConnection databaseConnection = new DatabaseConnection();
                 Connection connection = databaseConnection.getConnection();
-                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status,assigned)VALUES (?,?, ?,?, ?, ?, ?,)";
+                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status,assigned)VALUES (?,?, ?,?, ?, ?, ?)";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, String.valueOf(spaceId));
@@ -111,6 +111,7 @@ public class AddTaskController implements Initializable {
                     preparedStatement.setString(6,statuss);
                     preparedStatement.setString(7,assigned);
                     System.out.println(name+description+date);
+                    System.out.println("Task Added");
 
                     preparedStatement.executeUpdate();
 

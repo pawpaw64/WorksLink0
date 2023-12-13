@@ -63,35 +63,46 @@
 //}
 package com.example.workslink;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
 
 public class MembersData {
+
+
     private String memberId;
     private String memberUserName;
     private String memberEmail;
     private String memberDOB;
     private CheckBox select;
-    private Button sendRqst;
+  //  private Button sendRqst;
 
 
-    public MembersData(String memberUserName, String memberEmail, String memberDOB, String value) {
+    public MembersData(String memberUserName, String memberEmail, String memberDOB, String id) {
         this.memberUserName = memberUserName;
         this.memberEmail = memberEmail;
         this.memberDOB = memberDOB;
-       this.select=new CheckBox();
-        this.sendRqst=new Button();
+        this.memberId=id;
+        this.select=new CheckBox();
+     //   this.sendRqst=new Button("Send Request");
 
 
 
     }
-    public MembersData(String memberUserName,String memberEmail,String memberDOB){
+
+//    public Button getSendRqst() {
+//        return sendRqst;
+//    }
+//
+//    public void setSendRqst(Button sendRqst) {
+//        this.sendRqst = sendRqst;
+//    }
+
+    public MembersData(String memberUserName, String memberEmail, String memberDOB){
         this.memberDOB=memberDOB;
         this.memberEmail=memberEmail;
         this.memberUserName=memberUserName;
+
+
+        // this.sendRqst = new Button("Send Request");
     }
 
     public String getMemberId() {

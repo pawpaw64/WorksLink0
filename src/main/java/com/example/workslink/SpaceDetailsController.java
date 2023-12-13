@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,18 +22,22 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
@@ -72,6 +77,8 @@ public class SpaceDetailsController implements Initializable {
     @FXML
     private Label space_description;
     @FXML
+    private TableColumn<TaskHistoryData,String> taskID;
+    @FXML
     void add_task(ActionEvent event) {
         try {
 
@@ -95,6 +102,8 @@ public class SpaceDetailsController implements Initializable {
     }
     @FXML
     private Label areaSpaceName;
+    @FXML
+    private TableColumn<TaskHistoryData,String> taskAction;
 
     public Label getSpace_description() {
         return space_description;
@@ -116,8 +125,6 @@ public class SpaceDetailsController implements Initializable {
     private Label percentlebel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         ObservableList<PieChart.Data>pieChartData =
                 FXCollections.observableArrayList(
                   new PieChart.Data("Todo",50),
@@ -161,8 +168,83 @@ public class SpaceDetailsController implements Initializable {
                         }
                     });
         }
-
-
+        taskName.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
+        taskPriority.setCellValueFactory(new PropertyValueFactory<>("taskPriority"));
+        taskAssigned.setCellValueFactory(new PropertyValueFactory<>("taskAssigned"));
+        taskStatus.setCellValueFactory(new PropertyValueFactory<>("taskStatus"));
+//        taskID.setCellValueFactory(new);
+//        Callback<TableColumn<TaskHistoryData, String>, TableCell<TaskHistoryData, String>> cellFactory =
+//                (TableColumn<TaskHistoryData, String> param) -> {
+//                    // make cell containing buttons
+//
+//                    final TableCell<TaskHistoryData, String> cell = new TableCell<>() {
+//
+//                        final Button action = new Button("Action");
+//                        final Button complete=new Button("Complete");
+//
+//                        @Override
+//                        public void updateItem(String item, boolean empty) {
+//                            super.updateItem(item, empty);
+//                            //that cell created only on non-empty rows
+//                            if (empty) {
+//                                setGraphic(null);
+//                                setText(null);
+//
+//
+//                            } else {
+//                                complete.setStyle(
+//                                        "-fx-background-color:linear-gradient(from 25% 25% to 100% 100%,#80bf4f,#69db1) ;\n" +
+//                                                "-fx-background-radius: 5px;\n" +
+//                                                "-fx-text-fill: black;\n" +
+//                                                "-fx-font-weight: bold;\n" +
+//                                                "-fx-font-size: 14px;\n" +
+//                                                "-fx-cursor: hand;\n"
+//                                               // Add click effect
+//                                );
+//
+//                                action.setStyle(
+//                                        "-fx-background-color:linear-gradient(from 25% 25% to 100% 100%,#80bf4f,#69db1) \n" +
+//                                                "-fx-background-radius: 5px;\n" +
+//                                                "-fx-text-fill: black;\n" +
+//                                                "-fx-font-weight: bold;\n" +
+//                                                "-fx-font-size: 14px;\n"
+//
+//                                );
+//                                action.setOnAction((ActionEvent event) -> {
+//                                    try {
+//                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/taskAction.fxml"));
+//                                        Parent root = loader.load();
+//
+//                                        // Create a new stage for the new scene
+//                                        Stage newStage = new Stage();
+//                                        newStage.initModality(Modality.APPLICATION_MODAL);
+//                                        newStage.setScene(new Scene(root));
+//
+//                                        newStage.initStyle(StageStyle.UNDECORATED);
+//                                        newStage.show();
+//
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                        });
+//
+//
+//
+//                                HBox managebtn = new HBox(action, complete);
+//                                managebtn.setStyle("-fx-alignment:center");
+//                                HBox.setMargin(action, new Insets(2, 2, 0, 3));
+//                                HBox.setMargin(complete, new Insets(2, 3, 0, 2));
+//
+//                                setGraphic(managebtn);
+//                            }
+//                            spaceTableView.setEditable(false);
+//                        }
+//                    };
+//                    return cell;
+//                };
+//
+//        taskAction.setCellFactory(cellFactory);
     }
 
 
@@ -177,8 +259,8 @@ public class SpaceDetailsController implements Initializable {
                 spaceName = rs.getString("space_name");
                 spaceDes  = rs.getString("space_description");
                 space_description.setText(spaceDes);
-                System.out.println(spaceName);
-                System.out.println(spaceDes);
+                //System.out.println(spaceName);
+                //System.out.println(spaceDes);
 
             }
 
@@ -190,27 +272,35 @@ public class SpaceDetailsController implements Initializable {
 
 
     }
+    TaskHistoryData taskHistoryData;
 
     private void getSpaceTableData() {
+        System.out.println("enter");
         spaceTableView.getItems().clear();
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT task_name, task_description, status, priority,assigned FROM task_info WHERE space_Id= "+spaceId;
+            System.out.println("spaceid" + spaceId);
+            String sql = "SELECT task_name, task_description, status, priority, assigned FROM task_info WHERE space_Id= " + spaceId;
             ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                String task_name = rs.getString("task_name");
-                String task_details = rs.getString("task_description");
-                String status = rs.getString("status");
-                String priority = rs.getString("priority");
-                String assignedto=rs.getString("assigned");
-                System.out.println(task_details+task_name+status+priority+assignedto);
 
+            // Check if there is no data
+            if (!rs.isBeforeFirst()) {
+                spaceTableView.setPlaceholder(new Label("No tasks added"));
+            } else {
+                while (rs.next()) {
+                    String task_name = rs.getString("task_name");
+                    String task_details = rs.getString("task_description");
+                    String status = rs.getString("status");
+                    String priority = rs.getString("priority");
+                    String assignedto = rs.getString("assigned");
 
+                    System.out.println(task_name + status);
 
-                TaskHistoryData taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details,assignedto);
-                spaceTableView.getItems().add(taskHistoryData);
+                    taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details, assignedto);
+                    spaceTableView.getItems().add(taskHistoryData);
+                }
             }
 
             statement.close();
@@ -219,6 +309,7 @@ public class SpaceDetailsController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
 
     @FXML
@@ -227,25 +318,91 @@ public class SpaceDetailsController implements Initializable {
         Stage stage = (Stage) homeButton.getScene().getWindow();
         stage.close();
     }
-
     public void setUserId(int userId) {
         this.userId=userId;
-
-
-
     }
 
     public void setSpaceID(String spaceid) {
         this.spaceId= spaceid;
-        taskName.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
-        taskPriority.setCellValueFactory(new PropertyValueFactory<>("taskPriority"));
-        taskStatus.setCellValueFactory(new PropertyValueFactory<>("taskSatus"));
-        taskAssigned.setCellValueFactory(new PropertyValueFactory<>("taskAssigned"));
-        spaceTableView.setEditable(false);
-
         getSpaces();
         getSpaceTableData();
 
-        System.out.println(spaceId);
+        Callback<TableColumn<TaskHistoryData, String>, TableCell<TaskHistoryData, String>> cellFactory =
+                (TableColumn<TaskHistoryData, String> param) -> {
+                    // make cell containing buttons
+
+                    final TableCell<TaskHistoryData, String> cell = new TableCell<>() {
+
+                        final Button action = new Button("Action");
+                        final Button complete=new Button("Complete");
+
+                        @Override
+                        public void updateItem(String item, boolean empty) {
+                            super.updateItem(item, empty);
+                            //that cell created only on non-empty rows
+                            if (empty) {
+                                setGraphic(null);
+                                setText(null);
+
+
+                            } else {
+                                complete.setStyle(
+                                        "-fx-background-color:linear-gradient(from 25% 25% to 100% 100%,#80bf4f,#69db1) ;\n" +
+                                                "-fx-background-radius: 5px;\n" +
+                                                "-fx-text-fill: black;\n" +
+                                                "-fx-font-weight: bold;\n" +
+                                                "-fx-font-size: 14px;\n" +
+                                                "-fx-cursor: hand;\n"
+                                        // Add click effect
+                                );
+
+                                action.setStyle(
+                                        "-fx-background-color:linear-gradient(from 25% 25% to 100% 100%,#80bf4f,#69db1) \n" +
+                                                "-fx-background-radius: 5px;\n" +
+                                                "-fx-text-fill: black;\n" +
+                                                "-fx-font-weight: bold;\n" +
+                                                "-fx-font-size: 14px;\n"
+
+                                );
+                                action.setOnAction((ActionEvent event) -> {
+                                    try {
+                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/taskAction.fxml"));
+                                        Parent root = loader.load();
+
+                                        // Create a new stage for the new scene
+                                        Stage newStage = new Stage();
+                                        newStage.initModality(Modality.APPLICATION_MODAL);
+                                        newStage.setScene(new Scene(root));
+
+                                        newStage.initStyle(StageStyle.UNDECORATED);
+                                        newStage.show();
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                });
+
+//                                taskHistoryData = spaceTableView.getSelectionModel().getSelectedItem();
+//                                System.out.println(taskHistoryData.getSpaceTaskName());
+
+
+
+                                HBox managebtn = new HBox(action, complete);
+                                managebtn.setStyle("-fx-alignment:center");
+                                HBox.setMargin(action, new Insets(2, 2, 0, 3));
+                                HBox.setMargin(complete, new Insets(2, 3, 0, 2));
+
+                                setGraphic(managebtn);
+                            }
+                            spaceTableView.setEditable(false);
+                        }
+                    };
+                    return cell;
+                };
+
+        taskAction.setCellFactory(cellFactory);
+
+        //System.out.println(spaceId);
     }
 }

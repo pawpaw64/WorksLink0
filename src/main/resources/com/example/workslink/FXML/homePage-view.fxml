@@ -202,8 +202,8 @@
                         <URL value="@../CSS/BasicDesign.css" />
                      </stylesheets>
                   </TableView>
-                  <Label layoutX="93.0" layoutY="69.0" prefHeight="31.0" prefWidth="140.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="MY SPACES" />
-                  <ImageView fitHeight="80.0" fitWidth="69.0" layoutX="25.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" rotate="18.4">
+                  <Label layoutX="34.0" layoutY="75.0" prefHeight="31.0" prefWidth="140.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="MY SPACES" />
+                  <ImageView fitHeight="80.0" fitWidth="69.0" layoutX="23.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true" rotate="18.4">
                      <image>
                         <Image url="@../Icon/shooting-star.gif" />
                      </image>
@@ -215,7 +215,7 @@
                         <TableColumn prefWidth="247.0" text="Owner" />
                     </columns>
                   </TableView>
-                  <Label layoutX="22.0" layoutY="314.0" prefHeight="22.0" prefWidth="163.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="ASSIGNED SPACES" />
+                  <Label layoutX="34.0" layoutY="308.0" prefHeight="22.0" prefWidth="163.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="ASSIGNED SPACES" />
                   <Label layoutX="697.0" layoutY="46.0" onMouseClicked="#refresh" prefHeight="29.0" prefWidth="98.0" stylesheets="@../CSS/BasicDesign.css" text="Refresh">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
@@ -229,6 +229,7 @@
                         <String fx:value="fill-btn" />
                      </styleClass>
                   </Label>
+                  <Label fx:id="nameLabel" layoutX="93.0" layoutY="14.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Welcome" wrapText="true" />
                </children>
             </AnchorPane>
          </center>
