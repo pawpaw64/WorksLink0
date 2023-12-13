@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -27,7 +29,15 @@
                   <Label fx:id="profileUserName" layoutX="-11.0" layoutY="195.0" prefHeight="32.0" prefWidth="344.0" style="-fx-alignment: center;" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="pawpaw" textAlignment="CENTER" />
                   <Label layoutX="11.0" layoutY="251.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Bio:" />
 
-                  <Button layoutX="120.0" layoutY="623.0" mnemonicParsing="false" onAction="#logout" prefHeight="36.0" prefWidth="100.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LOG OUT" />
+                  <Button layoutX="110.0" layoutY="616.0" mnemonicParsing="false" onAction="#logout" prefHeight="41.0" prefWidth="119.0" text="LOG OUT">
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="fill-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
                   <Label fx:id="label_bio" layoutX="50.0" layoutY="234.0" prefHeight="55.0" prefWidth="276.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" textAlignment="CENTER">
 
                      <cursor>
@@ -55,8 +65,24 @@
                                     <Image url="@../Icon/profile.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="profile_1Set" layoutX="40.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeProfile" prefHeight="25.0" prefWidth="66.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="set" />
-                              <Button fx:id="profile_2Set" layoutX="183.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeProfile" prefHeight="25.0" prefWidth="66.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="set" />
+                              <Button fx:id="profile_1Set" layoutX="40.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeProfile" prefHeight="25.0" prefWidth="66.0" text="set">
+                                 <stylesheets>
+                                    <URL value="@../CSS/BasicDesign.css" />
+                                    <URL value="@../CSS/design.css" />
+                                 </stylesheets>
+                                 <styleClass>
+                                    <String fx:value="fill-btn" />
+                                    <String fx:value="tx" />
+                                 </styleClass></Button>
+                              <Button fx:id="profile_2Set" layoutX="183.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeProfile" prefHeight="25.0" prefWidth="66.0" text="set">
+                                 <stylesheets>
+                                    <URL value="@../CSS/BasicDesign.css" />
+                                    <URL value="@../CSS/design.css" />
+                                 </stylesheets>
+                                 <styleClass>
+                                    <String fx:value="fill-btn" />
+                                    <String fx:value="tx" />
+                                 </styleClass></Button>
                            </children>
                         </AnchorPane>
                     </content>

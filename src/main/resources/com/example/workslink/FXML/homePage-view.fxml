@@ -37,8 +37,24 @@
                         <Image url="@../Icon/search.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="1004.0" layoutY="11.0" mnemonicParsing="false" onAction="#logout" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LogOut" />
-                  <Button fx:id="closeButton" layoutX="1083.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Close" />
+                  <Button layoutX="969.0" layoutY="1.0" mnemonicParsing="false" onAction="#logout" prefHeight="11.0" prefWidth="91.0" text="LogOut">
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="fill-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
+                  <Button fx:id="closeButton" layoutX="1076.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="27.0" prefWidth="76.0" text="Close">
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="fill-btn" />
+                        <String fx:value="tx" />
+                     </styleClass></Button>
                </children>
             </Pane>
          </top>
@@ -161,7 +177,7 @@
             </AnchorPane>
          </left>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="904.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="904.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
                <children>
                   <TableView fx:id="spaceTableView" layoutX="22.0" layoutY="101.0" prefHeight="207.0" prefWidth="769.0">
                     <columns>
@@ -216,18 +232,26 @@
                     </columns>
                   </TableView>
                   <Label layoutX="34.0" layoutY="308.0" prefHeight="22.0" prefWidth="163.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="ASSIGNED SPACES" />
-                  <Label layoutX="697.0" layoutY="46.0" onMouseClicked="#refresh" prefHeight="29.0" prefWidth="98.0" stylesheets="@../CSS/BasicDesign.css" text="Refresh">
+                  <Label layoutX="698.0" layoutY="33.0" onMouseClicked="#refresh" prefHeight="36.0" prefWidth="103.0" text="Refresh">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/reload.png" />
                            </image>
+                           <styleClass>
+                              <String fx:value="fill-btn" />
+                              <String fx:value="text-field" />
+                           </styleClass>
                         </ImageView>
                      </graphic>
                      <styleClass>
                         <String fx:value="normal-label" />
                         <String fx:value="fill-btn" />
                      </styleClass>
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/design.css" />
+                     </stylesheets>
                   </Label>
                   <Label fx:id="nameLabel" layoutX="93.0" layoutY="14.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Welcome" wrapText="true" />
                </children>

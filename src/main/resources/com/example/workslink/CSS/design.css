@@ -108,7 +108,7 @@
   -fx-mark-color: rgb(33, 235, 114); // arrow color
 }
 /*Background color of the whole context menu*/
-.choice-box .context-menu { -fx-background-color: black; }
+.choice-box .context-menu { -fx-background-color: #0dffea; }
 /*// Focused item background color in the list*/
 .choice-box .menu-item:focused { -fx-background-color: orange; }
 /*// Text color of non-focused items in the list*/

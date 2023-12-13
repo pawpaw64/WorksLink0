@@ -126,6 +126,21 @@ public class HomePageController extends HelloController implements Initializable
         removeBlurEffect();
 
     }
+    @FXML
+    void notepad() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/notepad.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+
+        applyBlurEffect();
+        stage.showAndWait();
+        removeBlurEffect();
+    }
 
     @FXML
     void showChat() throws IOException {
