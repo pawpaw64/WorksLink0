@@ -16,9 +16,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AddTaskController implements Initializable {
     @FXML
@@ -138,24 +136,28 @@ public class AddTaskController implements Initializable {
     }
     String userID;
 
-    private List<String> getUserNamesFromDatabase() {
-        List<String> userNames = new ArrayList<>();
+    private Map<String, String> getUserNamesFromDatabase() {
+       // List<String> userNames = new ArrayList<>();
+        Map<String, String> userNameMap = new HashMap<>();
 
         try (Connection connection = DatabaseConnection.getConnection()) {
 
-            String sql = "SELECT userName FROM members WHERE userID="+userID;
+            String sql = "SELECT userName,id FROM members WHERE userID="+userID;
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     String userName = resultSet.getString("userName");
-                    userNames.add(userName);
+                    String id = resultSet.getString("userName");
+
+                   // userNames.add(userName);
+                    userNameMap.put(id, userName);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return userNames;
+        return userNameMap;
     }
 
     public void setSpaceID(int spaceId) {
@@ -170,7 +172,9 @@ public class AddTaskController implements Initializable {
 
 
         // Initialize the assignMember ChoiceBox with userNames
-        List<String> userNames = getUserNamesFromDatabase();
-        assignMember.setItems(FXCollections.observableArrayList(userNames));
+       // List<String> userNames = getUserNamesFromDatabase();
+        Map<String, String> userNameMap = getUserNamesFromDatabase();
+        //assignMember.setItems(FXCollections.observableArrayList(userNames));
+        assignMember.setItems(FXCollections.observableArrayList(userNameMap.keySet()));
     }
 }

@@ -30,6 +30,7 @@ public class CalculatorController extends ProfileController{
         titlePane.setOnMousePressed(mouseEvent -> {
             x = mouseEvent.getSceneX();
             y = mouseEvent.getSceneY();
+
         });
         titlePane.setOnMouseDragged(mouseEvent -> {
             stage.setX(mouseEvent.getScreenX()-x);

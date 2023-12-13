@@ -77,6 +77,9 @@ public class SpaceDetailsController implements Initializable {
     @FXML
     private Label space_description;
     @FXML
+    private Label areaSpaceName;
+
+    @FXML
     private TableColumn<TaskHistoryData,String> taskID;
     @FXML
     void add_task(ActionEvent event) {
@@ -100,8 +103,7 @@ public class SpaceDetailsController implements Initializable {
         }
 
     }
-    @FXML
-    private Label areaSpaceName;
+
     @FXML
     private TableColumn<TaskHistoryData,String> taskAction;
 
@@ -113,7 +115,7 @@ public class SpaceDetailsController implements Initializable {
     }
 
     public void setAreaSpaceName(String areaSpaceName) {
-        this.areaSpaceName.setText( spaceName);
+        this.areaSpaceName.setText( areaSpaceName);
     }
 
     void addPaneToVBox(Pane pane, VBox targetVBox) {
@@ -401,8 +403,8 @@ public class SpaceDetailsController implements Initializable {
                     return cell;
                 };
 
+
         taskAction.setCellFactory(cellFactory);
 
-        //System.out.println(spaceId);
     }
 }
