@@ -125,6 +125,22 @@ public class HomePageController extends HelloController implements Initializable
         removeBlurEffect();
 
     }
+    @FXML
+    void notepad(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/notepad.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+
+        notepadController Controller = fxmlLoader.getController();
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+
+        applyBlurEffect();
+        stage.showAndWait();
+        removeBlurEffect();
+
+    }
 //    private VBox createListViewVBox(List<String> items, int height, int width) {
 //        VBox vbox = new VBox();
 //        vbox.setPrefHeight(height);

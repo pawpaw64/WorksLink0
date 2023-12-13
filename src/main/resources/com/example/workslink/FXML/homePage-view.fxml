@@ -83,6 +83,18 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
+                        <Label alignment="CENTER" onMouseClicked="#notepad" prefHeight="52.0" prefWidth="132.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="NotePad" textAlignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="129.0" onMouseClicked="#showChat" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                                 <image>
+                                    <Image url="@../Icon/notes.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
                      </children>
                   </VBox>
                   <VBox layoutY="458.0" prefHeight="139.0" prefWidth="231.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
