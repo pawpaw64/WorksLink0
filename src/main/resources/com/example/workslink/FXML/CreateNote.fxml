@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="297.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.NoteController">
@@ -22,5 +24,10 @@
          </styleClass></Button>
       <Label layoutX="14.0" layoutY="28.0" prefHeight="18.0" prefWidth="82.0" text="Note Name:" />
       <TextField fx:id="noteNameTextField" layoutX="14.0" layoutY="58.0" prefHeight="34.0" prefWidth="380.0" styleClass="tx" stylesheets="@../CSS/design.css" />
+      <ImageView fitHeight="41.0" fitWidth="45.0" layoutX="366.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icon/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

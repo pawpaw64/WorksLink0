@@ -7,6 +7,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -73,7 +75,7 @@
          </styleClass></DatePicker>
       <Line endX="459.4000244140625" endY="1.0" layoutX="128.0" layoutY="373.0" startX="-100.0" />
       <Line endX="457.199951171875" layoutX="130.0" layoutY="48.0" startX="-100.0" />
-      <Label layoutX="30.0" layoutY="14.0" text="Add Task" textFill="#6a6569">
+      <Label layoutX="72.0" layoutY="14.0" text="Add Task" textFill="#6a6569">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -83,5 +85,10 @@
             <Font size="13.0" />
          </font>
       </Label>
+      <ImageView fitHeight="47.0" fitWidth="48.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icon/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -17,7 +17,7 @@
 <AnchorPane prefHeight="556.0" prefWidth="740.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceCreateController">
    <children>
       <Label layoutX="238.0" layoutY="28.0" styleClass="big-label" stylesheets="@../CSS/BasicDesign.css" text="Create New Space" />
-      <ImageView fitHeight="31.0" fitWidth="27.0" layoutX="699.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="31.0" fitWidth="27.0" layoutX="709.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/cross-circle.png" />
          </image>
@@ -115,5 +115,10 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <ImageView fitHeight="70.0" fitWidth="75.0" layoutX="672.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icon/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="@../CSS/homePageDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AllMembers">
    <children>
-      <Button fx:id="homeButton" layoutX="34.0" layoutY="42.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="31.0" prefWidth="84.0" text="Home">
+      <Button fx:id="homeButton" layoutX="89.0" layoutY="41.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="31.0" prefWidth="84.0" text="Home">
          <stylesheets>
             <URL value="@../CSS/BasicDesign.css" />
             <URL value="@../CSS/design.css" />
@@ -61,5 +61,10 @@
             </ImageView>
          </graphic>
       </Label>
+      <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="9.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icon/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

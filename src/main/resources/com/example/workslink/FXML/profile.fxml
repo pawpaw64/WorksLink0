@@ -105,6 +105,11 @@
                   </Label>
                   <Label fx:id="profileEmail" layoutX="72.0" layoutY="297.0" prefHeight="38.0" prefWidth="246.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="sumaiya@134" textAlignment="CENTER" />
                   <Label fx:id="profileDOB" layoutX="115.0" layoutY="344.0" prefHeight="37.0" prefWidth="211.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="13/10/2000" />
+                  <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="273.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icon/logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </content>

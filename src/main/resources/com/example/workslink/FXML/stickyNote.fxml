@@ -4,6 +4,8 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -15,7 +17,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Button layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNote" prefHeight="41.0" prefWidth="37.0" text="+">
+        <Button layoutX="74.0" layoutY="13.0" mnemonicParsing="false" onAction="#addNote" prefHeight="27.0" prefWidth="32.0" text="+">
             <font>
                 <Font size="14.0" />
             </font>
@@ -42,5 +44,10 @@
             <String fx:value="tx" />
          </styleClass>
         </Button>
+      <ImageView fitHeight="47.0" fitWidth="49.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icon/logo.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
