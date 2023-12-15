@@ -5,65 +5,79 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class NoteController {
 
     @FXML
-    private AnchorPane rootAnchorPane;
+    private AnchorPane addingPane;
 
     @FXML
-    private VBox notesVBox = new VBox();
+    private Label noteName;
+
+    @FXML
+    private Label noteitem;
+
+    @FXML
+    private TextField noteNameTextField;
+
+    @FXML
+    private TextField yourNoteTextField;
+
+    @FXML
+    private VBox notesVBox;
+
+    private Stage stage;
 
     @FXML
     private void addNote() throws IOException {
-        // Load the new note FXML
-        // Add your code to load the new note FXML here
-        // For simplicity, let's assume the FXML file is named "CreateNote.fxml"
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/CreateNote.fxml"));
-         Parent newNoteRoot = loader.load();
-         Stage newNoteStage = new Stage();
-         newNoteStage.setScene(new Scene(newNoteRoot));
-         newNoteStage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/CreateNote.fxml"));
+        Parent root = loader.load();
+
+        Stage secondStage = new Stage();
+        secondStage.setScene(new Scene(root));
+
+        // Set this controller as the controller for the Scene 2
+        NoteController noteController = loader.getController();
+        noteController.setStage(secondStage);
+
+        secondStage.show();
     }
-
-
-    @FXML
-    private TextField noteNameTextField = new TextField();
-
-    @FXML
-    private TextField yourNoteTextField = new TextField();
-
-//    private VBox notesVBox; // Add this variable to store the reference to the VBox
-
-    // Inject the VBox from the first FXML
-    public void setNotesVBox(boolean add) {
-        this.notesVBox = notesVBox;
-    }
-    @FXML
-    private Button saveButton;
 
     @FXML
     private void saveNote() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/note.fxml"));
+        Parent root = loader.load();
 
+        NoteController noteController = loader.getController();
+        noteController.setNoteDetails(noteNameTextField.getText(), yourNoteTextField.getText());
+
+        // Add the note display to the dashboard
+        notesVBox.getChildren().add(root);
+
+        // Close the current stage (Scene 2)
+        stage.close();
     }
-
-    private void addNoteToVBox(Parent newNotePaneRoot) {
-    }
-
-
-    // Add a method to get the VBox from the first FXML
     @FXML
-    Button closeButton = new Button();
+    private Button closeButton;
     @FXML
-    private void closeScene() {
+    public void closeOnAction() {
+        System.out.println("CLose");
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setNoteDetails(String title, String content) {
+        noteName.setText(title);
+        noteitem.setText(content);
     }
 }
