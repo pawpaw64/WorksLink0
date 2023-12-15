@@ -2,6 +2,7 @@ package com.example.workslink;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,17 +12,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class NoteController {
+public class NoteController implements Initializable {
 
-    @FXML
-    private AnchorPane addingPane;
 
-    @FXML
-    private Label noteName;
 
-    @FXML
-    private Label noteitem;
 
     @FXML
     private TextField noteNameTextField;
@@ -30,7 +27,7 @@ public class NoteController {
     private TextField yourNoteTextField;
 
     @FXML
-    private VBox notesVBox;
+    private VBox notesVBox = new VBox();
 
     private Stage stage;
 
@@ -48,21 +45,15 @@ public class NoteController {
 
         secondStage.show();
     }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    @FXML
-    private void saveNote() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/note.fxml"));
-        Parent root = loader.load();
+        saveNotes();
+//        OverViewDispaly();
 
-        NoteController noteController = loader.getController();
-        noteController.setNoteDetails(noteNameTextField.getText(), yourNoteTextField.getText());
-
-        // Add the note display to the dashboard
-        notesVBox.getChildren().add(root);
-
-        // Close the current stage (Scene 2)
-        stage.close();
     }
+
+
     @FXML
     private Button closeButton;
     @FXML
@@ -75,9 +66,31 @@ public class NoteController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+    public void saveNotes() {
+        // Clear all VBoxes
+        notesVBox.getChildren().clear();
+        //doingVbox.getChildren().clear();
+        //completeVbox.getChildren().clear();
 
-    public void setNoteDetails(String title, String content) {
-        noteName.setText(title);
-        noteitem.setText(content);
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXML/note.fxml"));
+
+            // Load separate instances of AnchorPane for each VBox
+            AnchorPane NotePane = loader.load();
+//            AnchorPane doingPane = loader.load();
+//            AnchorPane completePane = loader.load();
+
+            // Add each AnchorPane to its respective VBox
+            notesVBox.getChildren().add(NotePane);
+            //doingVbox.getChildren().add(doingPane);
+            //  completeVbox.getChildren().add(completePane);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
+
 }
