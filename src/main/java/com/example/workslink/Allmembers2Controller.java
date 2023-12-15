@@ -136,16 +136,17 @@ public class Allmembers2Controller implements Initializable {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO members (userID, userName, email, dob) VALUES (?, ?, ?, ?)");
+                    "INSERT INTO members (userID, id ,userName, email, dob) VALUES (?,?,?, ?, ?)");
 
             // Iterate over the rows and insert only the selected ones
             ObservableList<MembersData> allMembers = membersTableView.getItems();
             for (MembersData member : allMembers) {
                 if (member.getSelect().isSelected()) {
                     preparedStatement.setInt(1, userId);
-                    preparedStatement.setString(2, member.getMemberUserName());
-                    preparedStatement.setString(3, member.getMemberEmail());
-                    preparedStatement.setString(4, member.getMemberDOB());
+                    preparedStatement.setString(2, member.getMemberId());
+                    preparedStatement.setString(3, member.getMemberUserName());
+                    preparedStatement.setString(4, member.getMemberEmail());
+                    preparedStatement.setString(5, member.getMemberDOB());
 
                     preparedStatement.executeUpdate();
                 }
