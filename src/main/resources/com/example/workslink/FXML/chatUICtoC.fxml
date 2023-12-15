@@ -11,9 +11,9 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.ClientController">
 
                <children>
-      <TextArea fx:id="showArea" layoutX="31.0" layoutY="57.0" prefHeight="421.0" prefWidth="551.0">
+      <TextArea fx:id="showArea" layoutX="31.0" layoutY="57.0" prefHeight="421.0" prefWidth="551.0" style="-fx-background-color: #0d757a;">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold Italic" size="14.0" />
          </font>
       </TextArea>
       <TextField fx:id="inputfield" layoutX="49.0" layoutY="493.0" onMouseClicked="#buttonPrassed" prefHeight="37.0" prefWidth="386.0" promptText="Enter your name..." styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">

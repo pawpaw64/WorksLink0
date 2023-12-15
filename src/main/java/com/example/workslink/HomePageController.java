@@ -41,7 +41,6 @@ public class HomePageController extends HelloController implements Initializable
     public ImageView apps;
     @FXML
     public Label nameLabel;
-    public ImageView apps;
     @FXML
     Button closeButton;
     private User currentUser;
@@ -278,7 +277,9 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
-    void getTable(){
+
+
+
 
     public void refresh() {
         spaceTableView.getItems().clear();
@@ -344,6 +345,22 @@ public class HomePageController extends HelloController implements Initializable
         getSpaceVbox();
     }
 
+
+    private void applyBlurEffect() {
+        BoxBlur blur = new BoxBlur(5, 5, 3); // You can adjust the blur parameters
+        homePane.setEffect(blur);
+    }
+
+   @FXML
+   public void closeOnAction() {
+        System.out.println("CLose");
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
+
+
+
+
     private void getSpaceTableData() {
         spaceTableView.getItems().clear();
 
@@ -372,18 +389,6 @@ public class HomePageController extends HelloController implements Initializable
         }
     }
 
-    private void applyBlurEffect() {
-        BoxBlur blur = new BoxBlur(5, 5, 3); // You can adjust the blur parameters
-        homePane.setEffect(blur);
-    }
-
-   @FXML
-   public void closeOnAction() {
-        System.out.println("CLose");
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
@@ -392,11 +397,6 @@ public class HomePageController extends HelloController implements Initializable
         TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
-
-
-    }
-
-    public void calculator(MouseEvent event) {
     }
 }
 
