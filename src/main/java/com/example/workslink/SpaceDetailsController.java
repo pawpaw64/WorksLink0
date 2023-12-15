@@ -1,10 +1,6 @@
-//space_details.fxml controller
 package com.example.workslink;
 
-import com.example.workslink.DatabaseConnection;
-import com.example.workslink.TaskHistoryData;
 import javafx.animation.TranslateTransition;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,10 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,7 +30,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
@@ -77,6 +69,9 @@ public class SpaceDetailsController implements Initializable {
     @FXML
     private Label space_description;
     @FXML
+    private Label areaSpaceName;
+
+    @FXML
     private TableColumn<TaskHistoryData,String> taskID;
     @FXML
     void add_task(ActionEvent event) {
@@ -91,7 +86,7 @@ public class SpaceDetailsController implements Initializable {
             newStage.setScene(new Scene(root));
             AddTaskController addTaskController=loader.getController();
             addTaskController.setSpaceID(Integer.parseInt(spaceId));
-            addTaskController.setUserId(userId);
+           // addTaskController.setUserId(userId);
 
             newStage.showAndWait();
 
@@ -100,8 +95,7 @@ public class SpaceDetailsController implements Initializable {
         }
 
     }
-    @FXML
-    private Label areaSpaceName;
+
     @FXML
     private TableColumn<TaskHistoryData,String> taskAction;
 
@@ -113,7 +107,7 @@ public class SpaceDetailsController implements Initializable {
     }
 
     public void setAreaSpaceName(String areaSpaceName) {
-        this.areaSpaceName.setText( spaceName);
+        this.areaSpaceName.setText( areaSpaceName);
     }
 
     void addPaneToVBox(Pane pane, VBox targetVBox) {
@@ -125,6 +119,7 @@ public class SpaceDetailsController implements Initializable {
     private Label percentlebel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        OverViewDispaly();
         ObservableList<PieChart.Data>pieChartData =
                 FXCollections.observableArrayList(
                   new PieChart.Data("Todo",50),
@@ -172,79 +167,6 @@ public class SpaceDetailsController implements Initializable {
         taskPriority.setCellValueFactory(new PropertyValueFactory<>("taskPriority"));
         taskAssigned.setCellValueFactory(new PropertyValueFactory<>("taskAssigned"));
         taskStatus.setCellValueFactory(new PropertyValueFactory<>("taskStatus"));
-//        taskID.setCellValueFactory(new);
-//        Callback<TableColumn<TaskHistoryData, String>, TableCell<TaskHistoryData, String>> cellFactory =
-//                (TableColumn<TaskHistoryData, String> param) -> {
-//                    // make cell containing buttons
-//
-//                    final TableCell<TaskHistoryData, String> cell = new TableCell<>() {
-//
-//                        final Button action = new Button("Action");
-//                        final Button complete=new Button("Complete");
-//
-//                        @Override
-//                        public void updateItem(String item, boolean empty) {
-//                            super.updateItem(item, empty);
-//                            //that cell created only on non-empty rows
-//                            if (empty) {
-//                                setGraphic(null);
-//                                setText(null);
-//
-//
-//                            } else {
-//                                complete.setStyle(
-//                                        "-fx-background-color:linear-gradient(from 25% 25% to 100% 100%,#80bf4f,#69db1) ;\n" +
-//                                                "-fx-background-radius: 5px;\n" +
-//                                                "-fx-text-fill: black;\n" +
-//                                                "-fx-font-weight: bold;\n" +
-//                                                "-fx-font-size: 14px;\n" +
-//                                                "-fx-cursor: hand;\n"
-//                                               // Add click effect
-//                                );
-//
-//                                action.setStyle(
-//                                        "-fx-background-color:linear-gradient(from 25% 25% to 100% 100%,#80bf4f,#69db1) \n" +
-//                                                "-fx-background-radius: 5px;\n" +
-//                                                "-fx-text-fill: black;\n" +
-//                                                "-fx-font-weight: bold;\n" +
-//                                                "-fx-font-size: 14px;\n"
-//
-//                                );
-//                                action.setOnAction((ActionEvent event) -> {
-//                                    try {
-//                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/taskAction.fxml"));
-//                                        Parent root = loader.load();
-//
-//                                        // Create a new stage for the new scene
-//                                        Stage newStage = new Stage();
-//                                        newStage.initModality(Modality.APPLICATION_MODAL);
-//                                        newStage.setScene(new Scene(root));
-//
-//                                        newStage.initStyle(StageStyle.UNDECORATED);
-//                                        newStage.show();
-//
-//                                    } catch (IOException e) {
-//                                        e.printStackTrace();
-//                                    }
-//
-//                                        });
-//
-//
-//
-//                                HBox managebtn = new HBox(action, complete);
-//                                managebtn.setStyle("-fx-alignment:center");
-//                                HBox.setMargin(action, new Insets(2, 2, 0, 3));
-//                                HBox.setMargin(complete, new Insets(2, 3, 0, 2));
-//
-//                                setGraphic(managebtn);
-//                            }
-//                            spaceTableView.setEditable(false);
-//                        }
-//                    };
-//                    return cell;
-//                };
-//
-//        taskAction.setCellFactory(cellFactory);
     }
 
 
@@ -259,9 +181,6 @@ public class SpaceDetailsController implements Initializable {
                 spaceName = rs.getString("space_name");
                 spaceDes  = rs.getString("space_description");
                 space_description.setText(spaceDes);
-                //System.out.println(spaceName);
-                //System.out.println(spaceDes);
-
             }
 
             statement.close();
@@ -275,13 +194,11 @@ public class SpaceDetailsController implements Initializable {
     TaskHistoryData taskHistoryData;
 
     private void getSpaceTableData() {
-        System.out.println("enter");
         spaceTableView.getItems().clear();
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            System.out.println("spaceid" + spaceId);
             String sql = "SELECT task_name, task_description, status, priority, assigned FROM task_info WHERE space_Id= " + spaceId;
             ResultSet rs = statement.executeQuery(sql);
 
@@ -296,8 +213,6 @@ public class SpaceDetailsController implements Initializable {
                     String priority = rs.getString("priority");
                     String assignedto = rs.getString("assigned");
 
-                    System.out.println(task_name + status);
-
                     taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details, assignedto);
                     spaceTableView.getItems().add(taskHistoryData);
                 }
@@ -309,8 +224,6 @@ public class SpaceDetailsController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 
     @FXML
     private ImageView homeButton;
@@ -330,7 +243,6 @@ public class SpaceDetailsController implements Initializable {
         Callback<TableColumn<TaskHistoryData, String>, TableCell<TaskHistoryData, String>> cellFactory =
                 (TableColumn<TaskHistoryData, String> param) -> {
                     // make cell containing buttons
-
                     final TableCell<TaskHistoryData, String> cell = new TableCell<>() {
 
                         final Button action = new Button("Action");
@@ -346,48 +258,11 @@ public class SpaceDetailsController implements Initializable {
 
 
                             } else {
-                                complete.setStyle(
-                                        "-fx-background-color:linear-gradient(from 25% 25% to 100% 100%,#80bf4f,#69db1) ;\n" +
-                                                "-fx-background-radius: 5px;\n" +
-                                                "-fx-text-fill: black;\n" +
-                                                "-fx-font-weight: bold;\n" +
-                                                "-fx-font-size: 14px;\n" +
-                                                "-fx-cursor: hand;\n"
-                                        // Add click effect
-                                );
-
-                                action.setStyle(
-                                        "-fx-background-color:linear-gradient(from 25% 25% to 100% 100%,#80bf4f,#69db1) \n" +
-                                                "-fx-background-radius: 5px;\n" +
-                                                "-fx-text-fill: black;\n" +
-                                                "-fx-font-weight: bold;\n" +
-                                                "-fx-font-size: 14px;\n"
-
-                                );
                                 action.setOnAction((ActionEvent event) -> {
-                                    try {
-                                        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/taskAction.fxml"));
-                                        Parent root = loader.load();
-
-                                        // Create a new stage for the new scene
-                                        Stage newStage = new Stage();
-                                        newStage.initModality(Modality.APPLICATION_MODAL);
-                                        newStage.setScene(new Scene(root));
-
-                                        newStage.initStyle(StageStyle.UNDECORATED);
-                                        newStage.show();
-
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
+                                    TaskHistoryData selectedTask = getTableView().getItems().get(getIndex());
+                                    System.out.println(selectedTask.getTaskPriority());
+                                    openTaskAction(selectedTask);
                                 });
-
-//                                taskHistoryData = spaceTableView.getSelectionModel().getSelectedItem();
-//                                System.out.println(taskHistoryData.getSpaceTaskName());
-
-
-
                                 HBox managebtn = new HBox(action, complete);
                                 managebtn.setStyle("-fx-alignment:center");
                                 HBox.setMargin(action, new Insets(2, 2, 0, 3));
@@ -397,12 +272,62 @@ public class SpaceDetailsController implements Initializable {
                             }
                             spaceTableView.setEditable(false);
                         }
+
+
                     };
                     return cell;
                 };
 
+
         taskAction.setCellFactory(cellFactory);
 
-        //System.out.println(spaceId);
     }
+    public  void openTaskAction(TaskHistoryData t){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/taskAction.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage for the new scene
+            Stage newStage = new Stage();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.setScene(new Scene(root));
+
+            // Pass selected task data to TaskActionController
+            TaskAction taskActionController = loader.getController();
+            taskActionController.setTaskData(t);
+
+
+            newStage.initStyle(StageStyle.UNDECORATED);
+            newStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void OverViewDispaly() {
+        // Clear all VBoxes
+        todoVbox.getChildren().clear();
+        //doingVbox.getChildren().clear();
+        //completeVbox.getChildren().clear();
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXML/overview.fxml"));
+
+            // Load separate instances of AnchorPane for each VBox
+            AnchorPane todoPane = loader.load();
+            AnchorPane doingPane = loader.load();
+            AnchorPane completePane = loader.load();
+
+            // Add each AnchorPane to its respective VBox
+            todoVbox.getChildren().add(todoPane);
+            //doingVbox.getChildren().add(doingPane);
+          //  completeVbox.getChildren().add(completePane);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

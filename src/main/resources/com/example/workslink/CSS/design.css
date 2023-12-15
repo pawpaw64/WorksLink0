@@ -47,7 +47,7 @@
 }
 
 .rectangle:hover {
-    -fx-background-color: #8A9A5B; /* New background color for the hover state */
+    -fx-background-color: ; /* New background color for the hover state */
     -fx-text-fill: #FF5733;
     -fx-background-color: #3fff00;
 }
@@ -108,12 +108,59 @@
   -fx-mark-color: rgb(33, 235, 114); // arrow color
 }
 /*Background color of the whole context menu*/
-.choice-box .context-menu { -fx-background-color: black; }
+.choice-box .context-menu { -fx-background-color:white; }
 /*// Focused item background color in the list*/
-.choice-box .menu-item:focused { -fx-background-color: orange; }
+.choice-box .menu-item:focused { -fx-background-color: #05373c;
+ }
 /*// Text color of non-focused items in the list*/
-.choice-box .menu-item > .label { -fx-text-fill: white; }
+.choice-box .menu-item > .label { -fx-text-fill: black;
+ -fx-font-family: "Cambria";
+     -fx-font-size: 18px;
+     -fx-font-weight: bold;}
 /*// Text color of focused item in the list*/
-.choice-box .menu-item:focused > .label { -fx-text-fill: black; }
+.choice-box .menu-item:focused > .label { -fx-text-fill: white;
+ -fx-font-family: "Cambria";
+     -fx-font-size: 18px;
+     -fx-font-weight: bold;}
 
+/* design.css *//* design.css */
 
+                .check-combo-box .box {
+                    -fx-padding: 5 10; /* Adjust padding as needed */
+                }
+
+                .check-combo-box .arrow-button {
+                    -fx-padding: 5 10; /* Adjust padding as needed */
+                }
+
+                .check-combo-box .arrow-button .arrow {
+                    -fx-padding: 5 10; /* Adjust padding as needed */
+                }
+
+                .check-combo-box .arrow-button .arrow-button-background {
+                    -fx-padding: 5 10; /* Adjust padding as needed */
+                }
+
+                .check-combo-box-popup .list-view {
+                    -fx-pref-height: 200;
+                }
+
+                /* Customize the appearance of the selected items */
+                .check-combo-box-popup .list-view .list-cell:filled:selected {
+                    -fx-background-color: #b9f2ff; /* Selected item background color */
+                    -fx-text-fill: black; /* Selected item text color */
+                }
+
+                /* Customize the appearance of the non-selected items */
+                .check-combo-box-popup .list-view .list-cell:filled {
+                    -fx-background-color: white; /* Non-selected item background color */
+                    -fx-text-fill: black; /* Non-selected item text color */
+                }
+
+                /* Customize the appearance of the CheckComboBox label */
+                .check-combo-box .label {
+                    -fx-text-fill: black; /* Label text color */
+                    -fx-font-family: "Cambria";
+                    -fx-font-size: 18px;
+                    -fx-font-weight: bold;
+                }

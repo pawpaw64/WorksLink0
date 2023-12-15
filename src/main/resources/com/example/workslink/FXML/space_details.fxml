@@ -33,13 +33,25 @@
                               <AnchorPane prefHeight="576.0" prefWidth="920.0" styleClass="white">
                                  <children>
                                     <Label fx:id="areaSpaceName" layoutX="53.0" layoutY="14.0" prefHeight="32.0" prefWidth="380.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#Space" wrapText="true" />
-                                    <Label layoutX="53.0" layoutY="69.0" text="Space description" />
+                                    <Label layoutX="40.0" layoutY="69.0" prefHeight="20.0" prefWidth="130.0" text="Space description" underline="true" />
                                     <ImageView fx:id="homeButton" fitHeight="29.0" fitWidth="27.0" layoutX="26.0" layoutY="18.0" onMouseClicked="#homeButtonOnAction" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                                        <image>
                                           <Image url="@../Icon/angle-small-left.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="space_description" layoutX="65.0" layoutY="101.0" prefHeight="98.0" prefWidth="746.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <Label fx:id="space_description" layoutX="42.0" layoutY="101.0" prefHeight="98.0" prefWidth="769.0" stylesheets="@../CSS/homePageDesign.css" text="Details" />
+                                    <ImageView fitHeight="79.0" fitWidth="109.0" layoutX="169.0" pickOnBounds="true" preserveRatio="true" rotate="11.3">
+                                       <image>
+                                          <Image url="@../Icon/galaxy.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="42.0" layoutY="261.0" prefHeight="20.0" prefWidth="73.0" text="Start Date:" underline="true" />
+                                    <Label layoutX="42.0" layoutY="288.0" text="Label" />
+                                    <Label layoutX="172.0" layoutY="261.0" prefHeight="20.0" prefWidth="73.0" text="End Date:" underline="true" />
+                                    <Label layoutX="172.0" layoutY="288.0" prefWidth="60.0" text="Label" wrapText="true" />
+                                    <Label layoutX="42.0" layoutY="232.0" prefHeight="20.0" prefWidth="68.0" text="Timeline:" underline="true" />
+                                    <Label layoutX="309.0" layoutY="261.0" prefWidth="118.0" text="Remaining days:" underline="true" />
+                                    <Label layoutX="309.0" layoutY="288.0" text="Label" />
                                  </children>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -87,38 +99,38 @@
                <content>
                   <StackPane fx:id="stack" prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="790.0">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="968.0">
                            <children>
                               <Label layoutX="31.0" layoutY="16.0" prefHeight="34.0" prefWidth="359.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#OverView">
                                  <font>
                                     <Font name="Arial" size="29.0" />
                                  </font>
                               </Label>
-                              <HBox layoutX="46.0" layoutY="111.0" prefHeight="342.0" prefWidth="698.0">
+                              <HBox layoutX="16.0" layoutY="71.0" prefHeight="382.0" prefWidth="843.0">
                                  <children>
-                                    <VBox fx:id="todoVbox" prefHeight="342.0" prefWidth="265.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
-                                    <VBox fx:id="doingVbox" prefHeight="342.0" prefWidth="266.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
-                                    <VBox fx:id="CompleteVbox" prefHeight="342.0" prefWidth="262.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="todoVbox" prefHeight="382.0" prefWidth="276.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="doingVbox" prefHeight="382.0" prefWidth="313.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="CompleteVbox" prefHeight="382.0" prefWidth="272.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
                                  </children>
                               </HBox>
-                              <Label alignment="CENTER" layoutX="103.0" layoutY="71.0" prefHeight="30.0" prefWidth="122.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="To Do" textAlignment="CENTER">
+                              <Label alignment="CENTER" layoutX="89.0" layoutY="41.0" prefHeight="30.0" prefWidth="122.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="To Do" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="176.0" layoutY="102.0" startX="-129.0" stroke="#90d8ff" strokeWidth="1.5" />
-                              <Label alignment="CENTER" layoutX="332.0" layoutY="71.0" prefHeight="30.0" prefWidth="116.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Doing" textAlignment="CENTER">
+                              <Line endX="100.0" layoutX="164.0" layoutY="69.0" startX="-129.0" stroke="#90d8ff" strokeWidth="1.5" />
+                              <Label alignment="CENTER" layoutX="380.0" layoutY="41.0" prefHeight="30.0" prefWidth="116.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Doing" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="401.0" layoutY="102.0" startX="-111.80001831054688" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
-                              <Label alignment="CENTER" layoutX="567.0" layoutY="69.0" prefHeight="33.0" prefWidth="125.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Complete">
+                              <Line endX="100.0" layoutX="443.0" layoutY="70.0" startX="-111.80001831054688" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
+                              <Label alignment="CENTER" layoutX="663.0" layoutY="40.0" prefHeight="33.0" prefWidth="125.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Complete">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="637.0" layoutY="100.0" startX="-115.99996948242188" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
+                              <Line endX="100.0" layoutX="726.0" layoutY="67.0" startX="-115.99996948242188" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
                            </children>
                         </AnchorPane>
                      </children>

@@ -2,6 +2,7 @@ package com.example.workslink;
 
 import com.example.workslink.DatabaseConnection;
 import com.jfoenix.controls.JFXDatePicker;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import org.controlsfx.control.CheckComboBox;
+
 import java.util.List;
 
 import java.io.IOException;
@@ -25,8 +28,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 public class SpaceCreateController implements Initializable {
-    @FXML
-    private ChoiceBox<String> assignedTo;
 
     public Button createSpaceBtn;
     @FXML
@@ -42,6 +43,8 @@ public class SpaceCreateController implements Initializable {
     private DatePicker spaceStartDate;
     @FXML
     private Label invalid_date_label;
+    @FXML
+    private CheckComboBox<String> membersCheckComboBox;
 
     public TextField getSpaceDescription() {
         return spaceDescription;
@@ -81,33 +84,21 @@ public class SpaceCreateController implements Initializable {
 
 
 
-    public void space_circle(MouseEvent event) {
-        if (event.getSource() instanceof Circle) {
-            Circle clickedCircle = (Circle) event.getSource();
-            Color circleColor = (Color) clickedCircle.getFill();
-            space_Pane1.setStyle("-fx-background-color: #" + toHexString(circleColor));
-        }
-    }
 
-    private String toHexString(Color color) {
-        int r = (int) (color.getRed() * 255);
-        int g = (int) (color.getGreen() * 255);
-        int b = (int) (color.getBlue() * 255);
-
-        return String.format("%02X%02X%02X", r, g, b);
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
     }
-    List<String>assigneName=new ArrayList<>();
+
 
     int userId;
+    List<String> assigneName = new ArrayList<>();
+    private List<String> getMemberNames() {
 
-    private void getAssigneeList() throws SQLException {
         try {
+            System.out.println(userId);
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName FROM members WHERE userID = ?");
@@ -116,13 +107,17 @@ public class SpaceCreateController implements Initializable {
 
             while (rs.next()) {
                 assigneName.add(rs.getString("userName"));
-                System.out.println(assigneName);
 
             }
         } catch (Exception e) {
+
             e.printStackTrace();
+
         }
+        return assigneName;
     }
+
+
 
     private boolean hasValidDateRange() {
         if (spaceStartDate.getValue() == null || spaceEndDate.getValue() == null) {
@@ -164,7 +159,6 @@ public class SpaceCreateController implements Initializable {
     }
 
     public void create_spaceBtn(ActionEvent actionEvent) {
-
         String sd = spaceDescription.getText();
         System.out.println(sd);
         //String assignee=(String) assignedTo.getValue();
@@ -175,20 +169,21 @@ public class SpaceCreateController implements Initializable {
                 DatabaseConnection databaseConnection = new DatabaseConnection();
                 Connection connection = databaseConnection.getConnection();
 
-                //String sql = "INSERT INTO user (email, userName,dob, password,questions,answer) VALUES (?, ?, ?, ?,?,?)";
-                String sql = "INSERT INTO space_info(user_id, space_name, Space_description, start_date, end_date,calcDays) VALUES(?,?,?,?,?,?)";
+                String sql = "INSERT INTO space_info(user_id, space_name, Space_description, start_date, end_date, calcDays, members) VALUES(?,?,?,?,?,?,?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, String.valueOf(userId));
                     preparedStatement.setString(2, getSpaceName().getText());
                     preparedStatement.setString(3, spaceDescription.getText());
                     preparedStatement.setString(4, String.valueOf(Date.valueOf(spaceStartDate.getValue())));
                     preparedStatement.setString(5, String.valueOf(Date.valueOf(spaceEndDate.getValue())));
-                   // preparedStatement.setString(6, assignee);
-                    preparedStatement.setString(6, calcDays(spaceStartDate,spaceEndDate)+"Days");
+                    preparedStatement.setString(6, calcDays(spaceStartDate, spaceEndDate) + "Days");
 
+                    // Get selected members from CheckComboBox
+                    List<String> selectedMembers = membersCheckComboBox.getCheckModel().getCheckedItems();
+                    String membersString = String.join(",", selectedMembers);
+                    preparedStatement.setString(7, membersString);
 
                     int rowsInserted = preparedStatement.executeUpdate();
-
 
                     preparedStatement.close();
                     connection.close();
@@ -199,6 +194,7 @@ public class SpaceCreateController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
         } else {
             System.out.println("");
         }
@@ -209,20 +205,17 @@ public class SpaceCreateController implements Initializable {
 
     public void setUserID(int id) throws SQLException {
         this.userId = id;
-        getAssigneeList();
-        //assignedTo.getItems().addAll(assigneName);
-      //  System.out.println(assignedTo.getItems());
+        List<String> memberNames = getMemberNames();
+        membersCheckComboBox.getItems().addAll(memberNames);
     }
+
 
     @FXML
     private ImageView homeButton;
 
     public void goBack(MouseEvent mouseEvent) {
-
         Stage stage = (Stage) homeButton.getScene().getWindow();
-
         stage.close();
-
     }
 
 }
