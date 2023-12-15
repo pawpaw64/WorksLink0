@@ -24,7 +24,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -62,6 +62,14 @@ public class HomePageController extends HelloController implements Initializable
     private TableColumn<SpaceInfo, String> TaskOngoing;
     @FXML
     private TableView<SpaceInfo> spaceTableView;
+    @FXML
+    private TableColumn<SpaceInfo,String> AssignedSpaceName;
+    @FXML
+    private TableView<SpaceInfo> assignedTable;
+
+    @FXML
+    private TableColumn<SpaceInfo,String> assignedTaskOngoing;
+
     int spaceCount;
     String spaceid;
     int id;
@@ -73,7 +81,6 @@ public class HomePageController extends HelloController implements Initializable
         nameLabel.setText("Welcome " + currentUser.getUserName());
         getSpaceData();
     }
-
     @FXML
     public void logout(ActionEvent e) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/loginRegistration.fxml"));
@@ -86,7 +93,6 @@ public class HomePageController extends HelloController implements Initializable
         stage.setX(100);
         stage.show();
     }
-
     @FXML
     private void showProfile() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
@@ -105,11 +111,9 @@ public class HomePageController extends HelloController implements Initializable
         profileStage.showAndWait();
         removeBlurEffect();
     }
-
     private void removeBlurEffect() {
         homePane.setEffect(null); // Remove the blur effect
     }
-
     @FXML
     void calculator() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/calculator.fxml"));
@@ -126,7 +130,6 @@ public class HomePageController extends HelloController implements Initializable
         removeBlurEffect();
 
     }
-
     @FXML
     void showChat() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
@@ -140,7 +143,6 @@ public class HomePageController extends HelloController implements Initializable
         stage.show();
 
     }
-
     @FXML
     void createNewSpace() { //mouseEvent at add space
         try {
@@ -162,7 +164,6 @@ public class HomePageController extends HelloController implements Initializable
             throw new RuntimeException(e);
         }
     }
-
     @FXML
     void membersOnAction() { //mouseEvent at add space
         try {
@@ -227,7 +228,6 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
-
     public void getSpaceInfo(String value) throws SQLException {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
@@ -249,7 +249,6 @@ public class HomePageController extends HelloController implements Initializable
 
 
     }
-
     private void handleSpaceItemClick(String newValue, int userId, String spaceid) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
@@ -272,7 +271,6 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
-
     public void refresh() {
         spaceTableView.getItems().clear();
 
@@ -288,7 +286,7 @@ public class HomePageController extends HelloController implements Initializable
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
                 String calcDays = rs.getString("calcDays");
-                System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
+
                 SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
                 spaceTableView.getItems().add(singleSpace);
             }
@@ -299,7 +297,7 @@ public class HomePageController extends HelloController implements Initializable
         } catch (Exception e) {
             e.printStackTrace();
         }
-       // getVbox();
+
         try {
 
             DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -344,17 +342,27 @@ public class HomePageController extends HelloController implements Initializable
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name,start_date,end_date,calcDays FROM space_info WHERE user_id = " + id;
+            String sql = "SELECT space_Id ,space_name,start_date,end_date,calcDays FROM space_info WHERE user_id = " + id;
 
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
+                String spaceId = rs.getString("space_Id");
                 String spaceName = rs.getString("space_name");
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
                 String calcDays = rs.getString("calcDays");
-                System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
-                SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
-                spaceTableView.getItems().add(singleSpace);
+                String taskCount= String.valueOf(getTaskCount(spaceId));
+                System.out.println(taskCount);
+               if(taskCount!=null ){
+
+                    System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
+                    SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays, taskCount);
+                    spaceTableView.getItems().add(singleSpace);
+                }
+               else{
+                   SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
+                   spaceTableView.getItems().add(singleSpace);
+               }
             }
 
             statement.close();
@@ -364,6 +372,87 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+    Map<String, String> spaceIdTaskNameMap = new HashMap<>();
+
+    private void getSpaceId() {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT space_Id, task_name FROM task_info WHERE assigneeID = " + id;
+
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                String spaceId = rs.getString("space_Id");
+                String taskName = rs.getString("task_name");
+
+                // Store the spaceId and taskName in the map
+                spaceIdTaskNameMap.put(spaceId, taskName);
+
+                // Optionally, you can process each spaceId and taskName here as needed
+                System.out.println("Space ID: " + spaceId + ", Task Name: " + taskName);
+            }
+
+            // Now, spaceIdTaskNameMap contains spaceId as keys and taskName as values
+
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getAssignedSpaceTable() {
+        assignedTable.getItems().clear();
+        getSpaceId();
+
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT task_name FROM task_info WHERE assigneeID = " + id;
+
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+
+                String taskName = rs.getString("task_name");
+
+
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getTaskCount(String spaceId) {
+        int taskCount = 0;
+
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+
+            String sql = "SELECT COUNT(*) AS taskCount FROM task_info WHERE space_Id= " + spaceId;
+            ResultSet rs = statement.executeQuery(sql);
+
+            // Check if there is no data
+            if (rs.next()) {
+                taskCount = rs.getInt("taskCount");
+
+            }
+
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return taskCount;
+    }
+
 
     private void applyBlurEffect() {
         BoxBlur blur = new BoxBlur(5, 5, 3); // You can adjust the blur parameters
@@ -385,6 +474,10 @@ public class HomePageController extends HelloController implements Initializable
         TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
+        assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
+
+        AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("AssignedSpaceName"));
+       assignedTable.setEditable(false);
 
 
     }

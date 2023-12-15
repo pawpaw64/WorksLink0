@@ -9,17 +9,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.TaskAction">
    <children>
       <Label fx:id="taskName" layoutX="28.0" layoutY="46.0" prefHeight="32.0" prefWidth="220.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Task Name" />
       <Label layoutX="33.0" layoutY="98.0" prefHeight="22.0" prefWidth="124.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Description" />
       <Text fx:id="taskDes" layoutX="33.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="197.13671875" />
-      <ChoiceBox fx:id="taskpriority" layoutX="346.0" layoutY="53.0" prefHeight="25.0" prefWidth="240.0" />
+      <ChoiceBox fx:id="taskPriority" layoutX="346.0" layoutY="53.0" prefHeight="25.0" prefWidth="240.0" />
       <Label layoutX="346.0" layoutY="29.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Change Priority" />
       <Label layoutX="346.0" layoutY="90.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Change Status" />
       <ComboBox fx:id="taskStatus" layoutX="348.0" layoutY="119.0" prefHeight="25.0" prefWidth="240.0" />
-      <Button fx:id="taskSave" layoutX="240.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="157.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Save" />
+      <Button fx:id="taskSave" layoutX="240.0" layoutY="316.0" mnemonicParsing="false" onAction="#taskSave" prefHeight="30.0" prefWidth="157.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Save" />
       <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="12.0" layoutY="13.0" onMouseClicked="#goback" pickOnBounds="true" preserveRatio="true" styleClass="icon">
          <image>
             <Image url="@../Icon/angle-small-left.png" />

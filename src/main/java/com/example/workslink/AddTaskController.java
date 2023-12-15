@@ -56,8 +56,8 @@ public class AddTaskController implements Initializable {
     private Label invalid_date_label;
 
 
-    String[] priority={"Urgent","Averge","Minor"};
-    String [] status={"ToDo","Ongoing","Complete"};
+    String[] priority={"High", "Medium", "Low"};
+    String [] status={"To Do", "In Progress", "Done"};
 
     @FXML
     private Button closeButton;
@@ -78,6 +78,7 @@ public class AddTaskController implements Initializable {
         return taskStatus;
     }
     String name,description,statuss,priorityy,date,assigned;
+    String assigneeID;
 
 
 
@@ -89,6 +90,9 @@ public class AddTaskController implements Initializable {
         priorityy = (String) getTaskPriority().getValue();
         statuss = (String) getTaskStatus().getValue();
         assigned=getAssignMember().getValue();
+        assigneeID=userIdSelected;
+
+
 
         if(name.isEmpty() || description.isEmpty() || date.isEmpty()){
             valid_label.setText("Enter All Information");
@@ -98,7 +102,8 @@ public class AddTaskController implements Initializable {
             try{
                 DatabaseConnection databaseConnection = new DatabaseConnection();
                 Connection connection = databaseConnection.getConnection();
-                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status,assigned)VALUES (?,?, ?,?, ?, ?, ?)";
+                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status,assigned,assigneeID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, String.valueOf(spaceId));
@@ -108,8 +113,7 @@ public class AddTaskController implements Initializable {
                     preparedStatement.setString(5,priorityy);
                     preparedStatement.setString(6,statuss);
                     preparedStatement.setString(7,assigned);
-                    System.out.println(name+description+date);
-                    System.out.println("Task Added");
+                    preparedStatement.setString(8,assigneeID);
 
                     preparedStatement.executeUpdate();
 
@@ -121,6 +125,8 @@ public class AddTaskController implements Initializable {
         }Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
+
+
 
 
     @Override
@@ -135,46 +141,88 @@ public class AddTaskController implements Initializable {
         stage.close();
     }
     String userID;
+    Map<String, String> userNameMap = new HashMap<>();
+//    private Map<String, String> getUserNamesFromDatabase() {
+//       // List<String> userNames = new ArrayList<>();
+//
+//
+//        try (Connection connection = DatabaseConnection.getConnection()) {
+//
+//            String sql = "SELECT userName,id FROM members WHERE userID="+userID;
+//            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+//                ResultSet resultSet = preparedStatement.executeQuery();
+//                while (resultSet.next()) {
+//                    String userName = resultSet.getString("userName");
+//                    String id = resultSet.getString("id");
+//
+//                    userNameMap.put(id, userName);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return userNameMap;
+//    }
 
-    private Map<String, String> getUserNamesFromDatabase() {
-       // List<String> userNames = new ArrayList<>();
-        Map<String, String> userNameMap = new HashMap<>();
+    private List<String> getUserNamesFromDatabase(int spaceId) {
+        List<String> userNames = new ArrayList<>();
 
         try (Connection connection = DatabaseConnection.getConnection()) {
-
-            String sql = "SELECT userName,id FROM members WHERE userID="+userID;
+            String sql = "SELECT members FROM space_info WHERE space_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, spaceId);
                 ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    String userName = resultSet.getString("userName");
-                    String id = resultSet.getString("userName");
 
-                   // userNames.add(userName);
-                    userNameMap.put(id, userName);
+                if (resultSet.next()) {
+                    // Assuming the "members" column contains a comma-separated list of usernames.
+                    String members = resultSet.getString("members");
+                    userNames.addAll(Arrays.asList(members.split(",")));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return userNameMap;
+        return userNames;
     }
 
-    public void setSpaceID(int spaceId) {
-        this.spaceId=spaceId;
-    }
+    String userIdSelected;
 
-    public void setUserId(int userId) {
-        this.userID= String.valueOf(userId);
-        taskName.getText();
-        taskPriority.getItems().addAll(priority);
-        taskStatus.getItems().addAll(status);
+//    public void setSpaceID(int spaceId) {
+//    this.spaceId = spaceId;
+//    taskName.getText();
+//    taskPriority.getItems().addAll(priority);
+//    taskStatus.getItems().addAll(status);
+//
+//    // Initialize the assignMember ChoiceBox with userNames for the current space
+//    Map<String, String> userNameMap = getUserNamesFromDatabase(spaceId);
+//    assignMember.setItems(FXCollections.observableArrayList(userNameMap.values()));
+//    assignMember.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//        userIdSelected = getUserIdFromMap(userNameMap, newValue);
+//    });
+//}
+public void setSpaceID(int spaceId) {
+    this.spaceId = spaceId;
+    taskName.getText();
+    taskPriority.getItems().addAll(priority);
+    taskStatus.getItems().addAll(status);
 
+    // Initialize the assignMember ChoiceBox with userNames for the current space
+    List<String> userNames = getUserNamesFromDatabase(spaceId);
+    assignMember.setItems(FXCollections.observableArrayList(userNames));
+    assignMember.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        // You can use the selected username directly or perform additional actions.
+        // userIdSelected = getUserIdFromMap(userNameMap, newValue);
+    });
+}
 
-        // Initialize the assignMember ChoiceBox with userNames
-       // List<String> userNames = getUserNamesFromDatabase();
-        Map<String, String> userNameMap = getUserNamesFromDatabase();
-        //assignMember.setItems(FXCollections.observableArrayList(userNames));
-        assignMember.setItems(FXCollections.observableArrayList(userNameMap.keySet()));
+    private String getUserIdFromMap(Map<String, String> userNameMap,String newValue) {
+        for (Map.Entry<String, String> entry : userNameMap.entrySet()) {
+            if (Objects.equals(newValue, entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 }

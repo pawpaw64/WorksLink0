@@ -3,35 +3,11 @@ package com.example.workslink;
 import javafx.beans.property.SimpleStringProperty;
 
 public class TaskHistoryData {
-        private SimpleStringProperty spaceTaskName;
+    private SimpleStringProperty spaceTaskName;
     private SimpleStringProperty taskStatus;
-    private SimpleStringProperty taskID;
-
-    public String getTaskID() {
-        return taskID.get();
-    }
-
-    public SimpleStringProperty taskIDProperty() {
-        return taskID;
-    }
-
-    public void setTaskID(String taskID) {
-        this.taskID.set(taskID);
-    }
-
-    public String getTaskAction() {
-        return taskAction.get();
-    }
-
-    public SimpleStringProperty taskActionProperty() {
-        return taskAction;
-    }
-
-    public void setTaskAction(String taskAction) {
-        this.taskAction.set(taskAction);
-    }
-
-    private SimpleStringProperty taskAction;
+    private SimpleStringProperty taskDetails;
+    private SimpleStringProperty taskAssigned;
+    private  SimpleStringProperty taskPriority;
 
     public String getSpaceTaskName() {
         return spaceTaskName.get();
@@ -55,6 +31,18 @@ public class TaskHistoryData {
 
     public void setTaskStatus(String taskStatus) {
         this.taskStatus.set(taskStatus);
+    }
+
+    public String getTaskDetails() {
+        return taskDetails.get();
+    }
+
+    public SimpleStringProperty taskDetailsProperty() {
+        return taskDetails;
+    }
+
+    public void setTaskDetails(String taskDetails) {
+        this.taskDetails.set(taskDetails);
     }
 
     public String getTaskAssigned() {
@@ -81,17 +69,12 @@ public class TaskHistoryData {
         this.taskPriority.set(taskPriority);
     }
 
-    private SimpleStringProperty taskAssigned;
-        private SimpleStringProperty taskPriority;
-
     public TaskHistoryData(String taskName, String status, String priority, String taskDetails, String assignedto) {
         this.taskAssigned=new SimpleStringProperty(assignedto);
         this.taskPriority=new SimpleStringProperty(priority);
+        this.taskDetails=new SimpleStringProperty(taskDetails);
         this.taskStatus=new SimpleStringProperty(status);
         this.spaceTaskName=new SimpleStringProperty(taskName);
     }
-
-
-
 
 }
