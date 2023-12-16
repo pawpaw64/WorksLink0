@@ -1,5 +1,6 @@
 package com.example.workslink;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,13 +22,13 @@ public class NoteController implements Initializable {
 
 
     @FXML
-    private TextField noteNameTextField;
+    private TextField noteNameTextField = new TextField();
 
     @FXML
-    private TextField yourNoteTextField;
+    private TextField yourNoteTextField = new TextField();
 
-    @FXML
-    private VBox notesVBox = new VBox();
+//    @FXML
+//    private VBox notesVBox = new VBox();
 
     private Stage stage;
 
@@ -49,8 +50,6 @@ public class NoteController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         saveNotes();
-//        OverViewDispaly();
-
     }
 
 
@@ -66,27 +65,30 @@ public class NoteController implements Initializable {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+    @FXML
+    private VBox notesVBox = new VBox();
+
+    // ... other methods
+
+    @FXML
     public void saveNotes() {
-        // Clear all VBoxes
-        notesVBox.getChildren().clear();
-        //doingVbox.getChildren().clear();
-        //completeVbox.getChildren().clear();
-
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("FXML/note.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/note.fxml"));
 
-            // Load separate instances of AnchorPane for each VBox
-            AnchorPane NotePane = loader.load();
-//            AnchorPane doingPane = loader.load();
-//            AnchorPane completePane = loader.load();
+            // Load the content of note.fxml
+            AnchorPane notePane = loader.load();
 
-            // Add each AnchorPane to its respective VBox
-            notesVBox.getChildren().add(NotePane);
-            //doingVbox.getChildren().add(doingPane);
-            //  completeVbox.getChildren().add(completePane);
+            // Access the controller of note.fxml
+            SaveNotesController saveNotesController = loader.getController();
 
-        } catch (Exception e) {
+            // Set data to the labels in the loaded note.fxml (adjust as needed)
+            saveNotesController.getNoteName().setText(noteNameTextField.getText());
+            saveNotesController.getNoteitem().setText(yourNoteTextField.getText());
+
+            // Add the content to the notesVBox
+            notesVBox.getChildren().add(notePane);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

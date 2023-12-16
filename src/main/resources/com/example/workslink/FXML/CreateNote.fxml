@@ -13,7 +13,7 @@
    <children>
       <Label layoutX="14.0" layoutY="110.0" prefHeight="18.0" prefWidth="109.0" text="Your Note:" />
       <TextField fx:id="yourNoteTextField" layoutX="14.0" layoutY="149.0" prefHeight="83.0" prefWidth="380.0" styleClass="tx" stylesheets="@../CSS/design.css" />
-      <Button fx:id="saveButton" layoutX="169.0" layoutY="248.0" mnemonicParsing="false" onAction="#saveNotes" prefHeight="18.0" prefWidth="82.0" text="Save">
+      <Button fx:id="saveButton" layoutX="169.0" layoutY="248.0" mnemonicParsing="false" onAction="#saveNotes" onMouseClicked="#saveNotes" prefHeight="18.0" prefWidth="82.0" text="Save">
          <stylesheets>
             <URL value="@../CSS/BasicDesign.css" />
             <URL value="@../CSS/design.css" />
