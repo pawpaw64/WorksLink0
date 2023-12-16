@@ -17,13 +17,13 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="membersCountLabel" layoutX="42.0" layoutY="151.0" prefHeight="20.0" prefWidth="558.0" style="-fx-alignment: center;" text="Number Of members ">
+      <Label fx:id="membersCountLabel" layoutX="48.0" layoutY="114.0" prefHeight="20.0" prefWidth="558.0" style="-fx-alignment: center;" text="Number Of members ">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="119.0" layoutY="105.0" prefHeight="22.0" prefWidth="415.0" style="-fx-alignment: center;" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Select members to Add" textAlignment="CENTER" />
-      <TableView fx:id="membersTableView" layoutX="20.0" layoutY="183.0" prefHeight="287.0" prefWidth="567.0" stylesheets="@../CSS/table-view.css">
+      <Label layoutX="119.0" layoutY="76.0" prefHeight="22.0" prefWidth="415.0" style="-fx-alignment: center;" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Select members to Add" textAlignment="CENTER" />
+      <TableView fx:id="membersTableView" layoutX="34.0" layoutY="145.0" prefHeight="178.0" prefWidth="567.0" stylesheets="@../CSS/table-view.css">
         <columns>
             <TableColumn fx:id="membersID" prefWidth="45.0" text="ID" />
           <TableColumn fx:id="memberUserName" prefWidth="125.0" text="Name" />
@@ -42,6 +42,14 @@
          </cursor>
       </ImageView>
       <Label layoutX="42.0" layoutY="27.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Go Back" />
-      <Button layoutX="267.0" layoutY="505.0" mnemonicParsing="false" onAction="#saveMembers" prefHeight="30.0" prefWidth="109.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Save" />
+      <Button layoutX="261.0" layoutY="544.0" mnemonicParsing="false" onAction="#saveMembers" prefHeight="30.0" prefWidth="109.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Save" />
+      <TableView fx:id="AccReTable" layoutX="76.0" layoutY="356.0" prefHeight="178.0" prefWidth="489.0" stylesheets="@../CSS/table-view.css">
+         <columns>
+            <TableColumn fx:id="name" prefWidth="173.0" text="Name" />
+            <TableColumn fx:id="accept" prefWidth="163.0" text="Accept" />
+            <TableColumn fx:id="reject" prefWidth="151.0" text="Reject" />
+         </columns>
+      </TableView>
+      <Label layoutX="110.0" layoutY="334.0" prefHeight="22.0" prefWidth="415.0" style="-fx-alignment: center;" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Accept/Reject Request" textAlignment="CENTER" />
    </children>
 </AnchorPane>

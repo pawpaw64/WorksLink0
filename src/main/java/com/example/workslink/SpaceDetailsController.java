@@ -320,6 +320,7 @@ public class SpaceDetailsController implements Initializable {
             AnchorPane doingPane = loader.load();
             AnchorPane completePane = loader.load();
 
+
             // Add each AnchorPane to its respective VBox
             todoVbox.getChildren().add(todoPane);
             //doingVbox.getChildren().add(doingPane);

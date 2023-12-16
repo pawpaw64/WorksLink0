@@ -20,15 +20,14 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+
 
 public class HomePageController extends HelloController implements Initializable {
     @FXML
@@ -63,12 +62,12 @@ public class HomePageController extends HelloController implements Initializable
     @FXML
     private TableView<SpaceInfo> spaceTableView;
     @FXML
-    private TableColumn<SpaceInfo,String> AssignedSpaceName;
+    private TableColumn<SpaceInfo, String> AssignedSpaceName;
     @FXML
     private TableView<SpaceInfo> assignedTable;
 
     @FXML
-    private TableColumn<SpaceInfo,String> assignedTaskOngoing;
+    private TableColumn<SpaceInfo, String> assignedTaskOngoing;
 
     int spaceCount;
     String spaceid;
@@ -81,6 +80,7 @@ public class HomePageController extends HelloController implements Initializable
         nameLabel.setText("Welcome " + currentUser.getUserName());
         getSpaceData();
     }
+
     @FXML
     public void logout(ActionEvent e) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/loginRegistration.fxml"));
@@ -93,6 +93,7 @@ public class HomePageController extends HelloController implements Initializable
         stage.setX(100);
         stage.show();
     }
+
     @FXML
     private void showProfile() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/profile.fxml"));
@@ -111,9 +112,11 @@ public class HomePageController extends HelloController implements Initializable
         profileStage.showAndWait();
         removeBlurEffect();
     }
+
     private void removeBlurEffect() {
         homePane.setEffect(null); // Remove the blur effect
     }
+
     @FXML
     void calculator() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/calculator.fxml"));
@@ -130,6 +133,7 @@ public class HomePageController extends HelloController implements Initializable
         removeBlurEffect();
 
     }
+
     @FXML
     void showChat() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/chatUICtoC.fxml"));
@@ -143,6 +147,7 @@ public class HomePageController extends HelloController implements Initializable
         stage.show();
 
     }
+
     @FXML
     void createNewSpace() { //mouseEvent at add space
         try {
@@ -164,6 +169,7 @@ public class HomePageController extends HelloController implements Initializable
             throw new RuntimeException(e);
         }
     }
+
     @FXML
     void membersOnAction() { //mouseEvent at add space
         try {
@@ -185,6 +191,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+
     private void getSpaceVbox() {
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -228,6 +235,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+
     public void getSpaceInfo(String value) throws SQLException {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
@@ -249,6 +257,7 @@ public class HomePageController extends HelloController implements Initializable
 
 
     }
+
     private void handleSpaceItemClick(String newValue, int userId, String spaceid) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
@@ -271,6 +280,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+
     public void refresh() {
         spaceTableView.getItems().clear();
 
@@ -351,18 +361,17 @@ public class HomePageController extends HelloController implements Initializable
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
                 String calcDays = rs.getString("calcDays");
-                String taskCount= String.valueOf(getTaskCount(spaceId));
+                String taskCount = String.valueOf(getTaskCount(spaceId));
                 System.out.println(taskCount);
-               if(taskCount!=null ){
+                if (taskCount != null) {
 
                     System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
                     SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays, taskCount);
                     spaceTableView.getItems().add(singleSpace);
+                } else {
+                    SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
+                    spaceTableView.getItems().add(singleSpace);
                 }
-               else{
-                   SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
-                   spaceTableView.getItems().add(singleSpace);
-               }
             }
 
             statement.close();
@@ -372,6 +381,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+
     Map<String, String> spaceIdTaskNameMap = new HashMap<>();
 
     private void getSpaceId() {
@@ -459,8 +469,8 @@ public class HomePageController extends HelloController implements Initializable
         homePane.setEffect(blur);
     }
 
-   @FXML
-   public void closeOnAction() {
+    @FXML
+    public void closeOnAction() {
         System.out.println("CLose");
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
@@ -477,11 +487,11 @@ public class HomePageController extends HelloController implements Initializable
         assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
 
         AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("AssignedSpaceName"));
-       assignedTable.setEditable(false);
+        assignedTable.setEditable(false);
 
 
     }
-
 }
+
 
 
