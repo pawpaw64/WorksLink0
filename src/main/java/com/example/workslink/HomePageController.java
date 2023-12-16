@@ -25,10 +25,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.sql.*;
+import java.util.*;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+
 
 public class HomePageController extends HelloController implements Initializable {
     @FXML
@@ -62,6 +66,14 @@ public class HomePageController extends HelloController implements Initializable
     private TableColumn<SpaceInfo, String> TaskOngoing;
     @FXML
     private TableView<SpaceInfo> spaceTableView;
+    @FXML
+    private TableColumn<SpaceInfo, String> AssignedSpaceName;
+    @FXML
+    private TableView<SpaceInfo> assignedTable;
+
+    @FXML
+    private TableColumn<SpaceInfo, String> assignedTaskOngoing;
+
     int spaceCount;
     String spaceid;
     int id;
@@ -199,6 +211,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+
     private void getSpaceVbox() {
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -370,6 +383,47 @@ public class HomePageController extends HelloController implements Initializable
                 System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
                 SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
                 spaceTableView.getItems().add(singleSpace);
+                String taskCount = String.valueOf(getTaskCount(spaceId));
+                System.out.println(taskCount);
+                if (taskCount != null) {
+
+                    System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
+                    SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays, taskCount);
+                    spaceTableView.getItems().add(singleSpace);
+                } else {
+                    SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
+                    spaceTableView.getItems().add(singleSpace);
+                }
+            }
+
+            statement.close();
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    Map<String, String> spaceIdTaskNameMap = new HashMap<>();
+
+    private void getSpaceId() {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT space_Id, task_name FROM task_info WHERE assigneeID = " + id;
+
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                String spaceId = rs.getString("space_Id");
+                String taskName = rs.getString("task_name");
+
+                // Store the spaceId and taskName in the map
+                spaceIdTaskNameMap.put(spaceId, taskName);
+
+                // Optionally, you can process each spaceId and taskName here as needed
+                System.out.println("Space ID: " + spaceId + ", Task Name: " + taskName);
             }
 
             statement.close();
@@ -385,8 +439,8 @@ public class HomePageController extends HelloController implements Initializable
         homePane.setEffect(blur);
     }
 
-   @FXML
-   public void closeOnAction() {
+    @FXML
+    public void closeOnAction() {
         System.out.println("CLose");
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
@@ -400,10 +454,14 @@ public class HomePageController extends HelloController implements Initializable
         TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
+        assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
+
+        AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("AssignedSpaceName"));
+        assignedTable.setEditable(false);
 
 
     }
-
 }
+
 
 

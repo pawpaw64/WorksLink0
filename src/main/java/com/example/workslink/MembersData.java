@@ -73,7 +73,6 @@ public class MembersData {
     private String memberEmail;
     private String memberDOB;
     private CheckBox select;
-  //  private Button sendRqst;
 
 
     public MembersData(String memberUserName, String memberEmail, String memberDOB, String id) {

@@ -29,6 +29,7 @@ public class User {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
     public User(String email, String userName, String dob, int user_id, String bio,byte[] userimg) {
         this.userImg=userimg;
         this.email = email;

@@ -15,6 +15,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class TaskAction implements Initializable {
@@ -74,6 +77,39 @@ public class TaskAction implements Initializable {
     }
     @FXML
     void taskSave(ActionEvent event) {
+        String task_name = taskName.getText();
+        String description = taskDes.getText();
+        String status = taskStatus.getValue();
+        String priority = taskPriority.getValue();
+
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            // Create SQL query to update priority and status based on task_name and description
+            String sql = "UPDATE task_info SET priority = ?, status = ? WHERE task_name = ? AND task_description = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                // Set parameters for the prepared statement
+                preparedStatement.setString(1, priority);
+                preparedStatement.setString(2, status);
+                preparedStatement.setString(3, task_name);
+                preparedStatement.setString(4, description);
+
+                // Execute the update query
+                int rowsUpdated = preparedStatement.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    System.out.println("Task updated successfully.");
+                } else {
+                    System.out.println("No matching task found for update.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+        Stage stage = (Stage) taskSave.getScene().getWindow();
+        stage.close();
 
     }
 }

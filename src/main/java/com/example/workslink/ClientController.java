@@ -1,6 +1,7 @@
 package com.example.workslink;
 
 import com.example.workslink.User;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 
 import javafx.scene.input.MouseEvent;
 
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -18,7 +20,9 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
 import java.sql.*;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class ClientController implements Initializable {
 
@@ -35,6 +39,9 @@ public class ClientController implements Initializable {
     public User userProfile;
     boolean isConnected = false;
     String name;
+    @FXML
+    private static Set<String> writtenMessages = new HashSet<>();
+
 
     public void setUserProfile(User userProfile) {
         this.userProfile = userProfile;
@@ -45,8 +52,6 @@ public class ClientController implements Initializable {
     @FXML
     void buttonPrassed() {
         if (!isConnected) {
-            System.out.printf(userProfile.getUserName());
-
             String inputName = userProfile.getUserName();
             inputfield.clear();
             if(inputName==null || inputName.length() == 0){
@@ -74,9 +79,13 @@ public class ClientController implements Initializable {
                                 String data = reader.readLine();
                                 if (data != null) {
                                     data = data.trim(); // Trim to remove leading/trailing whitespaces
-                                    showArea.appendText(data + "\n");
+                                    String finalData = data;
+                                    Platform.runLater(() -> {
+                                        showArea.appendText(finalData + "\n");
+                                    });
                                     storeMessegeInFile(data);
                                 }
+
                             } catch (SocketException ee) {
                                 showArea.appendText("Connection lost" + "\n");
                                 break;
@@ -115,11 +124,17 @@ public class ClientController implements Initializable {
         }
     }
 
-    private static void storeMessegeInFile(String message) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
-            writer.write(message + "\n"); // Use write with "\n" to add a newline character
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void storeMessegeInFile(String message) {
+        // Check if the message has already been written
+        synchronized (writtenMessages) {
+            if (!writtenMessages.contains(message)) {
+                try (PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\java\\com\\example\\workslink\\previousMessage.txt", true))) {
+                    writer.write(message + "\n"); // Use write with "\n" to add a newline character
+                    writtenMessages.add(message); // Add the message to the set
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
