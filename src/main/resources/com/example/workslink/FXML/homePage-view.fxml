@@ -126,7 +126,7 @@
          <left>
             <AnchorPane prefHeight="597.0" prefWidth="230.0" BorderPane.alignment="TOP_LEFT">
                <children>
-                  <VBox fx:id="spaceBox" layoutY="9.0" prefHeight="253.0" prefWidth="231.0" styleClass="anchor-pane-with-border">
+                  <VBox fx:id="spaceBox" layoutY="9.0" prefHeight="293.0" prefWidth="231.0" styleClass="anchor-pane-with-border">
                      <children>
                         <Label onMouseClicked="#createNewSpace" prefHeight="25.0" prefWidth="229.0" text="Create Space" textAlignment="RIGHT" wrapText="true">
                            <font>
@@ -143,7 +143,21 @@
                               </ImageView>
                            </graphic>
                         </Label>
-                        <ListView fx:id="spaceListView" prefHeight="200.0" prefWidth="200.0" styleClass="anchor-pane-with-border" />
+                        <ListView fx:id="spaceListView" prefHeight="244.0" prefWidth="207.0" styleClass="anchor-pane-with-border" />
+                     </children>
+                     <stylesheets>
+                        <URL value="@../CSS/homePageDesign.css" />
+                        <URL value="@../CSS/listView.css" />
+                     </stylesheets>
+                  </VBox>
+                  <VBox fx:id="spaceBox1" layoutY="313.0" prefHeight="284.0" prefWidth="231.0" styleClass="anchor-pane-with-border">
+                     <children>
+                        <Label onMouseClicked="#createNewSpace" prefHeight="25.0" prefWidth="229.0" text="Assigned Spaces" textAlignment="RIGHT" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="assignedListView" prefHeight="236.0" prefWidth="207.0" styleClass="anchor-pane-with-border" />
                      </children>
                      <stylesheets>
                         <URL value="@../CSS/homePageDesign.css" />
@@ -169,6 +183,7 @@
                      </columnResizePolicy>
                      <styleClass>
                         <String fx:value="color-btn" />
+                        <String fx:value="table-row-cell" />
                         <String fx:value="column-header" />
                         <String fx:value="column-header-background" />
                         <String fx:value="corner" />
@@ -182,7 +197,6 @@
                         <String fx:value="small-label" />
                         <String fx:value="table-cell" />
                         <String fx:value="table-row-cell" />
-                        <String fx:value="table-view" />
                         <String fx:value="text-field" />
                         <String fx:value="thumb" />
                         <String fx:value="track" />
@@ -206,6 +220,11 @@
                       <TableColumn fx:id="AssignedSpaceName" prefWidth="232.0" text="Space Name" />
                       <TableColumn fx:id="assignedTaskOngoing" prefWidth="282.0" text="Task Assigned" />
                     </columns>
+                     <styleClass>
+                        <String fx:value="table-cell" />
+                        <String fx:value="table-view" />
+                        <String fx:value="table-row-cell" />
+                     </styleClass>
                   </TableView>
                   <Label layoutX="34.0" layoutY="308.0" prefHeight="22.0" prefWidth="163.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="ASSIGNED SPACES" />
                   <Label layoutX="669.0" layoutY="32.0" onMouseClicked="#refresh" prefHeight="29.0" prefWidth="98.0" stylesheets="@../CSS/BasicDesign.css" text="Refresh">
