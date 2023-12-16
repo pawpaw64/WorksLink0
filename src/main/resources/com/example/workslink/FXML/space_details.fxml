@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceDetailsController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceDetailsController">
    <children>
       <TabPane fx:id="tabPane" prefHeight="441.0" prefWidth="820.0" stylesheets="@../CSS/TabPane.css" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -46,12 +46,17 @@
                                        </image>
                                     </ImageView>
                                     <Label layoutX="42.0" layoutY="261.0" prefHeight="20.0" prefWidth="73.0" text="Start Date:" underline="true" />
-                                    <Label layoutX="42.0" layoutY="288.0" text="Label" />
+                                    <Label fx:id="startDateLabel" layoutX="42.0" layoutY="288.0" text="Label" />
                                     <Label layoutX="172.0" layoutY="261.0" prefHeight="20.0" prefWidth="73.0" text="End Date:" underline="true" />
-                                    <Label layoutX="172.0" layoutY="288.0" prefWidth="60.0" text="Label" wrapText="true" />
+                                    <Label fx:id="endDateLabel" layoutX="172.0" layoutY="288.0" prefHeight="20.0" prefWidth="118.0" text="Label" wrapText="true" />
                                     <Label layoutX="42.0" layoutY="232.0" prefHeight="20.0" prefWidth="68.0" text="Timeline:" underline="true" />
                                     <Label layoutX="309.0" layoutY="261.0" prefWidth="118.0" text="Remaining days:" underline="true" />
-                                    <Label layoutX="309.0" layoutY="288.0" text="Label" />
+                                    <Label fx:id="remaindaysLabel" layoutX="309.0" layoutY="288.0" text="Label" />
+                                    <VBox fx:id="memberVbox" alignment="TOP_CENTER" layoutX="448.0" layoutY="261.0" prefHeight="278.0" prefWidth="158.0">
+                                       <children>
+                                          <Label alignment="TOP_CENTER" text="Members" />
+                                       </children>
+                                    </VBox>
                                  </children>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -108,9 +113,9 @@
                               </Label>
                               <HBox layoutX="16.0" layoutY="71.0" prefHeight="382.0" prefWidth="843.0">
                                  <children>
-                                    <VBox fx:id="todoVbox" prefHeight="382.0" prefWidth="276.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
-                                    <VBox fx:id="doingVbox" prefHeight="382.0" prefWidth="313.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
-                                    <VBox fx:id="CompleteVbox" prefHeight="382.0" prefWidth="272.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="todoVbox" alignment="TOP_CENTER" prefHeight="382.0" prefWidth="276.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="doingVbox" alignment="TOP_CENTER" prefHeight="382.0" prefWidth="313.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="CompleteVbox" alignment="TOP_CENTER" prefHeight="382.0" prefWidth="272.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
                                  </children>
                               </HBox>
                               <Label alignment="CENTER" layoutX="89.0" layoutY="41.0" prefHeight="30.0" prefWidth="122.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="To Do" textAlignment="CENTER">
