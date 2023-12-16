@@ -54,7 +54,8 @@
                                     <Label fx:id="remaindaysLabel" layoutX="309.0" layoutY="288.0" text="Label" />
                                     <VBox fx:id="memberVbox" alignment="TOP_CENTER" layoutX="448.0" layoutY="261.0" prefHeight="278.0" prefWidth="158.0">
                                        <children>
-                                          <Label alignment="TOP_CENTER" text="Members" />
+                                          <Label alignment="TOP_CENTER" text="Members:" />
+                                          <Line endX="-17.30709457397461" endY="1.6033649444580078E-5" startX="-100.0" />
                                        </children>
                                     </VBox>
                                  </children>

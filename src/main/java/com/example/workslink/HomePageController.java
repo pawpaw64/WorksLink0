@@ -69,14 +69,18 @@ public class HomePageController extends HelloController implements Initializable
 
     @FXML
     private TableColumn<SpaceInfo,String> assignedTaskOngoing;
+    @FXML
+    private ListView<String> assignedListView;
 
     int spaceCount;
     String spaceid;
     int id;
+    String userNameToMatch;
 
     public void setUser(User loggedInUser) {
         this.currentUser = loggedInUser;
         id = currentUser.getUser_id();
+        userNameToMatch = currentUser.getUserName();
 
         nameLabel.setText("Welcome " + currentUser.getUserName());
         getSpaceData();
@@ -228,6 +232,47 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+    private void getAssignedVbox() {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+
+            // Surround userNameToMatch with single quotes in the SQL query
+            String sql = "SELECT assignedSpace FROM assignedspace WHERE userName = '" + userNameToMatch + "'";
+            ResultSet rs = statement.executeQuery(sql);
+            ObservableList<String> spaceNames = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                spaceCount++;
+                String assignedSpace = rs.getString("assignedSpace");
+                spaceNames.add(assignedSpace);
+            }
+
+            // Close the ResultSet, but keep the statement and connection open for the next query
+            rs.close();
+            statement.close();
+            connection.close();
+
+            // Set the items in the ListView
+            assignedListView.setItems(spaceNames);
+
+            assignedListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                try {
+                    if (newValue != null) {
+                        getSpaceInfo(newValue);
+                        handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void getSpaceInfo(String value) throws SQLException {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
@@ -333,6 +378,7 @@ public class HomePageController extends HelloController implements Initializable
 
         getSpaceTableData();
         getSpaceVbox();
+        getAssignedVbox();
     }
 
     private void getSpaceTableData() {
@@ -354,8 +400,6 @@ public class HomePageController extends HelloController implements Initializable
                 String taskCount= String.valueOf(getTaskCount(spaceId));
                 System.out.println(taskCount);
                if(taskCount!=null ){
-
-                    System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
                     SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays, taskCount);
                     spaceTableView.getItems().add(singleSpace);
                 }
@@ -474,8 +518,8 @@ public class HomePageController extends HelloController implements Initializable
         TaskOngoing.setCellValueFactory(new PropertyValueFactory<>("taskOngoing"));
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
-        assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
 
+        assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
         AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("AssignedSpaceName"));
        assignedTable.setEditable(false);
 

@@ -183,7 +183,11 @@ public class SpaceCreateController implements Initializable {
                     String membersString = String.join(",", selectedMembers);
                     preparedStatement.setString(7, membersString);
 
+                    insertDataIntoAssignedSpace(getSpaceName().getText(),selectedMembers);
+
                     int rowsInserted = preparedStatement.executeUpdate();
+
+
 
                     preparedStatement.close();
                     connection.close();
@@ -216,6 +220,27 @@ public class SpaceCreateController implements Initializable {
     public void goBack(MouseEvent mouseEvent) {
         Stage stage = (Stage) homeButton.getScene().getWindow();
         stage.close();
+    }
+
+    // Method to insert data into assignedspace table
+    private void insertDataIntoAssignedSpace(String spaceName, List<String> stringList) throws SQLException {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        Connection connection = databaseConnection.getConnection();
+        String insertSql = "INSERT INTO assignedspace (userName, assignedSpace) VALUES (?, ?)";
+
+        try{
+            for (String str : stringList) {
+                try (PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
+                    preparedStatement.setString(1, str);
+                    preparedStatement.setString(2, spaceName);
+                    preparedStatement.executeUpdate();
+                }
+            }
+
+            System.out.println("Data inserted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

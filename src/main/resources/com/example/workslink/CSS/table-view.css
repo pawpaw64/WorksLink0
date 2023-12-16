@@ -1,3 +1,18 @@
+.table-view {
+      -fx-background-color: transparent;
+       -fx-alignment: CENTER;
+  }
+ .table-cell {
+    -fx-alignment: CENTER;
+}
+/* Apply styles to table cells */
+  .table-row-cell {
+      -fx-background-color: transparent;
+      -fx-padding: 5px 10px;
+      -fx-border-color: transparent;
+       -fx-alignment: CENTER;
+  }
+
 /*.table-view .column-header-background .filler {
     -fx-background-color: transparent;
 }

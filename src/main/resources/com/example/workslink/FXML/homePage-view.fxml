@@ -157,7 +157,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="spaceListView1" prefHeight="236.0" prefWidth="207.0" styleClass="anchor-pane-with-border" />
+                        <ListView fx:id="assignedListView" prefHeight="236.0" prefWidth="207.0" styleClass="anchor-pane-with-border" />
                      </children>
                      <stylesheets>
                         <URL value="@../CSS/homePageDesign.css" />
@@ -183,6 +183,7 @@
                      </columnResizePolicy>
                      <styleClass>
                         <String fx:value="color-btn" />
+                        <String fx:value="table-row-cell" />
                         <String fx:value="column-header" />
                         <String fx:value="column-header-background" />
                         <String fx:value="corner" />
@@ -196,7 +197,6 @@
                         <String fx:value="small-label" />
                         <String fx:value="table-cell" />
                         <String fx:value="table-row-cell" />
-                        <String fx:value="table-view" />
                         <String fx:value="text-field" />
                         <String fx:value="thumb" />
                         <String fx:value="track" />
@@ -220,6 +220,11 @@
                       <TableColumn fx:id="AssignedSpaceName" prefWidth="232.0" text="Space Name" />
                       <TableColumn fx:id="assignedTaskOngoing" prefWidth="282.0" text="Task Assigned" />
                     </columns>
+                     <styleClass>
+                        <String fx:value="table-cell" />
+                        <String fx:value="table-view" />
+                        <String fx:value="table-row-cell" />
+                     </styleClass>
                   </TableView>
                   <Label layoutX="34.0" layoutY="308.0" prefHeight="22.0" prefWidth="163.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="ASSIGNED SPACES" />
                   <Label layoutX="669.0" layoutY="32.0" onMouseClicked="#refresh" prefHeight="29.0" prefWidth="98.0" stylesheets="@../CSS/BasicDesign.css" text="Refresh">
