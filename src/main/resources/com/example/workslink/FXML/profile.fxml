@@ -21,28 +21,28 @@
          <content>
             <AnchorPane fx:id="profilePane" layoutX="39.0" layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="339.0" style="-fx-background-color: white;">
                <children>
-                  <ImageView fx:id="profile_default" fitHeight="117.0" fitWidth="119.0" layoutX="101.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profile_default" fitHeight="117.0" fitWidth="127.0" layoutX="101.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icon/circle-user.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="profileUserName" layoutX="-11.0" layoutY="195.0" prefHeight="32.0" prefWidth="344.0" style="-fx-alignment: center;" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="pawpaw" textAlignment="CENTER" />
+                  <Label fx:id="profileUserName" layoutX="-6.0" layoutY="178.0" prefHeight="32.0" prefWidth="344.0" style="-fx-alignment: center;" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="pawpaw" textAlignment="CENTER" />
                   <Label layoutX="11.0" layoutY="251.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Bio:" />
 
-                  <Button layoutX="110.0" layoutY="616.0" mnemonicParsing="false" onAction="#logout" prefHeight="41.0" prefWidth="119.0" text="LOG OUT">
-                     <stylesheets>
-                        <URL value="@../CSS/BasicDesign.css" />
-                        <URL value="@../CSS/design.css" />
-                     </stylesheets>
-                     <styleClass>
-                        <String fx:value="fill-btn" />
-                        <String fx:value="tx" />
-                     </styleClass></Button>
-                  <Label fx:id="label_bio" layoutX="50.0" layoutY="234.0" prefHeight="55.0" prefWidth="276.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" textAlignment="CENTER">
+                  <Button layoutX="120.0" layoutY="623.0" mnemonicParsing="false" onAction="#logout" prefHeight="36.0" prefWidth="100.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LOG OUT" />
+                  <Label fx:id="label_bio" layoutX="50.0" layoutY="240.0" prefHeight="41.0" prefWidth="276.0" textAlignment="CENTER">
 
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
+                     <stylesheets>
+                        <URL value="@../CSS/BasicDesign.css" />
+                        <URL value="@../CSS/homePageDesign.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="normal-label" />
+                        <String fx:value="anchor-pane-with-border" />
+                     </styleClass>
                   </Label>
                   <Label layoutX="27.0" layoutY="21.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Profile" />
                   <Line endX="102.0" layoutX="231.0" layoutY="53.0" startX="-232.0" />
@@ -51,7 +51,7 @@
                         <Image url="@../Icon/angle-small-left.png" />
                      </image>
                   </ImageView>
-                  <TitledPane contentDisplay="TOP" layoutY="375.0" prefHeight="212.0" prefWidth="318.0" styleClass="title" stylesheets="@../CSS/titledpane.css" text="Change Avater" textAlignment="CENTER">
+                  <TitledPane collapsible="false" contentDisplay="TOP" layoutX="7.0" layoutY="390.0" prefHeight="212.0" prefWidth="318.0" styleClass="title" stylesheets="@../CSS/titledpane.css" text="Change Avater" textAlignment="CENTER">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="162.0" prefWidth="315.0" style="-fx-background-color: white;">
                            <children>
@@ -65,29 +65,13 @@
                                     <Image url="@../Icon/profile.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="profile_1Set" layoutX="40.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeProfile" prefHeight="25.0" prefWidth="66.0" text="set">
-                                 <stylesheets>
-                                    <URL value="@../CSS/BasicDesign.css" />
-                                    <URL value="@../CSS/design.css" />
-                                 </stylesheets>
-                                 <styleClass>
-                                    <String fx:value="fill-btn" />
-                                    <String fx:value="tx" />
-                                 </styleClass></Button>
-                              <Button fx:id="profile_2Set" layoutX="183.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeProfile" prefHeight="25.0" prefWidth="66.0" text="set">
-                                 <stylesheets>
-                                    <URL value="@../CSS/BasicDesign.css" />
-                                    <URL value="@../CSS/design.css" />
-                                 </stylesheets>
-                                 <styleClass>
-                                    <String fx:value="fill-btn" />
-                                    <String fx:value="tx" />
-                                 </styleClass></Button>
+                              <Button fx:id="profile_1Set" layoutX="40.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeProfile" prefHeight="25.0" prefWidth="66.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="set" />
+                              <Button fx:id="profile_2Set" layoutX="183.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeProfile" prefHeight="25.0" prefWidth="66.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="set" />
                            </children>
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <ImageView fx:id="bio_EditIcon" fitHeight="19.0" fitWidth="23.0" layoutX="299.0" layoutY="252.0" onMouseClicked="#edit_bio" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                  <ImageView fx:id="bio_EditIcon" fitHeight="19.0" fitWidth="23.0" layoutX="299.0" layoutY="218.0" onMouseClicked="#edit_bio" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                      <image>
                         <Image url="@../Icon/edit%20(1).png" />
                      </image>
@@ -103,13 +87,21 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="profileEmail" layoutX="72.0" layoutY="297.0" prefHeight="38.0" prefWidth="246.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="sumaiya@134" textAlignment="CENTER" />
-                  <Label fx:id="profileDOB" layoutX="115.0" layoutY="344.0" prefHeight="37.0" prefWidth="211.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="13/10/2000" />
-                  <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="273.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Icon/logo.png" />
-                     </image>
-                  </ImageView>
+                  <Label fx:id="profileEmail" layoutX="68.0" layoutY="293.0" prefHeight="38.0" prefWidth="246.0" stylesheets="@../CSS/BasicDesign.css" text="sumaiya@134" textAlignment="CENTER">
+                     <styleClass>
+                        <String fx:value="normal-label" />
+                        <String fx:value="anchor-pane-with-border" />
+                     </styleClass></Label>
+                  <Label fx:id="profileDOB" layoutX="115.0" layoutY="344.0" prefHeight="32.0" prefWidth="211.0" stylesheets="@../CSS/BasicDesign.css" text="13/10/2000">
+                     <styleClass>
+                        <String fx:value="normal-label" />
+                        <String fx:value="anchor-pane-with-border" />
+                     </styleClass></Label>
+                  <Label layoutX="254.0" layoutY="216.0" prefHeight="23.0" prefWidth="45.0" text="Edit Bio">
+                     <font>
+                        <Font name="Cambria Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </content>

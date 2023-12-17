@@ -76,6 +76,9 @@ public class SpaceInfo {
 
     }
 
+    public SpaceInfo() {
+    }
+
     public String getSpaceName() {
         return spaceName.get();
     }

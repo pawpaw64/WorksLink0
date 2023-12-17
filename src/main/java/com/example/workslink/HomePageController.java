@@ -64,15 +64,18 @@ public class HomePageController extends HelloController implements Initializable
     private TableColumn<SpaceInfo, String> TaskOngoing;
     @FXML
     private TableView<SpaceInfo> spaceTableView;
-    @FXML
-    private TableColumn<SpaceInfo,String> AssignedSpaceName;
-    @FXML
-    private TableView<SpaceInfo> assignedTable;
 
     @FXML
-    private TableColumn<SpaceInfo,String> assignedTaskOngoing;
-    @FXML
     private ListView<String> assignedListView;
+
+    @FXML
+    private TableView<AssignedSpaceTable> assignedTable;
+
+    @FXML
+    private TableColumn<AssignedSpaceTable, String> AssignedSpaceName;
+
+    @FXML
+    private TableColumn<AssignedSpaceTable, String> spaceOwnerTableCol;
 
     int spaceCount;
     String spaceid;
@@ -83,17 +86,6 @@ public class HomePageController extends HelloController implements Initializable
         this.currentUser = loggedInUser;
         id = currentUser.getUser_id();
         userNameToMatch = currentUser.getUserName();
-        byte[] userImgData = currentUser.getUserImg();
-        if (userImgData != null && userImgData.length > 0) {
-            Image profileImage = new Image(new ByteArrayInputStream(userImgData));
-            profileImg.setImage(profileImage);
-            //profileImg.setImage(new Image("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\profile.png"));
-            System.out.println("yes");
-        } else {
-            // Set a default image or handle the absence of an image
-            System.out.println("no");
-            profileImg.setImage(new Image("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\profile.png"));
-        }
 
 
         nameLabel.setText("Welcome " + currentUser.getUserName());
@@ -153,7 +145,7 @@ public class HomePageController extends HelloController implements Initializable
         Scene scene = new Scene(fxmlLoader.load());
         ClientController clientController = fxmlLoader.getController();
         clientController.setUserProfile(currentUser);
-        System.out.println("hhhh");
+
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -401,6 +393,8 @@ public class HomePageController extends HelloController implements Initializable
         getSpaceTableData();
         getSpaceVbox();
         getAssignedVbox();
+        //assignedSpaceinfo();
+        getAssignedSpaceTable();
     }
 
     private void getSpaceTableData() {
@@ -421,14 +415,14 @@ public class HomePageController extends HelloController implements Initializable
                 String calcDays = rs.getString("calcDays");
                 String taskCount= String.valueOf(getTaskCount(spaceId));
                 System.out.println(taskCount);
-               if(taskCount!=null ){
+                if(taskCount!=null ){
                     SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays, taskCount);
                     spaceTableView.getItems().add(singleSpace);
                 }
-               else{
-                   SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
-                   spaceTableView.getItems().add(singleSpace);
-               }
+                else{
+                    SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
+                    spaceTableView.getItems().add(singleSpace);
+                }
             }
 
             statement.close();
@@ -456,8 +450,6 @@ public class HomePageController extends HelloController implements Initializable
                 // Store the spaceId and taskName in the map
                 spaceIdTaskNameMap.put(spaceId, taskName);
 
-                // Optionally, you can process each spaceId and taskName here as needed
-                System.out.println("Space ID: " + spaceId + ", Task Name: " + taskName);
             }
 
             // Now, spaceIdTaskNameMap contains spaceId as keys and taskName as values
@@ -470,22 +462,23 @@ public class HomePageController extends HelloController implements Initializable
     }
 
     private void getAssignedSpaceTable() {
-        assignedTable.getItems().clear();
-        getSpaceId();
 
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT task_name FROM task_info WHERE assigneeID = " + id;
+           // String sql = "SELECT assignedSpace,spaceOwnerName FROM assignedspace WHERE userName = " + userNameToMatch;
+            String sql = "SELECT assignedSpace, spaceOwnerName FROM assignedspace WHERE userName = '" + userNameToMatch + "'";
 
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
 
-                String taskName = rs.getString("task_name");
-
-
+                String assignedSpace = rs.getString("assignedSpace");
+                String spaceOwnerName = rs.getString("spaceOwnerName");
+                AssignedSpaceTable assignedSpaceTable = new AssignedSpaceTable(assignedSpace,spaceOwnerName);
+                System.out.println(assignedSpaceTable);
+                assignedTable.getItems().add(assignedSpaceTable);
             }
             statement.close();
             connection.close();
@@ -525,9 +518,8 @@ public class HomePageController extends HelloController implements Initializable
         homePane.setEffect(blur);
     }
 
-   @FXML
-   public void closeOnAction() {
-        System.out.println("CLose");
+    @FXML
+    public void closeOnAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
@@ -541,13 +533,11 @@ public class HomePageController extends HelloController implements Initializable
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
 
-        assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
-        AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("AssignedSpaceName"));
-       assignedTable.setEditable(false);
 
+        AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("assignedSpaceName"));
+        spaceOwnerTableCol.setCellValueFactory(new PropertyValueFactory<>("spaceOwnerTableCol"));
+        assignedTable.setEditable(false);
 
     }
 
 }
-
-
