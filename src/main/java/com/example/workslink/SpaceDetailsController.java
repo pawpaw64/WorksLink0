@@ -122,6 +122,7 @@ public class SpaceDetailsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        spaceTableView.refresh();
 
     }
 
@@ -240,8 +241,10 @@ public class SpaceDetailsController implements Initializable {
             statement.close();
             connection.close();
         } catch (Exception e) {
+
             e.printStackTrace();
         }
+        spaceTableView.refresh();
     }
 
     @FXML

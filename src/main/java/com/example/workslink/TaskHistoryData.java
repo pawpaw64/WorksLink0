@@ -1,5 +1,6 @@
 package com.example.workslink;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class TaskHistoryData {
@@ -8,6 +9,8 @@ public class TaskHistoryData {
     private SimpleStringProperty taskDetails;
     private SimpleStringProperty taskAssigned;
     private  SimpleStringProperty taskPriority;
+    private SimpleBooleanProperty completed;
+
 
     public String getSpaceTaskName() {
         return spaceTaskName.get();
@@ -75,6 +78,17 @@ public class TaskHistoryData {
         this.taskDetails=new SimpleStringProperty(taskDetails);
         this.taskStatus=new SimpleStringProperty(status);
         this.spaceTaskName=new SimpleStringProperty(taskName);
+        this.completed = new SimpleBooleanProperty(false); // Initially set to false
+    }
+    public boolean isCompleted() {
+        return completed.get();
     }
 
+    public SimpleBooleanProperty completedProperty() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed.set(completed);
+    }
 }

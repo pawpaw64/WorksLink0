@@ -567,7 +567,7 @@ public class HomePageController extends HelloController implements Initializable
 
             // Set the values in the labels
             totalSpace.setText(String.valueOf(totalSpaces));
-            totalMember.setText(String.valueOf(totalMembers));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
