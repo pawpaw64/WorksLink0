@@ -93,30 +93,11 @@ public class ProfileController implements Initializable {
     }
 
     private void LoadProfile(ImageView img) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image file", "*png", "*jpg"));
-        File file = fileChooser.showOpenDialog(null);
 
-        if (file != null) {
-            Image image = new Image(file.toURI().toString(), 120, 127, false, true);
-            img.setImage(image);
-            byte[] imageData = convertProfileImageToByteArray(img);
-            updateUserProfileImageInDatabase(imageData);
-        }
+        profile_default.setImage(img.getImage());
+        profileImg.setImage(img.getImage());
     }
 
-    private void updateUserProfileImageInDatabase(byte[] imageData) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            String updateQuery = "UPDATE user SET user_img = ? WHERE id = ?";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-                preparedStatement.setBytes(1, imageData);
-                preparedStatement.setInt(2, userProfile.getUser_id());
-                preparedStatement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     private void updateUserProfileBioInDatabase(String bio) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String updateQuery = "UPDATE user SET user_bio = ? WHERE id = ?";

@@ -44,10 +44,14 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="taskPriority" layoutX="130.0" layoutY="168.0" prefHeight="45.0" prefWidth="395.0" styleClass="tx" stylesheets="@../CSS/design.css">
+      <ChoiceBox fx:id="taskPriority" layoutX="130.0" layoutY="168.0" prefHeight="45.0" prefWidth="395.0" stylesheets="@../CSS/design.css">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></ChoiceBox>
+         </cursor>
+         <styleClass>
+            <String fx:value="tx" />
+            <String fx:value="choice-box" />
+         </styleClass></ChoiceBox>
       <ChoiceBox fx:id="taskStatus" layoutX="127.0" layoutY="219.0" prefHeight="26.0" prefWidth="395.0" styleClass="tx" stylesheets="@../CSS/design.css">
          <cursor>
             <Cursor fx:constant="HAND" />

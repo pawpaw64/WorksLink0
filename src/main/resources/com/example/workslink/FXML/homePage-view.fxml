@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
+<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1176.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -129,21 +129,32 @@
                      </stylesheets>
                   </TableView>
                   <Label layoutX="34.0" layoutY="75.0" prefHeight="31.0" prefWidth="140.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="MY SPACES" />
-                  <ImageView fitHeight="80.0" fitWidth="69.0" layoutX="23.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="80.0" fitWidth="69.0" layoutX="22.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icon/shooting-star.gif" />
                      </image>
                   </ImageView>
-                  <TableView fx:id="assignedTable" layoutX="34.0" layoutY="344.0" prefHeight="200.0" prefWidth="513.0" stylesheets="@../CSS/table-view.css">
+                  <TableView fx:id="assignedTable" layoutX="34.0" layoutY="344.0" prefHeight="200.0" prefWidth="513.0">
                     <columns>
                       <TableColumn fx:id="AssignedSpaceName" prefWidth="232.0" text="Space Name" />
                       <TableColumn fx:id="spaceOwnerTableCol" prefWidth="282.0" text="Task Assigned" />
                     </columns>
                      <styleClass>
                         <String fx:value="table-cell" />
-                        <String fx:value="table-view" />
                         <String fx:value="table-row-cell" />
+                        <String fx:value="column-header" />
+                        <String fx:value="column-header-background" />
+                        <String fx:value="decrement-button" />
+                        <String fx:value="increment-button" />
+                        <String fx:value="scroll-bar" />
+                        <String fx:value="thumb" />
+                        <String fx:value="track" />
+                        <String fx:value="track-background" />
                      </styleClass>
+                     <stylesheets>
+                        <URL value="@../CSS/table-view.css" />
+                        <URL value="@../CSS/BasicDesign.css" />
+                     </stylesheets>
                   </TableView>
                   <Label layoutX="34.0" layoutY="308.0" prefHeight="22.0" prefWidth="163.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="ASSIGNED SPACES" />
                   <Label layoutX="669.0" layoutY="32.0" onMouseClicked="#refresh" prefHeight="29.0" prefWidth="98.0" stylesheets="@../CSS/BasicDesign.css" text="Refresh">
@@ -164,7 +175,7 @@
             </AnchorPane>
          </center>
          <right>
-            <AnchorPane prefHeight="597.0" prefWidth="129.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="597.0" prefWidth="156.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" layoutX="5.0" layoutY="54.0" onMouseClicked="#showProfile" prefHeight="31.0" prefWidth="97.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="profile" wrapText="true">
                      <graphic>

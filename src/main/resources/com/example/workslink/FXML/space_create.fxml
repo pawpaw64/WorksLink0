@@ -85,7 +85,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <org.controlsfx.control.CheckComboBox fx:id="membersCheckComboBox" layoutX="383.0" layoutY="191.0" prefHeight="26.0" prefWidth="240.0" stylesheets="@../CSS/design.css">
+      <org.controlsfx.control.CheckComboBox fx:id="membersCheckComboBox" layoutX="383.0" layoutY="191.0" prefHeight="26.0" prefWidth="240.0" stylesheets="../CSS/checkComboBoxStyles.css" styleClass="check-combo-box">
       <styleClass>
 
          </styleClass></org.controlsfx.control.CheckComboBox>

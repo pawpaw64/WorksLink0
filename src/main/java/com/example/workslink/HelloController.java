@@ -253,10 +253,6 @@ public class HelloController {
                                 bio = "Default Bio";
                             }
 
-                            if (user_img == null) {
-                                // Set a default image or handle the case when user_img is null
-                                user_img = getDefaultUserImage();
-                            }
                             login_username.clear();
                             login_password.clear();
                             // Create a User instance
@@ -294,18 +290,6 @@ public class HelloController {
         }
     }
 
-    private byte[] getDefaultUserImage() {
-        Path imagePath = Paths.get("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\emoji.png");
-
-        try {
-            byte[] imageData = Files.readAllBytes(imagePath);
-            return Base64.getEncoder().encode(imageData);
-        } catch (Exception e) {
-            // Handle exceptions, e.g., file not found, IOException, etc.
-            e.printStackTrace();
-            return new byte[0]; // Return an empty byte array as a fallback
-        }// Replace this with the actual default image data
-        }
 
 
     public void delay(Label label) {

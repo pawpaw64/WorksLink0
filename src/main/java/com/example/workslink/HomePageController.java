@@ -86,17 +86,6 @@ public class HomePageController extends HelloController implements Initializable
         this.currentUser = loggedInUser;
         id = currentUser.getUser_id();
         userNameToMatch = currentUser.getUserName();
-        byte[] userImgData = currentUser.getUserImg();
-        if (userImgData != null && userImgData.length > 0) {
-            Image profileImage = new Image(new ByteArrayInputStream(userImgData));
-            profileImg.setImage(profileImage);
-            //profileImg.setImage(new Image("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\profile.png"));
-            System.out.println("yes");
-        } else {
-            // Set a default image or handle the absence of an image
-            System.out.println("no");
-            //profileImg.setImage(new Image("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\emoji.png"));
-        }
 
 
         nameLabel.setText("Welcome " + currentUser.getUserName());
@@ -156,7 +145,7 @@ public class HomePageController extends HelloController implements Initializable
         Scene scene = new Scene(fxmlLoader.load());
         ClientController clientController = fxmlLoader.getController();
         clientController.setUserProfile(currentUser);
-        System.out.println("hhhh");
+
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -461,8 +450,6 @@ public class HomePageController extends HelloController implements Initializable
                 // Store the spaceId and taskName in the map
                 spaceIdTaskNameMap.put(spaceId, taskName);
 
-                // Optionally, you can process each spaceId and taskName here as needed
-                System.out.println("Space ID: " + spaceId + ", Task Name: " + taskName);
             }
 
             // Now, spaceIdTaskNameMap contains spaceId as keys and taskName as values
@@ -533,7 +520,6 @@ public class HomePageController extends HelloController implements Initializable
 
     @FXML
     public void closeOnAction() {
-        System.out.println("CLose");
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
