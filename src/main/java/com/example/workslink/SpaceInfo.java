@@ -8,12 +8,41 @@ public class SpaceInfo {
     private SimpleStringProperty startDate;
     private SimpleStringProperty endDate;
     private SimpleStringProperty time;
+    private SimpleStringProperty AssignedSpaceName;
+    private SimpleStringProperty assignedTaskOngoing;
 
 
+    public String getAssignedSpaceName() {
+        return AssignedSpaceName.get();
+    }
+
+    public SimpleStringProperty assignedSpaceNameProperty() {
+        return AssignedSpaceName;
+    }
+
+    public void setAssignedSpaceName(String assignedSpaceName) {
+        this.AssignedSpaceName.set(assignedSpaceName);
+    }
+
+    public String getAssignedTaskOngoing() {
+        return assignedTaskOngoing.get();
+    }
+
+    public SimpleStringProperty assignedTaskOngoingProperty() {
+        return assignedTaskOngoing;
+    }
+
+    public void setAssignedTaskOngoing(String assignedTaskOngoing) {
+        this.assignedTaskOngoing.set(assignedTaskOngoing);
+    }
 
 
     public String getTime() {
         return time.get();
+    }
+
+    public SimpleStringProperty timeProperty() {
+        return time;
     }
 
     public void setTime(String time) {
@@ -24,6 +53,13 @@ public class SpaceInfo {
     private String spaceColor;
     private  String TaskOngoing;
 
+    public String getTaskOngoing() {
+        return TaskOngoing;
+    }
+
+    public void setTaskOngoing(String taskOngoing) {
+        TaskOngoing = taskOngoing;
+    }
 
     public SpaceInfo(String spaceName, String startDate, String endDate, String time, String TaskOngoing) {
         this.spaceName = new SimpleStringProperty(spaceName);
