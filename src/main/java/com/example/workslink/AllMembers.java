@@ -37,7 +37,7 @@ public class AllMembers implements Initializable {
     private TableColumn<MembersData, String> memeberEdit;
 
     @FXML
-    void addNewMembers(ActionEvent event) throws IOException {
+    void addNewMembers() throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/allMembers2.fxml"));
@@ -56,7 +56,6 @@ public class AllMembers implements Initializable {
     }
 
     int userId;
-    Image image ;
     MembersData membersData;
 
     @Override
@@ -104,7 +103,6 @@ public class AllMembers implements Initializable {
                                         preparedStatement.execute();
                                         preparedStatement.close();
 
-                                       reloadData();
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -120,41 +118,43 @@ public class AllMembers implements Initializable {
 
     }
 
-        @FXML
-        public void reloadData() {
-            membersTableView.getItems().clear();
-            int membersCount = 0;
-            try {
-                DatabaseConnection databaseConnection = new DatabaseConnection();
-                Connection connection = databaseConnection.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, userName, email, dob FROM members WHERE userID = ? AND userName != ?");
-                preparedStatement.setInt(1, userId);
-                preparedStatement.setString(2, excludename);
-                ResultSet rs = preparedStatement.executeQuery();
-
-                while (rs.next()) {
-                    membersCount++;
-                    String userName = rs.getString("userName");
-                    String email = rs.getString("email");
-                    String dob = rs.getString("dob");
-
-                    MembersData members = new MembersData(userName, email, dob);
-                    membersTableView.getItems().add(members);
-                }
-
-                preparedStatement.close();
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            membersCountLabel.setText("Total numbers of User: " + String.valueOf(membersCount));
-        }
+//        @FXML
+//        public void reloadData() {
+//
+//            membersTableView.getItems().clear();
+//            int membersCount = 0;
+//            try {
+//                DatabaseConnection databaseConnection = new DatabaseConnection();
+//                Connection connection = databaseConnection.getConnection();
+//                PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName, email, dob FROM members WHERE userID = ? AND userName != ?");
+//                preparedStatement.setInt(1, id);
+//                preparedStatement.setString(2, excludedUsername);
+//                ResultSet rs = preparedStatement.executeQuery();
+//
+//                while (rs.next()) {
+//                    membersCount++;
+//                    String userName = rs.getString("userName");
+//                    String email = rs.getString("email");
+//                    String dob = rs.getString("dob");
+//
+//                    MembersData members = new MembersData(userName, email, dob);
+//                    membersTableView.getItems().add(members);
+//                }
+//
+//                preparedStatement.close();
+//                connection.close();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            membersCountLabel.setText("Total numbers of User: " + String.valueOf(membersCount));
+//    }
 
 
 
     private void getMembersTableData(int id, String excludedUsername)
     {
+
         membersTableView.getItems().clear();
         int membersCount = 0;
         try {

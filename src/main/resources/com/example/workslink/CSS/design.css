@@ -94,6 +94,10 @@
     -fx-background-color: #05373c; /* Green color, change as needed */
     -fx-border-color: #b9f2ff; /* Border color same as background color */
     -fx-text-fill: black; /* Text color */
+    -fx-text-fill: black;
+                                                              -fx-font-family: "Cambria";
+                                                                  -fx-font-size: 14px;
+                                                                  -fx-font-weight: bold;
 }
 
 .minimize {
@@ -108,19 +112,25 @@
   -fx-mark-color: #05373c; // arrow color
 }
 /*Background color of the whole context menu*/
-.choice-box .context-menu { -fx-background-color:#05373c; }
+.choice-box .context-menu { -fx-background-color:#0dffea;-fx-text-fill: black;
+                                                          -fx-font-family: "Cambria";
+                                                              -fx-font-size: 14px;
+                                                              -fx-font-weight: bold; }
 /*// Focused item background color in the list*/
-.choice-box .menu-item:focused { -fx-background-color: #05373c;
+.choice-box .menu-item:focused { -fx-background-color: #05373c;-fx-text-fill: black;
+                                                                -fx-font-family: "Cambria";
+                                                                    -fx-font-size: 14px;
+                                                                    -fx-font-weight: bold;
  }
 /*// Text color of non-focused items in the list*/
 .choice-box .menu-item > .label { -fx-text-fill: black;
  -fx-font-family: "Cambria";
-     -fx-font-size: 18px;
+     -fx-font-size: 14px;
      -fx-font-weight: bold;}
 /*// Text color of focused item in the list*/
 .choice-box .menu-item:focused > .label { -fx-text-fill: black;
  -fx-font-family: "Cambria";
-     -fx-font-size: 18px;
+     -fx-font-size: 14px;
      -fx-font-weight: bold;}
 
 /* design.css *//* design.css */

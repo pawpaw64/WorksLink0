@@ -18,11 +18,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
+<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Pane prefHeight="43.0" prefWidth="973.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="43.0" prefWidth="973.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
                <children>
                   <TextField layoutX="346.0" layoutY="8.0" prefHeight="27.0" prefWidth="517.0" promptText="Search">
                      <effect>
@@ -37,7 +37,7 @@
                         <Image url="@../Icon/search.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="1004.0" layoutY="11.0" mnemonicParsing="false" onAction="#logout" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LogOut" />
+                  <Button layoutX="972.0" layoutY="11.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="100.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LogOut" />
                   <Button fx:id="closeButton" layoutX="1083.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Close" />
                </children>
             </Pane>
@@ -129,7 +129,7 @@
                      </stylesheets>
                   </TableView>
                   <Label layoutX="34.0" layoutY="75.0" prefHeight="31.0" prefWidth="140.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="MY SPACES" />
-                  <ImageView fitHeight="80.0" fitWidth="69.0" layoutX="23.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="80.0" fitWidth="69.0" layoutX="22.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icon/shooting-star.gif" />
                      </image>
@@ -173,6 +173,12 @@
                      </styleClass>
                   </Label>
                   <Label fx:id="nameLabel" layoutX="93.0" layoutY="14.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Welcome" wrapText="true" />
+                  <Pane layoutX="583.0" layoutY="319.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css">
+                     <children>
+                        <Label layoutX="36.0" layoutY="14.0" prefHeight="17.0" prefWidth="110.0" text="Total Created Space" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="583.0" layoutY="451.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css" />
                </children>
             </AnchorPane>
          </center>

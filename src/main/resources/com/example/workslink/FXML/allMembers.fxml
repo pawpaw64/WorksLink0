@@ -48,7 +48,7 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="209.0" layoutY="559.0" onMouseClicked="#reload" prefHeight="27.0" prefWidth="142.0" stylesheets="@../CSS/BasicDesign.css" text="Reload data">
+      <Label layoutX="209.0" layoutY="559.0" onMouseClicked="#refreshData" prefHeight="27.0" prefWidth="142.0" stylesheets="@../CSS/BasicDesign.css" text="Reload data">
          <styleClass>
             <String fx:value="normal-label" />
             <String fx:value="icon" />

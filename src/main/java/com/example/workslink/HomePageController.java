@@ -338,16 +338,27 @@ public class HomePageController extends HelloController implements Initializable
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name,start_date,end_date,calcDays FROM space_info WHERE user_id = " + id;
+            String sql = "SELECT space_Id, space_name, start_date, end_date, calcDays FROM space_info WHERE user_id = " + id;
 
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
+                String spaceId = rs.getString("space_Id");
                 String spaceName = rs.getString("space_name");
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
                 String calcDays = rs.getString("calcDays");
 
-                SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
+                // Get the task count for the current spaceId
+                int taskCount = getTaskCount(spaceId);
+
+                // Create SpaceInfo object with or without taskCount
+                SpaceInfo singleSpace;
+                if (taskCount > 0) {
+                    singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays, String.valueOf(taskCount));
+                } else {
+                    singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays,"0");
+                }
+
                 spaceTableView.getItems().add(singleSpace);
             }
 
@@ -359,11 +370,9 @@ public class HomePageController extends HelloController implements Initializable
         }
 
         try {
-
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            //String sql = "SELECT space_name FROM space_info";
             String sql = "SELECT space_name FROM space_info WHERE user_id = " + id;
 
             ResultSet rs = statement.executeQuery(sql);
@@ -387,7 +396,9 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
 
+        getTaskCount(String.valueOf(id));
     }
+
 
     private void getSpaceData() {
 
