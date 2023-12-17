@@ -64,15 +64,18 @@ public class HomePageController extends HelloController implements Initializable
     private TableColumn<SpaceInfo, String> TaskOngoing;
     @FXML
     private TableView<SpaceInfo> spaceTableView;
-    @FXML
-    private TableColumn<SpaceInfo,String> AssignedSpaceName;
-    @FXML
-    private TableView<SpaceInfo> assignedTable;
 
     @FXML
-    private TableColumn<SpaceInfo,String> assignedTaskOngoing;
-    @FXML
     private ListView<String> assignedListView;
+
+    @FXML
+    private TableView<AssignedSpaceTable> assignedTable;
+
+    @FXML
+    private TableColumn<AssignedSpaceTable, String> AssignedSpaceName;
+
+    @FXML
+    private TableColumn<AssignedSpaceTable, String> spaceOwnerTableCol;
 
     int spaceCount;
     String spaceid;
@@ -92,7 +95,7 @@ public class HomePageController extends HelloController implements Initializable
         } else {
             // Set a default image or handle the absence of an image
             System.out.println("no");
-            profileImg.setImage(new Image("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\profile.png"));
+            //profileImg.setImage(new Image("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\emoji.png"));
         }
 
 
@@ -401,6 +404,8 @@ public class HomePageController extends HelloController implements Initializable
         getSpaceTableData();
         getSpaceVbox();
         getAssignedVbox();
+        //assignedSpaceinfo();
+        getAssignedSpaceTable();
     }
 
     private void getSpaceTableData() {
@@ -421,14 +426,14 @@ public class HomePageController extends HelloController implements Initializable
                 String calcDays = rs.getString("calcDays");
                 String taskCount= String.valueOf(getTaskCount(spaceId));
                 System.out.println(taskCount);
-               if(taskCount!=null ){
+                if(taskCount!=null ){
                     SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays, taskCount);
                     spaceTableView.getItems().add(singleSpace);
                 }
-               else{
-                   SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
-                   spaceTableView.getItems().add(singleSpace);
-               }
+                else{
+                    SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
+                    spaceTableView.getItems().add(singleSpace);
+                }
             }
 
             statement.close();
@@ -470,22 +475,23 @@ public class HomePageController extends HelloController implements Initializable
     }
 
     private void getAssignedSpaceTable() {
-        assignedTable.getItems().clear();
-        getSpaceId();
 
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT task_name FROM task_info WHERE assigneeID = " + id;
+           // String sql = "SELECT assignedSpace,spaceOwnerName FROM assignedspace WHERE userName = " + userNameToMatch;
+            String sql = "SELECT assignedSpace, spaceOwnerName FROM assignedspace WHERE userName = '" + userNameToMatch + "'";
 
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()) {
 
-                String taskName = rs.getString("task_name");
-
-
+                String assignedSpace = rs.getString("assignedSpace");
+                String spaceOwnerName = rs.getString("spaceOwnerName");
+                AssignedSpaceTable assignedSpaceTable = new AssignedSpaceTable(assignedSpace,spaceOwnerName);
+                System.out.println(assignedSpaceTable);
+                assignedTable.getItems().add(assignedSpaceTable);
             }
             statement.close();
             connection.close();
@@ -525,8 +531,8 @@ public class HomePageController extends HelloController implements Initializable
         homePane.setEffect(blur);
     }
 
-   @FXML
-   public void closeOnAction() {
+    @FXML
+    public void closeOnAction() {
         System.out.println("CLose");
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
@@ -541,13 +547,34 @@ public class HomePageController extends HelloController implements Initializable
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
 
-        assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
-        AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("AssignedSpaceName"));
-       assignedTable.setEditable(false);
 
+        AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("assignedSpaceName"));
+        spaceOwnerTableCol.setCellValueFactory(new PropertyValueFactory<>("spaceOwnerTableCol"));
+        assignedTable.setEditable(false);
 
     }
+//    public void assignedSpaceinfo(){
+//        assignedTable.getItems().clear();
+//        try{
+//            DatabaseConnection databaseConnection = new DatabaseConnection();
+//            Connection connection = databaseConnection.getConnection();
+//            Statement statement = connection.createStatement();
+//            String sql = "SELECT assignedSpace FROM assignedspace,spaceOwnerName WHERE userName = '" + userNameToMatch + "'";
+//            ResultSet rs = statement.executeQuery(sql);
+//
+//            while (rs.next()) {
+//                spaceCount++;
+//                String assignedSpace = rs.getString("assignedSpace");
+//                String spaceOwnerName = rs.getString("spaceOwnerName");
+//                AssignedSpaceTable assignedSpaceTable = new AssignedSpaceTable(assignedSpace,spaceOwnerName);
+//                assignedTable.getItems().add(assignedSpaceTable);
+//            }
+//            rs.close();
+//            statement.close();
+//            connection.close();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 
 }
-
-

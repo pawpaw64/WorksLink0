@@ -137,7 +137,7 @@
                   <TableView fx:id="assignedTable" layoutX="34.0" layoutY="344.0" prefHeight="200.0" prefWidth="513.0" stylesheets="@../CSS/table-view.css">
                     <columns>
                       <TableColumn fx:id="AssignedSpaceName" prefWidth="232.0" text="Space Name" />
-                      <TableColumn fx:id="assignedTaskOngoing" prefWidth="282.0" text="Task Assigned" />
+                      <TableColumn fx:id="spaceOwnerTableCol" prefWidth="282.0" text="Task Assigned" />
                     </columns>
                      <styleClass>
                         <String fx:value="table-cell" />
