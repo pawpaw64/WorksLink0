@@ -1,16 +1,12 @@
 package com.example.workslink;
 
-import javafx.animation.TranslateTransition;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
-import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -24,7 +20,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -62,6 +57,8 @@ public class SpaceDetailsController implements Initializable {
     @FXML
     private TableColumn<SpaceMembersList,String> membersTableColumn;
 
+    @FXML
+    private PieChart statusPieChart;
     String members;
     @FXML
     Label startDateLabel;
@@ -146,49 +143,8 @@ public class SpaceDetailsController implements Initializable {
     private Label percentlebel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<PieChart.Data>pieChartData =
-                FXCollections.observableArrayList(
-                  new PieChart.Data("Todo",50),
-                  new PieChart.Data("Doing",30),
-                  new PieChart.Data("Done",25)
-                );
-        pieChart.setData(pieChartData);
-        pieChart.setTitle("Stats");
 
-        pieChart.setLegendSide(Side.RIGHT);
-        pieChart.setClockwise(false);
 
-        percentlebel.setTextFill(Color.BLACK);
-        percentlebel.setStyle("-fx-font: 15 arial");
-
-        for(final PieChart.Data data : pieChart.getData()){
-            data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED,
-                    new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-//                            percentlebel.setTranslateX(event.getSceneX()- percentlebel.getLayoutX());
-//                            percentlebel.setTranslateY(event.getSceneY()- percentlebel.getLayoutY());
-//                            percentlebel.setText(String.valueOf(data.getPieValue())+ "%");
-
-                            Bounds b1 = data.getNode().getBoundsInLocal();
-                            double newX = (b1.getHeight()) / 2.0 + b1.getMinX();
-                            System.out.println(b1.getMinX());
-                            double newY = (b1.getHeight())/ 2.0 + b1.getMinY();
-
-                            data.getNode().setTranslateX(0);
-                            data.getNode().setTranslateY(0);
-                            TranslateTransition tt = new TranslateTransition(
-                                    Duration.millis(1500), data.getNode()
-                            );
-                            tt.setByX(newX);
-                            tt.setByY(newY);
-                            tt.setAutoReverse(true);
-                            tt.setCycleCount(2);
-                            tt.play();
-
-                        }
-                    });
-        }
         taskName.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
         taskPriority.setCellValueFactory(new PropertyValueFactory<>("taskPriority"));
         taskAssigned.setCellValueFactory(new PropertyValueFactory<>("taskAssigned"));
@@ -196,6 +152,8 @@ public class SpaceDetailsController implements Initializable {
 
         OverViewDispaly();
 
+        statusPieChart.setTitle("Task Status");
+        updateStatusPieChart();
     }
 
 
@@ -285,6 +243,8 @@ public class SpaceDetailsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        updateStatusPieChart();
+
     }
     private Label createLabel(String task_name, String priority, String assignedto) {
         return new Label("\nTask Name: " + task_name
@@ -416,4 +376,42 @@ public class SpaceDetailsController implements Initializable {
     }
     boolean is;
 
+    private void updateStatusPieChart() {
+        int todoCount = 0;
+        int doingCount = 0;
+        int completeCount = 0;
+
+        // Iterate through tasks and count their statuses
+        for (TaskHistoryData task : spaceTableView.getItems()) {
+            String status = task.getTaskStatus();
+            switch (status) {
+                case "To Do":
+                    todoCount++;
+                    break;
+                case "In Progress":
+                    doingCount++;
+                    break;
+                case "Done":
+                    completeCount++;
+                    break;
+                // Add more cases if you have additional statuses
+            }
+        }
+
+        // Create PieChart.Data objects
+        PieChart.Data todoData = new PieChart.Data("To Do", todoCount);
+        PieChart.Data doingData = new PieChart.Data("In Progress", doingCount);
+        PieChart.Data completeData = new PieChart.Data("Done", completeCount);
+
+        // Add labels to the PieChart.Data objects
+        todoData.nameProperty().set("To Do: " + todoCount);
+        doingData.nameProperty().set("In Progress: " + doingCount);
+        completeData.nameProperty().set("Done: " + completeCount);
+
+        statusPieChart.getData().clear();
+        statusPieChart.getData().addAll(todoData, doingData, completeData);
+    }
+
+
 }
+

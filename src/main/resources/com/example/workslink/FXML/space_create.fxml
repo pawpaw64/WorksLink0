@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<!-- <?import org.controlsfx.control.CheckComboBox?> -->
+<?import org.controlsfx.control.CheckComboBox?>
 
 <AnchorPane prefHeight="556.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.SpaceCreateController">
 
@@ -86,10 +86,10 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <!--   <org.controlsfx.control.CheckComboBox fx:id="membersCheckComboBox" layoutX="383.0" layoutY="191.0" prefHeight="26.0" prefWidth="240.0" stylesheets="../CSS/checkComboBoxStyles.css" styleClass="check-combo-box">
+         <org.controlsfx.control.CheckComboBox fx:id="membersCheckComboBox" layoutX="383.0" layoutY="191.0" prefHeight="26.0" prefWidth="240.0" stylesheets="../CSS/checkComboBoxStyles.css" styleClass="check-combo-box">
         <styleClass>
 
-           </styleClass></org.controlsfx.control.CheckComboBox> -->
+           </styleClass></org.controlsfx.control.CheckComboBox>
         <Label layoutX="382.0" layoutY="157.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Members" />
       <Label layoutX="61.0" layoutY="42.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="back" />
      </children>

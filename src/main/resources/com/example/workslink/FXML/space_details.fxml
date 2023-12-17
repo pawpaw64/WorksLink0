@@ -84,31 +84,35 @@
             </Tab>
             <Tab text="Task">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="addTask" layoutX="641.0" layoutY="29.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
-                        <Label layoutX="34.0" layoutY="19.0" prefHeight="44.0" prefWidth="120.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#TASK" />
-                        <Label layoutX="465.0" layoutY="29.0" prefHeight="34.0" prefWidth="160.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Refresh Task" textFill="#fff8f8">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Icon/reload.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <TableView fx:id="spaceTableView" layoutX="34.0" layoutY="90.0" prefHeight="266.0" prefWidth="773.0" stylesheets="@../CSS/table-view.css">
-                           <columns>
-                              <TableColumn fx:id="taskID" prefWidth="51.0" text="ID" />
-                              <TableColumn fx:id="taskName" prefWidth="146.0" text="Task name" />
-                              <TableColumn fx:id="taskPriority" minWidth="5.60003662109375" prefWidth="148.0" text="Priority" />
-                              <TableColumn fx:id="taskAssigned" prefWidth="124.0" text="Assigned To" />
-                              <TableColumn fx:id="taskStatus" prefWidth="126.0" text="Status" />
-                              <TableColumn fx:id="taskAction" prefWidth="176.0" text="Action" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
+                  <ScrollPane>
+                     <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="563.0" prefWidth="914.0">
+                           <children>
+                              <Label layoutX="465.0" layoutY="29.0" prefHeight="34.0" prefWidth="160.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Refresh Task" textFill="#fff8f8">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icon/reload.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Button fx:id="addTask" layoutX="641.0" layoutY="29.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
+                              <Label layoutX="34.0" layoutY="19.0" prefHeight="44.0" prefWidth="120.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#TASK" />
+                              <TableView fx:id="spaceTableView" layoutX="34.0" layoutY="90.0" prefHeight="266.0" prefWidth="773.0" stylesheets="@../CSS/table-view.css">
+                                 <columns>
+                                    <TableColumn fx:id="taskID" prefWidth="51.0" text="ID" />
+                                    <TableColumn fx:id="taskName" prefWidth="146.0" text="Task name" />
+                                    <TableColumn fx:id="taskPriority" minWidth="5.60003662109375" prefWidth="148.0" text="Priority" />
+                                    <TableColumn fx:id="taskAssigned" prefWidth="124.0" text="Assigned To" />
+                                    <TableColumn fx:id="taskStatus" prefWidth="126.0" text="Status" />
+                                    <TableColumn fx:id="taskAction" prefWidth="176.0" text="Action" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
               </content>
             </Tab>
             <Tab fx:id="task" text="OverView">
@@ -155,12 +159,10 @@
             </Tab>
             <Tab text="Chart">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <PieChart fx:id="pieChart" layoutX="100.0" layoutY="65.0" prefHeight="378.0" prefWidth="466.0" />
-                        <Label fx:id="percentlebel" layoutX="629.0" layoutY="98.0" prefHeight="29.0" prefWidth="88.0" />
-                     </children>
-                  </AnchorPane>
+                        <PieChart fx:id="statusPieChart" layoutX="227.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" />
+                     </children></AnchorPane>
               </content>
             </Tab>
          </tabs>
