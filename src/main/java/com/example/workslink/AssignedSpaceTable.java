@@ -2,36 +2,36 @@ package com.example.workslink;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class AssignedSpaceTable  {
-    private String  assignedSpace;
-    private String  spaceOwnerName;
+public class AssignedSpaceTable {
+    private String assignedSpaceName;
+    private String spaceOwnerTableCol;
 
-    public AssignedSpaceTable(String assignedSpace, String spaceOwnerName) {
-        this.assignedSpace = assignedSpace;
-        this.spaceOwnerName = spaceOwnerName;
+    public AssignedSpaceTable(String assignedSpaceName, String spaceOwnerTableCol) {
+        this.assignedSpaceName = assignedSpaceName;
+        this.spaceOwnerTableCol = spaceOwnerTableCol;
     }
 
-    public String getAssignedSpace() {
-        return assignedSpace;
+    public String getAssignedSpaceName() {
+        return assignedSpaceName;
     }
 
-    public void setAssignedSpace(String assignedSpace) {
-        this.assignedSpace = assignedSpace;
+    public void setAssignedSpaceName(String assignedSpaceName) {
+        this.assignedSpaceName = assignedSpaceName;
     }
 
-    public String getSpaceOwnerName() {
-        return spaceOwnerName;
+    public String getSpaceOwnerTableCol() {
+        return spaceOwnerTableCol;
     }
 
-    public void setSpaceOwnerName(String spaceOwnerName) {
-        this.spaceOwnerName = spaceOwnerName;
+    public void setSpaceOwnerTableCol(String spaceOwnerTableCol) {
+        this.spaceOwnerTableCol = spaceOwnerTableCol;
     }
 
     @Override
     public String toString() {
         return "AssignedSpaceTable{" +
-                "assignedSpace=" + assignedSpace +
-                ", spaceOwnerName=" + spaceOwnerName +
+                "assignedSpaceName='" + assignedSpaceName + '\'' +
+                ", spaceOwnerTableCol='" + spaceOwnerTableCol + '\'' +
                 '}';
     }
 }
