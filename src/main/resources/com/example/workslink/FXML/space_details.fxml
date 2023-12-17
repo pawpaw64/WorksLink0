@@ -40,7 +40,7 @@
                                        </image>
                                     </ImageView>
                                     <Label fx:id="space_description" layoutX="42.0" layoutY="101.0" prefHeight="98.0" prefWidth="769.0" stylesheets="@../CSS/homePageDesign.css" text="Details" />
-                                    <ImageView fitHeight="79.0" fitWidth="109.0" layoutX="169.0" pickOnBounds="true" preserveRatio="true" rotate="11.3">
+                                    <ImageView fitHeight="177.0" fitWidth="194.0" layoutX="678.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" rotate="11.3">
                                        <image>
                                           <Image url="@../Icon/galaxy.gif" />
                                        </image>
@@ -52,11 +52,21 @@
                                     <Label layoutX="42.0" layoutY="232.0" prefHeight="20.0" prefWidth="68.0" text="Timeline:" underline="true" />
                                     <Label layoutX="309.0" layoutY="261.0" prefWidth="118.0" text="Remaining days:" underline="true" />
                                     <Label fx:id="remaindaysLabel" layoutX="309.0" layoutY="288.0" text="Label" />
-                                    <VBox fx:id="memberVbox" alignment="TOP_CENTER" layoutX="448.0" layoutY="261.0" prefHeight="278.0" prefWidth="158.0">
+                                    <VBox fx:id="memberVbox" alignment="TOP_CENTER" layoutX="478.0" layoutY="252.0" prefHeight="248.0" prefWidth="142.0">
                                        <children>
                                           <Label alignment="TOP_CENTER" text="Members:" />
                                           <Line endX="-17.30709457397461" endY="1.6033649444580078E-5" startX="-100.0" />
                                        </children>
+                                       <stylesheets>
+                                          <URL value="@../CSS/design.css" />
+                                          <URL value="@../CSS/homePageDesign.css" />
+                                       </stylesheets>
+                                       <styleClass>
+                                          <String fx:value="tx" />
+                                          <String fx:value="arrow" />
+                                          <String fx:value="arrow-button" />
+                                          <String fx:value="anchor-pane-with-border" />
+                                       </styleClass>
                                     </VBox>
                                  </children>
                                  <cursor>

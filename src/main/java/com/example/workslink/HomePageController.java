@@ -175,6 +175,7 @@ public class HomePageController extends HelloController implements Initializable
             newStage.setScene(new Scene(root));
             SpaceCreateController spaceCreateController = loader.getController();
             spaceCreateController.setUserID(id);
+            spaceCreateController.setUser(currentUser);
             newStage.initStyle(StageStyle.UNDECORATED);
             newStage.show();
 
