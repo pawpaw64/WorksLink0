@@ -179,6 +179,8 @@ public class SpaceCreateController implements Initializable {
                     String membersString = String.join(",", selectedMembers);
                     preparedStatement.setString(7, membersString);
 
+
+                    System.out.println(currentUser.getUserName());
                     insertDataIntoAssignedSpace(getSpaceName().getText(),selectedMembers,currentUser.getUserName());
 
                     int rowsInserted = preparedStatement.executeUpdate();
