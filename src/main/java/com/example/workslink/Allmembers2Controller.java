@@ -13,72 +13,63 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Allmembers2Controller implements Initializable {
+    @FXML
+    private TableView<UserRequestData> AccReTable;
+    @FXML
+    private TableColumn<UserRequestData, String> accept;
+    @FXML
+    private TableColumn<UserRequestData, String> name;
+    @FXML
+    private TableColumn<UserRequestData, String> reject;
     public TableView<MembersData> membersTableView;
     public Label membersCountLabel;
     public TableColumn<MembersData, Integer> membersID;
     public TableColumn<MembersData, String> memberEmail;
     public TableColumn<MembersData, String> memberUserName;
     public TableColumn<MembersData, String> memberDOB;
-   public  TableColumn<MembersData,String> membersSelected;
-    @FXML
-    private CheckBox selectALl;
-    public TableColumn<MembersData, String> getMemberEmail() {
-        return memberEmail;
-    }
-    public void setMemberEmail(TableColumn<MembersData, String> memberEmail) {
-        this.memberEmail = memberEmail;
-    }
-    public TableColumn<MembersData, String> getMemberUserName() {
-        return memberUserName;
-    }
-    public void setMemberUserName(TableColumn<MembersData, String> memberUserName) {
-        this.memberUserName = memberUserName;
-    }
-    public TableColumn<MembersData, String> getMemberDOB() {
-        return memberDOB;
-    }
-    public void setMemberDOB(TableColumn<MembersData, String> memberDOB) {
-        this.memberDOB = memberDOB;
-    }
-    private CheckBox checkBox;
-
-    @FXML
-    private TableColumn<MembersData,String> sendRqst;
+      @FXML
+    private TableColumn<MembersData, String> sendRqst;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //  accept.setCellValueFactory(new PropertyValueFactory<>("acceptButton"));
+        accept.setCellFactory(cellFactory -> new AcceptButtonCell());
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        // reject.setCellValueFactory(new PropertyValueFactory<>("rejectButton"));
+        reject.setCellFactory(cellFactory -> new RejectButtonCell());
+
         memberUserName.setCellValueFactory(new PropertyValueFactory<>("memberUserName"));
         memberEmail.setCellValueFactory(new PropertyValueFactory<>("memberEmail"));
         memberDOB.setCellValueFactory(new PropertyValueFactory<>("memberDOB"));
         membersID.setCellValueFactory(new PropertyValueFactory<>("memberId"));
         Callback<TableColumn<MembersData, String>, TableCell<MembersData, String>> cellFoctory =
                 (TableColumn<MembersData, String> param) -> {
-                    // make cell containing buttons
-
-                    final TableCell<MembersData, String> cell = new TableCell<>() {
-
+                     final TableCell<MembersData, String> cell = new TableCell<>() {
                         final Button sendRequest = new Button("Send Request");
                         @Override
                         public void updateItem(String item, boolean empty) {
                             super.updateItem(item, empty);
-                            //that cell created only on non-empty rows
                             if (empty) {
                                 setGraphic(null);
                                 setText(null);
 
-
                             } else {
-
-
-
+                                sendRequest.setOnAction((ActionEvent e) -> {
+                                    MembersData member = getTableView().getItems().get(getIndex());
+                                    sendRequestToUser(member);
+                                });
                                 setGraphic(sendRequest);
                             }
                             membersTableView.setEditable(false);
@@ -87,96 +78,355 @@ public class Allmembers2Controller implements Initializable {
                     return cell;
                 };
         sendRqst.setCellFactory(cellFoctory);
-        membersSelected.setCellValueFactory(new PropertyValueFactory<>("select"));
-        //getMembersTableData();
+
+        //  getMembersTableData();
         membersTableView.setEditable(false);
+        AccReTable.setEditable(false);
 
 
     }
 
+    private class AcceptButtonCell extends TableCell<UserRequestData, String> {
+        final Button acceptButton = new Button("Accept");
+        AcceptButtonCell() {
+            acceptButton.setOnAction(event -> {
+                UserRequestData userRequest = getTableView().getItems().get(getIndex());
+                acceptRequest(userRequest);
+            });
+        }
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty) {
+                setGraphic(null);
+            } else {
+                setGraphic(acceptButton);
+            }
+        }
+    }
 
-    int membersCount;
-    private void getMembersTableData() {
+    private class RejectButtonCell extends TableCell<UserRequestData, String> {
+        final Button rejectButton = new Button("Reject");
+        RejectButtonCell() {
+            rejectButton.setOnAction(event -> {
+                UserRequestData userRequest = getTableView().getItems().get(getIndex());
+                rejectRequest(userRequest);
+            });
+        }
 
-        membersTableView.getItems().clear();
-        membersCount = 0;
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty) {
+                setGraphic(null);
+            } else {
+                setGraphic(rejectButton);
+            }
+        }
+    }
+
+    private void rejectRequest(UserRequestData request) {
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id,userName, email, dob FROM user WHERE id != ?");
+            PreparedStatement deleteStatement = connection.prepareStatement(
+                    "DELETE FROM user_requests WHERE request_id = ?");
+            deleteStatement.setInt(1, request.getRequestId());
+            deleteStatement.executeUpdate();
+            deleteStatement.close();
+            getAccRejTableData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void sendRequestToUser(MembersData selectedUser) {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+
+            // Insert into user_requests table
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO user_requests (sender_user_id, receiver_user_id," +
+                            " status,sender_username) VALUES (?, ?,?, ?)");
             preparedStatement.setInt(1, userId);
-            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.setInt(2, Integer.parseInt(selectedUser.getMemberId()));
+            preparedStatement.setString(3, "PENDING");
+            preparedStatement.setString(4, excludname);
 
-            while (rs.next()) {
-                membersCount++;
-                String id= rs.getString("id");
-                String userName = rs.getString("userName");
-                String email = rs.getString("email");
-                String dob = rs.getString("dob");
-                System.out.println("ID"+id);
-
-                MembersData members = new MembersData(userName, email, dob, id);
-                membersTableView.getItems().add(members);
-
-            }
-
+            preparedStatement.executeUpdate();
             preparedStatement.close();
+            showAlert(Alert.AlertType.INFORMATION, "Request Sent", "Request sent successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CSS/alertPrompt.css")).toExternalForm());
+        dialogPane.getStyleClass().add("styled-alert");
+        alert.showAndWait();
+    }
+
+    private void acceptRequest(UserRequestData request) {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+
+            // Update the status in the user_requests table to 'ACCEPTED'
+            PreparedStatement updateStatement = connection.prepareStatement(
+                    "UPDATE user_requests SET status = 'ACCEPTED' WHERE request_id = ?");
+            updateStatement.setInt(1, request.getRequestId());
+            System.out.println(request.getRequestId());
+            updateStatement.executeUpdate();
+            updateStatement.close();
+
+            // Optionally, you can provide a notification or update the UI
+
+            // Insert data into the members table
+            insertIntoMembers(request.getSenderUserId(),request.getReceiverUserId());
+            System.out.println("sender id"+request.getSenderUserId());
+            System.out.println("Recevwer id"+request.getReceiverUserId());
+
+            connection.close();
+
+            // Refresh the data in the AccRejTable
+            getAccRejTableData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void insertIntoMembers(int senderId, int receiverId) {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            System.out.println("Sender id is "+senderId);
+            System.out.println("reciever id is "+receiverId);
+
+            // Insert data for the sender
+            PreparedStatement insertStatementSender = connection.prepareStatement(
+                    "INSERT INTO members (userID, id, userName, email, dob) " +
+                            "SELECT ?, id, userName, email, dob FROM user WHERE id = ?");
+            insertStatementSender.setInt(1, senderId);
+            insertStatementSender.setInt(2, receiverId);
+            insertStatementSender.executeUpdate();
+            insertStatementSender.close();
+
+            // Insert data for the receiver
+            PreparedStatement insertStatementReceiver = connection.prepareStatement(
+                    "INSERT INTO members (userID, id, userName, email, dob) " +
+                            "SELECT ?, id, userName, email, dob FROM user WHERE id = ?");
+            insertStatementReceiver.setInt(1, receiverId);
+            insertStatementReceiver.setInt(2, senderId);
+            insertStatementReceiver.executeUpdate();
+            insertStatementReceiver.close();
+
+            // Optionally, you can provide a notification or update the UI
+
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        membersCountLabel.setText("Total numbers of User: " + String.valueOf(membersCount));
     }
-    String excludname;
 
-    @FXML
-    public void saveMembers(ActionEvent event) {
+
+
+    private void checkPendingRequests() {
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO members (userID, id ,userName, email, dob) VALUES (?,?,?, ?, ?)");
+                    "SELECT * FROM user_requests WHERE receiver_user_id = ? AND status = 'PENDING'");
+            preparedStatement.setInt(1, userId);
 
-            // Iterate over the rows and insert only the selected ones
-            ObservableList<MembersData> allMembers = membersTableView.getItems();
-            for (MembersData member : allMembers) {
-                if (member.getSelect().isSelected()) {
-                    preparedStatement.setInt(1, userId);
-                    preparedStatement.setString(2, member.getMemberId());
-                    preparedStatement.setString(3, member.getMemberUserName());
-                    preparedStatement.setString(4, member.getMemberEmail());
-                    preparedStatement.setString(5, member.getMemberDOB());
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-                    preparedStatement.executeUpdate();
-                }
+            if (resultSet.next()) {
+                // Display a notification about pending requests
+                showAlert(Alert.AlertType.INFORMATION,"You have pending requests", "Check your notifications for details.");
+
+                // You may want to update the status of the requests in the database
+                updateRequestStatus();
+            }
+
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateRequestStatus() {
+        try {
+            // Update the status of the requests in the database
+            // For example, set status to 'SEEN'
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            PreparedStatement updateStatement = connection.prepareStatement(
+                    "UPDATE user_requests SET status = 'SEEN' WHERE receiver_user_id = ?");
+            updateStatement.setInt(1, userId);
+
+            updateStatement.executeUpdate();
+
+            updateStatement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showNotification(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+
+    int membersCount;
+
+    private void getAccRejTableData() {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT sender_username, status, sender_user_id, request_id, receiver_user_id FROM " +
+                            "user_requests WHERE (receiver_user_id = ?) " +
+                            "AND (status = 'PENDING' OR status = 'SEEN')");
+            preparedStatement.setInt(1, userId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Clear previous items
+            AccReTable.getItems().clear();
+
+            boolean hasRequests = false;
+
+            while (resultSet.next()) {
+                // Create UserRequestData objects and add them to the list
+                // You need to replace this with your actual column names
+                String senderUsername = resultSet.getString("sender_username");
+                String status = resultSet.getString("status");
+                int senderUserId = resultSet.getInt("sender_user_id");
+                int requestID = resultSet.getInt("request_id");
+                int receiverID = resultSet.getInt("receiver_user_id");
+
+                UserRequestData userRequestData = new UserRequestData(senderUsername, senderUserId, status, requestID, receiverID);
+                AccReTable.getItems().add(userRequestData);
+
+                hasRequests = true;
             }
 
             preparedStatement.close();
             connection.close();
 
-            // Refresh the table data after insertion
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/allMembers.fxml"));
-            Parent root = loader.load();
-            AllMembers allMembersController = loader.getController();
-            allMembersController.refreshData();
-            allMembersController.setUser(userId,excludname);
+            // If no requests, display a message in the table
+            if (!hasRequests) {
+                Label noRequestsLabel = new Label("Currently No Request");
+                noRequestsLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
+                AccReTable.setPlaceholder(noRequestsLabel);
+            }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+    private void getMembersTableData() {
+        membersTableView.getItems().clear();
+        membersCount = 0;
+
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+
+            // Select members who are not the current user
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT id, userName, email, dob FROM user WHERE id != ?");
+            preparedStatement.setInt(1, userId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                String memberId = rs.getString("id");
+                String userName = rs.getString("userName");
+                String email = rs.getString("email");
+                String dob = rs.getString("dob");
+
+                // Check if the user is already a member
+                if (!isUserAlreadyMember(memberId)) {
+                    membersCount++;
+                    MembersData members = new MembersData(userName, email, dob, memberId);
+                    membersTableView.getItems().add(members);
+                }
+            }
+            membersTableView.setPlaceholder(new Label("No User to Add"));
+
+            preparedStatement.close();
+            connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-   }
+        membersCountLabel.setText("Total numbers of User: " +(membersCount));
+    }
+    private boolean isUserAlreadyMember(String memberId) {
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+
+            // Check if the user is already a member
+            PreparedStatement checkStatement = connection.prepareStatement(
+                    "SELECT COUNT(*) FROM members WHERE userID = ? AND id = ?");
+            checkStatement.setInt(1, userId);
+            checkStatement.setInt(2, Integer.parseInt(memberId));
+            ResultSet resultSet = checkStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+
+            checkStatement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    String excludname;
+
+
+
     @FXML
     void goBack(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
 
     }
-     int userId;
+
+    int userId;
+
     public void userId(int userId, String excludename) {
-        this.userId=userId;
-        this.excludname=excludename;
+        this.userId = userId;
+        this.excludname = excludename;
+        getAccRejTableData();
         getMembersTableData();
+        checkPendingRequests();
     }
 }
+

@@ -1,0 +1,18 @@
+.styled-alert {
+    -fx-background-color: linear-gradient(to bottom right, #0dffea, #05373c); /* Updated background color with gradient */
+    -fx-text-fill: black; /* Set the text color */
+     -fx-font-weight: bold;
+    -fx-font-size: 16px; /* Set the font size */
+    -fx-background-radius: 5px; /* Optional: Add border-radius for rounded corners */
+    -fx-padding: 10px; /* Optional: Add padding for better spacing */
+}
+
+.alert-button {
+    -fx-background-color:  #0dffea;/* Button background color with gradient */
+    -fx-text-fill: black; /* Set the text color */
+    -fx-font-weight: bold; /* Set the font weight */
+    -fx-font-size: 14px; /* Set the font size */
+    -fx-background-radius: 5px; /* Optional: Add border-radius for rounded corners */
+}
+
+

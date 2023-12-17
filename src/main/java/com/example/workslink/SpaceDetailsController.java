@@ -98,6 +98,8 @@ public class SpaceDetailsController implements Initializable {
     public VBox getMemberVbox() {
         return memberVbox;
     }
+    @FXML
+    private Button addTask;
 
     @FXML
     void add_task(ActionEvent event) {
@@ -344,6 +346,7 @@ public class SpaceDetailsController implements Initializable {
         taskAction.setCellFactory(cellFactory);
 
     }
+
     public  void openTaskAction(TaskHistoryData t){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/taskAction.fxml"));
@@ -395,6 +398,7 @@ public class SpaceDetailsController implements Initializable {
                 System.err.println("Failed to obtain OverView controller.");
             }
 
+
             // Add each AnchorPane to its respective VBox
            // todoVbox.getChildren().add(doingPane);
             //doingVbox.getChildren().add(doingPane);
@@ -404,5 +408,10 @@ public class SpaceDetailsController implements Initializable {
         }
     }
 
+    public void fromAssignee(boolean is) {
+        addTask.setDisable(true);
+        this.is=is;
+    }
+    boolean is;
 
 }
