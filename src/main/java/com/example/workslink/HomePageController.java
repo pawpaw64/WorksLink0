@@ -70,7 +70,7 @@ public class HomePageController extends HelloController implements Initializable
     private TableView<SpaceInfo> assignedTable;
 
     @FXML
-    private TableColumn<SpaceInfo,String> spaceOwnerTableCol;
+    private TableColumn<SpaceInfo,String> assignedTaskOngoing;
     @FXML
     private ListView<String> assignedListView;
 
@@ -92,7 +92,7 @@ public class HomePageController extends HelloController implements Initializable
         } else {
             // Set a default image or handle the absence of an image
             System.out.println("no");
-            profileImg.setImage(new Image("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\profile.png"));
+            //profileImg.setImage(new Image("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\emoji.png"));
         }
 
 
@@ -172,7 +172,6 @@ public class HomePageController extends HelloController implements Initializable
             newStage.setScene(new Scene(root));
             SpaceCreateController spaceCreateController = loader.getController();
             spaceCreateController.setUserID(id);
-            spaceCreateController.setUser(currentUser);
             newStage.initStyle(StageStyle.UNDECORATED);
             newStage.show();
 
@@ -402,7 +401,6 @@ public class HomePageController extends HelloController implements Initializable
         getSpaceTableData();
         getSpaceVbox();
         getAssignedVbox();
-        assignedTable();
     }
 
     private void getSpaceTableData() {
@@ -423,14 +421,14 @@ public class HomePageController extends HelloController implements Initializable
                 String calcDays = rs.getString("calcDays");
                 String taskCount= String.valueOf(getTaskCount(spaceId));
                 System.out.println(taskCount);
-               if(taskCount!=null ){
+                if(taskCount!=null ){
                     SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays, taskCount);
                     spaceTableView.getItems().add(singleSpace);
                 }
-               else{
-                   SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
-                   spaceTableView.getItems().add(singleSpace);
-               }
+                else{
+                    SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
+                    spaceTableView.getItems().add(singleSpace);
+                }
             }
 
             statement.close();
@@ -527,16 +525,11 @@ public class HomePageController extends HelloController implements Initializable
         homePane.setEffect(blur);
     }
 
-   @FXML
-   public void closeOnAction() {
+    @FXML
+    public void closeOnAction() {
         System.out.println("CLose");
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
-    }
-
-    public void assignedTable(){
-        assignedListView.getItems().clear();
-
     }
 
     @Override
@@ -548,13 +541,11 @@ public class HomePageController extends HelloController implements Initializable
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
 
-        spaceOwnerTableCol.setCellValueFactory(new PropertyValueFactory<>("spaceOwnerTableCol"));
+        assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
         AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("AssignedSpaceName"));
-       assignedTable.setEditable(false);
+        assignedTable.setEditable(false);
 
 
     }
 
 }
-
-

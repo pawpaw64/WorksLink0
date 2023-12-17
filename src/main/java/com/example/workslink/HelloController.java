@@ -294,7 +294,7 @@ public class HelloController {
     }
 
     private byte[] getDefaultUserImage() {
-        Path imagePath = Paths.get("com/example/workslink/Icon/emoji.png");
+        Path imagePath = Paths.get("C:\\Users\\USER\\Documents\\GitHub\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\emoji.png");
 
         try {
             byte[] imageData = Files.readAllBytes(imagePath);
