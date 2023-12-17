@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -141,55 +142,8 @@ public class SpaceDetailsController implements Initializable {
     void addPaneToVBox(Pane pane, VBox targetVBox) {
         targetVBox.getChildren().add(pane);
     }
-    @FXML
-    private PieChart pieChart;
-    @FXML
-    private Label percentlebel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<PieChart.Data>pieChartData =
-                FXCollections.observableArrayList(
-                  new PieChart.Data("Todo",50),
-                  new PieChart.Data("Doing",30),
-                  new PieChart.Data("Done",25)
-                );
-        pieChart.setData(pieChartData);
-        pieChart.setTitle("Stats");
-
-        pieChart.setLegendSide(Side.RIGHT);
-        pieChart.setClockwise(false);
-
-        percentlebel.setTextFill(Color.BLACK);
-        percentlebel.setStyle("-fx-font: 15 arial");
-
-        for(final PieChart.Data data : pieChart.getData()){
-            data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED,
-                    new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-//                            percentlebel.setTranslateX(event.getSceneX()- percentlebel.getLayoutX());
-//                            percentlebel.setTranslateY(event.getSceneY()- percentlebel.getLayoutY());
-//                            percentlebel.setText(String.valueOf(data.getPieValue())+ "%");
-
-                            Bounds b1 = data.getNode().getBoundsInLocal();
-                            double newX = (b1.getHeight()) / 2.0 + b1.getMinX();
-                            System.out.println(b1.getMinX());
-                            double newY = (b1.getHeight())/ 2.0 + b1.getMinY();
-
-                            data.getNode().setTranslateX(0);
-                            data.getNode().setTranslateY(0);
-                            TranslateTransition tt = new TranslateTransition(
-                                    Duration.millis(1500), data.getNode()
-                            );
-                            tt.setByX(newX);
-                            tt.setByY(newY);
-                            tt.setAutoReverse(true);
-                            tt.setCycleCount(2);
-                            tt.play();
-
-                        }
-                    });
-        }
         taskName.setCellValueFactory(new PropertyValueFactory<>("spaceTaskName"));
         taskPriority.setCellValueFactory(new PropertyValueFactory<>("taskPriority"));
         taskAssigned.setCellValueFactory(new PropertyValueFactory<>("taskAssigned"));
@@ -198,6 +152,7 @@ public class SpaceDetailsController implements Initializable {
         OverViewDispaly();
 
     }
+
 
 
     private void getSpaces() {
@@ -327,6 +282,22 @@ public class SpaceDetailsController implements Initializable {
                                     System.out.println(selectedTask.getTaskPriority());
                                     openTaskAction(selectedTask);
                                 });
+                                complete.setOnAction((ActionEvent event) -> {
+
+                                    TaskHistoryData selectedTask = getTableView().getItems().get(getIndex());
+
+                                    // Update the status to 'Completed'
+                                    selectedTask.setTaskStatus("Completed");
+
+                                    // Disable the action button
+                                    action.setDisable(true);
+
+                                    // Refresh the TableView to reflect the changes
+                                    spaceTableView.refresh();
+
+
+                                });
+
                                 HBox managebtn = new HBox(action, complete);
                                 managebtn.setStyle("-fx-alignment:center");
                                 HBox.setMargin(action, new Insets(2, 2, 0, 3));

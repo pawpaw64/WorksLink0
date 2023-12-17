@@ -76,6 +76,11 @@ public class HomePageController extends HelloController implements Initializable
 
     @FXML
     private TableColumn<AssignedSpaceTable, String> spaceOwnerTableCol;
+    @FXML
+    private Label totalMember;
+
+    @FXML
+    private Label totalSpace;
 
     int spaceCount;
     String spaceid;
@@ -86,6 +91,7 @@ public class HomePageController extends HelloController implements Initializable
         this.currentUser = loggedInUser;
         id = currentUser.getUser_id();
         userNameToMatch = currentUser.getUserName();
+        setTotalSpacesAndMembers();
 
 
         nameLabel.setText("Welcome " + currentUser.getUserName());
@@ -550,6 +556,68 @@ public class HomePageController extends HelloController implements Initializable
         spaceOwnerTableCol.setCellValueFactory(new PropertyValueFactory<>("spaceOwnerTableCol"));
         assignedTable.setEditable(false);
 
+
     }
+    private void setTotalSpacesAndMembers() {
+        try {
+            // Get the total number of spaces
+            int totalSpaces = getTotalSpaces();
+            // Get the total number of members
+            int totalMembers = getTotalMembers();
+
+            // Set the values in the labels
+            totalSpace.setText(String.valueOf(totalSpaces));
+            totalMember.setText(String.valueOf(totalMembers));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getTotalSpaces() throws SQLException {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        Connection connection = databaseConnection.getConnection();
+        Statement statement = connection.createStatement();
+
+        // Query to get the total number of spaces for the current user
+        String spaceCountQuery = "SELECT COUNT(*) AS spaceCount FROM space_info WHERE user_id = " + id;
+
+        ResultSet spaceCountResultSet = statement.executeQuery(spaceCountQuery);
+
+        int totalSpaces = 0;
+        if (spaceCountResultSet.next()) {
+            totalSpaces = spaceCountResultSet.getInt("spaceCount");
+        }
+
+        // Close the ResultSet, statement, and connection
+        spaceCountResultSet.close();
+        statement.close();
+        connection.close();
+
+        return totalSpaces;
+    }
+
+    private int getTotalMembers() throws SQLException {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        Connection connection = databaseConnection.getConnection();
+        Statement statement = connection.createStatement();
+
+        // Query to get the total number of members for the current user
+        String memberCountQuery = "SELECT COUNT(DISTINCT userName) AS memberCount FROM assignedspace WHERE spaceOwnerName = '" + userNameToMatch + "'";
+
+        ResultSet memberCountResultSet = statement.executeQuery(memberCountQuery);
+
+        int totalMembers = 0;
+        if (memberCountResultSet.next()) {
+            totalMembers = memberCountResultSet.getInt("memberCount");
+        }
+
+        // Close the ResultSet, statement, and connection
+        memberCountResultSet.close();
+        statement.close();
+        connection.close();
+
+        return totalMembers;
+    }
+
 
 }

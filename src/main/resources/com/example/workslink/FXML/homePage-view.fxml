@@ -137,7 +137,7 @@
                   <TableView fx:id="assignedTable" layoutX="34.0" layoutY="344.0" prefHeight="200.0" prefWidth="513.0">
                     <columns>
                       <TableColumn fx:id="AssignedSpaceName" prefWidth="232.0" text="Space Name" />
-                      <TableColumn fx:id="spaceOwnerTableCol" prefWidth="282.0" text="Task Assigned" />
+                      <TableColumn fx:id="spaceOwnerTableCol" prefWidth="282.0" text="Owner" />
                     </columns>
                      <styleClass>
                         <String fx:value="table-cell" />
@@ -173,19 +173,19 @@
                      </styleClass>
                   </Label>
                   <Label fx:id="nameLabel" layoutX="93.0" layoutY="14.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Welcome" wrapText="true" />
-                  <Pane layoutX="583.0" layoutY="319.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css">
+                  <Pane layoutX="571.0" layoutY="390.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css">
                      <children>
-                        <Label layoutX="36.0" layoutY="14.0" prefHeight="17.0" prefWidth="110.0" text="Total Created Space" />
+                        <Label layoutX="14.0" prefHeight="38.0" prefWidth="173.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Total Created Space" />
+                        <Label fx:id="totalSpace" layoutX="75.0" layoutY="50.0" prefHeight="22.0" prefWidth="47.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="fgfg" />
                      </children>
                   </Pane>
-                  <Pane layoutX="583.0" layoutY="451.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css" />
                </children>
             </AnchorPane>
          </center>
          <right>
-            <AnchorPane prefHeight="597.0" prefWidth="129.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="578.0" prefWidth="138.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" layoutX="3.0" layoutY="14.0" onMouseClicked="#showProfile" prefHeight="31.0" prefWidth="97.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="profile" wrapText="true">
+                  <Label alignment="CENTER" layoutX="3.0" layoutY="75.0" onMouseClicked="#showProfile" prefHeight="31.0" prefWidth="97.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="profile" wrapText="true">
                      <graphic>
                         <ImageView fx:id="profileImg" fitHeight="31.0" fitWidth="40.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
@@ -200,7 +200,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Label alignment="CENTER" graphicTextGap="5.0" layoutX="3.0" layoutY="57.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#membersOnAction" prefHeight="34.0" prefWidth="121.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Members" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" graphicTextGap="5.0" layoutX="6.0" layoutY="106.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#membersOnAction" prefHeight="34.0" prefWidth="121.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Members" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fx:id="apps1" fitHeight="32.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
@@ -212,7 +212,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Label alignment="CENTER" graphicTextGap="5.0" layoutX="2.0" layoutY="500.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#calculator" prefHeight="32.0" prefWidth="129.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Calculator" textAlignment="JUSTIFY" wrapText="true">
+                  <Label alignment="CENTER" graphicTextGap="5.0" layoutX="3.0" layoutY="500.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#calculator" prefHeight="32.0" prefWidth="129.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Calculator" textAlignment="JUSTIFY" wrapText="true">
                      <graphic>
                         <ImageView fx:id="apps" fitHeight="32.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
                            <image>
@@ -236,7 +236,8 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
-                  <Label layoutX="3.0" layoutY="414.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Resource" />
+                  <Label layoutX="30.0" layoutY="399.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Resource" underline="true" />
+                  <Label layoutX="37.0" layoutY="27.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="General" underline="true" />
                </children></AnchorPane>
          </right>
       </BorderPane>
