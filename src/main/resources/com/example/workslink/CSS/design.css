@@ -118,5 +118,12 @@
 .image{
     -fx-opacity: 0.5;
 }
+  .pane-with-border {
+    -fx-border-color: #a0a0a0; /* Set the border color to a light grey */
+    -fx-border-width: 2; /* Set the border width as needed */
+    -fx-border-radius: 3em; /* Set the border radius as needed */
+    -fx-padding: 10; /* Set padding as needed */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2); /* Apply a slight shadow effect */
+}
 
 
