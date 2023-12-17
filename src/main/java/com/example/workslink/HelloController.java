@@ -287,6 +287,7 @@ public class HelloController {
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception cE) {
+                cE.printStackTrace();
                 System.out.println("Class Not bbbbbFound Exception: " + cE);
 
             }

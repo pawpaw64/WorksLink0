@@ -2,12 +2,11 @@ package com.example.workslink;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class AssignedSpaceTable extends SpaceInfo {
-    private String assignedSpace;
-    private String spaceOwnerName;
+public class AssignedSpaceTable  {
+    private String  assignedSpace;
+    private String  spaceOwnerName;
 
     public AssignedSpaceTable(String assignedSpace, String spaceOwnerName) {
-        super();
         this.assignedSpace = assignedSpace;
         this.spaceOwnerName = spaceOwnerName;
     }
