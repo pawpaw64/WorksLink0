@@ -405,7 +405,6 @@ public class HomePageController extends HelloController implements Initializable
         getSpaceTableData();
         getSpaceVbox();
         getAssignedVbox();
-        //assignedSpaceinfo();
         getAssignedSpaceTable();
     }
 
@@ -489,7 +488,6 @@ public class HomePageController extends HelloController implements Initializable
                 String assignedSpace = rs.getString("assignedSpace");
                 String spaceOwnerName = rs.getString("spaceOwnerName");
                 AssignedSpaceTable assignedSpaceTable = new AssignedSpaceTable(assignedSpace,spaceOwnerName);
-                System.out.println(assignedSpaceTable);
                 assignedTable.getItems().add(assignedSpaceTable);
             }
             statement.close();

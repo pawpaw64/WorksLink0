@@ -40,7 +40,6 @@ public class SpaceCreateController implements Initializable {
     private User currentUser;
     public void setUser(User currentUser){
         this.currentUser = currentUser;
-        System.out.println(currentUser.getUserName());
     }
 
     public TextField getSpaceDescription() {
@@ -180,7 +179,6 @@ public class SpaceCreateController implements Initializable {
                     preparedStatement.setString(7, membersString);
 
 
-                    System.out.println(currentUser.getUserName());
                     insertDataIntoAssignedSpace(getSpaceName().getText(),selectedMembers,currentUser.getUserName());
 
                     int rowsInserted = preparedStatement.executeUpdate();

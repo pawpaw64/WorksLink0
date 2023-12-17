@@ -32,8 +32,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SpaceDetailsController implements Initializable {
@@ -237,6 +236,10 @@ public class SpaceDetailsController implements Initializable {
     String  nameOfTask,statusOfTask,assignedOfTask;
     private void getSpaceTableData() {
         spaceTableView.getItems().clear();
+
+        List<Label> todoLabels = new ArrayList<>();
+        List<Label> doingLabels = new ArrayList<>();
+        List<Label> completeLabels = new ArrayList<>();
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
@@ -264,29 +267,28 @@ public class SpaceDetailsController implements Initializable {
                     spaceTableView.getItems().add(taskHistoryData);
                     OverViewDispaly();
 
-                    if(status.equals("To Do")){
-                        Label label = new Label("Task Name: "+task_name
-                        +"\nPriority: "+priority+"\nAssigned: "+assignedto+"\n");
-                        todoVbox.getChildren().add(label);
-                    }
-                    else if(status.equals("In Progress")){
-                        Label label = new Label("Task Name: "+task_name
-                                +"\nPriority: "+priority+"\nAssigned: "+assignedto+"\n");
-                        doingVbox.getChildren().add(label);
-                    }
-                    else if(status.equals("Done")){
-                        Label label = new Label("\nTask Name: "+task_name
-                                +"\nPriority: "+priority+"\nAssigned: "+assignedto+"\n");
-                        CompleteVbox.getChildren().add(label);
+                    if (status.equals("To Do")) {
+                        todoLabels.add(createLabel(task_name, priority, assignedto));
+                    } else if (status.equals("In Progress")) {
+                        doingLabels.add(createLabel(task_name, priority, assignedto));
+                    } else if (status.equals("Done")) {
+                        completeLabels.add(createLabel(task_name, priority, assignedto));
                     }
                 }
             }
+            todoVbox.getChildren().addAll(todoLabels);
+            doingVbox.getChildren().addAll(doingLabels);
+            CompleteVbox.getChildren().addAll(completeLabels);
 
             statement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private Label createLabel(String task_name, String priority, String assignedto) {
+        return new Label("\nTask Name: " + task_name
+                + "\nPriority: " + priority + "\nAssigned: " + assignedto + "\n");
     }
 
     @FXML
