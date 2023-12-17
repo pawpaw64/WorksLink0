@@ -68,7 +68,7 @@ public class HomePageController extends HelloController implements Initializable
     private TableView<SpaceInfo> assignedTable;
 
     @FXML
-    private TableColumn<SpaceInfo,String> assignedTaskOngoing;
+    private TableColumn<SpaceInfo,String> spaceOwnerTableCol;
     @FXML
     private ListView<String> assignedListView;
 
@@ -159,6 +159,7 @@ public class HomePageController extends HelloController implements Initializable
             newStage.setScene(new Scene(root));
             SpaceCreateController spaceCreateController = loader.getController();
             spaceCreateController.setUserID(id);
+            spaceCreateController.setUser(currentUser);
             newStage.initStyle(StageStyle.UNDECORATED);
             newStage.show();
 
@@ -379,6 +380,7 @@ public class HomePageController extends HelloController implements Initializable
         getSpaceTableData();
         getSpaceVbox();
         getAssignedVbox();
+        assignedTable();
     }
 
     private void getSpaceTableData() {
@@ -510,6 +512,11 @@ public class HomePageController extends HelloController implements Initializable
         stage.close();
     }
 
+    public void assignedTable(){
+        assignedListView.getItems().clear();
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SpaceName.setCellValueFactory(new PropertyValueFactory<>("SpaceName"));
@@ -519,7 +526,7 @@ public class HomePageController extends HelloController implements Initializable
         time.setCellValueFactory(new PropertyValueFactory<>("time"));
         spaceTableView.setEditable(false);
 
-        assignedTaskOngoing.setCellValueFactory(new PropertyValueFactory<>("assignedTaskOngoing"));
+        spaceOwnerTableCol.setCellValueFactory(new PropertyValueFactory<>("spaceOwnerTableCol"));
         AssignedSpaceName.setCellValueFactory(new PropertyValueFactory<>("AssignedSpaceName"));
        assignedTable.setEditable(false);
 

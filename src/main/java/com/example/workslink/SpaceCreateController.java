@@ -1,20 +1,14 @@
 package com.example.workslink;
 
-import com.example.workslink.DatabaseConnection;
-import com.jfoenix.controls.JFXDatePicker;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
 
@@ -32,19 +26,22 @@ public class SpaceCreateController implements Initializable {
     public Button createSpaceBtn;
     @FXML
     private TextField spaceDescription;
-
     @FXML
     private DatePicker spaceEndDate;
-
     @FXML
     private TextField spaceName;
-
     @FXML
     private DatePicker spaceStartDate;
     @FXML
     private Label invalid_date_label;
     @FXML
     private CheckComboBox<String> membersCheckComboBox;
+    @FXML
+    private User currentUser;
+    public void setUser(User currentUser){
+        this.currentUser = currentUser;
+        System.out.println(currentUser.getUserName());
+    }
 
     public TextField getSpaceDescription() {
         return spaceDescription;
@@ -98,7 +95,6 @@ public class SpaceCreateController implements Initializable {
     private List<String> getMemberNames() {
 
         try {
-            System.out.println(userId);
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName FROM members WHERE userID = ?");
@@ -183,7 +179,7 @@ public class SpaceCreateController implements Initializable {
                     String membersString = String.join(",", selectedMembers);
                     preparedStatement.setString(7, membersString);
 
-                    insertDataIntoAssignedSpace(getSpaceName().getText(),selectedMembers);
+                    insertDataIntoAssignedSpace(getSpaceName().getText(),selectedMembers,currentUser.getUserName());
 
                     int rowsInserted = preparedStatement.executeUpdate();
 
@@ -223,16 +219,16 @@ public class SpaceCreateController implements Initializable {
     }
 
     // Method to insert data into assignedspace table
-    private void insertDataIntoAssignedSpace(String spaceName, List<String> stringList) throws SQLException {
+    private void insertDataIntoAssignedSpace(String spaceName, List<String> stringList,String userName) throws SQLException {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         Connection connection = databaseConnection.getConnection();
-        String insertSql = "INSERT INTO assignedspace (userName, assignedSpace) VALUES (?, ?)";
-
+        String insertSql = "INSERT INTO assignedspace (userName, assignedSpace,spaceOwnerName) VALUES (?, ?, ?)";
         try{
             for (String str : stringList) {
                 try (PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
                     preparedStatement.setString(1, str);
                     preparedStatement.setString(2, spaceName);
+                    preparedStatement.setString(3, userName);
                     preparedStatement.executeUpdate();
                 }
             }
