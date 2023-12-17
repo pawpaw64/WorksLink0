@@ -29,10 +29,9 @@
         <columns>
             <TableColumn fx:id="membersID" prefWidth="45.0" text="ID" />
           <TableColumn fx:id="memberUserName" prefWidth="125.0" text="Name" />
-          <TableColumn fx:id="memberEmail" prefWidth="121.0" text="Email" />
-            <TableColumn fx:id="memberDOB" prefWidth="117.0" text="Date of Birth" />
-            <TableColumn fx:id="membersSelected" minWidth="3.0" prefWidth="51.0" text="Select" />
-            <TableColumn fx:id="sendRqst" prefWidth="106.0" text="Send Request" />
+          <TableColumn fx:id="memberEmail" prefWidth="136.0" text="Email" />
+            <TableColumn fx:id="memberDOB" prefWidth="137.0" text="Date of Birth" />
+            <TableColumn fx:id="sendRqst" prefWidth="123.0" text="Send Request" />
         </columns>
       </TableView>
       <ImageView fitHeight="33.0" fitWidth="35.0" layoutX="14.0" layoutY="21.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true" styleClass="icon">

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="@../CSS/homePageDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AllMembers">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.AllMembers">
    <children>
       <Button fx:id="homeButton" layoutX="89.0" layoutY="41.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="31.0" prefWidth="84.0" text="Home">
          <stylesheets>

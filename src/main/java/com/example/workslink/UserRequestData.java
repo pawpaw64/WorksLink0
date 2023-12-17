@@ -1,31 +1,28 @@
 package com.example.workslink;
 
-public class UserRequestData {   private int requestId;
+import javafx.beans.property.SimpleStringProperty;
+
+public class UserRequestData {
+    private int requestId;
     private int senderUserId;
     private int receiverUserId;
     private String status;
-    private String name;
+    private SimpleStringProperty name;
 
-    public UserRequestData(String senderUsername,int senderUserId ,String status) {
-        this.name=senderUsername;
-        this.status=status;
-        this.senderUserId=senderUserId;
-    }
-
-    public String getName() {
+    public SimpleStringProperty nameProperty() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    // Constructor for creating UserRequestData with senderUsername, senderUserId, and status
+    public UserRequestData(String senderUsername, int senderUserId, String status, int requestID, int receieverID) {
+        this.name=new SimpleStringProperty(senderUsername);
+        this.status = status;
+        this.senderUserId = senderUserId;
+        this.requestId=requestID;
+        this.receiverUserId=receieverID;
     }
 
-    public UserRequestData(int requestId, int senderUserId, int receiverUserId, String status) {
-        this.requestId = requestId;
-        this.senderUserId = senderUserId;//sender
-        this.receiverUserId = receiverUserId;
-        this.status = status;
-    }
+    // Constructor for creating UserRequestData with requestId, senderUserId, receiverUserId, and status
 
     public int getRequestId() {
         return requestId;
@@ -42,7 +39,4 @@ public class UserRequestData {   private int requestId;
     public String getStatus() {
         return status;
     }
-
-
-
 }
