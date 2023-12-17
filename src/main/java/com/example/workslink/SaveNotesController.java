@@ -1,14 +1,18 @@
 package com.example.workslink;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-public class SaveNotesController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SaveNotesController implements Initializable {
     @FXML
-    private Label noteName;
+    private Label noteName = new Label();
 
     @FXML
-    private Label noteitem;
+    private Label noteitem = new Label();
     public Label getNoteName() {
         return noteName;
     }
@@ -25,4 +29,8 @@ public class SaveNotesController {
         this.noteitem = noteitem;
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

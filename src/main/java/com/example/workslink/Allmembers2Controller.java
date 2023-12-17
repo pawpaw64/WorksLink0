@@ -214,6 +214,9 @@ public class Allmembers2Controller implements Initializable {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("alertPrompt.css").toExternalForm());
+        dialogPane.getStyleClass().add("styled-alert");
 
         alert.showAndWait();
     }

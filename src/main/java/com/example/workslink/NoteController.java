@@ -21,10 +21,10 @@ public class NoteController implements Initializable {
 
 
     @FXML
-    private TextField noteNameTextField;
+    private TextField noteNameTextField = new TextField();
 
     @FXML
-    private TextField yourNoteTextField;
+    private TextField yourNoteTextField = new TextField();
 
     @FXML
     private VBox notesVBox = new VBox();
@@ -38,6 +38,7 @@ public class NoteController implements Initializable {
 
         Stage secondStage = new Stage();
         secondStage.setScene(new Scene(root));
+
 
         // Set this controller as the controller for the Scene 2
         NoteController noteController = loader.getController();
@@ -71,24 +72,27 @@ public class NoteController implements Initializable {
         notesVBox.getChildren().clear();
         //doingVbox.getChildren().clear();
         //completeVbox.getChildren().clear();
-
+    for(int i = 0; i<1000; i++) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("FXML/note.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/note.fxml"));
 
-            // Load separate instances of AnchorPane for each VBox
-            AnchorPane NotePane = loader.load();
-//            AnchorPane doingPane = loader.load();
-//            AnchorPane completePane = loader.load();
+            // Load the content of note.fxml
+            AnchorPane notePane = loader.load();
 
-            // Add each AnchorPane to its respective VBox
-            notesVBox.getChildren().add(NotePane);
-            //doingVbox.getChildren().add(doingPane);
-            //  completeVbox.getChildren().add(completePane);
+            // Access the controller of note.fxml
+            SaveNotesController saveNotesController = loader.getController();
 
-        } catch (Exception e) {
+            // Set data to the labels in the loaded note.fxml (adjust as needed)
+            saveNotesController.getNoteName().setText(noteNameTextField.getText());
+            saveNotesController.getNoteitem().setText(yourNoteTextField.getText());
+
+            // Add the content to the notesVBox
+            notesVBox.getChildren().add(notePane);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
     }
 
 

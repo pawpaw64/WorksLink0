@@ -20,11 +20,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ResourceBundle;
 import java.sql.*;
 import java.util.*;
 
@@ -137,21 +132,6 @@ public class HomePageController extends HelloController implements Initializable
         stage.showAndWait();
         removeBlurEffect();
 
-    }
-    @FXML
-    void notepad() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/notepad.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root);
-
-
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
-
-        applyBlurEffect();
-        stage.showAndWait();
-        removeBlurEffect();
     }
 
     @FXML
@@ -316,7 +296,7 @@ public class HomePageController extends HelloController implements Initializable
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
                 String calcDays = rs.getString("calcDays");
-                System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
+
                 SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
                 spaceTableView.getItems().add(singleSpace);
             }
@@ -327,7 +307,7 @@ public class HomePageController extends HelloController implements Initializable
         } catch (Exception e) {
             e.printStackTrace();
         }
-       // getVbox();
+
         try {
 
             DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -372,17 +352,15 @@ public class HomePageController extends HelloController implements Initializable
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name,start_date,end_date,calcDays FROM space_info WHERE user_id = " + id;
+            String sql = "SELECT space_Id ,space_name,start_date,end_date,calcDays FROM space_info WHERE user_id = " + id;
 
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
+                String spaceId = rs.getString("space_Id");
                 String spaceName = rs.getString("space_name");
                 String startDate = rs.getString("start_date");
                 String endDate = rs.getString("end_date");
                 String calcDays = rs.getString("calcDays");
-                System.out.println(startDate + "  " + spaceName + "  " + endDate + "  " + calcDays);
-                SpaceInfo singleSpace = new SpaceInfo(spaceName, startDate, endDate, calcDays);
-                spaceTableView.getItems().add(singleSpace);
                 String taskCount = String.valueOf(getTaskCount(spaceId));
                 System.out.println(taskCount);
                 if (taskCount != null) {
@@ -426,13 +404,65 @@ public class HomePageController extends HelloController implements Initializable
                 System.out.println("Space ID: " + spaceId + ", Task Name: " + taskName);
             }
 
+            // Now, spaceIdTaskNameMap contains spaceId as keys and taskName as values
+
             statement.close();
             connection.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void getAssignedSpaceTable() {
+        assignedTable.getItems().clear();
+        getSpaceId();
+
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT task_name FROM task_info WHERE assigneeID = " + id;
+
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+
+                String taskName = rs.getString("task_name");
+
+
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getTaskCount(String spaceId) {
+        int taskCount = 0;
+
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+
+            String sql = "SELECT COUNT(*) AS taskCount FROM task_info WHERE space_Id= " + spaceId;
+            ResultSet rs = statement.executeQuery(sql);
+
+            // Check if there is no data
+            if (rs.next()) {
+                taskCount = rs.getInt("taskCount");
+
+            }
+
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return taskCount;
+    }
+
 
     private void applyBlurEffect() {
         BoxBlur blur = new BoxBlur(5, 5, 3); // You can adjust the blur parameters
