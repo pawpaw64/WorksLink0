@@ -14,10 +14,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.AnchorPane;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -81,6 +83,18 @@ public class HomePageController extends HelloController implements Initializable
         this.currentUser = loggedInUser;
         id = currentUser.getUser_id();
         userNameToMatch = currentUser.getUserName();
+        byte[] userImgData = currentUser.getUserImg();
+        if (userImgData != null && userImgData.length > 0) {
+            Image profileImage = new Image(new ByteArrayInputStream(userImgData));
+            profileImg.setImage(profileImage);
+            //profileImg.setImage(new Image("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\profile.png"));
+            System.out.println("yes");
+        } else {
+            // Set a default image or handle the absence of an image
+            System.out.println("no");
+            profileImg.setImage(new Image("F:\\AOOP Project\\AOOP_Project\\WorksLink0\\src\\main\\resources\\com\\example\\workslink\\Icon\\profile.png"));
+        }
+
 
         nameLabel.setText("Welcome " + currentUser.getUserName());
         getSpaceData();
@@ -104,8 +118,7 @@ public class HomePageController extends HelloController implements Initializable
         Scene scene = new Scene(root);
         if (profileController == null) {
             profileController = fxmlLoader.getController();
-            profileController.setProfileImg(profileImg);
-            profileController.setUserProfile(currentUser);
+            profileController.setUserProfile(currentUser,profileImg);
 
             profileStage = new Stage();
             profileStage.setScene(scene);
@@ -175,7 +188,8 @@ public class HomePageController extends HelloController implements Initializable
             Parent root = loader.load();
             // Create a new stage for the new scene
             Stage newStage = new Stage();
-            newStage.initModality(Modality.APPLICATION_MODAL);
+            //newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.initStyle(StageStyle.UNDECORATED);
             newStage.setScene(new Scene(root));
             AllMembers allMembers = loader.getController();
             allMembers.setUser(id, currentUser.getUserName());
@@ -219,7 +233,7 @@ public class HomePageController extends HelloController implements Initializable
                 try {
                     if (newValue != null) {
                         getSpaceInfo(newValue);
-                        handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid);
+                        handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid,false);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -261,7 +275,7 @@ public class HomePageController extends HelloController implements Initializable
                 try {
                     if (newValue != null) {
                         getSpaceInfo(newValue);
-                        handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid);
+                        handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid,true);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -294,16 +308,23 @@ public class HomePageController extends HelloController implements Initializable
 
 
     }
-    private void handleSpaceItemClick(String newValue, int userId, String spaceid) {
+    private void handleSpaceItemClick(String newValue, int userId, String spaceid,boolean isAssigned) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
             Parent root = loader.load();
 
-            // Pass the selected space name to the controller if needed
-            SpaceDetailsController SpaceDetailsController = loader.getController();
-            SpaceDetailsController.setAreaSpaceName(newValue);
-            SpaceDetailsController.setUserId(userId);
-            SpaceDetailsController.setSpaceID(spaceid);
+            // Pass the selected space name and assignment status to the controller
+            SpaceDetailsController spaceDetailsController = loader.getController();
+            spaceDetailsController.setAreaSpaceName(newValue);
+            spaceDetailsController.setUserId(userId);
+            spaceDetailsController.setSpaceID(spaceid);
+
+            // Determine whether the space is assigned or not
+
+            if(isAssigned){
+                spaceDetailsController.fromAssignee(true);
+
+            }
 
             // Create a new stage for the new scene
             Stage newStage = new Stage();
@@ -316,6 +337,7 @@ public class HomePageController extends HelloController implements Initializable
             e.printStackTrace();
         }
     }
+
     public void refresh() {
         spaceTableView.getItems().clear();
 

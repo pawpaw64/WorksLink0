@@ -126,14 +126,20 @@ public class Allmembers2Controller implements Initializable {
     }
 
     private void rejectRequest(UserRequestData request) {
-        // Implement the logic for rejecting the request
-        // ...
-
-        // Optionally, you can provide a notification or update the UI
-
-        // Example: Print a message to the console
-        System.out.println("Request rejected successfully!");
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            PreparedStatement deleteStatement = connection.prepareStatement(
+                    "DELETE FROM user_requests WHERE request_id = ?");
+            deleteStatement.setInt(1, request.getRequestId());
+            deleteStatement.executeUpdate();
+            deleteStatement.close();
+            getAccRejTableData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     private void sendRequestToUser(MembersData selectedUser) {
         try {
@@ -142,8 +148,8 @@ public class Allmembers2Controller implements Initializable {
 
             // Insert into user_requests table
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO user_requests (sender_user_id, receiver_user_id, status,sender_username) VALUES (?, ?,?, ?)");
-
+                    "INSERT INTO user_requests (sender_user_id, receiver_user_id," +
+                            " status,sender_username) VALUES (?, ?,?, ?)");
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, Integer.parseInt(selectedUser.getMemberId()));
             preparedStatement.setString(3, "PENDING");
@@ -151,22 +157,6 @@ public class Allmembers2Controller implements Initializable {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
-
-            // Insert into user_notification table with sender's username
-//            preparedStatement = connection.prepareStatement(
-//                    "INSERT INTO user_requests (receiver_user_id, sender_username, status) VALUES (?, ?, ?)");
-//
-//            preparedStatement.setInt(1, Integer.parseInt(selectedUser.getMemberId()));
-//            preparedStatement.setString(2, excludname); // Assuming excludname is the sender's username
-//            preparedStatement.setString(3, "PENDING");
-//
-//            preparedStatement.executeUpdate();
-//            preparedStatement.close();
-//
-//            connection.close();
-
-            // Optionally, you can update the status in the UI or provide a notification
-            System.out.println("Request sent successfully!");
             showAlert(Alert.AlertType.INFORMATION, "Request Sent", "Request sent successfully!");
 
         } catch (Exception e) {
@@ -182,7 +172,6 @@ public class Allmembers2Controller implements Initializable {
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("CSS/alertPrompt.css")).toExternalForm());
         dialogPane.getStyleClass().add("styled-alert");
-// Get the button and apply a custom style
         alert.showAndWait();
     }
 
@@ -220,13 +209,15 @@ public class Allmembers2Controller implements Initializable {
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
+            System.out.println("Sender id is "+senderId);
+            System.out.println("reciever id is "+receiverId);
 
             // Insert data for the sender
             PreparedStatement insertStatementSender = connection.prepareStatement(
                     "INSERT INTO members (userID, id, userName, email, dob) " +
                             "SELECT ?, id, userName, email, dob FROM user WHERE id = ?");
             insertStatementSender.setInt(1, senderId);
-            insertStatementSender.setInt(2, senderId);
+            insertStatementSender.setInt(2, receiverId);
             insertStatementSender.executeUpdate();
             insertStatementSender.close();
 
@@ -235,7 +226,7 @@ public class Allmembers2Controller implements Initializable {
                     "INSERT INTO members (userID, id, userName, email, dob) " +
                             "SELECT ?, id, userName, email, dob FROM user WHERE id = ?");
             insertStatementReceiver.setInt(1, receiverId);
-            insertStatementReceiver.setInt(2, receiverId);
+            insertStatementReceiver.setInt(2, senderId);
             insertStatementReceiver.executeUpdate();
             insertStatementReceiver.close();
 
@@ -261,7 +252,7 @@ public class Allmembers2Controller implements Initializable {
 
             if (resultSet.next()) {
                 // Display a notification about pending requests
-                showNotification("You have pending requests", "Check your notifications for details.");
+                showAlert(Alert.AlertType.INFORMATION,"You have pending requests", "Check your notifications for details.");
 
                 // You may want to update the status of the requests in the database
                 updateRequestStatus();
@@ -309,7 +300,7 @@ public class Allmembers2Controller implements Initializable {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT sender_username, status, sender_user_id,request_id, receiver_user_id FROM " +
+                    "SELECT sender_username, status, sender_user_id, request_id, receiver_user_id FROM " +
                             "user_requests WHERE (receiver_user_id = ?) " +
                             "AND (status = 'PENDING' OR status = 'SEEN')");
             preparedStatement.setInt(1, userId);
@@ -319,25 +310,38 @@ public class Allmembers2Controller implements Initializable {
             // Clear previous items
             AccReTable.getItems().clear();
 
+            boolean hasRequests = false;
+
             while (resultSet.next()) {
                 // Create UserRequestData objects and add them to the list
                 // You need to replace this with your actual column names
                 String senderUsername = resultSet.getString("sender_username");
                 String status = resultSet.getString("status");
                 int senderUserId = resultSet.getInt("sender_user_id");
-                int requestID=resultSet.getInt("request_id");
-                int  receieverID=resultSet.getInt("receiver_user_id");
+                int requestID = resultSet.getInt("request_id");
+                int receiverID = resultSet.getInt("receiver_user_id");
 
-                UserRequestData userRequestData=new UserRequestData(senderUsername,senderUserId,status,requestID,receieverID);
+                UserRequestData userRequestData = new UserRequestData(senderUsername, senderUserId, status, requestID, receiverID);
                 AccReTable.getItems().add(userRequestData);
+
+                hasRequests = true;
             }
 
             preparedStatement.close();
             connection.close();
+
+            // If no requests, display a message in the table
+            if (!hasRequests) {
+                Label noRequestsLabel = new Label("Currently No Request");
+                noRequestsLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
+                AccReTable.setPlaceholder(noRequestsLabel);
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
 
 
@@ -368,6 +372,7 @@ public class Allmembers2Controller implements Initializable {
                     membersTableView.getItems().add(members);
                 }
             }
+            membersTableView.setPlaceholder(new Label("No User to Add"));
 
             preparedStatement.close();
             connection.close();
@@ -405,39 +410,7 @@ public class Allmembers2Controller implements Initializable {
 
     String excludname;
 
-    @FXML
-    public void saveMembers() throws IOException {
-////        try {
-////            DatabaseConnection databaseConnection = new DatabaseConnection();
-////            Connection connection = databaseConnection.getConnection();
-////            PreparedStatement preparedStatement = connection.prepareStatement(
-////                    "INSERT INTO members (userID, id ,userName, email, dob) VALUES (?,?,?, ?, ?)");
-////
-////            // Iterate over the rows and insert only the selected ones
-////            ObservableList<MembersData> allMembers = membersTableView.getItems();
-////            for (MembersData member : allMembers) {
-////                if (member.getSelect().isSelected()) {
-////                    preparedStatement.setInt(1, userId);
-////                    preparedStatement.setString(2, member.getMemberId());
-////                    preparedStatement.setString(3, member.getMemberUserName());
-////                    preparedStatement.setString(4, member.getMemberEmail());
-////                    preparedStatement.setString(5, member.getMemberDOB());
-////
-////                    preparedStatement.executeUpdate();
-////                }
-////            }
-////
-////            preparedStatement.close();
-////            connection.close();
-//
-//            // Refresh the table data after insertion
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/allMembers.fxml"));
-//            Parent root = loader.load();
-//            AllMembers allMembersController = loader.getController();
-//            allMembersController.refreshData();
-//            allMembersController.setUser(userId,excludname);
 
-    }
 
     @FXML
     void goBack(MouseEvent event) {

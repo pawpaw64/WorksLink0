@@ -47,6 +47,14 @@
     -fx-font-size: 14px;
     -fx-cursor: hand;
 } /* Colorful button */
+.fill-btn:disabled {
+    -fx-background-color: #ccc;
+         -fx-background-radius: 5px;/* Change the background color for the disabled state */
+            -fx-font-weight: bold;
+             -fx-font-size: 14px;
+    -fx-text-fill: #666; /* Change the text color for the disabled state */
+    -fx-cursor: default; /* Change the cursor to default for the disabled state */
+}
 
 .fill-btn:hover {
     -fx-background-color: linear-gradient(to bottom right, #fff, #0dffea, #fff);
