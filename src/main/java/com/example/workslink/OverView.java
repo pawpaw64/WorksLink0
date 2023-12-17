@@ -5,37 +5,55 @@ import javafx.scene.control.Label;
 
 public class OverView {
 
-        @FXML
-        private Label AssignedTO;
+    @FXML
+    private Label taskNameLabel;
 
-        @FXML
-        private Label Status;
+    @FXML
+    private Label taskStatusLabel;
 
-        @FXML
-        private Label taskName;
+    @FXML
+    private Label taskAssignLabel;
 
-    public Label getAssignedTO() {
-        return AssignedTO;
+    public OverView(){
+
     }
 
-    public void setAssignedTO(Label assignedTO) {
-        AssignedTO = assignedTO;
+    public Label getTaskNameLabel() {
+        return taskNameLabel;
     }
 
-    public Label getStatus() {
-        return Status;
+    public void setTaskNameLabel(Label taskNameLabel) {
+        this.taskNameLabel = taskNameLabel;
     }
 
-    public void setStatus(Label status) {
-        Status = status;
+    public Label getTaskStatusLabel() {
+        return taskStatusLabel;
     }
 
-    public Label getTaskName() {
-        return taskName;
+    public void setTaskStatusLabel(Label taskStatusLabel) {
+        this.taskStatusLabel = taskStatusLabel;
     }
 
-    public void setTaskName(Label taskName) {
-        this.taskName = taskName;
+    public Label getTaskAssignLabel() {
+        return taskAssignLabel;
+    }
+
+    public void setTaskAssignLabel(Label taskAssignLabel) {
+        this.taskAssignLabel = taskAssignLabel;
+    }
+    public void setLabel(String name,String assign,String status){
+        taskNameLabel.setText(name);
+        taskStatusLabel.setText(status);
+        taskAssignLabel.setText(assign);
+    }
+
+    @Override
+    public String toString() {
+        return "OverView{" +
+                "taskNameLabel=" + taskNameLabel +
+                ", taskStatusLabel=" + taskStatusLabel +
+                ", taskAssignLabel=" + taskAssignLabel +
+                '}';
     }
 }
 

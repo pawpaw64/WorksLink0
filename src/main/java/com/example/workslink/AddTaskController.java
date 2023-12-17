@@ -78,7 +78,7 @@ public class AddTaskController implements Initializable {
         return taskStatus;
     }
     String name,description,statuss,priorityy,date,assigned;
-    String assigneeID;
+   // String assigneeID;
 
 
 
@@ -90,7 +90,7 @@ public class AddTaskController implements Initializable {
         priorityy = (String) getTaskPriority().getValue();
         statuss = (String) getTaskStatus().getValue();
         assigned=getAssignMember().getValue();
-        assigneeID=userIdSelected;
+        //assigneeID=userIdSelected;
 
 
 
@@ -102,7 +102,7 @@ public class AddTaskController implements Initializable {
             try{
                 DatabaseConnection databaseConnection = new DatabaseConnection();
                 Connection connection = databaseConnection.getConnection();
-                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status,assigned,assigneeID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO task_info(space_Id,task_name,task_description,task_start_date,priority,status,assigned) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -113,7 +113,7 @@ public class AddTaskController implements Initializable {
                     preparedStatement.setString(5,priorityy);
                     preparedStatement.setString(6,statuss);
                     preparedStatement.setString(7,assigned);
-                    preparedStatement.setString(8,assigneeID);
+                    //preparedStatement.setString(8,assigneeID);
 
                     preparedStatement.executeUpdate();
 

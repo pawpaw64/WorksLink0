@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
+<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -37,146 +37,24 @@
                         <Image url="@../Icon/search.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="969.0" layoutY="1.0" mnemonicParsing="false" onAction="#logout" prefHeight="11.0" prefWidth="91.0" text="LogOut">
-                     <stylesheets>
-                        <URL value="@../CSS/BasicDesign.css" />
-                        <URL value="@../CSS/design.css" />
-                     </stylesheets>
-                     <styleClass>
-                        <String fx:value="fill-btn" />
-                        <String fx:value="tx" />
-                     </styleClass></Button>
-                  <Button fx:id="closeButton" layoutX="1076.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="27.0" prefWidth="76.0" text="Close">
-                     <stylesheets>
-                        <URL value="@../CSS/BasicDesign.css" />
-                        <URL value="@../CSS/design.css" />
-                     </stylesheets>
-                     <styleClass>
-                        <String fx:value="fill-btn" />
-                        <String fx:value="tx" />
-                     </styleClass></Button>
-                  <ImageView fitHeight="40.0" fitWidth="63.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Icon/logo.png" />
-                     </image>
-                  </ImageView>
+                  <Button layoutX="1004.0" layoutY="11.0" mnemonicParsing="false" onAction="#logout" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="LogOut" />
+                  <Button fx:id="closeButton" layoutX="1083.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="27.0" prefWidth="68.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Close" />
                </children>
             </Pane>
          </top>
-         <right>
-            <VBox alignment="CENTER" prefHeight="597.0" prefWidth="150.0" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox layoutX="-2.0" layoutY="263.0" prefHeight="194.0" prefWidth="234.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
-                     <children>
-                        <Label prefHeight="12.0" prefWidth="230.0" text="Resources" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" graphicTextGap="5.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#calculator" prefHeight="34.0" prefWidth="188.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Calculator" textAlignment="JUSTIFY" wrapText="true">
-                  <Label prefHeight="25.0" prefWidth="83.0" text="Resources" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <VBox prefHeight="193.0" prefWidth="234.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
-                     <children>
-                        <Label alignment="CENTER" graphicTextGap="5.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#calculator" prefHeight="32.0" prefWidth="135.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Calculator" textAlignment="JUSTIFY" wrapText="true">
-                           <graphic>
-                              <ImageView fx:id="apps" fitHeight="32.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
-                                 <image>
-                                    <Image url="@../Icon/calculator.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                        <Label alignment="CENTER" onMouseClicked="#showChat" prefHeight="32.0" prefWidth="82.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Chat" textAlignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="129.0" onMouseClicked="#showChat" pickOnBounds="true" preserveRatio="true" styleClass="icon">
-                                 <image>
-                                    <Image url="@../Icon/meeting.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                        <Label alignment="CENTER" onMouseClicked="#notepad" prefHeight="52.0" prefWidth="132.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="NotePad" textAlignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="129.0" onMouseClicked="#showChat" pickOnBounds="true" preserveRatio="true" styleClass="icon">
-                                 <image>
-                                    <Image url="@../Icon/notes.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="130.0" prefWidth="150.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css">
-                     <children>
-                        <Label prefHeight="25.0" prefWidth="232.0" text="General" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" onMouseClicked="#showProfile" prefHeight="31.0" prefWidth="104.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="profile" wrapText="true" VBox.vgrow="ALWAYS">
-                           <graphic>
-                              <ImageView fx:id="profileImg" fitHeight="31.0" fitWidth="40.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true" styleClass="icon">
-                                 <image>
-                                    <Image url="@../Icon/circle-user.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                        <Label alignment="CENTER" graphicTextGap="5.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#membersOnAction" prefHeight="34.0" prefWidth="164.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Members" textAlignment="CENTER" wrapText="true">
-                           <graphic>
-                              <ImageView fx:id="apps1" fitHeight="32.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
-                                 <image>
-                                    <Image url="@../Icon/group%20(1).png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <Pane fx:id="sidePane" prefHeight="597.0" prefWidth="130.0" stylesheets="@../CSS/homePageDesign.css" visible="false">
-                     <styleClass>
-                        <String fx:value="gradiant" />
-                        <String fx:value="anchor-pane-with-border" />
-                     </styleClass>
-                  </Pane>
-               </children>
-            </VBox>
-         </right>
          <left>
             <AnchorPane prefHeight="597.0" prefWidth="230.0" BorderPane.alignment="TOP_LEFT">
                <children>
-                  <VBox fx:id="spaceBox" layoutY="9.0" prefHeight="253.0" prefWidth="231.0" styleClass="anchor-pane-with-border">
+                  <VBox fx:id="spaceBox" layoutY="9.0" prefHeight="293.0" prefWidth="231.0" styleClass="anchor-pane-with-border">
                      <children>
-                        <Label onMouseClicked="#createNewSpace" prefHeight="25.0" prefWidth="229.0" text="Add Spaces" textAlignment="RIGHT" wrapText="true">
+                        <Label onMouseClicked="#createNewSpace" prefHeight="25.0" prefWidth="229.0" text="Create Space" textAlignment="RIGHT" wrapText="true">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                            <graphic>
                               <ImageView fx:id="add_space" fitHeight="25.0" fitWidth="19.0" onMouseClicked="#createNewSpace" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/link.png" />
+                                    <Image url="@../Icon/add.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -184,7 +62,21 @@
                               </ImageView>
                            </graphic>
                         </Label>
-                        <ListView fx:id="spaceListView" prefHeight="200.0" prefWidth="200.0" styleClass="anchor-pane-with-border" />
+                        <ListView fx:id="spaceListView" prefHeight="244.0" prefWidth="207.0" styleClass="anchor-pane-with-border" />
+                     </children>
+                     <stylesheets>
+                        <URL value="@../CSS/homePageDesign.css" />
+                        <URL value="@../CSS/listView.css" />
+                     </stylesheets>
+                  </VBox>
+                  <VBox fx:id="spaceBox1" layoutY="313.0" prefHeight="284.0" prefWidth="231.0" styleClass="anchor-pane-with-border">
+                     <children>
+                        <Label onMouseClicked="#createNewSpace" prefHeight="25.0" prefWidth="229.0" text="Assigned Spaces" textAlignment="RIGHT" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="assignedListView" prefHeight="236.0" prefWidth="207.0" styleClass="anchor-pane-with-border" />
                      </children>
                      <stylesheets>
                         <URL value="@../CSS/homePageDesign.css" />
@@ -195,7 +87,7 @@
             </AnchorPane>
          </left>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="904.0" styleClass="text-field" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="totalTask" prefHeight="200.0" prefWidth="904.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
                <children>
                   <TableView fx:id="spaceTableView" layoutX="22.0" layoutY="101.0" prefHeight="207.0" prefWidth="769.0">
                     <columns>
@@ -210,6 +102,7 @@
                      </columnResizePolicy>
                      <styleClass>
                         <String fx:value="color-btn" />
+                        <String fx:value="table-row-cell" />
                         <String fx:value="column-header" />
                         <String fx:value="column-header-background" />
                         <String fx:value="corner" />
@@ -223,7 +116,6 @@
                         <String fx:value="small-label" />
                         <String fx:value="table-cell" />
                         <String fx:value="table-row-cell" />
-                        <String fx:value="table-view" />
                         <String fx:value="text-field" />
                         <String fx:value="thumb" />
                         <String fx:value="track" />
@@ -237,48 +129,97 @@
                      </stylesheets>
                   </TableView>
                   <Label layoutX="34.0" layoutY="75.0" prefHeight="31.0" prefWidth="140.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="MY SPACES" />
-                  <ImageView fitHeight="80.0" fitWidth="69.0" layoutX="23.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true" rotate="18.4">
+                  <ImageView fitHeight="80.0" fitWidth="69.0" layoutX="23.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icon/shooting-star.gif" />
                      </image>
                   </ImageView>
-                  <TableView layoutX="22.0" layoutY="345.0" prefHeight="200.0" prefWidth="769.0" styleClass="root1">
+                  <TableView fx:id="assignedTable" layoutX="34.0" layoutY="344.0" prefHeight="200.0" prefWidth="513.0" stylesheets="@../CSS/table-view.css">
                     <columns>
                       <TableColumn fx:id="AssignedSpaceName" prefWidth="232.0" text="Space Name" />
-                      <TableColumn fx:id="g" prefWidth="282.0" text="Task Ongoing" />
-                        <TableColumn prefWidth="247.0" text="Owner" />
+                      <TableColumn fx:id="assignedTaskOngoing" prefWidth="282.0" text="Task Assigned" />
                     </columns>
-                     <stylesheets>
-                        <URL value="@../CSS/table-view.css" />
-                        <URL value="@../CSS/background.css" />
-                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="table-cell" />
+                        <String fx:value="table-view" />
+                        <String fx:value="table-row-cell" />
+                     </styleClass>
                   </TableView>
                   <Label layoutX="34.0" layoutY="308.0" prefHeight="22.0" prefWidth="163.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="ASSIGNED SPACES" />
-                  <Label layoutX="698.0" layoutY="33.0" onMouseClicked="#refresh" prefHeight="36.0" prefWidth="103.0" text="Refresh">
+                  <Label layoutX="669.0" layoutY="32.0" onMouseClicked="#refresh" prefHeight="29.0" prefWidth="98.0" stylesheets="@../CSS/BasicDesign.css" text="Refresh">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icon/reload.png" />
                            </image>
-                           <styleClass>
-                              <String fx:value="fill-btn" />
-                              <String fx:value="text-field" />
-                           </styleClass>
                         </ImageView>
                      </graphic>
                      <styleClass>
                         <String fx:value="normal-label" />
                         <String fx:value="fill-btn" />
                      </styleClass>
-                     <stylesheets>
-                        <URL value="@../CSS/BasicDesign.css" />
-                        <URL value="@../CSS/design.css" />
-                     </stylesheets>
                   </Label>
                   <Label fx:id="nameLabel" layoutX="93.0" layoutY="14.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Welcome" wrapText="true" />
                </children>
             </AnchorPane>
          </center>
+         <right>
+            <AnchorPane prefHeight="597.0" prefWidth="129.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutX="3.0" layoutY="14.0" onMouseClicked="#showProfile" prefHeight="31.0" prefWidth="97.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="profile" wrapText="true">
+                     <graphic>
+                        <ImageView fx:id="profileImg" fitHeight="31.0" fitWidth="40.0" onMouseClicked="#showProfile" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                           <image>
+                              <Image url="@../Icon/circle-user.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label alignment="CENTER" graphicTextGap="5.0" layoutX="3.0" layoutY="57.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#membersOnAction" prefHeight="34.0" prefWidth="121.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Members" textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fx:id="apps1" fitHeight="32.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                           <image>
+                              <Image url="@../Icon/group%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label alignment="CENTER" graphicTextGap="5.0" layoutX="2.0" layoutY="500.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#calculator" prefHeight="32.0" prefWidth="129.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Calculator" textAlignment="JUSTIFY" wrapText="true">
+                     <graphic>
+                        <ImageView fx:id="apps" fitHeight="32.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                           <image>
+                              <Image url="@../Icon/calculator.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="3.0" layoutY="453.0" onMouseClicked="#showChat" prefHeight="32.0" prefWidth="84.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Chat" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="129.0" onMouseClicked="#showChat" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                           <image>
+                              <Image url="@../Icon/meeting.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label layoutX="3.0" layoutY="414.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Resource" />
+               </children></AnchorPane>
+         </right>
       </BorderPane>
    </children>
 </AnchorPane>

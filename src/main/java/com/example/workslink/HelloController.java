@@ -16,11 +16,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class HelloController {
@@ -243,12 +248,19 @@ public class HelloController {
                             int user_id=rs.getInt("id");
                             String bio=rs.getString("user_bio");
                             byte[] user_img=rs.getBytes("user_img");
+                            if (bio == null) {
+                                // Set a default value or handle the case when bio is null
+                                bio = "Default Bio";
+                            }
+
+                            if (user_img == null) {
+                                // Set a default image or handle the case when user_img is null
+                                user_img = getDefaultUserImage();
+                            }
                             login_username.clear();
                             login_password.clear();
                             // Create a User instance
                             User loggedInUser = new User(email, userName, dob,user_id,bio,user_img);
-
-                            System.out.println("home1");
                             // Jump to the homepage...v
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
                             Parent root = fxmlLoader.load();
@@ -280,6 +292,21 @@ public class HelloController {
             }
         }
     }
+
+    private byte[] getDefaultUserImage() {
+        Path imagePath = Paths.get("com/example/workslink/Icon/emoji.png");
+
+        try {
+            byte[] imageData = Files.readAllBytes(imagePath);
+            return Base64.getEncoder().encode(imageData);
+        } catch (Exception e) {
+            // Handle exceptions, e.g., file not found, IOException, etc.
+            e.printStackTrace();
+            return new byte[0]; // Return an empty byte array as a fallback
+        }// Replace this with the actual default image data
+        }
+
+
     public void delay(Label label) {
         Duration delay = Duration.seconds(3);
         KeyFrame keyFrame = new KeyFrame(delay, event -> label.setVisible(false));

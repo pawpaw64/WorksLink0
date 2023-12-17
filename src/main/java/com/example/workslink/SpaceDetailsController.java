@@ -31,6 +31,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class SpaceDetailsController implements Initializable {
@@ -55,13 +58,28 @@ public class SpaceDetailsController implements Initializable {
 
     @FXML
     private TableColumn<TaskHistoryData,String> taskStatus;
+    @FXML
+    private TableView<SpaceMembersList> membersTableView;
+    @FXML
+    private TableColumn<SpaceMembersList,String> membersTableColumn;
+
+    String members;
+    @FXML
+    Label startDateLabel;
+    @FXML
+    Label endDateLabel;
+    @FXML
+    Label remaindaysLabel;
     private TextArea textArea;
     @FXML
     private Pane spaceDettails;
+
     @FXML
-    private VBox completeVbox;
+    private VBox CompleteVbox;
     @FXML
     private VBox doingVbox;
+    @FXML
+     VBox memberVbox;
     private int userId;
     String spaceName;
     String  spaceDes;
@@ -73,6 +91,16 @@ public class SpaceDetailsController implements Initializable {
 
     @FXML
     private TableColumn<TaskHistoryData,String> taskID;
+    private String start_date;
+    private String end_date;
+    private String estimatedDays;
+
+    public VBox getMemberVbox() {
+        return memberVbox;
+    }
+    @FXML
+    private Button addTask;
+
     @FXML
     void add_task(ActionEvent event) {
         try {
@@ -119,7 +147,6 @@ public class SpaceDetailsController implements Initializable {
     private Label percentlebel;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        OverViewDispaly();
         ObservableList<PieChart.Data>pieChartData =
                 FXCollections.observableArrayList(
                   new PieChart.Data("Todo",50),
@@ -167,6 +194,9 @@ public class SpaceDetailsController implements Initializable {
         taskPriority.setCellValueFactory(new PropertyValueFactory<>("taskPriority"));
         taskAssigned.setCellValueFactory(new PropertyValueFactory<>("taskAssigned"));
         taskStatus.setCellValueFactory(new PropertyValueFactory<>("taskStatus"));
+
+        OverViewDispaly();
+
     }
 
 
@@ -175,12 +205,24 @@ public class SpaceDetailsController implements Initializable {
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT space_name, space_description FROM space_info WHERE space_Id = "+spaceId;
+            String sql = "SELECT space_name, space_description,members,start_date,end_date,calcDays FROM space_info WHERE space_Id = "+spaceId;
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 spaceName = rs.getString("space_name");
                 spaceDes  = rs.getString("space_description");
+                start_date  = rs.getString("start_date");
+                end_date  = rs.getString("end_date");
+                members = rs.getString("members");
+                estimatedDays = rs.getString("calcDays");
                 space_description.setText(spaceDes);
+                startDateLabel.setText(start_date);
+                endDateLabel.setText(end_date);
+                remaindaysLabel.setText(estimatedDays);
+
+                SpaceMembersList spaceMembersList = new SpaceMembersList(members);
+                for (String s: spaceMembersList.getMembersList()){
+                    memberVbox.getChildren().add(new Label(s));
+                }
             }
 
             statement.close();
@@ -192,7 +234,7 @@ public class SpaceDetailsController implements Initializable {
 
     }
     TaskHistoryData taskHistoryData;
-
+    String  nameOfTask,statusOfTask,assignedOfTask;
     private void getSpaceTableData() {
         spaceTableView.getItems().clear();
         try {
@@ -209,12 +251,34 @@ public class SpaceDetailsController implements Initializable {
                 while (rs.next()) {
                     String task_name = rs.getString("task_name");
                     String task_details = rs.getString("task_description");
-                    String status = rs.getString("status");
+                    String  status = rs.getString("status");
                     String priority = rs.getString("priority");
                     String assignedto = rs.getString("assigned");
 
+                    nameOfTask = task_name;
+                    statusOfTask = status;
+                    assignedOfTask = assignedto;
+
+
                     taskHistoryData = new TaskHistoryData(task_name, status, priority, task_details, assignedto);
                     spaceTableView.getItems().add(taskHistoryData);
+                    OverViewDispaly();
+
+                    if(status.equals("To Do")){
+                        Label label = new Label("Task Name: "+task_name
+                        +"\nPriority: "+priority+"\nAssigned: "+assignedto+"\n");
+                        todoVbox.getChildren().add(label);
+                    }
+                    else if(status.equals("In Progress")){
+                        Label label = new Label("Task Name: "+task_name
+                                +"\nPriority: "+priority+"\nAssigned: "+assignedto+"\n");
+                        doingVbox.getChildren().add(label);
+                    }
+                    else if(status.equals("Done")){
+                        Label label = new Label("\nTask Name: "+task_name
+                                +"\nPriority: "+priority+"\nAssigned: "+assignedto+"\n");
+                        CompleteVbox.getChildren().add(label);
+                    }
                 }
             }
 
@@ -282,6 +346,7 @@ public class SpaceDetailsController implements Initializable {
         taskAction.setCellFactory(cellFactory);
 
     }
+
     public  void openTaskAction(TaskHistoryData t){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/taskAction.fxml"));
@@ -305,30 +370,48 @@ public class SpaceDetailsController implements Initializable {
         }
 
     }
+
+
+
+
     public void OverViewDispaly() {
         // Clear all VBoxes
         todoVbox.getChildren().clear();
-        //doingVbox.getChildren().clear();
-        //completeVbox.getChildren().clear();
+        doingVbox.getChildren().clear();
 
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("FXML/overview.fxml"));
 
             // Load separate instances of AnchorPane for each VBox
-            AnchorPane todoPane = loader.load();
+            //AnchorPane todoPane = loader.load();
             AnchorPane doingPane = loader.load();
-            AnchorPane completePane = loader.load();
+
+            // Access the controller after loading
+            OverView o = loader.getController();
+
+            // Check if the controller is successfully obtained
+            if (o != null) {
+                // Set the label data using the obtained controller
+                o.setLabel(nameOfTask, assignedOfTask, statusOfTask);
+            } else {
+                System.err.println("Failed to obtain OverView controller.");
+            }
 
 
             // Add each AnchorPane to its respective VBox
-            todoVbox.getChildren().add(todoPane);
+           // todoVbox.getChildren().add(doingPane);
             //doingVbox.getChildren().add(doingPane);
-          //  completeVbox.getChildren().add(completePane);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void fromAssignee(boolean is) {
+        addTask.setDisable(true);
+        this.is=is;
+    }
+    boolean is;
 
 }
