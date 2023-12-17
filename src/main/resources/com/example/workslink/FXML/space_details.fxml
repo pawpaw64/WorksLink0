@@ -161,7 +161,11 @@
               <content>
                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <PieChart fx:id="statusPieChart" layoutX="227.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" />
+                        <PieChart fx:id="statusPieChart" layoutX="227.0" layoutY="80.0" prefHeight="233.0" prefWidth="277.0" />
+                        <HBox fx:id="legendContainer" layoutX="227.0" layoutY="337.0" prefHeight="100.0" prefWidth="588.0" />
+                        <Label fx:id="labelTodo" layoutX="642.0" layoutY="115.0" prefHeight="26.0" prefWidth="158.0" text="Label" />
+                        <Label fx:id="labelDoing" layoutX="642.0" layoutY="156.0" prefHeight="26.0" prefWidth="190.0" text="Label" />
+                        <Label fx:id="labelComplete" layoutX="642.0" layoutY="197.0" prefHeight="26.0" prefWidth="202.0" text="Label" />
                      </children></AnchorPane>
               </content>
             </Tab>

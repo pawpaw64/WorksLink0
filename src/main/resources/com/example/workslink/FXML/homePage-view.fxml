@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
+<AnchorPane fx:id="homePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.HomePageController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -175,10 +175,17 @@
                   <Label fx:id="nameLabel" layoutX="93.0" layoutY="14.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Welcome" wrapText="true" />
                   <Pane layoutX="583.0" layoutY="319.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css">
                      <children>
-                        <Label layoutX="36.0" layoutY="14.0" prefHeight="17.0" prefWidth="110.0" text="Total Created Space" />
+                        <Label layoutX="36.0" layoutY="14.0" prefHeight="20.0" prefWidth="151.0" text="Total Created Space">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="countLabel" layoutX="71.0" layoutY="51.0" prefHeight="17.0" prefWidth="67.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="583.0" layoutY="451.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css" />
                </children>
             </AnchorPane>
          </center>

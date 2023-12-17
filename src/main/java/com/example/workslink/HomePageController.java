@@ -226,6 +226,7 @@ public class HomePageController extends HelloController implements Initializable
                 try {
                     if (newValue != null) {
                         getSpaceInfo(newValue);
+                        System.out.println(spaceid+currentUser.getUser_id()+"------spaceListView");
                         handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid,false);
                     }
                 } catch (Exception e) {
@@ -268,6 +269,7 @@ public class HomePageController extends HelloController implements Initializable
                 try {
                     if (newValue != null) {
                         getSpaceInfo(newValue);
+                        System.out.println(spaceid+currentUser.getUser_id()+"------assignedListView");
                         handleSpaceItemClick(newValue, currentUser.getUser_id(), spaceid,true);
                     }
                 } catch (Exception e) {
@@ -306,7 +308,6 @@ public class HomePageController extends HelloController implements Initializable
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/space_details.fxml"));
             Parent root = loader.load();
 
-            // Pass the selected space name and assignment status to the controller
             SpaceDetailsController spaceDetailsController = loader.getController();
             spaceDetailsController.setAreaSpaceName(newValue);
             spaceDetailsController.setUserId(userId);
@@ -406,6 +407,7 @@ public class HomePageController extends HelloController implements Initializable
         getSpaceVbox();
         getAssignedVbox();
         getAssignedSpaceTable();
+        getSpaceCount();
     }
 
     private void getSpaceTableData() {
@@ -478,7 +480,6 @@ public class HomePageController extends HelloController implements Initializable
             DatabaseConnection databaseConnection = new DatabaseConnection();
             Connection connection = databaseConnection.getConnection();
             Statement statement = connection.createStatement();
-           // String sql = "SELECT assignedSpace,spaceOwnerName FROM assignedspace WHERE userName = " + userNameToMatch;
             String sql = "SELECT assignedSpace, spaceOwnerName FROM assignedspace WHERE userName = '" + userNameToMatch + "'";
 
             ResultSet rs = statement.executeQuery(sql);
@@ -533,6 +534,36 @@ public class HomePageController extends HelloController implements Initializable
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
+    @FXML
+    private Label countLabel;
+
+    public int getSpaceCount() {
+        int spaceCount = 0;
+
+        try {
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            Connection connection = databaseConnection.getConnection();
+            Statement statement = connection.createStatement();
+
+            String sql = "SELECT COUNT(*) AS spaceCount FROM space_info";
+            ResultSet rs = statement.executeQuery(sql);
+
+            // Check if there is a result
+            if (rs.next()) {
+                spaceCount = rs.getInt("spaceCount");
+                countLabel.setText(String.valueOf(spaceCount));
+                System.out.println(spaceCount+"-----gg");
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return spaceCount;
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

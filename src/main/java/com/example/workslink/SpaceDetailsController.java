@@ -1,12 +1,10 @@
 package com.example.workslink;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -16,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -84,12 +83,20 @@ public class SpaceDetailsController implements Initializable {
     private Label space_description;
     @FXML
     private Label areaSpaceName;
+    @FXML
+    private HBox legendContainer;
 
     @FXML
     private TableColumn<TaskHistoryData,String> taskID;
     private String start_date;
     private String end_date;
     private String estimatedDays;
+    @FXML
+    private Label labelTodo;
+    @FXML
+    private Label labelDoing;
+    @FXML
+    private Label labelComplete;
 
     public VBox getMemberVbox() {
         return memberVbox;
@@ -154,6 +161,7 @@ public class SpaceDetailsController implements Initializable {
 
         statusPieChart.setTitle("Task Status");
         updateStatusPieChart();
+        createStatusLegend();
     }
 
 
@@ -398,20 +406,69 @@ public class SpaceDetailsController implements Initializable {
             }
         }
 
-        // Create PieChart.Data objects
-        PieChart.Data todoData = new PieChart.Data("To Do", todoCount);
-        PieChart.Data doingData = new PieChart.Data("In Progress", doingCount);
-        PieChart.Data completeData = new PieChart.Data("Done", completeCount);
+        // Calculate total tasks
+        int totalCount = todoCount + doingCount + completeCount;
 
-        // Add labels to the PieChart.Data objects
-        todoData.nameProperty().set("To Do: " + todoCount);
-        doingData.nameProperty().set("In Progress: " + doingCount);
-        completeData.nameProperty().set("Done: " + completeCount);
+        // Check if totalCount is not zero to avoid division by zero
+        if (totalCount != 0) {
+            // Calculate percentages
+            double todoPercentage = ((double) todoCount / totalCount) * 100;
+            double doingPercentage = ((double) doingCount / totalCount) * 100;
+            double completePercentage = ((double) completeCount / totalCount) * 100;
 
-        statusPieChart.getData().clear();
-        statusPieChart.getData().addAll(todoData, doingData, completeData);
+            // Set labels with percentages
+            labelTodo.setText(String.format("To Do: %.1f%%", todoPercentage));
+            labelDoing.setText(String.format("In Progress: %.1f%%", doingPercentage));
+            labelComplete.setText(String.format("Done: %.1f%%", completePercentage));
+
+            // Clear previous data and add new data to the PieChart
+            statusPieChart.getData().clear();
+            statusPieChart.getData().addAll(
+                    new PieChart.Data("To Do", todoCount),
+                    new PieChart.Data("In Progress", doingCount),
+                    new PieChart.Data("Done", completeCount)
+            );
+
+            // Set labels visible
+            statusPieChart.setLabelsVisible(false); // Hide default labels on the PieChart
+            labelTodo.setVisible(true);
+            labelDoing.setVisible(true);
+            labelComplete.setVisible(true);
+        } else {
+            // Handle the case when totalCount is zero (avoid division by zero)
+            System.out.println("Total task count is zero.");
+        }
     }
 
 
+    private void createStatusLegend() {
+        // Define colors for each status
+        Color todoColor = Color.RED;
+        Color doingColor = Color.ORANGE;
+        Color doneColor = Color.GREEN;
+
+        // Create circles for each status
+        Circle todoCircle = createColoredCircle(todoColor);
+        Circle doingCircle = createColoredCircle(doingColor);
+        Circle doneCircle = createColoredCircle(doneColor);
+
+        // Create labels for each status
+        Label todoLabel = new Label("To Do ");
+        Label doingLabel = new Label(" In Progress ");
+        Label doneLabel = new Label(" Done");
+
+        // Add circles and labels to legend container
+        legendContainer.getChildren().addAll(
+                todoCircle, todoLabel,
+                doingCircle, doingLabel,
+                doneCircle, doneLabel
+        );
+    }
+
+    private Circle createColoredCircle(Color color) {
+        Circle circle = new Circle(7);
+        circle.setFill(color);
+        return circle;
+    }
 }
 
