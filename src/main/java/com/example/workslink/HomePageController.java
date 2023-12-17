@@ -553,28 +553,5 @@ public class HomePageController extends HelloController implements Initializable
         assignedTable.setEditable(false);
 
     }
-//    public void assignedSpaceinfo(){
-//        assignedTable.getItems().clear();
-//        try{
-//            DatabaseConnection databaseConnection = new DatabaseConnection();
-//            Connection connection = databaseConnection.getConnection();
-//            Statement statement = connection.createStatement();
-//            String sql = "SELECT assignedSpace FROM assignedspace,spaceOwnerName WHERE userName = '" + userNameToMatch + "'";
-//            ResultSet rs = statement.executeQuery(sql);
-//
-//            while (rs.next()) {
-//                spaceCount++;
-//                String assignedSpace = rs.getString("assignedSpace");
-//                String spaceOwnerName = rs.getString("spaceOwnerName");
-//                AssignedSpaceTable assignedSpaceTable = new AssignedSpaceTable(assignedSpace,spaceOwnerName);
-//                assignedTable.getItems().add(assignedSpaceTable);
-//            }
-//            rs.close();
-//            statement.close();
-//            connection.close();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
 
 }
