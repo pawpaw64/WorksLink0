@@ -1,0 +1,5 @@
+.styled-alert {
+    -fx-background-color: #0dffea; /* Set the background color */
+    -fx-text-fill: black; /* Set the text color */
+    -fx-font-size: 16px; /* Set the font size */
+}
