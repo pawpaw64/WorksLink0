@@ -28,6 +28,7 @@ CREATE TABLE `workslink`.`user` (
 
 
 
+-------------------------------------------------
 -- Create table structure for 'space_info' table
 CREATE TABLE `workslink`.`space_info` (
   `user_id` int(50),
@@ -41,6 +42,7 @@ CREATE TABLE `workslink`.`space_info` (
   PRIMARY KEY (`space_Id`),
   INDEX `space_Id` USING BTREE (`space_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-------------------------------------------------
 
 -- Create table structure for 'user_requests' table
 CREATE TABLE `workslink`.`user_requests` (
@@ -53,6 +55,7 @@ CREATE TABLE `workslink`.`user_requests` (
   PRIMARY KEY (`request_id`),
   INDEX `request_id` USING BTREE (`request_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-------------------------------------------------
 
 -- Create table structure for 'task_info' table
 CREATE TABLE `workslink`.`task_info` (
@@ -64,6 +67,7 @@ CREATE TABLE `workslink`.`task_info` (
   `status` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `assigned` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-------------------------------------------------
 
 -- Create table structure for 'assignedspace' table
 CREATE TABLE `workslink`.`assignedspace` (
@@ -71,6 +75,7 @@ CREATE TABLE `workslink`.`assignedspace` (
   `assignedSpace` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `spaceOwnerName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-------------------------------------------------
 
 -- Create table structure for 'members' table
 CREATE TABLE `workslink`.`members` (
