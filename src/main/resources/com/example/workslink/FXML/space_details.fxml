@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,10 +11,11 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -22,92 +25,176 @@
    <children>
       <TabPane fx:id="tabPane" prefHeight="441.0" prefWidth="820.0" stylesheets="@../CSS/TabPane.css" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab fx:id="board" text="Space Details">
+            <Tab fx:id="board" text="Space ">
                <content>
                   <StackPane fx:id="stack2" prefHeight="541.0" prefWidth="914.0">
                      <children>
                         <ScrollPane style="-fx-background-color: #ffffff;">
                            <content>
-                              <AnchorPane prefHeight="576.0" prefWidth="920.0" styleClass="white" stylesheets="@../CSS/BasicDesign.css">
+                              <AnchorPane prefHeight="576.0" prefWidth="920.0" styleClass="white">
                                  <children>
                                     <Label fx:id="areaSpaceName" layoutX="53.0" layoutY="14.0" prefHeight="32.0" prefWidth="380.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#Space" wrapText="true" />
-                                    <Label layoutX="53.0" layoutY="69.0" text="Space description" />
-                                    <Label layoutX="56.0" layoutY="233.0" text="Task history " />
-                                    <ImageView fitHeight="51.0" fitWidth="54.0" layoutX="330.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                                    <TableView fx:id="spaceTableView" layoutX="65.0" layoutY="281.0" prefHeight="266.0" prefWidth="721.0">
-                                      <columns>
-                                          <TableColumn fx:id="spaceID" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="name" prefWidth="124.00001525878906" text="Task name" />
-                                          <TableColumn fx:id="spaceProgress" minWidth="0.0" prefWidth="168.79998779296875" text="Progress" />
-                                          <TableColumn fx:id="spaceStatus" minWidth="5.60003662109375" prefWidth="123.20001220703125" text="Status" />
-                                          <TableColumn prefWidth="228.80002441406248" text="Assigned To" />
-                                      </columns>
-                                    </TableView>
-                                    <Button fx:id="addTask" layoutX="501.0" layoutY="225.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
-                                    <TextArea fx:id="texxtArea" layoutX="55.0" layoutY="92.0" prefHeight="102.0" prefWidth="728.0" />
-                                    <Button fx:id="homeButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#homeButtonOnAction" prefHeight="18.0" prefWidth="34.0" text="&lt;">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Button>
+                                    <Label layoutX="40.0" layoutY="69.0" prefHeight="20.0" prefWidth="130.0" text="Space description" underline="true" />
+                                    <ImageView fx:id="homeButton" fitHeight="29.0" fitWidth="27.0" layoutX="26.0" layoutY="18.0" onMouseClicked="#homeButtonOnAction" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                                       <image>
+                                          <Image url="@../Icon/angle-small-left.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="space_description" layoutX="26.0" layoutY="104.0" prefHeight="98.0" prefWidth="489.0" style="-fx-background-color: #0dffea;" stylesheets="@../CSS/design.css" text="Details">
+                                       <styleClass>
+                                          <String fx:value="pane-with-border" />
+                                          <String fx:value="tx" />
+                                       </styleClass></Label>
+                                    <ImageView fitHeight="177.0" fitWidth="194.0" layoutX="678.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" rotate="11.3">
+                                       <image>
+                                          <Image url="@../Icon/galaxy.gif" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="42.0" layoutY="232.0" prefHeight="20.0" prefWidth="68.0" text="Timeline:" underline="true" />
+                                    <VBox fx:id="memberVbox" alignment="TOP_CENTER" layoutX="477.0" layoutY="273.0" prefHeight="153.0" prefWidth="142.0">
+                                       <children>
+                                          <Label alignment="TOP_CENTER" text="Members:" />
+                                          <Line endX="-17.30709457397461" endY="1.6033649444580078E-5" startX="-100.0" />
+                                       </children>
+                                       <stylesheets>
+                                          <URL value="@../CSS/design.css" />
+                                          <URL value="@../CSS/homePageDesign.css" />
+                                       </stylesheets>
+                                       <styleClass>
+                                          <String fx:value="tx" />
+                                          <String fx:value="arrow" />
+                                          <String fx:value="arrow-button" />
+                                          <String fx:value="pane-with-border" />
+                                       </styleClass>
+                                    </VBox>
+                                    <Pane layoutX="14.0" layoutY="273.0" prefHeight="155.0" prefWidth="138.0" style="-fx-background-color: #0dffea;" stylesheets="@../CSS/design.css">
+                                       <styleClass>
+                                          <String fx:value="tx" />
+                                          <String fx:value="pane-with-border" />
+                                       </styleClass>
+                                       <children>
+                                          <Label layoutX="27.0" layoutY="13.0" prefHeight="20.0" prefWidth="73.0" text="Start Date:" underline="true" />
+                                          <Label fx:id="startDateLabel" layoutX="28.0" layoutY="46.0" text="Label" />
+                                       </children>
+                                    </Pane>
+                                    <Pane layoutX="163.0" layoutY="273.0" prefHeight="155.0" prefWidth="138.0" style="-fx-background-color: white;" stylesheets="@../CSS/design.css">
+                                       <styleClass>
+                                          <String fx:value="tx" />
+                                          <String fx:value="pane-with-border" />
+                                       </styleClass>
+                                       <children>
+                                          <Label layoutX="24.0" layoutY="14.0" prefHeight="20.0" prefWidth="73.0" text="End Date:" underline="true" />
+                                          <Label fx:id="endDateLabel" layoutX="24.0" layoutY="51.0" prefHeight="20.0" prefWidth="118.0" text="Label" wrapText="true" />
+                                       </children>
+                                    </Pane>
+                                    <Pane layoutX="321.0" layoutY="273.0" prefHeight="155.0" prefWidth="138.0" style="-fx-background-color: #0dffea;" stylesheets="@../CSS/design.css">
+                                       <styleClass>
+                                          <String fx:value="tx" />
+                                          <String fx:value="pane-with-border" />
+                                       </styleClass>
+                                       <children>
+                                          <Label layoutX="10.0" layoutY="14.0" prefWidth="118.0" text="Remaining days:" underline="true" />
+                                          <Label fx:id="remaindaysLabel" layoutX="15.0" layoutY="41.0" text="Label" />
+                                       </children>
+                                    </Pane>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <stylesheets>
+                                    <URL value="@../CSS/BasicDesign.css" />
+                                    <URL value="@../CSS/homePageDesign.css" />
+                                 </stylesheets>
                               </AnchorPane>
                            </content>
                         </ScrollPane>
                      </children></StackPane>
                </content>
             </Tab>
-            <Tab fx:id="task" text="Report">
+            <Tab text="Task">
+              <content>
+                  <ScrollPane>
+                     <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="563.0" prefWidth="914.0">
+                           <children>
+                              <Label layoutX="465.0" layoutY="29.0" onMouseClicked="#refresh" prefHeight="34.0" prefWidth="160.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Refresh Task" textFill="#fff8f8">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icon/reload.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Button fx:id="addTask" layoutX="641.0" layoutY="29.0" mnemonicParsing="false" onAction="#add_task" prefHeight="34.0" prefWidth="216.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Add new Task" />
+                              <Label layoutX="34.0" layoutY="19.0" prefHeight="44.0" prefWidth="120.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#TASK" />
+                              <TableView fx:id="spaceTableView" layoutX="34.0" layoutY="90.0" prefHeight="266.0" prefWidth="773.0" stylesheets="@../CSS/table-view.css">
+                                 <columns>
+                                    <TableColumn fx:id="taskName" prefWidth="146.0" text="Task name" />
+                                    <TableColumn fx:id="taskPriority" minWidth="5.60003662109375" prefWidth="148.0" text="Priority" />
+                                    <TableColumn fx:id="taskAssigned" prefWidth="158.4000244140625" text="Assigned To" />
+                                    <TableColumn fx:id="taskStatus" prefWidth="146.4000244140625" text="Status" />
+                                    <TableColumn fx:id="taskAction" prefWidth="172.00002441406252" text="Action" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+              </content>
+            </Tab>
+            <Tab fx:id="task" text="OverView">
                <content>
                   <StackPane fx:id="stack" prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="790.0">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="968.0">
                            <children>
-                              <Label layoutX="31.0" layoutY="16.0" prefHeight="34.0" prefWidth="359.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#Project">
+                              <Label layoutX="31.0" layoutY="16.0" prefHeight="34.0" prefWidth="359.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#OverView">
                                  <font>
                                     <Font name="Arial" size="29.0" />
                                  </font>
                               </Label>
-                              <HBox layoutX="46.0" layoutY="111.0" prefHeight="342.0" prefWidth="698.0">
+                              <HBox layoutX="16.0" layoutY="71.0" prefHeight="382.0" prefWidth="843.0">
                                  <children>
-                                    <VBox fx:id="todoVbox" prefHeight="342.0" prefWidth="265.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
-                                    <VBox fx:id="doingVbox" prefHeight="342.0" prefWidth="266.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
-                                    <VBox fx:id="CompleteVbox" prefHeight="342.0" prefWidth="262.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="todoVbox" alignment="TOP_CENTER" prefHeight="382.0" prefWidth="276.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="doingVbox" alignment="TOP_CENTER" prefHeight="382.0" prefWidth="313.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
+                                    <VBox fx:id="CompleteVbox" alignment="TOP_CENTER" prefHeight="382.0" prefWidth="272.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" />
                                  </children>
                               </HBox>
-                              <Label alignment="CENTER" layoutX="103.0" layoutY="71.0" prefHeight="30.0" prefWidth="122.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="To Do" textAlignment="CENTER">
+                              <Label alignment="CENTER" layoutX="89.0" layoutY="41.0" prefHeight="30.0" prefWidth="122.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="To Do" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="176.0" layoutY="102.0" startX="-121.9999771118164" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
-                              <Label alignment="CENTER" layoutX="332.0" layoutY="71.0" prefHeight="30.0" prefWidth="116.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Doing" textAlignment="CENTER">
+                              <Line endX="100.0" layoutX="164.0" layoutY="69.0" startX="-129.0" stroke="#90d8ff" strokeWidth="1.5" />
+                              <Label alignment="CENTER" layoutX="380.0" layoutY="41.0" prefHeight="30.0" prefWidth="116.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Doing" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="401.0" layoutY="102.0" startX="-111.80001831054688" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
-                              <Label alignment="CENTER" layoutX="567.0" layoutY="69.0" prefHeight="33.0" prefWidth="125.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Complete">
+                              <Line endX="100.0" layoutX="443.0" layoutY="70.0" startX="-111.80001831054688" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
+                              <Label alignment="CENTER" layoutX="663.0" layoutY="40.0" prefHeight="33.0" prefWidth="125.0" styleClass="normal-label" stylesheets="@../CSS/BasicDesign.css" text="Complete">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Line endX="100.0" layoutX="637.0" layoutY="100.0" startX="-115.99996948242188" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
-                              <Button layoutX="79.0" layoutY="467.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Complete" />
-                              <Button layoutX="605.0" layoutY="467.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Save Task" />
+                              <Line endX="100.0" layoutX="726.0" layoutY="67.0" startX="-115.99996948242188" startY="-2.288818359375E-5" stroke="#90d8ff" strokeWidth="1.5" />
                            </children>
                         </AnchorPane>
                      </children>
                   </StackPane>
                </content>
             </Tab>
-            <Tab text="Untitled Tab">
+            <Tab text="Chart">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <PieChart fx:id="pieChart" layoutX="44.0" layoutY="50.0" prefHeight="246.0" prefWidth="254.0" stylesheets="@../CSS/design.css" />
-                     </children>
-                  </AnchorPane>
+                        <PieChart fx:id="statusPieChart" layoutX="227.0" layoutY="80.0" prefHeight="233.0" prefWidth="277.0" />
+                        <HBox fx:id="legendContainer" layoutX="227.0" layoutY="337.0" prefHeight="100.0" prefWidth="588.0" />
+                        <Label fx:id="labelTodo" layoutX="642.0" layoutY="115.0" prefHeight="26.0" prefWidth="158.0" text="Label" />
+                        <Label fx:id="labelDoing" layoutX="642.0" layoutY="156.0" prefHeight="26.0" prefWidth="190.0" text="Label" />
+                        <Label fx:id="labelComplete" layoutX="642.0" layoutY="197.0" prefHeight="26.0" prefWidth="202.0" text="Label" />
+                     </children></AnchorPane>
               </content>
             </Tab>
          </tabs>

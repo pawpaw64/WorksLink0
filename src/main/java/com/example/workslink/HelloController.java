@@ -16,11 +16,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class HelloController {
@@ -201,6 +206,13 @@ public class HelloController {
                     int rowsInserted = preparedStatement.executeUpdate();
                     if (rowsInserted > 0) {
                         su_valid_label.setText("User registration successful!");
+                        su_valid_label.setVisible(true);
+                        su_email_TextField.clear();
+                        su_username_TextFIeld.clear();
+                        su_bdate.getEditor().clear(); // Clear the DatePicker
+                        su_password.clear();
+                        su_questions.getSelectionModel().clearSelection();
+                        su_answers.clear();
                         delay(su_valid_label);
                     }
                 }
@@ -208,6 +220,7 @@ public class HelloController {
                 e.printStackTrace();
             }
         }
+
     }
 
     @FXML
@@ -235,10 +248,15 @@ public class HelloController {
                             int user_id=rs.getInt("id");
                             String bio=rs.getString("user_bio");
                             byte[] user_img=rs.getBytes("user_img");
+                            if (bio == null) {
+                                // Set a default value or handle the case when bio is null
+                                bio = "Default Bio";
+                            }
+
+                            login_username.clear();
+                            login_password.clear();
                             // Create a User instance
                             User loggedInUser = new User(email, userName, dob,user_id,bio,user_img);
-
-                            System.out.println("home1");
                             // Jump to the homepage...v
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/homePage-view.fxml"));
                             Parent root = fxmlLoader.load();
@@ -265,11 +283,15 @@ public class HelloController {
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception cE) {
+                cE.printStackTrace();
                 System.out.println("Class Not bbbbbFound Exception: " + cE);
 
             }
         }
     }
+
+
+
     public void delay(Label label) {
         Duration delay = Duration.seconds(3);
         KeyFrame keyFrame = new KeyFrame(delay, event -> label.setVisible(false));

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="154.0" prefWidth="265.0" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workslink.OverView">
+   <children>
+      <Label fx:id="taskName2" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="92.0" text="Task Name :" />
+      <Label fx:id="AssignedTO" layoutX="14.0" layoutY="46.0" prefHeight="18.0" prefWidth="98.0" text="Assigned to:" />
+      <Label fx:id="Status" layoutX="10.0" layoutY="108.0" prefHeight="42.0" prefWidth="261.0" style="-fx-background-color: pink;" styleClass="anchor-pane-with-border" stylesheets="@../CSS/homePageDesign.css" text="Status" />
+      <Label fx:id="taskNameLabel" layoutX="119.0" layoutY="15.0" prefHeight="18.0" prefWidth="158.0" text="Label" />
+      <Label fx:id="taskAssignLabel" layoutX="119.0" layoutY="47.0" prefHeight="18.0" prefWidth="158.0" text="Label" />
+      <Label fx:id="taskStatusLabel" layoutX="76.0" layoutY="113.0" prefHeight="26.0" prefWidth="149.0" text="Label" />
+   </children>
+</AnchorPane>

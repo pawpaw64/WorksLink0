@@ -1,4 +1,19 @@
-.table-view .column-header-background .filler {
+.table-view {
+      -fx-background-color: transparent;
+       -fx-alignment: CENTER;
+  }
+ .table-cell {
+    -fx-alignment: CENTER;
+}
+/* Apply styles to table cells */
+  .table-row-cell {
+      -fx-background-color: transparent;
+      -fx-padding: 5px 10px;
+      -fx-border-color: transparent;
+       -fx-alignment: CENTER;
+  }
+
+/*.table-view .column-header-background .filler {
     -fx-background-color: transparent;
 }
 .table-view .corner {
@@ -18,23 +33,23 @@
     -fx-padding: 2 0 2 10px;
 }
 .table-row-cell:hover {
-    -fx-background-color: #93f9b911;
+    -fx-background-color: #93f9b9;
     -fx-text-background-color: #05373c;
 }
 .table-row-cell:odd{
-    -fx-background-color: #93f9b911;
+    -fx-background-color: #93f9b9;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
 .table-row-cell:even{
-    -fx-background-color: #1dbbdd11;
+    -fx-background-color: #1dbbdd;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
 .table-view .table-cell:filled:selected {
     -fx-text-fill: black; /* Set the desired text color */
 }
-
+/*
 .table-view .virtual-flow .scroll-bar:vertical,
 .table-view .virtual-flow .scroll-bar:vertical .track,
 .table-view .virtual-flow .scroll-bar:vertical .track-background,
@@ -58,3 +73,78 @@
     -fx-background-color: #81c483;
     -fx-background-radius: 15px;
 }
+*//* Apply styles to the table */
+  .table-view {
+      -fx-background-color: transparent;
+       -fx-alignment: CENTER;
+  }
+/* if the table-view property doesn't work , then create:
+ .table-cell {
+    -fx-alignment: CENTER; 
+} also don't forget to add the property to scenebuilder  */
+
+  /* Apply styles to table cells */
+  .table-row-cell {
+      -fx-background-color: transparent;
+      -fx-padding: 5px 10px;
+      -fx-border-color: transparent;
+       -fx-alignment: CENTER;
+  }
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom right, #0dffea, #0dffea);
+    -fx-background-radius: 7px 7px 7px 7px;
+    -fx-background-insets: 0 0px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+  /* Apply alternating row colors */
+  .table-row-cell:odd {
+      -fx-background-color: #93f9b911;
+  }
+
+  .table-row-cell:even {
+      -fx-background-color: #1dbbdd11;
+  }
+
+  /* Apply hover effect */
+  .table-row-cell:hover {
+      -fx-background-color: #93f9b911;
+  }
+
+  /* Apply selected cell styles */
+  .table-row-cell:selected {
+      -fx-text-fill: black; /* Set the desired text color */
+      -fx-background-color: #0dffea;
+      -fx-background-radius: 5px;
+  }
+
+  /* Customize the scroll bar */
+  .table-view .scroll-bar:vertical,
+  .table-view .scroll-bar:vertical .track,
+  .table-view .scroll-bar:vertical .track-background,
+  .table-view .scroll-bar:horizontal,
+  .table-view .scroll-bar:horizontal .track,
+  .table-view .scroll-bar:horizontal .track-background {
+      -fx-background-color: transparent;
+  }
+
+  /* Hide increment and decrement buttons */
+  .table-view .scroll-bar .increment-button,
+  .table-view .scroll-bar .decrement-button {
+      -fx-opacity: 0;
+      -fx-padding: 2;
+  }
+
+  /* Customize the thumb of the scroll bar */
+  .table-view .scroll-bar:vertical .thumb {
+      -fx-background-color: linear-gradient(to bottom right, #0dffea, #0dffea);
+  }
+
+  .table-view .scroll-bar:horizontal .thumb {
+      -fx-background-color: linear-gradient(to bottom right, #0dffea, #0dffea);
+  }
+
+

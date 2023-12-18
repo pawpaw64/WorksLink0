@@ -29,13 +29,20 @@ public class User {
     public void setBio(String bio) {
         this.bio = bio;
     }
-    public User(String email, String userName, String dob, int user_id, String bio,byte[] userimg) {
-        this.userImg=userimg;
+
+    public User(String email, String userName, String dob, int user_id, String bio,byte[] userImg) {
+
         this.email = email;
         this.userName = userName;
         this.dob = dob;
-        this.bio= String.valueOf(bio);
+        this.bio = (bio != null) ? bio : "Default Bio";
+        this.userImg = (userImg != null) ? userImg : getDefaultUserImage();
         this.user_id=user_id;
+    }
+    private byte[] getDefaultUserImage() {
+        // Provide a default image as a byte array
+        // Example: return Files.readAllBytes(Paths.get("path/to/default/image.jpg"));
+        return new byte[0]; // Replace this with the actual default image data
     }
     public void setUserName(String userName) {
         this.userName = userName;

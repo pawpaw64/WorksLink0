@@ -9,12 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -22,13 +19,12 @@ import java.util.ResourceBundle;
 
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-
-import javax.swing.*;
+import org.w3c.dom.ls.LSOutput;
 
 public class AllMembers implements Initializable {
     public TableView<MembersData> membersTableView;
     public Label membersCountLabel;
-    public TableColumn<MembersData, String> memberID;
+
     public TableColumn<MembersData, String> memberEmail;
     public TableColumn<MembersData, String> memberUserName;
     public TableColumn<MembersData, String> memberDOB;
@@ -41,7 +37,7 @@ public class AllMembers implements Initializable {
     private TableColumn<MembersData, String> memeberEdit;
 
     @FXML
-    void addNewMembers(ActionEvent event) throws IOException {
+    void addNewMembers() throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(ClientController.class.getResource("FXML/allMembers2.fxml"));
@@ -60,7 +56,6 @@ public class AllMembers implements Initializable {
     }
 
     int userId;
-    Image image ;
     MembersData membersData;
 
     @Override
@@ -68,10 +63,14 @@ public class AllMembers implements Initializable {
         memberUserName.setCellValueFactory(new PropertyValueFactory<>("memberUserName"));
         memberEmail.setCellValueFactory(new PropertyValueFactory<>("memberEmail"));
         memberDOB.setCellValueFactory(new PropertyValueFactory<>("memberDOB"));
+
+
         Callback<TableColumn<MembersData, String>, TableCell<MembersData, String>> cellFoctory =
                 (TableColumn<MembersData, String> param) -> {
                     // make cell containing buttons
+
                     final TableCell<MembersData, String> cell = new TableCell<>() {
+
                         final Button delete = new Button("Delete");
                         @Override
                         public void updateItem(String item, boolean empty) {
@@ -81,22 +80,34 @@ public class AllMembers implements Initializable {
                                 setGraphic(null);
                                 setText(null);
 
+
                             } else {
-                               
+
+
                                 delete.setOnAction((ActionEvent event) -> {
                                     try {
+
+                                        System.out.println("Delete");
                                         membersData = membersTableView.getSelectionModel().getSelectedItem();
+
+                                        System.out.println(membersData.getMemberUserName());
                                         DatabaseConnection databaseConnection = new DatabaseConnection();
                                         Connection connection = databaseConnection.getConnection();
-                                        String sql = "DELETE FROM `members` WHERE id  = " + membersData.getMemberId();
+                                        String sql = "DELETE FROM members WHERE userID = ? AND userName = ?";
                                         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                                        preparedStatement = connection.prepareStatement(sql);
+                                        preparedStatement.setString(1, String.valueOf(userId));
+                                        preparedStatement.setString(2, membersData.getMemberUserName());
+
+                                        System.out.println(membersData.getMemberId());
+                                        membersTableView.getItems().remove(membersData);
                                         preparedStatement.execute();
-                                        reloadData();
+                                        preparedStatement.close();
+
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
                                 });
+                                setGraphic(delete);
                             }
                             membersTableView.setEditable(false);
                         }
@@ -107,41 +118,43 @@ public class AllMembers implements Initializable {
 
     }
 
-        @FXML
-        public void reloadData() {
-            membersTableView.getItems().clear();
-            int membersCount = 0;
-            try {
-                DatabaseConnection databaseConnection = new DatabaseConnection();
-                Connection connection = databaseConnection.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName, email, dob FROM members WHERE userID = ? AND userName != ?");
-                preparedStatement.setInt(1, userId);
-                preparedStatement.setString(2, excludename);
-                ResultSet rs = preparedStatement.executeQuery();
-
-                while (rs.next()) {
-                    membersCount++;
-                    String userName = rs.getString("userName");
-                    String email = rs.getString("email");
-                    String dob = rs.getString("dob");
-
-                    MembersData members = new MembersData(userName, email, dob);
-                    membersTableView.getItems().add(members);
-                }
-
-                preparedStatement.close();
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            membersCountLabel.setText("Total numbers of User: " + String.valueOf(membersCount));
-        }
+//        @FXML
+//        public void reloadData() {
+//
+//            membersTableView.getItems().clear();
+//            int membersCount = 0;
+//            try {
+//                DatabaseConnection databaseConnection = new DatabaseConnection();
+//                Connection connection = databaseConnection.getConnection();
+//                PreparedStatement preparedStatement = connection.prepareStatement("SELECT userName, email, dob FROM members WHERE userID = ? AND userName != ?");
+//                preparedStatement.setInt(1, id);
+//                preparedStatement.setString(2, excludedUsername);
+//                ResultSet rs = preparedStatement.executeQuery();
+//
+//                while (rs.next()) {
+//                    membersCount++;
+//                    String userName = rs.getString("userName");
+//                    String email = rs.getString("email");
+//                    String dob = rs.getString("dob");
+//
+//                    MembersData members = new MembersData(userName, email, dob);
+//                    membersTableView.getItems().add(members);
+//                }
+//
+//                preparedStatement.close();
+//                connection.close();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            membersCountLabel.setText("Total numbers of User: " + String.valueOf(membersCount));
+//    }
 
 
 
     private void getMembersTableData(int id, String excludedUsername)
     {
+
         membersTableView.getItems().clear();
         int membersCount = 0;
         try {
@@ -189,6 +202,6 @@ public class AllMembers implements Initializable {
     }
 
     public void reload(MouseEvent event) {
-        reloadData();
+       // reloadData();
     }
 }

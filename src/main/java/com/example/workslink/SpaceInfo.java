@@ -7,13 +7,77 @@ public class SpaceInfo {
     private String spaceDescription;
     private SimpleStringProperty startDate;
     private SimpleStringProperty endDate;
+
+    private SimpleStringProperty time;
+    private SimpleStringProperty AssignedSpaceName;
+    private SimpleStringProperty assignedTaskOngoing;
+
+
+    public String getAssignedSpaceName() {
+        return AssignedSpaceName.get();
+    }
+
+    public SimpleStringProperty assignedSpaceNameProperty() {
+        return AssignedSpaceName;
+    }
+
+    public void setAssignedSpaceName(String assignedSpaceName) {
+        this.AssignedSpaceName.set(assignedSpaceName);
+    }
+
+    public String getAssignedTaskOngoing() {
+        return assignedTaskOngoing.get();
+    }
+
+    public SimpleStringProperty assignedTaskOngoingProperty() {
+        return assignedTaskOngoing;
+    }
+
+    public void setAssignedTaskOngoing(String assignedTaskOngoing) {
+        this.assignedTaskOngoing.set(assignedTaskOngoing);
+    }
+
+
+    public String getTime() {
+        return time.get();
+    }
+
+    public SimpleStringProperty timeProperty() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time.set(time);
+    }
+
     private int assigneeId;
     private String spaceColor;
+    private  String TaskOngoing;
 
-    public SpaceInfo(String spaceName, String startDate, String endDate) {
+    public String getTaskOngoing() {
+        return TaskOngoing;
+    }
+
+    public void setTaskOngoing(String taskOngoing) {
+        TaskOngoing = taskOngoing;
+    }
+
+    public SpaceInfo(String spaceName, String startDate, String endDate, String time, String TaskOngoing) {
         this.spaceName = new SimpleStringProperty(spaceName);
         this.endDate = new SimpleStringProperty(endDate);
         this.startDate = new SimpleStringProperty(startDate);
+        this.time = new SimpleStringProperty(time);
+        this.TaskOngoing=TaskOngoing;
+    }
+    public SpaceInfo(String spaceName, String startDate, String endDate, String time) {
+        this.spaceName = new SimpleStringProperty(spaceName);
+        this.endDate = new SimpleStringProperty(endDate);
+        this.startDate = new SimpleStringProperty(startDate);
+        this.time = new SimpleStringProperty(time);
+
+    }
+
+    public SpaceInfo() {
     }
 
     public String getSpaceName() {

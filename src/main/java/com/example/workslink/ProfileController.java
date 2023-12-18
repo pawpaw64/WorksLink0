@@ -8,18 +8,31 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.PopOver;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable {
@@ -46,14 +59,16 @@ public class ProfileController implements Initializable {
     @FXML
     Label profileUserName = new Label();
     public User userProfile;
-    private Pane sidePane;  // Reference to the sidePane in HomePageController
     private ImageView profileImg;
-    private String profile_bio;
 
-
-    public void setUserProfile(User userProfile) {
+    public void setUserProfile(User userProfile,ImageView profileImg ) {
         this.userProfile = userProfile;
+        this.profileImg=profileImg;
+        this.profile_default=profileImg;
+        label_bio.setText(userProfile.getBio());
+
         updateLabels();
+
     }
     private void updateLabels() {
         if (userProfile != null) {
@@ -83,6 +98,21 @@ public class ProfileController implements Initializable {
         profileImg.setImage(img.getImage());
     }
 
+    private void updateUserProfileBioInDatabase(String bio) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String updateQuery = "UPDATE user SET user_bio = ? WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+                preparedStatement.setString(1, bio);
+                preparedStatement.setInt(2, userProfile.getUser_id());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     public void logout(ActionEvent e) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/loginRegistration.fxml"));
@@ -100,17 +130,49 @@ public class ProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ProfileController initialize called");
         updateLabels();
+
+
     }
 
 
-    public void setProfileImg(ImageView profileImg) {
-        this.profileImg=profileImg;
+    private byte[] convertProfileImageToByteArray(ImageView profileImg) {
+        Image image = profileImg.getImage();
+
+        // Create a writable image from the ImageView
+        WritableImage writableImage = new WritableImage((int) image.getWidth(), (int) image.getHeight());
+        SnapshotParameters params = new SnapshotParameters();
+        params.setFill(Color.TRANSPARENT);  // Set a transparent background if needed
+        profileImg.snapshot(params, writableImage);
+
+        // Create a PixelReader to read pixel data
+        PixelReader pixelReader = writableImage.getPixelReader();
+
+        // Create a byte array to store image data
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        // Iterate through pixels and write them to the byte array
+        for (int y = 0; y < writableImage.getHeight(); y++) {
+            for (int x = 0; x < writableImage.getWidth(); x++) {
+                Color color = pixelReader.getColor(x, y);
+                int red = (int) (color.getRed() * 255);
+                int green = (int) (color.getGreen() * 255);
+                int blue = (int) (color.getBlue() * 255);
+                int alpha = (int) (color.getOpacity() * 255);
+
+                // Write RGBA values to the byte array
+                byteArrayOutputStream.write(red);
+                byteArrayOutputStream.write(green);
+                byteArrayOutputStream.write(blue);
+                byteArrayOutputStream.write(alpha);
+            }
+        }
+
+        return byteArrayOutputStream.toByteArray();
     }
+
     @FXML
     private void edit_bio(MouseEvent mouseEvent) {
         if (mouseEvent.getSource() == bio_EditIcon) {
-            System.out.println("yes");
-
             // Create a PopOver
             PopOver popOver = new PopOver();
 
@@ -130,7 +192,9 @@ public class ProfileController implements Initializable {
             confirmButton.setOnAction(event -> {
                 String enteredText = textArea.getText();
                 label_bio.setText(enteredText);
+
                 userProfile.setBio(enteredText);
+                updateUserProfileBioInDatabase(enteredText);
                 popOver.hide(); // Close the PopOver after confirming
             });
 
