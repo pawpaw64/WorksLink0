@@ -15,6 +15,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -39,20 +40,18 @@
                                           <Image url="@../Icon/angle-small-left.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="space_description" layoutX="42.0" layoutY="101.0" prefHeight="98.0" prefWidth="769.0" stylesheets="@../CSS/homePageDesign.css" text="Details" />
+                                    <Label fx:id="space_description" layoutX="26.0" layoutY="104.0" prefHeight="98.0" prefWidth="489.0" style="-fx-background-color: #0dffea;" stylesheets="@../CSS/design.css" text="Details">
+                                       <styleClass>
+                                          <String fx:value="pane-with-border" />
+                                          <String fx:value="tx" />
+                                       </styleClass></Label>
                                     <ImageView fitHeight="177.0" fitWidth="194.0" layoutX="678.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" rotate="11.3">
                                        <image>
                                           <Image url="@../Icon/galaxy.gif" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="42.0" layoutY="261.0" prefHeight="20.0" prefWidth="73.0" text="Start Date:" underline="true" />
-                                    <Label fx:id="startDateLabel" layoutX="42.0" layoutY="288.0" text="Label" />
-                                    <Label layoutX="172.0" layoutY="261.0" prefHeight="20.0" prefWidth="73.0" text="End Date:" underline="true" />
-                                    <Label fx:id="endDateLabel" layoutX="172.0" layoutY="288.0" prefHeight="20.0" prefWidth="118.0" text="Label" wrapText="true" />
                                     <Label layoutX="42.0" layoutY="232.0" prefHeight="20.0" prefWidth="68.0" text="Timeline:" underline="true" />
-                                    <Label layoutX="309.0" layoutY="261.0" prefWidth="118.0" text="Remaining days:" underline="true" />
-                                    <Label fx:id="remaindaysLabel" layoutX="309.0" layoutY="288.0" text="Label" />
-                                    <VBox fx:id="memberVbox" alignment="TOP_CENTER" layoutX="478.0" layoutY="252.0" prefHeight="248.0" prefWidth="142.0">
+                                    <VBox fx:id="memberVbox" alignment="TOP_CENTER" layoutX="477.0" layoutY="273.0" prefHeight="153.0" prefWidth="142.0">
                                        <children>
                                           <Label alignment="TOP_CENTER" text="Members:" />
                                           <Line endX="-17.30709457397461" endY="1.6033649444580078E-5" startX="-100.0" />
@@ -65,9 +64,39 @@
                                           <String fx:value="tx" />
                                           <String fx:value="arrow" />
                                           <String fx:value="arrow-button" />
-                                          <String fx:value="anchor-pane-with-border" />
+                                          <String fx:value="pane-with-border" />
                                        </styleClass>
                                     </VBox>
+                                    <Pane layoutX="14.0" layoutY="273.0" prefHeight="155.0" prefWidth="138.0" style="-fx-background-color: #0dffea;" stylesheets="@../CSS/design.css">
+                                       <styleClass>
+                                          <String fx:value="tx" />
+                                          <String fx:value="pane-with-border" />
+                                       </styleClass>
+                                       <children>
+                                          <Label layoutX="27.0" layoutY="13.0" prefHeight="20.0" prefWidth="73.0" text="Start Date:" underline="true" />
+                                          <Label fx:id="startDateLabel" layoutX="28.0" layoutY="46.0" text="Label" />
+                                       </children>
+                                    </Pane>
+                                    <Pane layoutX="163.0" layoutY="273.0" prefHeight="155.0" prefWidth="138.0" style="-fx-background-color: white;" stylesheets="@../CSS/design.css">
+                                       <styleClass>
+                                          <String fx:value="tx" />
+                                          <String fx:value="pane-with-border" />
+                                       </styleClass>
+                                       <children>
+                                          <Label layoutX="24.0" layoutY="14.0" prefHeight="20.0" prefWidth="73.0" text="End Date:" underline="true" />
+                                          <Label fx:id="endDateLabel" layoutX="24.0" layoutY="51.0" prefHeight="20.0" prefWidth="118.0" text="Label" wrapText="true" />
+                                       </children>
+                                    </Pane>
+                                    <Pane layoutX="321.0" layoutY="273.0" prefHeight="155.0" prefWidth="138.0" style="-fx-background-color: #0dffea;" stylesheets="@../CSS/design.css">
+                                       <styleClass>
+                                          <String fx:value="tx" />
+                                          <String fx:value="pane-with-border" />
+                                       </styleClass>
+                                       <children>
+                                          <Label layoutX="10.0" layoutY="14.0" prefWidth="118.0" text="Remaining days:" underline="true" />
+                                          <Label fx:id="remaindaysLabel" layoutX="15.0" layoutY="41.0" text="Label" />
+                                       </children>
+                                    </Pane>
                                  </children>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -88,7 +117,7 @@
                      <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="563.0" prefWidth="914.0">
                            <children>
-                              <Label layoutX="465.0" layoutY="29.0" prefHeight="34.0" prefWidth="160.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Refresh Task" textFill="#fff8f8">
+                              <Label layoutX="465.0" layoutY="29.0" onMouseClicked="#refresh" prefHeight="34.0" prefWidth="160.0" styleClass="fill-btn" stylesheets="@../CSS/BasicDesign.css" text="Refresh Task" textFill="#fff8f8">
                                  <graphic>
                                     <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -101,12 +130,11 @@
                               <Label layoutX="34.0" layoutY="19.0" prefHeight="44.0" prefWidth="120.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="#TASK" />
                               <TableView fx:id="spaceTableView" layoutX="34.0" layoutY="90.0" prefHeight="266.0" prefWidth="773.0" stylesheets="@../CSS/table-view.css">
                                  <columns>
-                                    <TableColumn fx:id="taskID" prefWidth="51.0" text="ID" />
                                     <TableColumn fx:id="taskName" prefWidth="146.0" text="Task name" />
                                     <TableColumn fx:id="taskPriority" minWidth="5.60003662109375" prefWidth="148.0" text="Priority" />
-                                    <TableColumn fx:id="taskAssigned" prefWidth="124.0" text="Assigned To" />
-                                    <TableColumn fx:id="taskStatus" prefWidth="126.0" text="Status" />
-                                    <TableColumn fx:id="taskAction" prefWidth="176.0" text="Action" />
+                                    <TableColumn fx:id="taskAssigned" prefWidth="158.4000244140625" text="Assigned To" />
+                                    <TableColumn fx:id="taskStatus" prefWidth="146.4000244140625" text="Status" />
+                                    <TableColumn fx:id="taskAction" prefWidth="172.00002441406252" text="Action" />
                                  </columns>
                               </TableView>
                            </children>

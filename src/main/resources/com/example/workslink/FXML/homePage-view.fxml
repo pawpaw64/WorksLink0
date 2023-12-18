@@ -137,7 +137,7 @@
                   <TableView fx:id="assignedTable" layoutX="34.0" layoutY="344.0" prefHeight="200.0" prefWidth="513.0">
                     <columns>
                       <TableColumn fx:id="AssignedSpaceName" prefWidth="232.0" text="Space Name" />
-                      <TableColumn fx:id="spaceOwnerTableCol" prefWidth="282.0" text="Task Assigned" />
+                      <TableColumn fx:id="spaceOwnerTableCol" prefWidth="282.0" text="Owner" />
                     </columns>
                      <styleClass>
                         <String fx:value="table-cell" />
@@ -173,7 +173,7 @@
                      </styleClass>
                   </Label>
                   <Label fx:id="nameLabel" layoutX="93.0" layoutY="14.0" styleClass="small-label" stylesheets="@../CSS/BasicDesign.css" text="Welcome" wrapText="true" />
-                  <Pane layoutX="583.0" layoutY="319.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css">
+                  <Pane layoutX="585.0" layoutY="344.0" prefHeight="122.0" prefWidth="197.0" style="-fx-background-color: #0dffea;" styleClass="space_Pane1" stylesheets="@../CSS/design.css">
                      <children>
                         <Label layoutX="36.0" layoutY="14.0" prefHeight="20.0" prefWidth="151.0" text="Total Created Space">
                            <font>

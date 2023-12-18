@@ -148,6 +148,12 @@ public class SpaceDetailsController implements Initializable {
     private PieChart pieChart;
     @FXML
     private Label percentlebel;
+    @FXML
+    void refresh(MouseEvent event) {
+        getSpaces();
+        getSpaceTableData();
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -280,7 +286,7 @@ public class SpaceDetailsController implements Initializable {
                     final TableCell<TaskHistoryData, String> cell = new TableCell<>() {
 
                         final Button action = new Button("Action");
-                        final Button complete=new Button("Complete");
+                       // final Button complete=new Button("Complete");
 
                         @Override
                         public void updateItem(String item, boolean empty) {
@@ -297,10 +303,10 @@ public class SpaceDetailsController implements Initializable {
                                     System.out.println(selectedTask.getTaskPriority());
                                     openTaskAction(selectedTask);
                                 });
-                                HBox managebtn = new HBox(action, complete);
+                                HBox managebtn = new HBox(action);
                                 managebtn.setStyle("-fx-alignment:center");
                                 HBox.setMargin(action, new Insets(2, 2, 0, 3));
-                                HBox.setMargin(complete, new Insets(2, 3, 0, 2));
+                               // HBox.setMargin(complete, new Insets(2, 3, 0, 2));
 
                                 setGraphic(managebtn);
                             }
