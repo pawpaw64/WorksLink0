@@ -2,29 +2,23 @@
 
 This project is a modern, collaborative project-management platform designed to support individuals and teams. It offers a clean, user-focused experience with tools that boost productivity, enhance teamwork, and simplify workspace organization.
 
-⭐ Key Features
+⭐ Features
 
-Customizable workspaces
+🔧 Customizable Workspaces
 
-Add Spaces button
+📁 Resources Integration
 
-Integrated resources
+📊 Real-Time Project Overview Table
 
-Real-time project overview table
+👥 Member Collaboration & Easy Member Addition
 
-Member collaboration & easy member addition
+🧑‍💼 Profile Insights
 
-Profile insights
 
-Dynamic progress indicator
-
-Intuitive workspace icons
-
-Simple, user-friendly interface
 
 📚 Course
 
-Course: Advanced Object Oriented programming -CSE/UIU
+Course: Advanced Object-Oriented Programming -CSE/UIU
 
 
 ## Screenshot
